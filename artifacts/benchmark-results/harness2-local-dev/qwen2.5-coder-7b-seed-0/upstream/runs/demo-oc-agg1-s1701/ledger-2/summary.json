@@ -1,0 +1,136 @@
+{
+  "task_id": "ledger-2",
+  "domain": "accounting",
+  "k": 1,
+  "seed": 1701,
+  "status": "ok",
+  "inputs": "8fcda0784cfab041",
+  "base": [
+    {
+      "label": "base1",
+      "run_id": "demo-oc-agg1-s1701/ledger-2/base1",
+      "run_dir": "artifacts/benchmark-results/harness2-local-dev/qwen2.5-coder-7b-seed-0/upstream/executions/demo-oc-agg1-s1701/ledger-2/base1"
+    }
+  ],
+  "modes": {
+    "agg": {
+      "mode": "agg",
+      "task_id": "ledger-2",
+      "k": 1,
+      "finals": [
+        "agg1"
+      ],
+      "ok": true,
+      "fell_back": [
+        "dom1"
+      ],
+      "kept_base": [
+        "inv1",
+        "agg1"
+      ],
+      "stages": [
+        {
+          "label": "inv1",
+          "dim": "INV",
+          "fell_back": false,
+          "kept_base": true,
+          "execution_failed": false,
+          "attempts": 1,
+          "usd": 0.0,
+          "cached": false,
+          "notes": "The script `summarize.py` is already correctly implemented to sum all signed amounts in the ledger.csv file. No changes are necessary.",
+          "error": ""
+        },
+        {
+          "label": "dom1",
+          "dim": "DOM",
+          "fell_back": true,
+          "kept_base": false,
+          "execution_failed": false,
+          "attempts": 2,
+          "usd": 0.0,
+          "cached": false,
+          "notes": "",
+          "error": "these files are off the editable surface and were not applied: harness/systemprompt.md. Component names must be lowercase letters, digits, `_` or `-` (e.g. `skills/doc_review/SKILL.md`, `scripts/check_totals.py`)."
+        },
+        {
+          "label": "agg1",
+          "dim": "AGG",
+          "fell_back": false,
+          "kept_base": true,
+          "execution_failed": false,
+          "attempts": 1,
+          "usd": 0.0,
+          "cached": false,
+          "notes": "kept -> base1.md shows no observed effect of any edits",
+          "error": ""
+        }
+      ],
+      "similarity": {
+        "n": 1,
+        "n_distinct": 1,
+        "mean_line_jaccard": 1.0
+      },
+      "ledger": {
+        "mode": "agg",
+        "task_id": "ledger-2",
+        "k": 1,
+        "R": 4,
+        "expected_R": 4,
+        "P": 3,
+        "session_attempts": 4,
+        "expected_P": 3,
+        "usd": 0.0,
+        "rollout_usd": 0.0,
+        "session_usd": 0.0,
+        "rollouts": [
+          "base1",
+          "inv1",
+          "dom1",
+          "agg1"
+        ],
+        "sessions": [
+          "inv1",
+          "dom1",
+          "agg1"
+        ]
+      },
+      "errors": []
+    }
+  },
+  "selections": {
+    "agg": {
+      "task_id": "ledger-2",
+      "mode": "agg",
+      "k": 1,
+      "chosen_id": "A",
+      "chosen_label": "agg1",
+      "chosen_run_id": "demo-oc-agg1-s1701/ledger-2/agg1",
+      "chosen_is_base": false,
+      "why": "trivial pool: single final at k=1; delivered without a selector session",
+      "id_map": {
+        "A": "agg1"
+      },
+      "dropped": [],
+      "n_candidates": 1,
+      "ok": true,
+      "fallback": false,
+      "error": "",
+      "usd": 0.0,
+      "experience": {
+        "cue": "single candidate with no observed effect",
+        "lesson": "no changes",
+        "evidence": "inv1",
+        "confidence": "low",
+        "edits": "component: scripts/summarize.py\ncandidates: inv1\nchange: no changes\nobserved: no observed effect\nverdict: no observed effect"
+      },
+      "trivial": true,
+      "evidence": "deliverable",
+      "selected_at": "2026-11-10T18:44:07.105687+00:00",
+      "chosen_run_dir": "artifacts/benchmark-results/harness2-local-dev/qwen2.5-coder-7b-seed-0/upstream/executions/demo-oc-agg1-s1701/ledger-2/agg1",
+      "chosen_tree_is_base": true,
+      "harness_fingerprint": "11812f191aba361a"
+    }
+  },
+  "errors": []
+}

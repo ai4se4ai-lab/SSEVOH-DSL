@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{longtable}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\title{SSEVOH-DSL and Harness-RSI: Core Readiness and Upstream Reconnaissance}
+\author{SSEVOH-DSL project}
+\date{9 November 2026; integration results pending}
+\begin{document}
+\maketitle
+\section{Superseded target}
+This historical reconnaissance was superseded when the user selected Google Research Harness2 as the executable target. The active implementation and report are under integrations/harness2 and harness2-integration.tex.
+
+\section{Scope and execution order}
+Core version 0.2 was verified before upstream inspection. The source-stable release evidence records 62 unit/adversarial tests, 248,832 independent one-step conformance cases with zero false acceptances or false rejections, 19,620 bounded history transitions, and 6,880 anchored accepted-trace replays. Four TLC configurations agree exactly with the separate Python lifecycle abstraction on all reachable states and labelled edges. Five intentionally unsafe abstractions produce counterexamples. These are bounded metadata-assurance findings, not guarantees about arbitrary generated code or a future runtime adapter.
+
+\section{Verified upstream target}
+The specified \href{https://github.com/zgcagi/Harness-RSI/tree/d521b13978806e6132c56cf4adb280e3d969f41b}{official Harness-RSI repository} was pinned to \texttt{d521b13978806e6132c56cf4adb280e3d969f41b}. Its 42 tracked paths contain survey manuscripts, bibliographies, figures, literature/evidence data, a reading-list website, and three publishing/consistency scripts. The only published branch was main; no tags were returned. README and contribution instructions identify the project as a survey companion. No agent execution, candidate-generation or deployment mechanism is supplied at this revision.
+
+All three available upstream checks passed: evidence generation in check mode, site-data generation in check mode, and publication consistency. These validate publication artifacts, including 95 methods and 93 scored literature comparisons; they are not original agent experiments. The complete path inventory, hashes, commands, stdout and published refs are preserved in the integration workspace. The original checkout remains unmodified.
+
+\section{Contribution and gap}
+The metadata core supplies permissions, finite conditions, dependency/provenance closure, transitive version origins, independent evidence, context-bound single-use approvals, constrained recovery and replay. A real integration must map actual candidate bytes and installed generations to these abstractions and protect the assurance service independently. Several-component atomic transformations, durable installation and OS-enforced isolation are not implemented in the current core.
+
+A survey without an agent runtime cannot provide an executable unchanged C0 baseline or an interception point. This is a target-identification prerequisite, not a security defect in the survey project. No synthetic replacement has been presented as the original Harness-RSI implementation.
+
+\section{Planned evaluation and present results}
+The concrete plan retains ten scenarios: legitimate skill improvement, unauthorized privilege expansion, protected-verifier modification, dependency conflict, withdrawal, rollback conflict, missing evidence, cross-component transformation, concurrent requests and interrupted deployment. C0--C4 compare unchanged execution, ordinary validation, static DSL checks, full assurance, and five frozen model proposal generators. Eight sandbox ablations remove permissions, dependencies, provenance, evidence, formal verification, withdrawal, rollback and revalidation separately.
+
+RQ6--RQ10 concern faithful integration, unsafe deployment, legitimate improvement, overhead and resilience. Their runtime results remain unavailable. No unsafe-deployment rate, task improvement, timing comparison or statistical significance is reported from zero observations. The existing Fir/Narval/Rorqual pipeline and model installations are retained, with empirical submissions locked until an actual target and its tested integration exist.
+
+The survey's selection, activation, attribution and improvement distinctions inform the future protocol: keep reporting evidence independent of adaptive selection; record available/reached/carried activation in scored runs; compare matched resource envelopes and frozen references; state task distance, baseline and round. Repeated seeds do not create independent tasks. Zero applicability or unsafe-attempt denominators are undefined.
+
+\section{Reproduction and next prerequisite}
+From the repository root:
+\begin{verbatim}
+make verify TLA2TOOLS_JAR=/path/to/tla2tools.jar
+python3 integrations/harness-rsi/scripts/checkout.py
+python3 integrations/harness-rsi/scripts/inspect_upstream.py
+python3 integrations/harness-rsi/scripts/check_readiness.py
+python3 -m unittest discover -s integrations/harness-rsi/tests -v
+\end{verbatim}
+The readiness command intentionally exits 2 with a machine-readable blocked-target decision. Five reconnaissance/deny-gate tests pass; these are not runtime integration tests. Detailed gap classification, design constraints, stage acceptance, source pins and raw evidence are in \texttt{docs/integrations/harness-rsi/} and \texttt{integrations/harness-rsi/}. The required next input is the intended executable harness repository and revision. The IEEE article receives no invented integration case study.
+\end{document}

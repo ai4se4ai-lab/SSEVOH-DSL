@@ -1,0 +1,38 @@
+{
+  "records": 500,
+  "expected": 500,
+  "complete": true,
+  "per_model": {
+    "qwen2.5-coder:7b": 100,
+    "phi4:14b": 100,
+    "gpt-oss:20b": 100,
+    "devstral:24b": 100,
+    "qwen3-coder:30b": 100
+  },
+  "runs": [
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-core-full-20261109T234758Z-fir",
+      "models": [
+        "qwen3-coder:30b",
+        "devstral:24b",
+        "gpt-oss:20b"
+      ],
+      "state": "submitted"
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-core-full-20261109T234913Z-rorqual",
+      "models": [
+        "phi4:14b",
+        "qwen2.5-coder:7b"
+      ],
+      "state": "submitted"
+    }
+  ],
+  "auxiliary_records": {
+    "deterministic": 500,
+    "ablations": 750,
+    "scaling": 180
+  }
+}

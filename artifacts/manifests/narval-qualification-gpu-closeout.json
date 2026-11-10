@@ -1,0 +1,45 @@
+{
+  "schema": "ssevoh-pending-gpu-closeout-v1",
+  "utc": "2026-11-10T01:40:55.632134+00:00",
+  "cluster": "narval",
+  "trials": [
+    {
+      "study": "harness2",
+      "run_id": "ssevoh-h2-smoke-20261109T215528Z-narval-r1",
+      "array_job_id": "8853666"
+    },
+    {
+      "study": "harness2",
+      "run_id": "ssevoh-h2-smoke-20261109T215559Z-narval-r2",
+      "array_job_id": "8853671"
+    },
+    {
+      "study": "harness2",
+      "run_id": "ssevoh-h2-smoke-20261109T215608Z-narval-r3",
+      "array_job_id": "8853677"
+    },
+    {
+      "study": "core",
+      "run_id": "ssevoh-core-smoke-20261109T230443Z-narval-r1",
+      "array_job_id": "8857309"
+    },
+    {
+      "study": "core",
+      "run_id": "ssevoh-core-smoke-20261109T230533Z-narval-r2",
+      "array_job_id": "8857321"
+    },
+    {
+      "study": "core",
+      "run_id": "ssevoh-core-smoke-20261109T230548Z-narval-r3",
+      "array_job_id": "8857330"
+    }
+  ],
+  "state": "cancel_requested",
+  "reason": "Both full studies completed; close only still-PENDING late GPU elements after the predefined 45-minute qualification window. Preserve running cells and downstream collection.",
+  "interpretation": "right-censored, not evidence of GPU failure",
+  "filter": "--state=PENDING --user=mbabaei",
+  "reference": "https://slurm.schedmd.com/scancel.html",
+  "returncode": 0,
+  "stdout": "",
+  "stderr": ""
+}

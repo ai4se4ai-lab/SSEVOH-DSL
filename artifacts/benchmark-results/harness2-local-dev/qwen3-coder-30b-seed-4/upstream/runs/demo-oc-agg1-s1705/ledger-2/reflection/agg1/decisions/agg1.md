@@ -1,0 +1,1 @@
+kept -> systemprompt.md -> base rollout used the instruction 'Reconcile the ledger using python scripts/summarize.py' and all candidates produced the same result, no behavioral difference observed

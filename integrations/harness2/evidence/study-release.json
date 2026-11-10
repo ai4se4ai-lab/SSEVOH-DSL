@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "empirical_allowed": true,
+  "integration_allowed": true,
+  "status": "controlled_harness2_study_released",
+  "reason": "Core formal release and real Harness2 integration/source/publication checks passed; only the bounded controlled study is released.",
+  "required_evidence": [
+    "precise bounded soundness and completeness contracts",
+    "independent operational reference semantics",
+    "exhaustive conformance with counterexamples",
+    "runtime and formal lifecycle agreement",
+    "trace and replay integrity",
+    "negative and mutation tests",
+    "explicit assumptions and limits"
+  ],
+  "readiness_report": "formal/assurance/results/readiness.json",
+  "allowed_studies": [
+    "harness2-controlled-v1"
+  ],
+  "legacy_controller_allowed": false,
+  "released_utc": "2026-11-09T21:53:09.905739+00:00",
+  "core_readiness_sha256": "8eff9504dcc2e0a70bade5f690cb3ebf2acce9028ccb18328656e2256802cb49",
+  "integration_readiness_sha256": "f7468da8f589d5c0ac2656f2b3bec95368ac8041eef2da22c7ac4cbafc52edce",
+  "profile_sha256": "553d0f4d5c1c568f2f25fce1eb1d1f5b486d467f99c408a1d2aacd7dfc2e1489"
+}

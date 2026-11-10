@@ -1,0 +1,9 @@
+{
+  "checked_utc": "2026-11-09",
+  "models": ["qwen2.5-coder:7b", "phi4:14b", "gpt-oss:20b", "devstral:24b", "qwen3-coder:30b"],
+  "smoke_models": ["qwen2.5-coder:7b", "phi4:14b"],
+  "sources": ["https://ollama.com/library/qwen2.5-coder:7b", "https://ollama.com/library/phi4:14b", "https://ollama.com/library/gpt-oss:20b", "https://ollama.com/library/devstral:24b", "https://ollama.com/library/qwen3-coder:30b"],
+  "decoding": {"temperature": 0.2, "top_p": 0.9, "num_predict": 1024, "num_ctx": 4096},
+  "repeats": 5,
+  "pin_status": "runtime manifests and license texts must be frozen in setup; web availability is not a runtime qualification"
+}

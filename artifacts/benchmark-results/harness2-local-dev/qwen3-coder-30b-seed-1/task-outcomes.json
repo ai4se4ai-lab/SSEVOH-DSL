@@ -1,0 +1,18 @@
+[
+  {
+    "task": "ledger-1",
+    "expected": "Total: 85.15",
+    "frozen_answer": "The permitted summary tool returned a total of 105.25.",
+    "answer": "The permitted summary tool returned a total of 105.25.",
+    "frozen_success": false,
+    "task_success": false
+  },
+  {
+    "task": "ledger-2",
+    "expected": "Total: 20.25",
+    "frozen_answer": "The permitted summary tool returned a total of 35.50.",
+    "answer": "The permitted summary tool returned a total of 35.50.",
+    "frozen_success": false,
+    "task_success": false
+  }
+]

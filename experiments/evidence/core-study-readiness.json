@@ -1,0 +1,26 @@
+{
+  "schema": "ssevoh-core-study-readiness-v1",
+  "utc": "2026-11-10T01:54:23.439481+00:00",
+  "passed": true,
+  "source_sha256": {
+    "experiments/scripts/llm.py": "6d46e1cd716cdc136cb94a79698c740de7cead5ed4d14663fb9b2ef1ceac77c5",
+    "experiments/scripts/runtime.py": "3f57696a11f57eacb75b95c081f07fa14e654c7fc55b904c62e7d7417227bebb",
+    "experiments/scripts/analyze.py": "739769b13de31fcab6e419012fbfa358a11d919ca48b5e39e1681734714e6fdf",
+    "experiments/scripts/scale.py": "bd5e74250df2502e6d83f1d7cca11895b8dfeb9201857c017006f332521f62ed",
+    "experiments/scripts/ablations.py": "e40db66941528ba25ca808da03fdd68ac3c2b08d79eda624d1592e47329580bb",
+    "experiments/scripts/resume_check.py": "3390d2ef6e5bacbf061d3f7eb3e4690e10d992c6259c4385a63ce98599c28bfa",
+    "experiments/scripts/core_study_preflight.py": "bb348c20a0595882c88f7abe1843451b2f585a9389a6f197c4d9758ecec799f0",
+    "hpc/config/profiles/ssevoh-original.json": "7260a0179c629fc8dc1109cf28403625884d90b3ff25c56fbb100cbdbe65dc44",
+    "hpc/config/models.json": "dd7120c2d2b20a437efc7cceda59d8d3e4ff38747a51fbb1a7226e849412130a",
+    "benchmark/scenarios/heartbench-v1.json": "4e1365e494f5b89916d907249d5e1a1a6d3db77613a1cc3bbfdae205a4c59fd8",
+    "experiments/experiment-plan.json": "e830a6ab6d55ba4438c0dc709ce408f05f802ceed12dd75585cccea195152649",
+    "experiments/scripts/qualification_analyze.py": "adfebc9d553317ebd983a46042afc8c2f0328ed26f7ec9bafbea61f7e35c653c",
+    "experiments/scripts/request_fidelity.py": "db205ea1ed3e5daa22e5a0db83b35c66638dd1d2a623b10fb0bd55ab4bdfafcb",
+    "experiments/tests/test_primary_analysis.py": "2c83cb284298d285b53ff28dbb5de574859b6fc12588c53899a43c45b2d35ade",
+    "experiments/tests/test_primary_oracle.py": "cc2b15e5a8de58a0f47d7878d4bdaeea439da2b4de4ea055110f15352e183e01",
+    "experiments/tests/test_qualification_analysis.py": "96414979b935f3e6d55556fa6ec1d8ce5ef0f15330681d98d0695401145eb7da",
+    "experiments/tests/test_request_fidelity.py": "83aa00d86bedbc88b2752dd127b061d53649fac1d582486ae28addc29f875924"
+  },
+  "core_readiness_sha256": "8eff9504dcc2e0a70bade5f690cb3ebf2acce9028ccb18328656e2256802cb49",
+  "scope": "primary synthetic metadata study; independent operational-reference oracle; no empirical result"
+}

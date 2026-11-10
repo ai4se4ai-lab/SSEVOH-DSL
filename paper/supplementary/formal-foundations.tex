@@ -1,0 +1,42 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,longtable}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\newcommand{\status}{\IfFileExists{../generated/results.tex}{\input{../generated/results.tex}}{\IfFileExists{paper/generated/results.tex}{\input{paper/generated/results.tex}}{Results must be regenerated from recorded artifacts.}}}
+\title{SSEVOH-DSL: Formal Foundations}
+\author{SSEVOH-DSL project}
+\date{Evidence-linked development document}
+\begin{document}
+\maketitle
+
+\section{System and trust model}
+Let $N$ be a finite set of component names and $K$ the closed set of component kinds. A component is $c=(n,k,v,m,D,O,A)$: name, kind, positive version, mutability, runtime dependencies, provenance parents, and capabilities. A harness is
+\[H=(C,Q,W,r,J),\qquad C:N\to K\times\mathbb N^+\times\{0,1\}\times2^N\times2^N\times2^{Cap}.\]
+$Q\subseteq N$ contains inactive components, $W\subseteq N\times\mathbb N^+$ contains permanently withdrawn version identities, $r$ is a revision and $J$ is a hash-chained deployment journal. Operator policy $P$ and validator registry $V$ are outside the proposal domain. Initial state is supplied by the operator.
+
+Active$(H)=N\setminus Q$. An edge $x\to y$ means $x$ requires or derives from $y$. Define reverse closure $R_H(t)$ as the least set containing $t$ and every component having an edge into that set. Closure includes dependencies and derivation parents; neither an immediate-neighbor calculation nor a dependency-only calculation is sufficient.
+
+\section{Evolution proposals}
+A proposal $e=(op,t,v_e,v_n,D_n,O_n,A_n,R,pre,post)$ identifies its target, expected and desired versions, replacement relationships and capabilities, validators and finite pre/postconditions. Supported operations are update, withdrawal and rollback. The caller identity is an external parameter $p$, not a proposal field.
+
+Update requires the expected current version, $v_n>v_e$, an unused version identity, valid references, and $O_t\subseteq O_n$. The last rule prohibits unverified ancestry deletion. Withdrawal requires the current version identity; rollback requires a known historical component. There is no arbitrary expression evaluator or model-provided policy evaluator.
+
+\section{Transition rules}
+For update, replace only $C[t]$ and set $Q'=(Q\cup(R_H(t)\setminus\{t\}))\setminus\{t\}$. For withdrawal, preserve component records, set $W'=W\cup\{(t,C[t].version)\}$ and $Q'=Q\cup R_H(t)$. For rollback, restore a selected known historical component while retaining $W$, reject a withdrawn identity and quarantine descendants as for update. All cases require protected components to preserve both metadata and active status.
+
+Every candidate must have an acyclic combined graph, existing references and active ancestors for each active artifact. $r'=r+1$ on commit. Preparation never changes the trusted state. Approval records a capability bound to $hash(e)$, $hash(H)$ and $hash(P)$, with independent validator outcomes. Commit consumes the capability only when the fingerprints remain current under the engine lock.
+
+\section{Withdrawal and mixed-origin artifacts}
+A derived component with multiple parents is retained when one parent is withdrawn. It becomes quarantined rather than deleted. The implementation does not establish semantic independence of retained contributions. Removing provenance parents would require a release certificate not supported by the current DSL. A revalidated version can become active only when all its declared ancestors remain active.
+
+\section{Lifecycle and recovery scope}
+Proposal phases are PROPOSED, ANALYSED, VERIFIED, APPROVED, DEPLOYED and REJECTED. A fingerprint mismatch signals REVALIDATION\_REQUIRED. Artifact states are active, quarantined and version-withdrawn; these are distinct from proposal phases. Recovery is selective component restoration, not unrestricted snapshot restoration. Atomicity is a reference swap in one process. Persistent crash recovery and distributed transactions are outside this model.
+
+\section{Version origins and approval context}
+Let $L(n,v)$ contain immutable transitive derivation origins. Update inherits the previous target identity and origins plus current parent identities and origins; recovery restores historical origins. Every active identity and its origins must be disjoint from the current monotone withdrawal set. A clean version now bound to a parent name cannot launder a derivative of its withdrawn version. Approval binds the complete state/policy/validator/history/origin context captured before validation, together with the candidate and origins. Context checks after callbacks and at commit reject reentrant or stale validation. Journal v2 replay checks source/IR, policy, evidence, states and origins against an externally retained head.
+
+\section{Implementation connection and limits}
+The immutable IR resides in \texttt{src/ssevoh/model.py}; candidate semantics in assurance.py; located compilation in compiler.py. The DSL cannot edit operator policy. Metadata structure does not determine code behavior, validator correctness, or an artifact's usefulness. See the threat model and property matrix for assumptions. \status
+
+\end{document}

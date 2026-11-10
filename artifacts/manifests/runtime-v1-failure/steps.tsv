@@ -1,0 +1,6 @@
+time	job	task	restart	stage	cell	step	start	end	seconds	rc	note	command
+2026-11-09 19:19:44	26198573		0	setup	all	gpu	2026-11-09 19:19:44	2026-11-09 19:19:44	0	0		[check_gpu]
+2026-11-09 19:27:25	26198573		0	setup	all	pins	2026-11-09 19:19:44	2026-11-09 19:27:25	461	1		python experiments/scripts/runtime.py freeze --models qwen2.5-coder:7b phi4:14b --output "/scratch/mbabaei/ssevoh/runs/ssevoh-smoke-20261109T191636Z-rorqual/results/setup/models.lock.json"
+2026-11-09 19:27:45	26198578		0	analysis	all	statistics	2026-11-09 19:27:44	2026-11-09 19:27:45	1	0		python experiments/scripts/analyze.py --root "/scratch/mbabaei/ssevoh/runs/ssevoh-smoke-20261109T191636Z-rorqual/results" --output "/scratch/mbabaei/ssevoh/runs/ssevoh-smoke-20261109T191636Z-rorqual/results/analysis"
+2026-11-09 19:27:45	26198578		0	analysis	all	resume-check	2026-11-09 19:27:45	2026-11-09 19:27:45	0	6	missing input: deterministic/records.jsonl	[None]
+2026-11-09 19:28:04	26198579		0	collect	all	persist	2026-11-09 19:28:02	2026-11-09 19:28:04	3	0		[collect]

@@ -1,0 +1,22 @@
+test_cached_models_have_exactly_one_qualified_owner (test_campaign.CampaignTests.test_cached_models_have_exactly_one_qualified_owner) ... ok
+test_full_collection_requires_two_task_outcomes_per_stream (test_campaign.CampaignTests.test_full_collection_requires_two_task_outcomes_per_stream) ... ok
+test_lost_submission_acknowledgement_never_retries_automatically (test_campaign.CampaignTests.test_lost_submission_acknowledgement_never_retries_automatically) ... ok
+test_resumed_controller_executes_one_monitor_cycle_without_submission (test_campaign.CampaignTests.test_resumed_controller_executes_one_monitor_cycle_without_submission) ... ok
+test_cpu_only_discovery_and_missing_allocation_fail_closed (test_gpu_bootstrap.BootstrapTests.test_cpu_only_discovery_and_missing_allocation_fail_closed) ... ok
+test_device_probe_is_offline_and_has_no_model_or_prompt (test_gpu_bootstrap.BootstrapTests.test_device_probe_is_offline_and_has_no_model_or_prompt) ... ok
+test_three_trials_and_two_qualified_sites_are_required (test_humaneval_campaign.CodingOwnershipTests.test_three_trials_and_two_qualified_sites_are_required) ... ok
+test_whole_streams_have_unique_owners_on_fastest_qualified_sites (test_humaneval_campaign.CodingOwnershipTests.test_whole_streams_have_unique_owners_on_fastest_qualified_sites) ... ok
+test_a_recent_fetch_does_not_make_an_old_audit_fresh (test_live.SnapshotFreshness.test_a_recent_fetch_does_not_make_an_old_audit_fresh) ... ok
+test_missing_snapshot_and_path_escape_fail_closed (test_manifest.ManifestTests.test_missing_snapshot_and_path_escape_fail_closed) ... ok
+test_only_frozen_source_affects_content_identity (test_manifest.ManifestTests.test_only_frozen_source_affects_content_identity) ... ok
+test_one_failed_site_does_not_skip_other_collections (test_monitoring.MonitoringTests.test_one_failed_site_does_not_skip_other_collections) ... fir: OK: logs refreshed
+narval: UNAVAILABLE; previous snapshot retained: Command 'rsync' timed out after 120 seconds
+rorqual: OK: logs refreshed
+ok
+test_success_records_fresh_snapshot (test_monitoring.MonitoringTests.test_success_records_fresh_snapshot) ... ok
+test_timeout_preserves_prior_success_and_exposes_partial_refresh (test_monitoring.MonitoringTests.test_timeout_preserves_prior_success_and_exposes_partial_refresh) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.015s
+
+OK

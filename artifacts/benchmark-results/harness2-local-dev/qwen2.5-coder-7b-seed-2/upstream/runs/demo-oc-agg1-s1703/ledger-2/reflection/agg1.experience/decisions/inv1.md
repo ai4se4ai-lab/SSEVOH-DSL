@@ -1,0 +1,1 @@
+The script `summarize.py` is already correctly set up to sum the signed amounts in the ledger.csv file and return the total with two decimal places. No changes are needed.

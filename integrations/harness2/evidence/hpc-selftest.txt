@@ -1,0 +1,38 @@
+== shell syntax
+  ok    common.sh
+  ok    stage.sh
+  ok    all.sh
+  ok    status.sh
+  ok    selftest.sh
+  ok    ssh-session.sh
+== python compile
+  ok    audit.py
+  ok    audit_fleet.py
+  ok    campaign.py
+  ok    campaignctl.py
+  ok    collect_results.py
+  ok    fleet.py
+  ok    halt_experiments.py
+  ok    harness2_campaign.py
+  ok    hpclib.py
+  ok    manifest.py
+  ok    measure.py
+  ok    run_stage.py
+  ok    smoke_ablations.py
+  ok    transfer_models.py
+  ok    verify_transfer.py
+  ok    submit.py
+== experiments.json (graph, GPU policy, placeholders of every cell)
+  note  stage deterministic is cpu_only (no GPU requested)
+  note  stage analysis is cpu_only (no GPU requested)
+  note  stage collect is cpu_only (no GPU requested)
+  ok    full  graph: 5 stages, 9 cells, 39 placeholders filled
+  note  stage deterministic is cpu_only (no GPU requested)
+  note  stage analysis is cpu_only (no GPU requested)
+  note  stage collect is cpu_only (no GPU requested)
+  ok    smoke graph: 5 stages, 6 cells, 27 placeholders filled
+== sbatch dry runs
+  ok    full graph
+  ok    smoke graph
+
+SELFTEST OK — next: python3 hpc/slurm/submit.py --smoke

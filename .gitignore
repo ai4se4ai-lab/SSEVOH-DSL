@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+.ruff_cache/
+hpc/logs/
+hpc/fetched/
+hpc/.ssh/
+hpc/config/fleet.local.json
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+paper/build/
+docs/ieeesoftware/*.pdf
+formal/model/states/
+
+.cache/
+# Reproducible external survey checkout; pin and inventory are tracked instead.
+/integrations/harness-rsi/original/upstream/
+# Preserve the source-scoped formal raw logs as reviewable evidence.
+!formal/assurance/results/*.log
+/integrations/harness2/original/upstream/

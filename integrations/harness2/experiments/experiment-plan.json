@@ -1,0 +1,23 @@
+{
+  "study": "harness2-controlled-v1",
+  "upstream_commit": "6868817518876de8fd170c6a8354daca273b6191",
+  "scope": "real upstream workflow in a controlled ledger/catalog domain; not Google professional-benchmark replication",
+  "execution_order": ["core formal readiness", "upstream and integration tests", "adapter publication model check", "worker/source preflight", "three-site smoke qualification", "measured ownership plan", "full controlled evaluation", "pooled scheduled analysis", "publication update"],
+  "questions": [
+    {"id":"RQ6","objective":"preserve the real proposer/probe/compose/selection/library workflow","evidence":"unchanged pin, original tests and both-mode integration tests"},
+    {"id":"RQ7","objective":"compare unsafe trusted deployments under an explicit operator contract","design":"C0–C3, 12 shared deterministic fixtures, five repeats; lifecycle-only APIs separately marked"},
+    {"id":"RQ8","objective":"measure legitimate false rejection, task completion and model no-ops/refusals","design":"three legitimate deterministic fixture families; C4 two ledger tasks with five seeds and frozen references"},
+    {"id":"RQ9","objective":"observe action/stream latency, GPU resources, generation cost and storage","limits":"no broad efficiency or significance claim from two ledger tasks"},
+    {"id":"RQ10","objective":"test dependency, missing-evidence, withdrawal/provenance, recovery, stale approvals and publication faults","evidence":"actual filesystem/executor tests and deterministic lifecycle records"}
+  ],
+  "conditions": {"C0":"original upstream surface/schema/dependency/grader checks","C1":"C0 plus an ordinary signed-ledger unit input","C2":"C0 plus static DSL/operator permissions; no temporal model/evidence gates","C3":"full authority and actual catalog execution","C4":"full authority with five data-only model proposers and the added bounded model executor"},
+  "shared_scenarios": 12,
+  "lifecycle_scenarios": 4,
+  "ablations": ["permissions","dependencies","provenance","evidence","formal_verification","withdrawal","rollback","revalidation"],
+  "ablation_scope": "single named gate removals in isolated scripted fixture processes; retained defenses may produce zero observed effect",
+  "full_design": {"deterministic_primary_records":900,"models":5,"seeds_per_model":5,"model_stream_records":25,"task_outcomes":50,"recursion":"parallel k=1; both modes and k=2 covered by integration tests"},
+  "smoke_design": {"independent_runs_per_site":3,"sites":["fir","narval","rorqual"],"models_per_run":2,"seeds":1,"task_outcomes_per_model_stream":2},
+  "model_decoding": {"temperature":0.2,"top_p":0.9,"num_predict":2048,"num_ctx":16384,"format":"json","seed":"1701 + repeat + SHA256(stage label) prefix"},
+  "outcomes": ["explicit-contract unsafe attempts and deployments","legitimate false rejections","task/frozen success","no-ops and invalid JSON/refusals","actual available/reached/carried activation","generation tokens/duration and full GPU residency","operator decisions and artifact/source hashes"],
+  "limitations": ["two ledger reporting tasks; no broad generalization or significance claim","catalog restricts executable expressiveness","C0/C1/C2 do not implement operator withdrawal/recovery; no invented failure rates for absent APIs","C4 is not directly a deterministic C0–C3 effectiveness comparison","legacy qualification artifacts are not current-version results","zero unsafe denominators remain undefined"]
+}

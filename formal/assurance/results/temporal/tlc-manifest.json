@@ -1,0 +1,79 @@
+{
+  "schema": "ssevoh-temporal-v2",
+  "passed": true,
+  "jar_sha256": "936a262061c914694dfd669a543be24573c45d5aa0ff20a8b96b23d01e050e88",
+  "source": "https://github.com/tlaplus/tlaplus/releases/tag/v1.7.4",
+  "bounds": {
+    "proposals": 1,
+    "epochs": [
+      0,
+      1,
+      2
+    ]
+  },
+  "utc": "2026-11-09T20:48:48.464646+00:00",
+  "runs": [
+    {
+      "authorized": true,
+      "evidence": true,
+      "returncode": 0,
+      "states": 61,
+      "labelled_edges": 133,
+      "exact_graph_match": true,
+      "missing_states": [],
+      "extra_states": [],
+      "missing_edges": [],
+      "extra_edges": [],
+      "log": "formal/assurance/results/temporal/tlc-1-1.txt",
+      "dot_sha256": "1f26345c1516bfe8c7841d734aa80327936fd43843f68d6197a31987e34093f2"
+    },
+    {
+      "authorized": false,
+      "evidence": true,
+      "returncode": 0,
+      "states": 18,
+      "labelled_edges": 44,
+      "exact_graph_match": true,
+      "missing_states": [],
+      "extra_states": [],
+      "missing_edges": [],
+      "extra_edges": [],
+      "log": "formal/assurance/results/temporal/tlc-0-1.txt",
+      "dot_sha256": "e4fad92a2a89844d80776fab0b0af8c4c3333cf892d492866b078e329a2c32b2"
+    },
+    {
+      "authorized": true,
+      "evidence": false,
+      "returncode": 0,
+      "states": 23,
+      "labelled_edges": 62,
+      "exact_graph_match": true,
+      "missing_states": [],
+      "extra_states": [],
+      "missing_edges": [],
+      "extra_edges": [],
+      "log": "formal/assurance/results/temporal/tlc-1-0.txt",
+      "dot_sha256": "e32ae4f727db9d0ce2e43f713786dd3d66dc4db47e1380e2c6232097cc215e11"
+    },
+    {
+      "authorized": false,
+      "evidence": false,
+      "returncode": 0,
+      "states": 18,
+      "labelled_edges": 44,
+      "exact_graph_match": true,
+      "missing_states": [],
+      "extra_states": [],
+      "missing_edges": [],
+      "extra_edges": [],
+      "log": "formal/assurance/results/temporal/tlc-0-0.txt",
+      "dot_sha256": "fb4830dc39e15c07bc3e8ad317b04179d59fe1f8e2e36dbaa0fc4d2760658ebd"
+    }
+  ],
+  "source_sha256": {
+    "formal/model/Lifecycle.tla": "5a1b1637648d77f58ecd6830300270a5dd040a23541f8d00d1f248c4354ed294",
+    "formal/model/Lifecycle.cfg": "dd70810d36e460fb79109460da2b4789428a48ad318e71804ad4c8802bbcab4a",
+    "src/ssevoh/verification.py": "afa1e4e3fe4160e8b71612ce54fe79d91c48f0935310c975058c81da9dc84b7b",
+    "formal/check.py": "ee4aa2b8f25cf57d25d69877ffba7ad3a1d90c45ef51b9778bfa96d8dc62fd19"
+  }
+}

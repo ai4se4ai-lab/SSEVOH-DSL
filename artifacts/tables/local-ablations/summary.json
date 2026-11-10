@@ -1,0 +1,144 @@
+{
+  "summaries": [
+    {
+      "condition": "ablation:full",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 0,
+      "false_accept_rate": 0,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.00014711531926877796,
+      "median_seconds": 0.00014836899936199188,
+      "std_seconds": 7.131272590083744e-05,
+      "latency_task_bootstrap_ci95": [
+        0.00012239899782192273,
+        0.00018672890146262944
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 0
+    },
+    {
+      "condition": "ablation:dependency_closure",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 1,
+      "false_accept_rate": 0.08333333333333333,
+      "false_reject_rate": 0.15384615384615385,
+      "mean_seconds": 0.0001833891193382442,
+      "median_seconds": 0.00015355399227701128,
+      "std_seconds": 8.608961032050545e-05,
+      "latency_task_bootstrap_ci95": [
+        0.00015774909164368485,
+        0.0002322358785022516
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 9
+    },
+    {
+      "condition": "ablation:provenance_checks",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 1,
+      "false_accept_rate": 0.08333333333333333,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.00023744151927530767,
+      "median_seconds": 0.00023625799803994596,
+      "std_seconds": 0.00011054124712887449,
+      "latency_task_bootstrap_ci95": [
+        0.00020676378432350854,
+        0.00029681133479850057
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 1
+    },
+    {
+      "condition": "ablation:withdrawal_validation",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 0,
+      "false_accept_rate": 0,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.0003101307200267911,
+      "median_seconds": 0.0003401629801373929,
+      "std_seconds": 0.00013975308811622946,
+      "latency_task_bootstrap_ci95": [
+        0.0002577706021838821,
+        0.0003764213244721759
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 0
+    },
+    {
+      "condition": "ablation:rollback_conflicts",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 1,
+      "false_accept_rate": 0.08333333333333333,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.000492999879643321,
+      "median_seconds": 0.0005122119910083711,
+      "std_seconds": 0.0001835755635180882,
+      "latency_task_bootstrap_ci95": [
+        0.00042926411697408184,
+        0.0005796543504402507
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 1
+    },
+    {
+      "condition": "ablation:revalidation",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 1,
+      "false_accept_rate": 0.08333333333333333,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.00034166627912782135,
+      "median_seconds": 0.0003370910126250237,
+      "std_seconds": 0.00015493159023161125,
+      "latency_task_bootstrap_ci95": [
+        0.00028253120108274744,
+        0.00041331842585350386
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 2
+    }
+  ],
+  "paired_comparisons": [],
+  "sources": [
+    {
+      "path": "artifacts/benchmark-results/local-ablations.jsonl",
+      "sha256": "0f4355715f93500676969c17c1f8f26aabe5e015ccbe63bf72bd3e5aaaec2ee5"
+    }
+  ],
+  "statistics": "descriptive; task-cluster bootstrap, 2000 draws, seed 481; no significance claim"
+}

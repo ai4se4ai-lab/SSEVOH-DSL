@@ -1,0 +1,119 @@
+{
+  "summaries": [
+    {
+      "condition": "ablation:full",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 0,
+      "false_accept_rate": 0,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.00033862624317407606,
+      "median_seconds": 0.00033054198138415813,
+      "std_seconds": 0.00016663464254664613,
+      "latency_task_bootstrap_ci95": [
+        0.0002773384486014644,
+        0.00042384221839408077
+      ],
+      "qualification": false
+    },
+    {
+      "condition": "ablation:dependency_closure",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 1,
+      "false_accept_rate": 0.08333333333333333,
+      "false_reject_rate": 0.15384615384615385,
+      "mean_seconds": 0.00030907608568668364,
+      "median_seconds": 0.00034143298398703337,
+      "std_seconds": 0.00013689946790553436,
+      "latency_task_bootstrap_ci95": [
+        0.00025600766530260445,
+        0.0003730407683178782
+      ],
+      "qualification": false
+    },
+    {
+      "condition": "ablation:provenance_checks",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 1,
+      "false_accept_rate": 0.08333333333333333,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.00035762655548751357,
+      "median_seconds": 0.0003661629743874073,
+      "std_seconds": 0.00017253387301629185,
+      "latency_task_bootstrap_ci95": [
+        0.00029742343176621946,
+        0.0004452462870782862
+      ],
+      "qualification": false
+    },
+    {
+      "condition": "ablation:withdrawal_validation",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 0,
+      "false_accept_rate": 0,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.00032815916929394005,
+      "median_seconds": 0.00034456304274499416,
+      "std_seconds": 0.000157379454849221,
+      "latency_task_bootstrap_ci95": [
+        0.0002691742411116138,
+        0.0004060356237459928
+      ],
+      "qualification": false
+    },
+    {
+      "condition": "ablation:rollback_conflicts",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 1,
+      "false_accept_rate": 0.08333333333333333,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.0005237395549193024,
+      "median_seconds": 0.0005252339178696275,
+      "std_seconds": 0.00024247055054302065,
+      "latency_task_bootstrap_ci95": [
+        0.0004363824681301291,
+        0.0006493258435511962
+      ],
+      "qualification": false
+    },
+    {
+      "condition": "ablation:revalidation",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 1,
+      "false_accept_rate": 0.08333333333333333,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.0003378831688314676,
+      "median_seconds": 0.0003395429812371731,
+      "std_seconds": 0.00016275332011299033,
+      "latency_task_bootstrap_ci95": [
+        0.00027641641402927536,
+        0.0004183806828223169
+      ],
+      "qualification": false
+    }
+  ],
+  "sources": [
+    {
+      "path": "/scratch/mbabaei/ssevoh/runs/ssevoh-ablation-smoke-20261109T193026Z-rorqual/results/ablations/records.jsonl",
+      "sha256": "30437f2dff5f42a32e2cc205b5687ebbff004ff0bcad392692759e003551536a"
+    }
+  ],
+  "statistics": "descriptive; task-cluster bootstrap, 2000 draws, seed 481; no significance claim"
+}

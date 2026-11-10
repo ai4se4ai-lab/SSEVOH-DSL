@@ -1,0 +1,104 @@
+{
+  "project": "ssevoh-humaneval-controls",
+  "study": "humaneval-evaluator-controls-v1",
+  "require_gpu": true,
+  "vars": {},
+  "stages": [
+    {
+      "name": "isolation",
+      "depends": [],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 1,
+        "mem": "2G",
+        "time": "00:05:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "trusted-controls",
+          "cmd": "python experiments/scripts/humaneval_sandbox.py --output \"{RESULTS}/isolation/report.json\"",
+          "produces": [
+            "isolation/report.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "controls",
+      "depends": [
+        {
+          "stage": "isolation",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "6G",
+        "time": "00:20:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "positive-negative",
+          "cmd": "python experiments/scripts/humaneval_grade.py --controls --dataset \"{WORK}/benchmarks/private/HumanEvalPlus-v0.1.10.jsonl.gz\" --isolation-report \"{RESULTS}/isolation/report.json\" --output \"{RESULTS}/controls/records.jsonl\"",
+          "needs": [
+            "isolation/report.json"
+          ],
+          "produces": [
+            "controls/records.jsonl"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "collect",
+      "cpu_only": true,
+      "depends": [
+        {
+          "stage": "isolation",
+          "type": "afterany"
+        },
+        {
+          "stage": "controls",
+          "type": "afterany"
+        }
+      ],
+      "resources": {
+        "cpus": 1,
+        "mem": "2G",
+        "time": "00:05:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "persist",
+          "builtin": "collect",
+          "needs": [
+            "isolation/report.json",
+            "controls/records.jsonl"
+          ],
+          "critical": true
+        }
+      ]
+    }
+  ],
+  "results": {
+    "tables": [],
+    "summaries": [],
+    "copy": [
+      "isolation/**",
+      "controls/**"
+    ],
+    "archive": []
+  }
+}

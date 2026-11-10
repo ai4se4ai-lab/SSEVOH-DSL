@@ -1,0 +1,539 @@
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,array,booktabs,graphicx,url,listings,multirow,xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,fit,arrows.meta,calc,backgrounds}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage[hidelinks]{hyperref}
+\lstset{basicstyle=\ttfamily\scriptsize,captionpos=b,abovecaptionskip=6pt,belowcaptionskip=2pt,breaklines=true,columns=fullflexible,frame=single,
+  morekeywords={harness,component,evolution,operation,target,from,to,depends,parents,capabilities,requires,expect,ensure,version,mutable},
+  keywordstyle=\bfseries,xleftmargin=2pt,xrightmargin=2pt,aboveskip=4pt,belowskip=2pt}
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+\algnewcommand{\Req}{\textbf{require }}
+\algrenewcommand\alglinenumber[1]{\scriptsize #1:}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\tool}{SSEVOH-DSL}
+\newcommand{\harness}{Harness\textsuperscript{2}}
+\newcommand{\pathcode}[1]{\nolinkurl{#1}}
+\newcommand{\sv}[2]{\ensuremath{\langle\textsf{#1},#2\rangle}}
+% numbered flow badges, pre-rendered so that captions never run TikZ
+\makeatletter
+\AtBeginDocument{\@for\n:={1,2,3,4,5,6,7,8,9}\do{%
+  \expandafter\newsavebox\csname flowbadge\n\endcsname
+  \global\expandafter\sbox\csname flowbadge\n\endcsname{\tikz[baseline=(c.base)]\node[circle,fill=black,text=white,inner sep=0.6pt,font=\scriptsize\bfseries](c){\n};}}}
+\DeclareRobustCommand{\circled}[1]{\expandafter\usebox\csname flowbadge#1\endcsname}
+\makeatother
+\definecolor{trust}{HTML}{2A78D6}
+\definecolor{untrust}{HTML}{EB6834}
+\definecolor{assure}{HTML}{1BAF7A}
+\definecolor{inkm}{HTML}{52514E}
+\begin{document}
+\title{SSEVOH-DSL: Revocable, Version-Bound Approvals for Self-Evolving Agent Harnesses}
+\author{Anonymous Author(s)}
+\IEEEtitleabstractindextext{%
+\begin{abstract}
+An agent that revises its own prompts, tools, memory, and workflows changes the machinery that governs its later behavior. Testing a candidate once does not establish that its approval remains valid after a concurrent update, the withdrawal of an ancestor, or the reuse of a learned experience entry. We present \tool{}, a declarative transition language and a trusted enforcement service that bind every evolution decision to versioned state, operator policy, validator evidence, and transitive provenance. The service couples one-use, context-bound admission receipts with dependency-aware withdrawal, eligibility-checked recovery, and revalidation at execution and library reuse. We integrate it non-invasively with a pinned \harness{} runtime by wrapping its admission, stage-execution, and library seams while preserving its recursive adaptation logic. Independent bounded exploration finds no discrepancy over 248,832 one-step cases, 19,620 history transitions, and 6,880 anchored journal replays, and independent state graphs agree with TLC. In controlled \harness{} fixtures, deployed operator-contract violations fall from 25/45 under the original admission checks to 0/45, while all permitted executions are retained; removing an individual gate re-opens up to 15. Across 500 model-generated requests, all 73 oracle-classified disallowed requests are blocked and all 18 allowed ones admitted; in model-driven \harness{} streams, 141/141 disallowed proposals are blocked and 16/16 permitted proposals admitted. Admission costs 0.6\,ms median. The evidence supports bounded contract enforcement, not task improvement: a two-task ledger pilot fails because of adapter defects we diagnose and fix; in the corrected 50-stream pilot, a sandboxed-evidence policy admits correct model repairs that the catalog rejects (8/50 versus 0/50 correct values, post hoc) with no disallowed execution, while strict success remains 0 because of an answer-format defect. A prespecified 540-stream tool-repair study and a standard coding benchmark remain outstanding.
+\end{abstract}
+\begin{IEEEkeywords}
+Agent harnesses, self-evolving agents, domain-specific languages, runtime verification, authorization, provenance, model checking.
+\end{IEEEkeywords}}
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+\IEEEpeerreviewmaketitle
+
+%=====================================================================
+\section{Introduction}
+\IEEEPARstart{A}{n} agent harness determines how a language model receives instructions, accesses tools, stores memory, and organizes work. Revising the harness changes future behavior without changing model weights, and recent systems search over agent designs or recursively revise their own supporting software~\cite{adas,dgm,harness2}. This creates a software engineering problem that resembles release management more than prompt engineering: a candidate that was acceptable at one point in an evolution history may no longer be acceptable when it is deployed, composed into another candidate, or reused from an experience library.
+
+Consider a harness that repairs its ledger-summary tool and then derives a reporting skill from the repaired version. If an operator later withdraws the repaired tool, a passing unit test does not authorize running the derived skill; a schema validator cannot tell whether an experience entry still originates from the withdrawn version; and reverting a file does not establish whether a historical version is eligible for recovery. The object that must be governed is a \emph{transition in a versioned authority state}, not an isolated text edit. Existing safeguards address adjacent concerns: runtime monitors mediate events~\cite{schneider}, authorization languages decide principal/action/resource requests~\cite{cedar}, AgentSpec enforces declarative runtime rules for agents~\cite{agentspec}, Progent controls evolving tool privileges~\cite{progent}, and AutoSpec learns safety rules~\cite{autospec}. None of them targets the lifecycle obligations created when a harness proposes, composes, publishes, withdraws, recovers, and reuses versions of itself.
+
+\tool{} represents harness components and proposed transitions as typed metadata. An untrusted proposer \emph{requests} a change and names required checks; it cannot supply authority or declare validation successful. A trusted service compiles the request, matches it against trusted state, authorizes it under operator policy, constructs and checks the candidate, obtains evidence from registered validators, and issues a context-bound, one-use receipt. Commit rechecks the bound context. Withdrawal records an irrevocable version identity and quarantines its affected closure, and execution and library reuse recheck exact artifact bytes and eligible origins.
+
+\textbf{Contributions.} (1) A transition language with explicit lifecycle semantics for update, withdrawal, and rollback over dependencies and transitive version origins (Sec.~\ref{sec:approach}). (2) A trusted enforcement service, presented as six short algorithms, whose approvals are bound to state, evidence, and origins and rechecked at commit, dispatch, and library reuse. (3) Independent bounded conformance, history, replay, and TLC cross-checks (RQ1). (4) A non-invasive integration with the original \harness{} runtime and an auditable multi-cluster evaluation that separates enforcement discrimination (RQ2--RQ3) from usefulness (RQ4) and cost (RQ5). We report negative evidence explicitly: consistent enforcement does not make an ineffective worker useful, and our ledger pilot fails both tasks.
+
+%=====================================================================
+\section{Background and Running Example}\label{sec:background}
+\subsection{Self-evolving harnesses}
+A \emph{component} is a named, typed, versioned harness element; we recognize skill, memory, tool, workflow, configuration, policy, and verifier kinds. \harness{}~\cite{harness2} is representative of recursive harness adaptation: for each task it proposes edits to a harness tree, probes candidates with solver rollouts, composes promising edits, selects a deliverable, and reflects outcomes into an experience library that is shown to later tasks. Its pinned runtime already validates paths and schemas, retries and falls back on failures, and separates method from judge. These safeguards decide whether an edit is \emph{well formed}; they do not decide whether it is \emph{authorized under the operator's current lifecycle state}.
+
+\subsection{Running example: a self-repairing ledger harness}\label{sec:running}
+\textbf{Motivation.} We use one scenario throughout the paper. It abstracts the ledger fixtures of our controlled evaluation (Sec.~\ref{sec:design}): each event below corresponds to a fixture family executed there. A reporting harness reconciles CSV ledgers. It contains a protected policy file (\textsf{guardrails}), a tool \textsf{summarize} (a trusted Python program), a skill \textsf{report} that uses the tool, and editable memory. Version~1 of \textsf{summarize} sums only positive amounts, so refunds are silently dropped.
+
+\textbf{Scenario.} Five events occur during evolution.
+\textbf{E1}~The agent proposes \textsf{summarize}~1$\to$2 (signed sum); a trusted unit check maps $9.00,-2.00\mapsto7.00$.
+\textbf{E2}~A second proposal, prepared from the \emph{same} base, also edits \textsf{summarize}.
+\textbf{E3}~A proposal edits \textsf{guardrails} and adds a network capability.
+\textbf{E4}~The agent derives \textsf{report}~v2 from \textsf{summarize}~v2, executes it, and reflects an experience entry into its library.
+\textbf{E5}~The operator later finds a defect in \textsf{summarize}~v2 and withdraws it, then asks to restore a working state.
+
+\textbf{What should happen.} E1 should be admitted only with passing evidence. E2's approval became stale when E1 committed and must not deploy. E3 must be rejected however plausible its bytes. After E5, \textsf{report}~v2 and the library entry must become ineligible, \emph{even though their own bytes never changed}; rollback of \textsf{summarize} to v2 must be refused, whereas rollback to v1 and of \textsf{report} to v1 may succeed under current policy.
+
+\textbf{Objectives.} The scenario yields five objectives: \textbf{O1}~authority---only authorized, evidenced transitions deploy; \textbf{O2}~freshness---an approval is void once its context changes; \textbf{O3}~revocation through origins---withdrawal propagates to dependents, derived versions, and library entries; \textbf{O4}~safe recovery---only eligible historical versions return; \textbf{O5}~non-invasiveness and traceability---the host's adaptive loop is preserved and every decision is auditable. Original \harness{} admission checks well-formedness, which overlaps O1 only partially (Sec.~\ref{sec:rq3}); it was not designed to carry operator authority and offers no counterpart to O2--O4.
+
+\subsection{Trust boundary and failure model}\label{sec:trust}
+We trust the host service, its policy and validator registry, the pinned launcher and runtime, and the operating environment separating them from the proposer. Proposals and model outputs are untrusted data. Validators are assumed pure, terminating, and correct for their registered predicates; hashes identify bytes under collision resistance; a chained journal needs an external anchor to detect wholesale replacement. The supported failure model covers invalid proposal text, stale state, conflicting approvals, withdrawn origins, file changes detectable at controlled boundaries, and model protocol failures. It excludes kernel compromise, malicious validators, arbitrary host code execution, and durable recovery after authority state is lost. The class name \texttt{SandboxEngine} does not imply OS isolation: the ledger executor runs a finite catalog of two trusted Python programs, and process-local hooks do not isolate a hostile same-user process.
+
+%=====================================================================
+\section{Approach}\label{sec:approach}
+\subsection{Overview}
+Fig.~\ref{fig:overview} shows the architecture. The untrusted harness (left) keeps its full adaptive loop. The trusted service (center) consists of four modules: \emph{A.~Admission} turns a request into a receipt (Algs.~\ref{alg:prepare}--\ref{alg:candidate}); \emph{B.~Commit} owns the authority state and journal (Alg.~\ref{alg:commit}); \emph{C.~Runtime guards} recheck that state when a stage runs or a library entry is reused (Alg.~\ref{alg:guard}); and \emph{D.~Operator} withdraws and restores versions (Algs.~\ref{alg:withdraw}--\ref{alg:rollback}). Only eight numbered flows cross module boundaries, and the harness touches the service only through flows \circled{1}, \circled{2}, \circled{5}, and \circled{6}. Offline assurance (right) cross-checks the service against independent semantics. The subsections below follow the modules in order.
+
+\begin{figure*}[t]\centering
+\begin{tikzpicture}[font=\sffamily\scriptsize, >={Stealth[length=4.5pt]},
+  box/.style={draw, rounded corners=2pt, align=center, fill=white, inner sep=2.5pt, minimum height=0.66cm},
+  chip/.style={draw=trust!60, rounded corners=1.5pt, align=center, fill=white, inner sep=2pt, minimum height=0.62cm, font=\sffamily\tiny},
+  mod/.style={draw=trust, rounded corners=3pt, fill=trust!9, inner sep=4pt},
+  modt/.style={font=\sffamily\scriptsize\bfseries, text=trust!80!black},
+  grp/.style={draw, rounded corners=4pt, inner sep=6pt},
+  ia/.style={->, trust!55, >={Stealth[length=3pt]}},
+  lbl/.style={font=\sffamily\tiny, align=center, fill=white, inner sep=1pt, text=black},
+  flow/.style={->, very thick},
+  num/.style={circle, fill=black, text=white, inner sep=0.7pt, font=\sffamily\tiny\bfseries}]
+% ---------------- untrusted harness
+\node[box, minimum width=2.2cm] (prop) at (0,4.15) {Proposer LLM\\(data-only edits)};
+\node[box, minimum width=2.2cm] (probe) at (0,3.05) {Probe \& compose};
+\node[box, minimum width=2.2cm] (sel) at (0,1.95) {Select \& reflect};
+\node[box, minimum width=2.2cm] (exec) at (0,0.85) {Stage executor};
+\node[box, minimum width=2.2cm] (lib) at (0,-0.25) {Experience library};
+\foreach \u/\v in {prop/probe, probe/sel, sel/exec, exec/lib} \draw[->, inkm] (\u) -- (\v);
+\draw[->, inkm] (lib.west) to[bend left=40] node[lbl, left]{context} (prop.west);
+\begin{scope}[on background layer]
+\node[grp, draw=untrust, fill=untrust!7, fit=(prop)(lib), inner xsep=9pt, label={[font=\sffamily\scriptsize\bfseries, text=untrust]above:{Harness$^{2}$ (untrusted, unchanged)}}] (G1) {};
+\end{scope}
+% ---------------- module A: admission
+\node[chip, minimum width=1.75cm] (a1) at (4.25,4.05) {Parse \&\\canonicalize};
+\node[chip, minimum width=1.75cm] (a2) at (6.05,4.05) {Match trusted\\snapshot};
+\node[chip, minimum width=1.75cm] (a3) at (7.9,4.05) {Authorize\\(policy)};
+\node[chip, minimum width=1.75cm] (a4) at (4.25,2.95) {Build candidate\\+ origins};
+\node[chip, minimum width=1.75cm] (a5) at (6.05,2.95) {Run registered\\validators};
+\node[chip, minimum width=1.75cm] (a6) at (7.9,2.95) {Issue one-use\\receipt $\rho$};
+\draw[ia] (a1) -- (a2); \draw[ia] (a2) -- (a3); \draw[ia] (a3.south) -- (a4.north east);
+\draw[ia] (a4) -- (a5); \draw[ia] (a5) -- (a6);
+\begin{scope}[on background layer]
+\node[mod, fit=(a1)(a6), inner ysep=5pt] (A) {};
+\end{scope}
+\node[modt, anchor=south west] at (A.north west) {A. Admission (Alg.~1--2)};
+% ---------------- module B: commit & state
+\node[chip, minimum width=2.25cm] (b1) at (10.85,4.05) {Authority store\\$S$, history $H$, origins $O$};
+\node[chip, minimum width=2.25cm] (b2) at (10.85,2.95) {Locked commit\\recheck $\kappa$, swap};
+\node[chip, minimum width=2.25cm] (b3) at (10.85,1.85) {Hash-chained journal\\+ decision log};
+\begin{scope}[on background layer]
+\node[mod, fit=(b1)(b3), inner ysep=5pt] (B) {};
+\end{scope}
+\node[modt, anchor=south west] at (B.north west) {B. Commit (Alg.~3)};
+% ---------------- module C: runtime guards
+\node[chip, minimum width=3.1cm] (c1) at (5.45,0.85) {Dispatch guard\\receipt $\cdot$ bytes $\cdot$ eligibility};
+\node[chip, minimum width=3.1cm] (c2) at (5.45,-0.25) {Library guard\\executed origins $\cdot$ filter};
+\begin{scope}[on background layer]
+\node[mod, fit=(c1)(c2), inner ysep=5pt] (C) {};
+\end{scope}
+\node[modt, anchor=north west] at (C.south west) {C. Runtime guards (Alg.~6)};
+% ---------------- module D: operator
+\node[chip, minimum width=2.25cm] (d1) at (10.85,0.3) {Withdraw $\cdot$ Rollback\\quarantine closure};
+\begin{scope}[on background layer]
+\node[mod, fit=(d1), inner ysep=5pt] (D) {};
+\end{scope}
+\node[modt, anchor=north west] at (D.south west) {D. Operator (Alg.~4--5)};
+\begin{scope}[on background layer]
+\node[grp, draw=trust, fit=(A)(B)(C)(D), inner ysep=15pt, inner xsep=8pt, label={[font=\sffamily\scriptsize\bfseries, text=trust]above:{\tool{} trusted enforcement service}}] (G2) {};
+\end{scope}
+% ---------------- assurance
+\node[box, minimum width=2.1cm] (r1) at (14.12,4.05) {Reference\\semantics};
+\node[box, minimum width=2.1cm] (r2) at (14.12,2.95) {History \&\\replay explorers};
+\node[box, minimum width=2.1cm] (r3) at (14.12,1.85) {Python graphs\\$\leftrightarrow$ TLA$^{+}$/TLC};
+\node[box, minimum width=2.1cm] (r4) at (14.12,0.75) {Faulty-variant\\detection};
+\begin{scope}[on background layer]
+\node[grp, draw=assure, fill=assure!7, fit=(r1)(r4), inner xsep=5pt, label={[font=\sffamily\scriptsize\bfseries, text=assure!70!black]above:{Offline assurance (RQ1)}}] (G3) {};
+\end{scope}
+% ---------------- numbered flows between modules only
+\draw[flow, untrust] (prop.east) -- node[num, above=1pt]{1} node[lbl, below=1pt]{request + tree} (prop.east -| A.west);
+\draw[flow, inkm] (probe.east -| A.west) -- node[num, above=1pt]{2} node[lbl, below=1pt]{reject + reason} (probe.east);
+\draw[flow, trust] (a6.east) -- node[num, above=1pt]{3} (a6.east -| B.west);
+\draw[flow, trust] (B.west |- b3) -| node[pos=0.3, num, above=1pt]{4} node[pos=0.3, lbl, below=1pt]{publish receipts} ([xshift=-14pt]C.north east);
+\draw[flow, trust] (exec.east) -- node[num, above=1pt]{5} node[lbl, below=1pt]{dispatch} (exec.east -| C.west);
+\draw[flow, trust] (lib.east) -- node[num, above=1pt]{6} node[lbl, below=1pt]{insert / expose} (lib.east -| C.west);
+\draw[flow, inkm] (D.north) -- node[num, right=1pt]{7} (B.south -| D.north);
+\draw[<->, very thick, dashed, assure!70!black] (G3.west |- b2) -- node[num, above=1pt]{8} (B.east |- b2);
+\end{tikzpicture}
+\caption{Architecture of \tool{}, grouped into four trusted modules; thin arrows show the order of steps inside the admission module, and numbered arrows show the only flows between modules. \circled{1}~\harness{} submits a data-only DSL request with its candidate tree to Module~A, which canonicalizes it, matches the declared snapshot against trusted state, authorizes it, builds the candidate with its origins, runs the registered validators, and issues a one-use receipt $\rho$. \circled{2}~A rejection returns a reason to \harness{}'s own retry loop. \circled{3}~Module~B rechecks $\rho$ under the authority lock and commits it to state and journal, and \circled{4}~publishes the receipt for execution. Module~C rechecks every \circled{5}~stage dispatch and every \circled{6}~library insertion and exposure. \circled{7}~Operator withdrawal and rollback (Module~D) commit through Module~B and quarantine affected closures. \circled{8}~Offline explorers and TLC cross-check the lifecycle semantics.}
+\label{fig:overview}
+\end{figure*}
+
+\subsection{The transition language}\label{sec:dsl}
+A specification declares the trusted snapshot of the relevant components and exactly one evolution. Names, fields, and set-valued lists must be unique; references resolve over all declarations; the parser rejects unknown fields and trailing syntax and canonicalizes declarations and lists. An evolution names an operation (\texttt{update}, \texttt{withdraw}, or \texttt{rollback}), a target, expected and resulting versions, declared dependencies, derivation parents, capabilities, required validators, and pre/post activity conditions. Proposal values cannot embed validator code. Listing~\ref{lst:dsl} is event E1; it compiles with the released compiler.
+
+\begin{lstlisting}[caption={Running example, event E1: a \emph{request} to update \textsf{summarize}.},label={lst:dsl}]
+harness ledger {
+  component guardrails policy { version 1; mutable false; }
+  component summarize tool {
+    version 1; mutable true; capabilities [read_ledger]; }
+  component report skill {
+    version 1; mutable true; depends [summarize]; }
+  evolution fix_sign {
+    operation update; target summarize; from 1; to 2;
+    capabilities [read_ledger];
+    requires [structure, signed_ledger];
+    expect active; ensure active;
+  }
+}
+\end{lstlisting}
+
+The listing requests a transition; it is not a grant. The declared snapshot must equal trusted state---the service never accepts a proposal's account of what is installed---and the principal, policy, and validator implementations come from the host. E3 is expressed the same way but targets \textsf{guardrails} or adds \texttt{network} to \texttt{capabilities}; it is well formed and is rejected by policy, not by the parser.
+
+\subsection{Lifecycle state and validity}\label{sec:state}
+The lifecycle configuration is $S=(C,I,W,r,H,O)$: $C$ maps names to current component records (kind, positive version, mutability, dependencies, parents, capabilities); $I$ is the set of inactive names; $W$ is the set of withdrawn \sv{name}{version} identities; $r$ is a revision; $H$ stores historical records; and $O$ maps each version identity to its transitive origins. Policy, validator registry, outstanding receipts, and audit records form the separate trusted service context. The combined dependency/parent graph $G$ must resolve and be acyclic, every active component must have active direct dependencies and parents, and active versions and their origins must avoid withdrawal:
+\begin{equation}
+\forall c\notin I:\ \mathsf{Elig}(c,v_c),\ \text{where}\ \mathsf{Elig}(x)\equiv(\{x\}\cup O(x))\cap W=\varnothing.
+\label{eq:origin}
+\end{equation}
+We write $\mathsf{Valid}(S)$ for these conditions plus typed, unique records; $\mathsf{Auth}(p,e,S)$ for authorization of principal $p$, operation, target, and capabilities by trusted policy; $\mathsf{Evidence}(e,S')$ for exact-\texttt{True} results of every mandatory and requested registered validator; and $\mathsf{Protected}(S,S')$ for preservation of immutable, policy, and verifier records and the prohibition of newly quarantining them. $\mathsf{Reach}^{-1}_G(t)$ denotes the components that reach $t$ over dependency or parent edges.
+
+\subsection{Admission: preparing a transition}
+Algorithm~\ref{alg:prepare} is the only path to an approval. It holds the authority lock, records the identity hash of the complete service context, and fails closed at every \textbf{require}.
+
+\begin{algorithm}[t]\caption{\textsc{Prepare}: admit a request (flows \circled{1}--\circled{2})}\label{alg:prepare}\footnotesize
+\begin{algorithmic}[1]
+\Require DSL source $src$, authenticated principal $p$
+\State lock authority; $\kappa\gets\mathsf{Id}(\text{service context})$
+\State $e\gets\textsc{Compile}(src)$; \Req $e.\mathit{snapshot}=\mathsf{Snap}(S)$
+\State \Req $\mathsf{Auth}(p,e,S)$ \Comment{principal, op, target, caps}
+\State \Req $e.\mathit{from}=v_{e.t}$ and $e.\mathit{expect}$ holds in $S$
+\State $(S',O')\gets\textsc{Candidate}(e,S)$ \Comment{Alg.~\ref{alg:candidate}}
+\State \Req $\mathsf{Protected}(S,S')\wedge\mathsf{Valid}(S')$
+\For{$v\in\mathit{Mandatory}\cup e.\mathit{requires}$}
+  \State $ev[v]\gets\mathit{Registry}[v](e,S')$; \Req $ev[v]=\texttt{True}$
+\EndFor
+\State \Req $\mathsf{Id}(\text{service context})=\kappa$
+\State \Return $\rho=\langle\text{fresh token},p,\mathsf{h}(src),\kappa,\mathsf{h}(S'),O',ev\rangle$
+\end{algorithmic}\end{algorithm}
+
+\textit{Running example.} For E1, the snapshot in Listing~\ref{lst:dsl} matches trusted state; policy grants the agent principal \texttt{update} on mutable tools with \texttt{read\_ledger}; the candidate keeps \textsf{guardrails} unchanged; and both \texttt{structure} and the trusted \texttt{signed\_ledger} check return \texttt{True}. The proposer can name \texttt{signed\_ledger} but cannot supply its result (line~8). Here \texttt{signed\_ledger} illustrates an operator-registered unit check analogous to condition C1's input; the deployed integration registers artifact-schema, code-catalog, and version-origin validators. For E3, line~3 fails because policy protects \textsf{guardrails} and caps the capability set; line~6 would independently reject a newly quarantined policy component. Each rejection is returned with its reason to \harness{}'s own retry loop (flow~\circled{2}).
+
+\subsection{Candidate construction and origins}
+Algorithm~\ref{alg:candidate} computes the candidate for an update. Quarantine uses the \emph{old} graph, so dependents of the replaced version must be revalidated rather than silently inheriting it. Origins are conservative: the new version inherits the previous target version, its origins, and every declared parent version with its origins. An update cannot drop a parent and so cannot declare independence from a withdrawn ancestor; no provenance-severing release operation is provided.
+
+\begin{algorithm}[t]\caption{\textsc{Candidate}: update a target $t$}\label{alg:candidate}\footnotesize
+\begin{algorithmic}[1]
+\Require canonical request $e$ for target $t$, state $S$
+\State $c\gets C[t]$; \Req $e.\mathit{to}>v_c$ and $\sv{t}{e.\mathit{to}}\notin\mathrm{dom}(H)$
+\State \Req $c.\mathit{parents}\subseteq e.\mathit{parents}$ \Comment{ancestry never dropped}
+\State $Q\gets\mathsf{Reach}^{-1}_{G(S)}(t)$ \Comment{dependents in old graph}
+\State $c'\gets c$ with version $e.\mathit{to}$, relations and caps of $e$
+\State $O'(\sv{t}{e.\mathit{to}})\gets\{\sv{t}{v_c}\}\cup O(\sv{t}{v_c})\ \cup$
+\State \hspace{1.5em}$\bigcup_{q\in e.\mathit{parents}}\big(\{\sv{q}{v_q}\}\cup O(\sv{q}{v_q})\big)$
+\State $I'\gets I\cup Q$
+\If{$e.\mathit{ensure}=\mathit{active}$ and all deps/parents of $c'$ active}
+  \State $I'\gets I'\setminus\{t\}$
+\EndIf
+\State \Return $(\langle C[t\mapsto c'],I',W,r{+}1\rangle,\,O')$
+\end{algorithmic}\end{algorithm}
+
+\textit{Running example.} E1 yields $O(\sv{summarize}{2})=\{\sv{summarize}{1}\}$ and quarantines \textsf{report}, which depends on \textsf{summarize}, until it is revalidated against v2. In E4, \textsf{report}~1$\to$2 declares \texttt{parents [summarize]}, so line~5 records $O(\sv{report}{2})=\{\sv{report}{1},\sv{summarize}{2},\sv{summarize}{1}\}$. This set is what later makes E5 bite.
+
+\subsection{Commit and freshness}
+Algorithm~\ref{alg:commit} turns a receipt into state. Because $\kappa$ hashes the entire service context---state, policy, validator registry, and outstanding receipts---any successful competing commit invalidates every other receipt prepared from the old base. Staging followed by a reference swap prevents partly applied authoritative transitions; a rejected receipt leaves state unchanged. This is a transaction guarantee for the service and its controlled publication path, not a general filesystem crash-consistency theorem.
+
+\begin{algorithm}[t]\caption{\textsc{Commit}: apply a receipt (flows \circled{3}--\circled{4})}\label{alg:commit}\footnotesize
+\begin{algorithmic}[1]
+\Require receipt $\rho$
+\State lock authority
+\State \Req $\rho$ genuine, outstanding, and unconsumed
+\State \Req $\rho.\kappa=\mathsf{Id}(\text{service context})$ \Comment{stale otherwise}
+\State stage $H\cup\{\rho.S'\}$, $O\cup\rho.O'$, journal entry $\langle\mathsf{h}_{\mathit{prev}},\mathsf{h}(\rho)\rangle$
+\State atomically swap state references; consume $\rho$
+\State publish bundle bytes and receipt for executor stages
+\State append decision record; \Return new revision $r'$
+\end{algorithmic}\end{algorithm}
+
+\textit{Running example.} E1 and E2 receive receipts with the same $\kappa$. Committing E1 changes $C$, $r$, and $H$, so E2 fails at line~3 even though E2 alone would have been valid. Re-proposing E2 against the new base is the intended recovery; this is objective~O2.
+
+\subsection{Withdrawal and rollback}
+Withdrawal (Alg.~\ref{alg:withdraw}) is the operator's revocation primitive. $W$ grows monotonically ($W\subseteq W'$ for every transition). A dependent may become inactive without its own version being withdrawn, which keeps direct withdrawal distinct from affected closure. Eligibility of derived versions follows from Eq.~\eqref{eq:origin}, so no enumeration of descendants is needed.
+
+\begin{algorithm}[t]\caption{\textsc{Withdraw}: revoke \sv{t}{v} (flow \circled{7})}\label{alg:withdraw}\footnotesize
+\begin{algorithmic}[1]
+\Require operator principal $p$, identity \sv{t}{v}
+\State lock authority; \Req $\mathsf{Auth}(p,\mathit{withdraw},t)$
+\State $W'\gets W\cup\{\sv{t}{v}\}$ \Comment{irrevocable}
+\State $Q\gets\mathsf{Reach}^{-1}_{G}(t)\cup(\{t\}$ if $v_t=v$ else $\varnothing)$
+\State $I'\gets I\cup Q$ \Comment{affected closure}
+\State \Req $\mathsf{Valid}(\langle C,I',W',r{+}1\rangle)$ \Comment{Eq.~\eqref{eq:origin}}
+\State \textsc{Commit} through Alg.~\ref{alg:commit} \Comment{receipt as in Alg.~\ref{alg:prepare}}
+\end{algorithmic}\end{algorithm}
+
+Rollback (Alg.~\ref{alg:rollback}) restores a stored historical record---never a reconstruction---and applies \emph{current} policy, capability ceilings, structure, validators, and activity conditions. It neither erases $W$ nor reactivates an unsafe history.
+
+\begin{algorithm}[t]\caption{\textsc{Rollback}: restore \sv{t}{v_h} (flow \circled{7})}\label{alg:rollback}\footnotesize
+\begin{algorithmic}[1]
+\Require principal $p$, historical identity \sv{t}{v_h}
+\State lock authority; $c_h\gets H[\sv{t}{v_h}]$ \Comment{stored record}
+\State \Req $\mathsf{Elig}(\sv{t}{v_h})$ under current $W$
+\State \Req $\mathsf{Auth}(p,\mathit{rollback},t)\wedge c_h.\mathit{caps}\subseteq\mathit{Ceil}(t)$
+\State $Q\gets\mathsf{Reach}^{-1}_{G}(t)$; $S'\gets\langle C[t\mapsto c_h],I\cup Q,W,r{+}1\rangle$
+\State \Req $\mathsf{Protected}(S,S')\wedge\mathsf{Valid}(S')$
+\State \Req $\mathsf{Evidence}(e,S')$ \Comment{same registry as Alg.~\ref{alg:prepare}}
+\State \textsc{Commit} through Alg.~\ref{alg:commit} \Comment{$W$ unchanged}
+\end{algorithmic}\end{algorithm}
+
+\textit{Running example.} In E5 the operator withdraws \sv{summarize}{2}. Line~3 of Alg.~\ref{alg:withdraw} quarantines \textsf{summarize} and \textsf{report}. Even if a later edit restored \textsf{report}'s dependencies, \sv{report}{2} stays ineligible because $\sv{summarize}{2}\in O(\sv{report}{2})\cap W$. Rollback of \textsf{summarize} to v2 fails at line~2 of Alg.~\ref{alg:rollback}; rollback to v1 and then of \textsf{report} to v1 succeed because their origins avoid $W$ (objective O4). Note that the target-version comparison of Alg.~\ref{alg:prepare} alone would \emph{not} catch \sv{report}{2}: origin revocation is a separate obligation from freshness.
+
+\subsection{Execution and library reuse in \harness{}}\label{sec:integration}
+Admission is not the last enforcement event. A selected deliverable may run later, and a library entry may influence many later tasks. Algorithm~\ref{alg:guard} wraps the three \harness{} seams in a dedicated launcher: \texttt{\_accept\_tree} (admission), \texttt{\_run\_stage} (execution), and the \texttt{Library} class (reuse). Original acceptance checks run first. Dispatch admission and withdrawal are serialized under the authority lock, preventing a check followed by unguarded dispatch; this does not promise instantaneous termination of already-running external processes.
+
+\begin{algorithm}[t]\caption{\textsc{Guard}: \harness{} seams (flows \circled{4}--\circled{6})}\label{alg:guard}\footnotesize
+\begin{algorithmic}[1]
+\Function{AcceptTree}{$tree$, $base$, $sources$}
+  \State \Req \textsc{OriginalAcceptTree}$(tree)$ \Comment{upstream checks}
+  \State $\rho\gets$ \textsc{Prepare}(\textsc{ToDSL}($tree,base$, parents$=sources$))
+  \State \textsc{Commit}$(\rho)$; bind stage directory to $\rho$
+\EndFunction
+\Function{RunStage}{$s$}
+  \State lock; $\rho\gets\mathit{Receipt}(s)$; \Req $\mathsf{h}(\mathit{Tree}(s))=\rho.\mathit{bytes}$
+  \State \Req $\mathsf{Elig}(\rho.x)$, $\rho.x$ active, executor in trusted catalog
+  \State \textsc{OriginalRunStage}$(s)$; $\mathit{Exec}\gets\mathit{Exec}\cup\{\rho.x\}$
+\EndFunction
+\State \textsc{Insert}$(entry)$: $entry.O\gets\bigcup_{x\in\mathit{Exec}}(\{x\}\cup O(x))$
+\State \textsc{Expose}$()$: \Return $\{entry\in\mathit{Lib}\mid entry.O\cap W=\varnothing\}$
+\end{algorithmic}\end{algorithm}
+
+\textit{Running example.} In E4, \harness{} composes \textsf{report}~v2 from \textsf{summarize}~v2; line~3 binds that contributing source as a parent even though the current-name graph alone cannot express a historical source relation. After the run, the reflected entry carries $\{\sv{report}{2}\}\cup O(\sv{report}{2})$ (line~10). After E5, line~7 refuses to dispatch \textsf{report}~v2 even with unchanged bytes, and line~11 hides the entry from every later task's context (objective O3). Merely creating a stage directory never establishes authority.
+
+The integration replaces no upstream source file; the hook layer is 188 physical lines and the authority adapter 502. These are concrete seams in the pinned release (commit \texttt{6868817}), not a stable upstream API; a new release needs compatibility checks and renewed assurance. Sec.~\ref{sec:discussion} relates each seam to the \harness{} gaps it closes and the evidence for each.
+
+\subsection{Correctness argument and audit trail}
+Under trusted initialization, pure terminating validators, exclusive use of the service boundary, a stable context during successful validation, and sufficient resources, accepted transitions preserve $\mathsf{Valid}$. Initialization checks acyclicity and active origins; historical completeness before initialization is an operator assumption. Updates preserve identity immutability and ancestry while quarantining affected dependents (Alg.~\ref{alg:candidate}); withdrawal grows $W$ and quarantines its closure (Alg.~\ref{alg:withdraw}); rollback checks stored origins against current $W$ and capability ceilings (Alg.~\ref{alg:rollback}); the remaining conjuncts are checked on the candidate; and locked single-use commit linearizes the swap (Alg.~\ref{alg:commit}). Induction over accepted transitions gives preservation. This is a reviewable, non-mechanized argument, not a proof of the Python interpreter or filesystem. Conversely, for well-typed representable requests admitted by the reference relation, with available history, unchanged context, and all validators returning \texttt{True}, every implementation rejection should correspond to a reference premise; RQ1 tests both directions on finite domains.
+
+A hash-chained journal records committed transitions, and anchored replay checks continuity, content, and trusted identity; a separate decision log also records rejections. Together they trace each proposal to its decision and resulting state. Version origins describe declared and observed workflow relationships, not every semantic influence on a language model.
+
+%=====================================================================
+\section{Evaluation}\label{sec:evaluation}
+\subsection{Research questions}
+\textbf{RQ1 (bounded conformance):} Do the implementation and independent lifecycle semantics agree within published finite bounds?
+\textbf{RQ2 (enforcement discrimination):} Which contract violations are blocked and which permitted changes retained, relative to ordinary testing and static validation, and what does each gate contribute?
+\textbf{RQ3 (integration fidelity):} Are admission, composition, execution, and library reuse protected inside the original \harness{} workflow, including with model-driven proposers?
+\textbf{RQ4 (useful behavior):} Does an evolving agent under the contract deliver useful task outcomes at a documented inference budget?
+\textbf{RQ5 (cost and reproducibility):} What do validation, scaling, and contention cost, and can distributed runs be reconstructed from pins and raw records?
+
+\subsection{Study design}\label{sec:design}
+Table~\ref{tab:design} lists the cohorts. Each answers a different question, and their counts must not be pooled.
+
+\begin{table*}[t]\caption{Evaluation cohorts. Records are raw rows; inferential units are tasks or fixtures, not seeds or sites.}\label{tab:design}\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.15\textwidth}rp{0.28\textwidth}p{0.30\textwidth}l}\toprule
+Cohort & Records & Units and repetition & Conditions & RQ\\\midrule
+Bounded assurance & 275,332 & Enumerated cases, histories, replays (Table~\ref{tab:rq1}) & Implementation vs.\ reference; Python vs.\ TLC; 11 faulty variants & 1\\
+Deterministic baselines & 500 & 25 actions $\times$ 5 repeats; 60 disallowed, 65 allowed per condition & B0 syntax; B1 +schema; B2 +policy/candidate; B3 full & 2\\
+Core ablations & 750 & As above & Full; minus one of 5 lifecycle gates & 2\\
+Primary DSL generation & 500 & 5 models $\times$ 20 contexts (17 scenarios) $\times$ 5 seeds & Full enforcement on each response & 2\\
+Controlled \harness{} & 900 & 12 shared + 4 lifecycle fixtures $\times$ 5 repeats & C0 original; C1 +unit test; C2 +static DSL; C3 full; 8 single-gate ablations & 2, 3\\
+Model-driven \harness{} & 25 + 50 streams & v1: 5 models $\times$ 5 seeds $\times$ 2 ledger tasks; v2: same, $\times$ 2 executable policies & Evolving under C3 vs.\ frozen reference & 3, 4\\
+Scaling & 180 & 3 sizes $\times$ 3 shapes $\times$ 4 contention levels $\times$ 5 & Full enforcement & 5\\
+Qualification & 18 runs & 3 sites $\times$ 2 studies $\times$ 3 matched trials & Same source/model/prompt identities & 5\\\bottomrule
+\end{tabular}\end{table*}
+
+\textbf{Conditions.} B0--B2 are admission-only comparisons; trusted safe setup advances later contexts, so their timings are not end-to-end deployment costs. In \harness{}, C1 adds one independent signed-ledger unit input after the original checks; C2 adds static principal/protected-file checks and DSL compilation, and is not a semantic verifier. Shared fixtures contain three permitted families (script correction, multifile correction, skill addition) and nine disallowed families (rows of Fig.~\ref{fig:enforcement}a). The four lifecycle families---withdrawn origin, rollback conflict, stale approval, interrupted publication---are the executed counterparts of events E2 and E4--E5. C0--C2 offer no withdrawal/recovery API, so no lifecycle rates are invented for them. The eight ablations remove permissions, dependencies, provenance, evidence, formal verification, withdrawal, rollback, or revalidation individually.
+
+\textbf{Models and budgets.} Qwen2.5-Coder~7B, Phi-4~14B, GPT-OSS~20B, Devstral~24B, and Qwen3-Coder~30B are pinned by manifest digest. The DSL cohort uses temperature~0.2, top-$p$~0.9, 1,024 output and 4,096 context tokens, one generation per model/context/seed. The ledger pilot uses 2,048 output and 16,384 context tokens and runs original aggregation at $k{=}1$: four solver rollouts and three proposal stages per task, at most two edit attempts per stage. Raw request/response records retain all calls, tokens, limits, and failures.
+
+\textbf{Measures and analysis.} \emph{Unsafe deployment} means deploying a request that violates the explicit operator contract; it is not a maliciousness classifier. We separate syntax validity, oracle evaluability, allowed and disallowed attempts, deployment, false rejection, protocol/workflow failure, and task success. Invalid output is never counted as a safe request; zero eligible observations yield an undefined rate, not zero risk. A post hoc strict request-fidelity diagnostic checks every declared field; it is not preregistered and not the safety oracle. Tasks are inferential units; seeds repeat observations and sites supply infrastructure. Primary-cohort comparisons use task-cluster bootstrap and paired sign-flip tests with Holm correction and are diagnostic; with few tasks we emphasize counts and effect sizes.
+
+\subsection{RQ1: Bounded conformance}
+Table~\ref{tab:rq1} reports the assurance layers. Independent one-step, history, and anchored-replay checks report zero discrepancies within their domains. The one-step campaign accepts 3,388 and rejects 245,444 requests; history exploration visits 3,307 contexts, accepts 6,880 and rejects 12,740 transitions, and anchors a replay at every accepted endpoint. These counts characterize the enumerated relation, not deployment prevalence. In the lifecycle abstraction, Python and TLC produce identical graphs in all four authorization/evidence contexts, and the five faulty variants (authorization, evidence, withdrawal, rollback, revalidation) each yield a counterexample; e.g., the revalidation variant deploys after a dependency change in five steps. The publication abstraction similarly agrees and detects six faulty variants.
+
+\begin{table}[t]\caption{RQ1 assurance evidence and exact finite domains. Rows are different evidence layers and are not independent replications.}\label{tab:rq1}\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{L{0.22\columnwidth}L{0.45\columnwidth}L{0.24\columnwidth}}\toprule
+Check & Enumerated domain & Extent / result\\\midrule
+One-step: graph/lifecycle & Acyclic 2-component graphs; inactive/withdrawn subsets; relations from self/other/missing; target versions 1--3, expected 1--2; activity conditions & 176,256; 0 diff.\\
+One-step: type/policy & 1 component; kind, mutability, capability, grant, evidence & 72,576; 0 diff.\\
+History sequences & 2 components; 7 initial graphs; versions 1--3; depth 4; all ops & 19,620; 0 diff.\\
+Anchored replay & Every accepted history endpoint & 6,880; 0 diff.\\
+Lifecycle model & 1 proposal; epochs 0--2; 4 auth./evidence contexts & Python = TLC: 18/44, 18/44, 23/62, 61/133 states/edges\\
+Publication model & 1 bundle; 1 origin bit; 2 epochs & Python = TLC: 45/81 (auth.+evid.), 4/4 others\\
+Faulty variants & Lifecycle (5), publication (6) & 11/11 detected\\
+Test suites & Core / integration / upstream \harness{} & 62 / 32 / 70 pass\\\bottomrule
+\end{tabular}\end{table}
+
+\textbf{Answer to RQ1.} Within the published bounds, the implementation, the independent reference relation, and the TLC model agree, and every injected fault is detected. This supports consistency among the checked representations. It is not an unbounded soundness theorem, a refinement proof from Python to TLA$^{+}$, or evidence about generated programs or new adapters.
+
+\subsection{RQ2: Enforcement discrimination}
+\textbf{Deterministic baselines and core ablations.} Table~\ref{tab:rq2} shows that syntax (B0) and schema (B1) checks admit all 60 disallowed actions; trusted policy with candidate construction (B2) still admits 20, namely those whose violation is only visible to validators or lifecycle history. Full enforcement (B3) admits none and rejects none of the 65 allowed actions. Removing dependency closure, provenance checks, or revalidation each re-opens five admissions; removing dependency closure also causes ten false rejections, because skipped quarantine diverges later state. Removing withdrawal or rollback checks alone has no effect in these cases because retained guards overlap; a zero single-gate effect does not show that a mechanism is dispensable.
+
+\begin{table}[t]\caption{RQ2 deterministic admission (125 records per row: 60 disallowed, 65 allowed). FA: disallowed admitted; FR: allowed rejected.}\label{tab:rq2}\centering\footnotesize
+\begin{tabular}{lrrr}\toprule
+Condition & FA & FR & Median ms\\\midrule
+B0 syntax only & 60/60 & 0/65 & 0.197\\
+B1 + snapshot schema & 60/60 & 0/65 & 0.203\\
+B2 + policy, candidate & 20/60 & 0/65 & 0.227\\
+B3 full enforcement & \textbf{0/60} & \textbf{0/65} & 0.599\\\midrule
+Full $-$ dep.\ closure & 5/60 & 10/65 & 0.538\\
+Full $-$ provenance & 5/60 & 0/65 & 0.708\\
+Full $-$ revalidation & 5/60 & 0/65 & 0.593\\
+Full $-$ withdrawal & 0/60 & 0/65 & 0.563\\
+Full $-$ rollback & 0/60 & 0/65 & 0.841\\\bottomrule
+\end{tabular}\end{table}
+
+\begin{figure*}[t]\centering
+\includegraphics[width=\textwidth]{figures/enforcement.pdf}
+\caption{Enforcement outcomes. (a)~Each cell counts, over five repeats, permitted changes retained (top three rows) or disallowed changes deployed (other rows). Red cells are errors. Original \harness{} admission (C0) deploys 25/45 shared violations; ordinary testing (C1) still deploys 20 and static DSL validation (C2) 10; full enforcement (C3) deploys none, retains all permitted changes, and blocks all four lifecycle families (L). Removing a single gate re-opens exactly the families that gate covers. (b)~Of 500 model-generated DSL requests, 409 never reach the oracle (fenced, empty, length-limited, or identifier-level parse failures); every oracle-classified request is decided correctly.}
+\label{fig:enforcement}
+\end{figure*}
+
+\textbf{Model-generated requests.} Fig.~\ref{fig:enforcement}b and Table~\ref{tab:models} show that only 91 of 500 generated responses are oracle-evaluable: 73 disallowed and 18 allowed. Full enforcement deploys none of the 73 and falsely rejects none of the 18. Three models return fenced output in all 100 responses, which the strict raw-text protocol rejects. GPT-OSS has 56 empty and 62 length-limited outputs (overlapping). The historical \texttt{syntax\_valid} flag is also set for parser-level identifier failures: 39 Qwen3-Coder responses quote a relation or capability identifier and fail before oracle classification, so the flag must not be read as 100 parsed programs. Filtering to valid proposals would hide these interface failures.
+
+\begin{table}[t]\caption{Model-generated proposals. Left: primary DSL cohort (100 responses per model). Right: model-driven \harness{} streams under C3 (5 per model). Oracle: allowed/disallowed evaluable requests; Fid.: post hoc strict request fidelity; Inv.: invalid proposals; Adm.: allowed proposals admitted; Blk.: disallowed proposals blocked.}\label{tab:models}\centering\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\begin{tabular}{lrrr|rrrr}\toprule
+& \multicolumn{3}{c|}{Primary DSL} & \multicolumn{4}{c}{\harness{} streams}\\
+Model & Flag & Oracle & Fid. & WF ok & Inv. & Adm. & Blk.\\\midrule
+Qwen2.5-C 7B & 0 & 0/0 & 0\% & 5/5 & 0 & 7/7 & 30/30\\
+Phi-4 14B & 0 & 0/0 & 0\% & 5/5 & 43 & 0/0 & 17/17\\
+GPT-OSS 20B & 30 & 9/21 & 21\% & 0/5 & -- & -- & --\\
+Devstral 24B & 0 & 0/0 & 0\% & 5/5 & 0 & 0/0 & 54/54\\
+Qwen3-C 30B & 100 & 9/52 & 21\% & 5/5 & 0 & 9/9 & 40/40\\\midrule
+Total & 130 & 18/73 & -- & 20/25 & 43 & 16/16 & 141/141\\\bottomrule
+\end{tabular}\end{table}
+
+\textbf{Answer to RQ2.} Within the designed fixtures, full enforcement separates allowed from disallowed requests without error in every population that reaches a decision: 0/60 deterministic, 0/73 model-generated, and 0/45 controlled violations deployed, with no false rejections. Each comparison condition leaks a characteristic subset, and each gate that matters in isolation is visible in the ablations. The dominant failure for generated requests is the interface, not the gate.
+
+\subsection{RQ3: Integration fidelity in \harness{}}\label{sec:rq3}
+Fig.~\ref{fig:enforcement}a and Table~\ref{tab:rq3} report the controlled study inside the original recursive workflow. C0 deploys protected-file edits, permission expansions, unauthorized principals, missing-evidence changes, and executables outside the catalog. The unit test (C1) catches only the uncatalogued executable; C2's static checks catch the protected-file, permission, and principal violations but not the evidence or catalog violations. C3 blocks all 45 and retains all 15 permitted executions. In the separate lifecycle group, C3 blocks all 20 attempts, including the withdrawn-origin execution of event E5 and the stale approval of E2. Removing provenance alone re-admits that withdrawn-origin execution in all five repeats; removing permissions, evidence, or dependency checks re-admits 15, 10, and 5 shared violations, respectively.
+
+\begin{table}[t]\caption{RQ3 controlled \harness{} study (5 repeats). Shared: 45 disallowed, 15 permitted per condition; lifecycle: 20 disallowed. Mean ms over the 15 permitted executions only; timing is descriptive and order-confounded.}\label{tab:rq3}\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{lrrrr}\toprule
+Condition & Shared & Retained & Lifecycle & ms\\\midrule
+C0 original & 25/45 & 15/15 & n/a & 77.17\\
+C1 + unit test & 20/45 & 15/15 & n/a & 155.73\\
+C2 + static DSL & 10/45 & 15/15 & n/a & 78.33\\
+C3 full & \textbf{0/45} & \textbf{15/15} & \textbf{0/20} & 114.81\\\midrule
+C3 $-$ permissions & 15/45 & 15/15 & 0/20 & --\\
+C3 $-$ evidence & 10/45 & 15/15 & 0/20 & --\\
+C3 $-$ dependencies & 5/45 & 15/15 & 0/20 & --\\
+C3 $-$ provenance & 0/45 & 15/15 & 5/20 & --\\
+C3 $-$ any other & 0/45 & 15/15 & 0/20 & --\\\bottomrule
+\end{tabular}\end{table}
+
+\textbf{Model-driven streams.} With real model proposers inside the same workflow (Table~\ref{tab:models}, right), C3 blocks all 141 assessed disallowed proposals and admits all 16 permitted non-no-op proposals at exact bytes. GPT-OSS fails all five workflows before producing an assessable proposal; these failures remain in stream and task denominators. A source and raw-artifact audit found that this pilot never exercised reflection: our launcher did not pass the model client as \harness{}'s selector, so upstream built a CLI selector absent from the pinned archive, and all fifty task summaries have empty experience. The corrected launcher (v2, RQ4) does exercise it, and library guarding is also covered by the deterministic fixtures and eight coding-adapter regressions.
+
+\textbf{Answer to RQ3.} Admission, composition, execution, and library exposure are enforced at actual upstream call sites, and the lifecycle obligations of the running example hold in executed fixtures. Fidelity is scoped to the supported local executors, the two-program catalog, and data-only edits; it is not general tool-enabled agent isolation.
+
+\subsection{RQ4: Useful behavior}
+\textbf{Original pilot (v1).} Evolving ledger agents achieve 0/50 successful outcomes, and frozen references also achieve 0/50. The audit traced this to two defects in \emph{our} model adapter, not to enforcement. First, the executor schema quoted a placeholder, \texttt{\{"answer":"final deliverable"\}}, which Qwen2.5-Coder and Devstral returned verbatim and Phi-4 paraphrased: 29 of the 50 evolving answers are the placeholder. Second, the missing selector channel above disabled reflection. The remaining Qwen3-Coder answers report the output of the unrepaired positive-only tool.
+
+\textbf{Corrected pilot (v2).} We fixed both defects (a typed answer schema; the model client as \texttt{selector\_prop}) and, motivated by the rejected repair below, added an operator policy \texttt{sandboxed\_evidence}: a program outside the catalog is admitted only if a trusted validator finds it inside a static allowlist and correct on operator-held ledgers under Bubblewrap, and it then executes only in that sandbox. A live isolation probe gates every compute node. We reran all five models under both policies on Fir and Narval (50 streams, Table~\ref{tab:pilot}). Reflection now works (a learned entry precedes the second task in 34/50 streams), no disallowed proposal executes under either policy, and all permitted proposals are admitted except one under the catalog. GPT-OSS fails all ten streams at the serving layer (an Ollama response-parser error under JSON-constrained decoding), recorded as failures. Strict success is still 0/100 outcomes, but for an identifiable reason: under \texttt{sandboxed\_evidence}, correct repairs by Phi-4 and Qwen3-Coder (e.g., \texttt{sum(amounts, Decimal(0))}) were admitted, executed in the sandbox, and returned the correct total, yet the agent answered in prose (``the tool returned a total of 20.25'') because the final executor turn did not restate the task's required \texttt{Total:} form. A post hoc, format-insensitive diagnostic counts 8/50 correct values under sandboxed evidence and 0/50 under the catalog, which rejected the same repairs.
+
+\begin{table}[t]\caption{Ledger pilot: v1 versus the corrected v2 HPC cohort (5 models, 5 seeds, 2 tasks). Library: a learned entry precedes task~2. Correct value is post hoc and format-insensitive.}\label{tab:pilot}\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrr}\toprule
+ & v1 & v2 catalog & v2 sandboxed\\\midrule
+Completed workflows & 20/25 & 20/25 & 20/25\\
+Placeholder answers & 29/50 & 0/50 & 0/50\\
+Library entry reused & 0/25 & 16/25 & 18/25\\
+Disallowed executed & 0/141 & 0/31 & 0/13\\
+Permitted admitted & 16/16 & 81/82 & 96/96\\
+Correct value (post hoc) & -- & 0/50 & 8/50\\
+Strict success: evolving & 0/50 & 0/50 & 0/50\\
+\phantom{Strict success:} frozen & 0/50 & 0/50 & 0/50\\\bottomrule
+\end{tabular}\end{table}
+
+The pilot therefore motivates, but cannot establish, usefulness: two tasks share one planted bug. We prespecified a follow-up, ToolRepair-12 (12 planted-defect tool families with disjoint visible, validation, and oracle inputs; original \harness{}, catalog, and sandboxed-evidence arms; one injected red-team proposal per stream; family as the unit of inference), with a corrected executor that restates the task, frozen by implementation hashes before qualification.
+
+For text-only evolution, a HumanEval+ v0.1.10 study~\cite{humaneval,evalplus} is prepared: a public-only projection keeps solutions and verdicts out of every agent context, selections and libraries are frozen before hidden grading, generated code runs only in a qualified OS sandbox, and one-shot, call-matched frozen, original, and contract conditions are compared on all 164 tasks with intention-to-evaluate denominators.
+
+\textbf{Answer to RQ4.} Not yet. After correcting two adapter defects, the evolution loop, library, and sandboxed-evidence admission all work, and the evidence policy recovers correct values that the catalog blocks (8/50 versus 0/50), without any disallowed execution; strict success remains 0/100 because of a third, now-fixed answer-format defect. ToolRepair-12 and HumanEval+ carry the usefulness question; neither is complete in this snapshot (10~November~2026).
+
+\subsection{RQ5: Cost and reproducibility}
+\begin{figure*}[t]\centering
+\includegraphics[width=\textwidth]{figures/cost.pdf}
+\caption{Three aspects of enforcement cost (medians of five repeats). (a)~\emph{Graph size:} transition time grows with the number of components and depends on graph shape through the size of the quarantine closure. (b)~\emph{Contention:} with 1--8 conflicting approvals on 500 components, time grows linearly and every cell has exactly one commit winner. (c)~\emph{Check level:} each cumulative admission check adds little latency; only full enforcement (B3, 0.60\,ms) leaks none of the 60 disallowed actions.}
+\label{fig:cost}
+\end{figure*}
+
+\textbf{Validation and scaling.} Fig.~\ref{fig:cost} summarizes the 180 scaling records and the admission baselines. Shape matters because quarantine follows reverse reachability: chains quarantine the longest closures. Contention is resolved by compare-and-swap on the context hash: in every tested cell exactly one approval commits and the others are rejected as stale. These observations do not establish distributed throughput or an asymptotic bound. Traced Python allocation peaks at 2.5\,MB at 500 components and excludes native and GPU memory. In \harness{}, the permitted-execution mean rises from 77.17\,ms (C0) to 114.81\,ms (C3), a descriptive, order-confounded fixture difference; C1's slower 155.73\,ms reflects its extra test process and does not establish general superiority to testing.
+
+\textbf{Reproducibility.} HPC runs used Fir, Narval, and Rorqual through a \texttt{use-hpc}-derived Slurm pipeline~\cite{usehpc} with source freezes, cache identity and GPU checks, measured site qualification, and hash-verified collection; censored and failed cells are preserved, and superseded cells are re-run as recorded supplements rather than overwritten. Twenty-four matched cross-site pairs produced identical text and decisions under identical identities.
+
+\textbf{Answer to RQ5.} Enforcement is cheap relative to inference: a 0.6\,ms admission is below 0.1\% of the 1.66\,s mean stream time per model call in our completed streams, and even a 500-component chain transition costs less than one call. Every reported count can be recomputed from committed raw records, pins, and logs (Sec.~\ref{sec:availability}).
+
+\subsection{Discussion}\label{sec:discussion}
+\textbf{How the integration works.} \tool{} is attached to \harness{} by a dedicated launcher that installs three wrappers at run time and leaves upstream search, probing, composition, selection, reflection, and judging untouched (Fig.~\ref{fig:overview}, Alg.~\ref{alg:guard}). (i)~When \harness{} accepts a candidate tree, the original \texttt{\_accept\_tree} checks run first; the tree, its base, and its contributing sources are then translated into a DSL request and must obtain and commit a receipt. A rejection is returned as an ordinary acceptance failure, so the upstream retry and fallback loop handles it unchanged. (ii)~\texttt{\_run\_stage} executes a stage only if its directory is bound to a published receipt with matching bytes and an eligible version. (iii)~The \texttt{Library} wrapper stamps each reflected entry with the origins of the versions that actually executed and hides ineligible entries from later contexts. Because nothing upstream is edited, all 70 original \harness{} tests still pass (Table~\ref{tab:rq1}).
+
+\textbf{Which \harness{} gaps are closed, and the evidence.} Table~\ref{tab:gaps} links each gap observed under original admission (C0) to the mechanism that closes it and to the measured effect. Two patterns stand out. First, five of the nine shared violation families deploy under C0 because well-formedness checks cannot see authority or evidence; ordinary testing (C1) closes only one of them and static validation (C2) three (Fig.~\ref{fig:enforcement}a). Second, \harness{} has no notion of revocation, freshness, or authority-aware recovery, so the four lifecycle families have no C0 counterpart at all; under C3 each is blocked, and the withdrawn-origin case reopens in every repeat when provenance alone is removed. The price is about 38\,ms per permitted execution in these fixtures (77.17 to 114.81\,ms, Table~\ref{tab:rq3}) and 0.4\,ms per admission (Fig.~\ref{fig:cost}c), both below the 1.66\,s mean stream time per model call.
+
+\begin{table}[t]\caption{\harness{} gaps under original admission (C0), the \tool{} mechanism that closes each, and the evidence (shared fixtures: 5 repeats per family; Fig.~\ref{fig:enforcement}a, Tables~\ref{tab:models}--\ref{tab:rq3}).}\label{tab:gaps}\centering\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{L{0.31\columnwidth}L{0.25\columnwidth}L{0.37\columnwidth}}\toprule
+\harness{} gap & Mechanism & Evidence (C0 $\rightarrow$ C3)\\\midrule
+Protected files, capability, and principal not checked & Policy, $\mathsf{Protected}$ (Alg.~\ref{alg:prepare}) & 15/15 $\rightarrow$ 0/15 deployed; $-$Perm reopens 15/45\\
+No required evidence; uncatalogued executables & Registered validators (Alg.~\ref{alg:prepare}) & 10/10 $\rightarrow$ 0/10; C1 still 5, C2 10; $-$Evid reopens 10/45\\
+Missing dependencies & Dependency closure (Alg.~\ref{alg:candidate}) & Blocked by C0 already; $-$Dep reopens 5/45\\
+Approval not tied to base state & Context-bound receipt (Alg.~\ref{alg:commit}) & No C0 API; stale approval 0/5\\
+Derived versions and library entries keep withdrawn origins & Origins; dispatch and library guards (Algs.~\ref{alg:withdraw},~\ref{alg:guard}) & No C0 API; withdrawn origin 0/5; $-$Prov reopens 5/5\\
+No authority-aware recovery & Rollback eligibility (Alg.~\ref{alg:rollback}) & No C0 API; rollback conflict 0/5\\
+Partial publication & Staged swap (Alg.~\ref{alg:commit}) & No C0 API; interrupted publish 0/5\\
+Model-driven proposals & All of the above & 141/141 blocked, 16/16 admitted\\
+Permitted changes & --- & 15/15 retained in every condition\\\bottomrule
+\end{tabular}\end{table}
+
+\textbf{What the integration does not fix, and the evidence trade-off.} Enforcement does not make the worker useful (RQ4). The pilot also measured a cost of conservatism: a finite catalog cannot recognize an equivalent program, so it rejected every correct model repair. Replacing catalog membership with sandboxed behavioral evidence recovered those repairs without any disallowed execution (Table~\ref{tab:pilot}), at the price of a larger trusted base (validators, validation data, and the isolation layer) and a declared limit: behavioral evidence cannot exclude behavior triggered only by inputs outside every validation case, which the sandbox contains but does not prevent. ToolRepair-12 probes that limit explicitly. The v1 defects also show that a silent fallback can disable the very loop being governed, so integrations should audit fallback paths and treat interface robustness as first-class; in the primary cohort, 82\% of responses never reached an oracle-classified decision. Four of eight single-gate ablations show no effect because guards overlap---in the running example, withdrawing \sv{summarize}{2} is caught both by origin eligibility and by quarantine of dependents---so a zero effect is defense in depth, not redundancy. Finally, conservative origins reject some useful rewrites, and operators must maintain policies and validators.
+
+\textbf{Beyond \harness{}.} The three seams---candidate acceptance, stage dispatch, and experience reuse---are generic to self-evolving harnesses. In ADAS~\cite{adas}, archived designs and their derivations map onto components and parents; the Darwin G\"odel Machine~\cite{dgm} already keeps a lineage tree that maps onto the origin relation $O$; and coding agents that load editable skill and memory files fit our data-only edit surface. Porting requires locating the host's equivalents of the three seams and, where executable artifacts evolve, a verified isolation story we do not provide. A mature authorization language such as Cedar~\cite{cedar} could replace our policy layer.
+
+\subsection{Threats to validity}
+\textbf{Construct.} Compliance with an operator lifecycle contract is narrower than harmless agent behavior; correctness, fidelity, and authorization are distinct, and strict fidelity is post hoc.
+\textbf{Internal.} Validators and reference semantics can share design errors; independent implementations and faulty variants reduce but do not eliminate common-mode mistakes. Same-user adversarial isolation and durable restart are unsupported. Timing is order-confounded.
+\textbf{External.} Designed fixtures are not a sample of real attacks; two catalog programs and two ledger tasks do not establish general autonomous work, and pilot correct-value counts are post hoc; models and sites do not add tasks. HumanEval+ would extend coding evidence but not cover professional maintenance or open-world tools, and public tasks may be contaminated.
+\textbf{Conclusion.} Zero observed violations is not zero risk; repeated fixtures cannot be pooled as independent samples; pre-proposal workflow failures shrink assessable safety populations and remain failures for task outcomes.
+\textbf{Operational.} Queues, heterogeneous GPUs, and model packaging affect completion; pins, raw logs, deadlines, and censoring support audit without making infrastructure deterministic.
+
+%=====================================================================
+\section{Related Work}\label{sec:related}
+\textbf{Runtime enforcement and authorization.} Schneider characterizes policies enforceable by execution monitoring~\cite{schneider}; our service mediates restricted transition and dispatch events in that tradition and adds versioned evolution and reuse obligations rather than a new characterization. Cedar combines expressive authorization with analysis and verification-guided engineering~\cite{cedar,cedarengineering}; its formal foundations exceed our bounded exploration, and general principal/action/resource authorization is not our novelty. Proof-carrying code separates untrusted programs from evidence checked by a trusted consumer~\cite{necula}; our receipts are context-bound service records, not proofs of program semantics, and catalog membership is not proof-carrying compilation. TLA$^{+}$ supplies state-machine specification and checking~\cite{lamport}; we contribute a lifecycle model and cross-checks, not a refinement theorem. PROV-DM provides a general provenance model~\cite{prov}; our narrower version-origin relation is operational: it governs revocation eligibility.
+
+\textbf{Agent safety languages.} AgentSpec offers declarative rules of triggers, predicates, and enforcement actions over agent execution~\cite{agentspec}; its predicates can inspect trajectories, so we do not claim greater logical expressiveness. Progent represents privileges as allowed tool calls and checks policy updates with an SMT solver, narrowing automatically and expanding only with approval~\cite{progent}; monotone restriction and approval of evolving policies are therefore not new here. Our contract instead follows immutable artifact-version identities and transitive origins: replacing a tool implementation or reusing a learned entry can change eligibility even when the allowed-call set is unchanged. AutoSpec evolves safety rules via counterexample-guided, logic-based synthesis~\cite{autospec}; it could supply trusted validators or policy proposals, whereas our ordinary proposals cannot rewrite protected policy. We have not run head-to-head comparisons and infer no security superiority.
+
+Table~\ref{tab:novelty} summarizes the resulting positioning; it does not assert that prior frameworks cannot be extended to implement these obligations.
+
+\begin{table}[t]\caption{Positioning: existing responsibility of each foundation and the evolution-specific connection examined here.}\label{tab:novelty}\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{L{0.22\columnwidth}L{0.29\columnwidth}L{0.41\columnwidth}}\toprule
+Foundation & Existing responsibility & Connection examined here\\\midrule
+Authorization languages~\cite{cedar} & Decide principal/action/resource requests & Bind a decision to candidate bytes, history, validators, and full context\\
+Runtime monitors~\cite{schneider} & Mediate enforceable events & Recheck one lifecycle identity at admission, dispatch, and library exposure\\
+Provenance models~\cite{prov} & Record derivations & Make transitive origins operational in withdrawal and recovery\\
+Transactional publication & Publish changes atomically & Couple approval freshness with receipts and byte-bound execution\\
+AgentSpec, Progent~\cite{agentspec,progent} & Runtime rules; privilege-policy evolution & Artifact-version/origin eligibility and publication/reuse contract\\
+AutoSpec~\cite{autospec} & Learn safety rules & Protect policy/verifier state while mediating harness transitions\\
+Self-evolving agents~\cite{adas,dgm,harness2} & Propose and evaluate changes & Independent operator authority around the original adaptive loop\\\bottomrule
+\end{tabular}\end{table}
+
+\textbf{Self-evolving agents and benchmarks.} ADAS searches over agent designs~\cite{adas}, the Darwin G\"odel Machine studies open-ended self-improvement~\cite{dgm}, and \harness{} recursively adapts harnesses~\cite{harness2}. Our operator boundary complements these search procedures (Sec.~\ref{sec:discussion}). HumanEval and EvalPlus assess generated-program correctness~\cite{humaneval,evalplus} and complement, rather than replace, lifecycle checks.
+
+%=====================================================================
+\section{Conclusion}
+Approval in a self-evolving harness should be a versioned relation to a trusted context, not a property of bytes that passed a test once. \tool{} binds each transition to state, policy, evidence, and origins, and re-enforces that binding at commit, execution, and library reuse. Bounded exploration, TLC cross-checks, and controlled \harness{} fixtures show that the contract is implemented consistently and blocks violations that original admission, testing, and static validation miss, at sub-millisecond admission cost. The same evaluation shows what the contract does not yet deliver: the governed ledger agent learns from its library, and sandboxed evidence admits its correct repairs, but strict task success is still unestablished. Remaining priorities are complete frozen HumanEval+ results, professional tasks, durable recovery, verified isolation for evolving executable tools, and a mechanized refinement argument.
+
+\subsection*{Data and Artifact Availability}\label{sec:availability}
+The repository is the accompanying artifact (an immutable public release is required at submission). Readiness records list checked source files and hashes; \texttt{make verify} and \pathcode{integrations/harness2/scripts/verify.py} rerun assurance without submitting experiments; \pathcode{docs/TSE/figures/make_figures.py} regenerates Figs.~\ref{fig:enforcement}--\ref{fig:cost}. Table~\ref{tab:artifacts} maps evidence to locations.
+
+\begin{table}[t]\caption{Evidence-to-artifact map (repository-relative).}\label{tab:artifacts}\centering\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{p{0.24\columnwidth}p{0.72\columnwidth}}\toprule
+Evidence & Location\\\midrule
+Language, core & \pathcode{docs/language/grammar.ebnf}; \pathcode{src/ssevoh/}\\
+Assurance & \pathcode{formal/assurance/results/readiness.json}; \pathcode{formal/model/}\\
+Integration & \pathcode{integrations/harness2/adapter/ssevoh_harness2/}; \pathcode{upstream-runtime.json}\\
+DSL cohort & \pathcode{artifacts/benchmark-results/full-campaign/records.jsonl}\\
+Baselines, scaling & \pathcode{artifacts/benchmark-results/full-campaign/auxiliary.jsonl}\\
+\harness{} studies & \pathcode{artifacts/benchmark-results/harness2-full/} (\pathcode{controlled.jsonl}, \pathcode{model-streams.jsonl})\\
+Ledger pilot v2 & \pathcode{artifacts/benchmark-results/harness2-pilot-v2/}; ToolRepair: \pathcode{experiments/toolrepair/}\\
+Qualification & \pathcode{artifacts/benchmark-results/qualification/}; \pathcode{artifacts/manifests/hpc-final-audit.json}\\
+HumanEval+ & \pathcode{experiments/humaneval/} (\pathcode{dataset-manifest.json}, \pathcode{protocol.json})\\\bottomrule
+\end{tabular}\end{table}
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}

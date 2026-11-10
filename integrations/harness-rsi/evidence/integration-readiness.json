@@ -1,0 +1,9 @@
+{
+  "decision": "BLOCKED_UPSTREAM_TARGET",
+  "integration_implementation_allowed": false,
+  "empirical_allowed": false,
+  "reasons": [
+    "Pinned upstream is a survey companion with no executable agent evolution runtime",
+    "No real proposal interception and controlled deployment boundaries identified"
+  ]
+}

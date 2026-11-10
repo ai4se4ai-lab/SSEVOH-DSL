@@ -1,0 +1,1 @@
+kept -> base harness -> no changes required; both candidates propose identical behavior and the base rollout successfully computes the total as 105.25, indicating the current harness is sufficient for this task

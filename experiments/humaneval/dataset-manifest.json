@@ -1,0 +1,16 @@
+{
+  "schema": "ssevoh-humaneval-public-projection-v1",
+  "tasks": 164,
+  "private_dataset_sha256": "272720b90ac375502c8ed23cd791c2a93dfb22a911641a494da74a426c09f101",
+  "public_sha256": "2daaf2edc5a3dc6a68316a89800b61af7d534bca5f6230a5e6b6773411576c0a",
+  "public_fields": [
+    "entry_point",
+    "prompt",
+    "task_id"
+  ],
+  "hidden_grading_performed": false,
+  "dataset_version": "v0.1.10",
+  "dataset_url": "https://github.com/evalplus/humanevalplus_release/releases/download/v0.1.10/HumanEvalPlus.jsonl.gz",
+  "evalplus_commit": "26d6d00bb1fd0fa37f39c99d5290da67891d1c5e",
+  "status": "public_projection_prepared_no_generations_or_grading"
+}

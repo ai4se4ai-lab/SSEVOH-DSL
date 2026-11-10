@@ -1,0 +1,40 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,longtable}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\newcommand{\status}{\IfFileExists{../generated/results.tex}{\input{../generated/results.tex}}{\IfFileExists{paper/generated/results.tex}{\input{paper/generated/results.tex}}{Results must be regenerated from recorded artifacts.}}}
+\title{SSEVOH-DSL: Model Checking and Counterexamples}
+\author{SSEVOH-DSL project}
+\date{Evidence-linked development document}
+\begin{document}
+\maketitle
+
+\section{Model selection}
+The smallest suitable initial combination is an explicit finite-state explorer and a TLA+ lifecycle specification checked by TLC. Concrete graph constraints are checked by independent DFS and Kahn implementations. SMT and Alloy are not introduced because this bounded metadata scope does not presently justify additional tools. Concrete graph checks remain finite structural analyses, not temporal proofs.
+
+\section{State and bounds}
+An abstract state is $(phase,epoch,approvedEpoch,withdrawn,active,certifiedEpoch)$. The model considers one proposal, epochs 0 through 2, and boolean authorization and evidence contexts. Analyse, verify, approve, deploy, dependency change, withdraw, recover and reject define successor transitions. Stuttering is permitted in the TLA+ specification. No fairness or liveness property is assumed.
+
+The default configuration uses true authorization and evidence and checks the safety invariant. Separate recorded runs cover the remaining three boolean contexts. TLC's true/true configuration reaches 61 distinct states. Complete state tuples and action-labelled edge sets agree with the Python abstraction for all four contexts: 18/44, 18/44, 23/62 and 61/133 states/edges in false/false, false/true, true/false and true/true order. Denied recovery enters REJECTED. This exact finite-graph comparison does not establish refinement of the concrete runtime.
+
+\section{Negative cases}
+The Python suite deliberately removes authorization, evidence, withdrawal, rollback or revalidation protection. Its breadth-first search retains parent transitions and reports a shortest discovered bad trace. For example, weakening the recovery rule permits withdrawal followed by recovery into an active withdrawn state. Weakening stale approval checks permits approval, dependency change and deployment using a certificate for an older epoch.
+
+Each mutant must fail the invariant; each corrected context must exhaust its reachable graph without a violation. The JSON report stores visited states, transitions, bounds and counterexamples, while TLC logs store tool output and completed reachability summaries. Model-checker success is not substituted for runtime regression tests.
+
+\section{Reproduction}
+From the repository root:
+\begin{verbatim}
+PYTHONPATH=src python3 formal/check.py \
+  --tlc-jar /path/to/tla2tools.jar
+\end{verbatim}
+The recorded jar is from the official tlaplus/tlaplus v1.7.4 release. formal/assurance/results/temporal/tlc-manifest.json records its SHA-256 and run outcomes. The script uses a fixed seed of 481, one worker, temporary checker state and four separate configurations. formal/assurance/results/temporal/local-verification.json records the independent Python suite.
+
+\section{Independent concrete operational conformance}
+Version 0.2 additionally checks the public compile--approve--deploy API against a separately written set/fixed-point operational specification. All 248,832 one-step cases agree in acceptance, rejection and exact state effects. Histories through depth four cover 19,620 transitions over 3,307 reachable contexts with two components and versions one through three; all 6,880 accepted traces reproduce under anchored replay. Bounds, source hashes and raw reports reside in formal/assurance/results. These are exhaustive checks within declared domains, not universal completeness. The runner verifies source stability throughout the combined verification run.
+
+\section{Limits}
+The explored system is an abstraction with one proposal and three epochs. It does not prove arbitrary component counts, concurrent distributed proposals, implementation refinement, semantic code safety, or liveness. Concurrency, artifact graphs and fault behavior are evaluated separately. \status
+
+\end{document}

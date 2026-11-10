@@ -1,0 +1,1 @@
+kept -> systemprompt.md -> base rollout and both candidates all produced identical outputs (35.50) without any behavioral differences observed, indicating no change in execution pattern or outcome supports modifying the system prompt; the prompt is already correctly instructing the agent to use the summarize script and all rollouts followed this instruction consistently

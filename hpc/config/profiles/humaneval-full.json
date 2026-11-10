@@ -1,0 +1,208 @@
+{
+  "project": "ssevoh-humaneval-full-generation",
+  "study": "humaneval-coding-full-v1",
+  "require_gpu": true,
+  "vars": {
+    "MODELS": "qwen2.5-coder:7b phi4:14b"
+  },
+  "stages": [
+    {
+      "name": "setup",
+      "description": "setup",
+      "depends": [],
+      "cpu_only": false,
+      "resources": {
+        "gpus": "h100:1",
+        "cpus": 4,
+        "mem": "32G",
+        "time": "00:15:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "gpu",
+          "builtin": "check_gpu",
+          "critical": true
+        },
+        {
+          "name": "pins",
+          "cmd": "python experiments/scripts/runtime.py freeze --models {MODELS} --output \"{RESULTS}/setup/models.lock.json\"",
+          "produces": [
+            "setup/models.lock.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "isolation",
+      "depends": [],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 1,
+        "mem": "2G",
+        "time": "00:05:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "trusted-controls",
+          "cmd": "python experiments/scripts/humaneval_sandbox.py --output \"{RESULTS}/isolation/report.json\"",
+          "produces": [
+            "isolation/report.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "controls",
+      "depends": [
+        {
+          "stage": "isolation",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "6G",
+        "time": "00:20:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "positive-negative",
+          "cmd": "python experiments/scripts/humaneval_grade.py --controls --dataset \"{WORK}/benchmarks/private/HumanEvalPlus-v0.1.10.jsonl.gz\" --isolation-report \"{RESULTS}/isolation/report.json\" --output \"{RESULTS}/controls/records.jsonl\"",
+          "needs": [
+            "isolation/report.json"
+          ],
+          "produces": [
+            "controls/records.jsonl"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "llm",
+      "depends": [
+        {
+          "stage": "controls",
+          "type": "afterok"
+        },
+        {
+          "stage": "setup",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": false,
+      "resources": {
+        "gpus": "h100:1",
+        "cpus": 4,
+        "mem": "32G",
+        "time": "16:00:00",
+        "requeue": false
+      },
+      "matrix": {
+        "model": [
+          "qwen2.5-coder:7b",
+          "phi4:14b"
+        ],
+        "seed": [
+          1701,
+          1702,
+          1703
+        ]
+      },
+      "array_throttle": 2,
+      "steps": [
+        {
+          "name": "disjoint-edit-calibration",
+          "cmd": "python experiments/scripts/humaneval_development.py --model {model} --lock \"{RESULTS}/setup/models.lock.json\" --output \"{RESULTS}/development/{CELL}.json\"",
+          "needs": [
+            "setup/models.lock.json"
+          ],
+          "produces": [
+            "development/{CELL}.json"
+          ],
+          "critical": true
+        },
+        {
+          "name": "coding-stream",
+          "cmd": "python experiments/scripts/humaneval_generate.py --model {model} --seed {seed} --lock \"{RESULTS}/setup/models.lock.json\" --output \"{RESULTS}/llm/selected-{model}-{seed}.jsonl\"",
+          "needs": [
+            "setup/models.lock.json",
+            "controls/records.jsonl"
+          ],
+          "produces": [
+            "llm/selected-{model}-{seed}.jsonl",
+            "llm/selected-{model}-{seed}.freeze.json"
+          ],
+          "progress": {
+            "file": "llm/selected-{model}-{seed}.jsonl",
+            "expected": "656"
+          },
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "collect",
+      "cpu_only": true,
+      "depends": [
+        {
+          "stage": "setup",
+          "type": "afterany"
+        },
+        {
+          "stage": "isolation",
+          "type": "afterany"
+        },
+        {
+          "stage": "controls",
+          "type": "afterany"
+        },
+        {
+          "stage": "llm",
+          "type": "afterany"
+        }
+      ],
+      "resources": {
+        "cpus": 1,
+        "mem": "2G",
+        "time": "01:00:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "persist",
+          "builtin": "collect",
+          "needs": [
+            "isolation/report.json",
+            "controls/records.jsonl"
+          ],
+          "critical": true
+        }
+      ]
+    }
+  ],
+  "results": {
+    "tables": [],
+    "summaries": [],
+    "copy": [
+      "isolation/**",
+      "controls/**",
+      "setup/**",
+      "llm/**",
+      "development/**"
+    ],
+    "archive": []
+  }
+}

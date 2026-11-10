@@ -1,0 +1,186 @@
+test_absent_grade_fields_do_not_count_as_a_completed_grade (test_baseline_judge.BaselineJudgeTests.test_absent_grade_fields_do_not_count_as_a_completed_grade) ... ok
+test_missing_numerator_is_ungraded_for_baseline_and_selected_runs (test_baseline_judge.BaselineJudgeTests.test_missing_numerator_is_ungraded_for_baseline_and_selected_runs) ... ok
+test_missing_or_nonpositive_criteria_are_ungraded (test_baseline_judge.BaselineJudgeTests.test_missing_or_nonpositive_criteria_are_ungraded) ... ok
+test_positive_criteria_preserve_zero_partial_and_full_scores (test_baseline_judge.BaselineJudgeTests.test_positive_criteria_preserve_zero_partial_and_full_scores) ... ok
+test_selected_run_uses_the_same_criteria_contract (test_baseline_judge.BaselineJudgeTests.test_selected_run_uses_the_same_criteria_contract) ... ok
+test_documented_copy_loads_an_unconfigured_example (test_env_example.EnvExampleTests.test_documented_copy_loads_an_unconfigured_example) ... ok
+test_existing_file_loading_preserves_shell_precedence (test_env_example.EnvExampleTests.test_existing_file_loading_preserves_shell_precedence) ... ok
+test_clean_rollout_is_left_alone (test_jobbench_killed_rollout.KilledRolloutTests.test_clean_rollout_is_left_alone) ... [14:15:59] run t1 (base1) attempt 1 -> /tmp/tmp83gkw3x7/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141559.jsonl
+[14:15:59] output -> /tmp/tmp83gkw3x7/tasks/t1/model_output/base1
+ok
+test_crashed_rollout_says_so (test_jobbench_killed_rollout.KilledRolloutTests.test_crashed_rollout_says_so) ... [14:15:59] run t1 (base1) attempt 1 -> /tmp/tmpu0xs_xr1/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141559.jsonl
+[14:15:59] EXIT 1: Rollout runner: the executor exited with status 1; files already in the output directory were kept as the deliverable.
+[14:15:59] output -> /tmp/tmpu0xs_xr1/tasks/t1/model_output/base1
+ok
+test_note_survives_an_unterminated_last_event (test_jobbench_killed_rollout.KilledRolloutTests.test_note_survives_an_unterminated_last_event) ... [14:15:59] run t1 (base1) attempt 1 -> /tmp/tmpej_tj5j6/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141559.jsonl
+[14:16:00] EXIT 124: Rollout runner: the executor was stopped at the 1 s time limit (exit 124); files already in the output directory were kept as the deliverable.
+[14:16:00] output -> /tmp/tmpej_tj5j6/tasks/t1/model_output/base1
+ok
+test_retried_attempt_keeps_its_own_note (test_jobbench_killed_rollout.KilledRolloutTests.test_retried_attempt_keeps_its_own_note) ... [14:16:00] run t1 (base1) attempt 1 -> /tmp/tmpp6nhg662/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141600.jsonl
+[14:16:00] EXIT 1: Rollout runner: the executor exited with status 1; the output directory was empty.
+[14:16:00] run t1 (base1) attempt 2 -> /tmp/tmpp6nhg662/tasks/t1/model_traj/base1/t1_base1_attempt2_20261110_141600.jsonl
+[14:16:00] output -> /tmp/tmpp6nhg662/tasks/t1/model_output/base1
+ok
+test_rollout_stopped_at_the_time_limit_says_so (test_jobbench_killed_rollout.KilledRolloutTests.test_rollout_stopped_at_the_time_limit_says_so) ... [14:16:00] run t1 (base1) attempt 1 -> /tmp/tmpj60jui_6/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141600.jsonl
+[14:16:01] EXIT 124: Rollout runner: the executor was stopped at the 1 s time limit (exit 124); files already in the output directory were kept as the deliverable.
+[14:16:01] output -> /tmp/tmpj60jui_6/tasks/t1/model_output/base1
+ok
+test_signal_wording (test_jobbench_killed_rollout.KilledRolloutTests.test_signal_wording) ... [14:16:01] EXIT -9: Rollout runner: the executor was killed with SIGKILL (-9), after the 2400 s time limit or by the system; the output directory was empty.
+[14:16:01] EXIT 137: Rollout runner: the executor was killed with SIGKILL (137), after the 2400 s time limit or by the system; the output directory was empty.
+[14:16:01] EXIT -11: Rollout runner: the executor was killed by signal 11; the output directory was empty.
+[14:16:01] EXIT 124: Rollout runner: the executor was stopped at the 40m time limit (exit 124); the output directory was empty.
+ok
+test_fence_blocks_other_rollouts_but_keeps_own_dirs_and_tmp (test_jobbench_rollout_isolation.RolloutIsolationTests.test_fence_blocks_other_rollouts_but_keeps_own_dirs_and_tmp) ... [14:16:01] run t1 (base1) attempt 1 -> /tmp/tmp4og0fthk/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141601.jsonl
+[14:16:01] output -> /tmp/tmp4og0fthk/tasks/t1/model_output/base1
+ok
+test_installed_commands_stay_on_path (test_jobbench_rollout_isolation.RolloutIsolationTests.test_installed_commands_stay_on_path) ... [14:16:01] run t1 (base1) attempt 1 -> /tmp/tmpxdttwd_w/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141601.jsonl
+[14:16:01] output -> /tmp/tmpxdttwd_w/tasks/t1/model_output/base1
+ok
+test_later_rollout_cannot_see_earlier_installs_or_temp_files (test_jobbench_rollout_isolation.RolloutIsolationTests.test_later_rollout_cannot_see_earlier_installs_or_temp_files) ... [14:16:01] run t1 (base1) attempt 1 -> /tmp/tmpr30fxy46/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141601.jsonl
+[14:16:01] output -> /tmp/tmpr30fxy46/tasks/t1/model_output/base1
+[14:16:01] run t1 (inv1) attempt 1 -> /tmp/tmpr30fxy46/tasks/t1/model_traj/inv1/t1_inv1_attempt1_20261110_141601.jsonl
+[14:16:01] output -> /tmp/tmpr30fxy46/tasks/t1/model_output/inv1
+ok
+test_retry_starts_from_a_clean_sandbox (test_jobbench_rollout_isolation.RolloutIsolationTests.test_retry_starts_from_a_clean_sandbox) ... [14:16:01] run t1 (base1) attempt 1 -> /tmp/tmp1zvehk8u/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141601.jsonl
+[14:16:01] EXIT 1: Rollout runner: the executor exited with status 1; the output directory was empty.
+[14:16:01] run t1 (base1) attempt 2 -> /tmp/tmp1zvehk8u/tasks/t1/model_traj/base1/t1_base1_attempt2_20261110_141601.jsonl
+[14:16:01] output -> /tmp/tmp1zvehk8u/tasks/t1/model_output/base1
+ok
+test_temp_dir_leaves_room_for_unix_socket_paths (test_jobbench_rollout_isolation.RolloutIsolationTests.test_temp_dir_leaves_room_for_unix_socket_paths) ... ok
+test_existing_transport_failure_control_stays_ungraded (test_jobbench_worker_failure.JobbenchWorkerFailureTests.test_existing_transport_failure_control_stays_ungraded) ... ok
+test_partial_worker_failure_does_not_lower_a_mixed_score (test_jobbench_worker_failure.JobbenchWorkerFailureTests.test_partial_worker_failure_does_not_lower_a_mixed_score) ... ok
+test_valid_full_credit_control_is_graded (test_jobbench_worker_failure.JobbenchWorkerFailureTests.test_valid_full_credit_control_is_graded) ... ok
+test_valid_zero_control_is_graded (test_jobbench_worker_failure.JobbenchWorkerFailureTests.test_valid_zero_control_is_graded) ... ok
+test_worker_exception_is_ungraded_and_quarantined (test_jobbench_worker_failure.JobbenchWorkerFailureTests.test_worker_exception_is_ungraded_and_quarantined) ... ok
+test_agreeing_repeated_fences_are_a_valid_grade (test_lab_judge_patch.LabJudgePatchTests.test_agreeing_repeated_fences_are_a_valid_grade) ... ok
+test_ambiguity_exhaustion_never_writes_a_score (test_lab_judge_patch.LabJudgePatchTests.test_ambiguity_exhaustion_never_writes_a_score) ... ok
+test_conflicting_fenced_verdicts_retry_before_writing_a_score (test_lab_judge_patch.LabJudgePatchTests.test_conflicting_fenced_verdicts_retry_before_writing_a_score) ... ok
+test_existing_unfenced_ambiguity_guard_remains_active (test_lab_judge_patch.LabJudgePatchTests.test_existing_unfenced_ambiguity_guard_remains_active) ... ok
+test_fail_verdict_controls (test_lab_judge_patch.LabJudgePatchTests.test_fail_verdict_controls) ... ok
+test_basename_request_reads_nested_artifact (test_lab_nested_deliverables.LabNestedDeliverableTests.test_basename_request_reads_nested_artifact) ... ok
+test_declared_relative_path_keeps_its_identity (test_lab_nested_deliverables.LabNestedDeliverableTests.test_declared_relative_path_keeps_its_identity) ... ok
+test_distinct_nested_files_with_the_same_basename (test_lab_nested_deliverables.LabNestedDeliverableTests.test_distinct_nested_files_with_the_same_basename) ... ok
+test_no_deliverable_list_control (test_lab_nested_deliverables.LabNestedDeliverableTests.test_no_deliverable_list_control) ... ok
+test_root_file_control (test_lab_nested_deliverables.LabNestedDeliverableTests.test_root_file_control) ... ok
+test_legacy_ok_summary_without_discriminator_still_skips (test_proposer_failures.ProposerFailureTests.test_legacy_ok_summary_without_discriminator_still_skips) ...   [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 ok           ledger-2
+  [accounting] 1/2 skipped      ledger-1
+  [accounting] 2/2 skipped      ledger-2
+ok
+test_one_failed_stage_only_fails_its_mode (test_proposer_failures.ProposerFailureTests.test_one_failed_stage_only_fails_its_mode) ... ok
+test_outage_is_partial_then_healthy_rerun_succeeds_and_skips (test_proposer_failures.ProposerFailureTests.test_outage_is_partial_then_healthy_rerun_succeeds_and_skips) ...   [accounting] 1/2 partial      ledger-1  :: agg: inv1: proposer execution failed: offline outage; agg: dom1: proposer execution failed: offline outage; agg: agg1: proposer execution failed: offline outage; seq: inv1: proposer execution failed: offline outage; seq: dom1: proposer execution failed: offline outage; seq: c1: proposer execution failed: offline outage
+  [accounting] 2/2 partial      ledger-2  :: agg: inv1: proposer execution failed: offline outage; agg: dom1: proposer execution failed: offline outage; agg: agg1: proposer execution failed: offline outage; seq: inv1: proposer execution failed: offline outage; seq: dom1: proposer execution failed: offline outage; seq: c1: proposer execution failed: offline outage
+  [ledger-1] cached summary covers ['agg', 'seq'], re-running for ['agg', 'seq']
+  [accounting] 1/2 ok           ledger-1
+  [ledger-2] cached summary covers ['agg', 'seq'], re-running for ['agg', 'seq']
+  [accounting] 2/2 ok           ledger-2
+  [accounting] 1/2 skipped      ledger-1
+  [accounting] 2/2 skipped      ledger-2
+  [accounting] 1/2 partial      ledger-1  :: agg: inv1: proposer execution failed: offline outage; agg: dom1: proposer execution failed: offline outage; agg: inv2: proposer execution failed: offline outage; agg: dom2: proposer execution failed: offline outage; agg: agg1: proposer execution failed: offline outage; agg: agg2: proposer execution failed: offline outage; seq: inv1: proposer execution failed: offline outage; seq: dom1: proposer execution failed: offline outage; seq: c1: proposer execution failed: offline outage; seq: inv2: proposer execution failed: offline outage; seq: dom2: proposer execution failed: offline outage; seq: c2: proposer execution failed: offline outage
+  [accounting] 2/2 partial      ledger-2  :: agg: inv1: proposer execution failed: offline outage; agg: dom1: proposer execution failed: offline outage; agg: inv2: proposer execution failed: offline outage; agg: dom2: proposer execution failed: offline outage; agg: agg1: proposer execution failed: offline outage; agg: agg2: proposer execution failed: offline outage; seq: inv1: proposer execution failed: offline outage; seq: dom1: proposer execution failed: offline outage; seq: c1: proposer execution failed: offline outage; seq: inv2: proposer execution failed: offline outage; seq: dom2: proposer execution failed: offline outage; seq: c2: proposer execution failed: offline outage
+  [ledger-1] cached summary covers ['agg', 'seq'], re-running for ['agg', 'seq']
+  [accounting] 1/2 ok           ledger-1
+  [ledger-2] cached summary covers ['agg', 'seq'], re-running for ['agg', 'seq']
+  [accounting] 2/2 ok           ledger-2
+  [accounting] 1/2 skipped      ledger-1
+  [accounting] 2/2 skipped      ledger-2
+ok
+test_rejected_edit_then_outage_preserves_both_attempts_and_costs (test_proposer_failures.ProposerFailureTests.test_rejected_edit_then_outage_preserves_both_attempts_and_costs) ... ok
+test_rejected_edits_keep_successful_fallback_and_resume (test_proposer_failures.ProposerFailureTests.test_rejected_edits_keep_successful_fallback_and_resume) ...   [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 ok           ledger-2
+  [accounting] 1/2 skipped      ledger-1
+  [accounting] 2/2 skipped      ledger-2
+  [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 ok           ledger-2
+  [accounting] 1/2 skipped      ledger-1
+  [accounting] 2/2 skipped      ledger-2
+ok
+test_session_error_rejects_partial_output_and_preserves_cost (test_proposer_session_errors.ProposerSessionErrorsTests.test_session_error_rejects_partial_output_and_preserves_cost) ... ok
+test_successful_file_and_stdout_answers_remain_usable (test_proposer_session_errors.ProposerSessionErrorsTests.test_successful_file_and_stdout_answers_remain_usable) ... ok
+test_valid_parallel_mode_resumes_when_sequential_selection_failed (test_requested_mode_resume.RequestedModeResumeTests.test_valid_parallel_mode_resumes_when_sequential_selection_failed) ...   [accounting] 1/1 partial      ledger-1  :: seq: selection failed: temporary sequential selector failure
+  [accounting] 1/1 skipped      ledger-1
+  [accounting] 1/1 skipped      ledger-1
+  [ledger-1] cached summary covers ['agg', 'seq'], re-running for ['seq']
+  [accounting] 1/1 partial      ledger-1  :: seq: selection failed: temporary sequential selector failure
+ok
+test_actual_judge_and_report_consume_the_seeded_summary (test_runner_seed.RunnerSeedTests.test_actual_judge_and_report_consume_the_seeded_summary) ... ok
+test_seed_reaches_every_stage_for_each_runner (test_runner_seed.RunnerSeedTests.test_seed_reaches_every_stage_for_each_runner) ... ok
+test_seedless_workflow_keeps_its_existing_arguments (test_runner_seed.RunnerSeedTests.test_seedless_workflow_keeps_its_existing_arguments) ... ok
+test_retry_keeps_the_rejected_attempts_edits (test_stage_retry.StageRetryTests.test_retry_keeps_the_rejected_attempts_edits) ... ok
+test_configured_provider_keeps_its_key (test_subprocess_env.SubprocessEnvTests.test_configured_provider_keeps_its_key) ... ok
+test_jobbench_opencode_runner_runs_as_script (test_subprocess_env.SubprocessEnvTests.test_jobbench_opencode_runner_runs_as_script) ... ok
+test_lab_launchers_keep_only_their_own_keys (test_subprocess_env.SubprocessEnvTests.test_lab_launchers_keep_only_their_own_keys) ... ok
+test_scrub_env_across_launchers (test_subprocess_env.SubprocessEnvTests.test_scrub_env_across_launchers) ... [14:16:11] wb | b1: 1 task(s) x k=1 [oc]
+ok
+test_digest_follows_file_contents_and_membership (test_task_input_identity.InputsFingerprintTests.test_digest_follows_file_contents_and_membership) ... ok
+test_digest_follows_the_prompt (test_task_input_identity.InputsFingerprintTests.test_digest_follows_the_prompt) ... ok
+test_digest_ignores_byproducts_and_missing_material (test_task_input_identity.InputsFingerprintTests.test_digest_ignores_byproducts_and_missing_material) ... ok
+test_digest_is_stable_for_unchanged_inputs (test_task_input_identity.InputsFingerprintTests.test_digest_is_stable_for_unchanged_inputs) ... ok
+test_caller_without_inputs_keeps_previous_behaviour (test_task_input_identity.MarkerInputTests.test_caller_without_inputs_keeps_previous_behaviour) ... ok
+test_marker_refuses_reuse_under_changed_inputs (test_task_input_identity.MarkerInputTests.test_marker_refuses_reuse_under_changed_inputs) ... ok
+test_marker_without_inputs_stays_reusable (test_task_input_identity.MarkerInputTests.test_marker_without_inputs_stays_reusable)
+Markers written before input identity existed must not invalidate on upgrade. ... ok
+test_changed_instructions_re_roll_the_rollout (test_task_input_identity.RolloutReuseTests.test_changed_instructions_re_roll_the_rollout) ...   [lab-cx] re-rolling lab-cx-agg1/example__task-1/base1: task inputs 5dae5cd936c2a54b != 1ed572097582e7f2 -- the task prompt or its source files changed since this rollout finished
+ok
+test_changed_source_files_re_roll_the_rollout (test_task_input_identity.RolloutReuseTests.test_changed_source_files_re_roll_the_rollout) ...   [lab-cx] re-rolling lab-cx-agg1/example__task-1/base1: task inputs 5dae5cd936c2a54b != da76dac4947a0144 -- the task prompt or its source files changed since this rollout finished
+ok
+test_unchanged_inputs_reuse_the_rollout (test_task_input_identity.RolloutReuseTests.test_unchanged_inputs_reuse_the_rollout) ... ok
+test_changed_prompt_is_not_resumed (test_task_input_identity.SummaryInputTests.test_changed_prompt_is_not_resumed) ... ok
+test_changed_source_files_are_not_resumed (test_task_input_identity.SummaryInputTests.test_changed_source_files_are_not_resumed) ... ok
+test_summary_without_inputs_is_not_invalidated (test_task_input_identity.SummaryInputTests.test_summary_without_inputs_is_not_invalidated)
+A summary written before input identity existed keeps its previous meaning. ... ok
+test_write_summary_drops_modes_from_an_older_input_identity (test_task_input_identity.SummaryInputTests.test_write_summary_drops_modes_from_an_older_input_identity)
+Modes recorded under a previous input digest must not survive a re-run. ... ok
+test_complete_evidence_and_library_prefix (test_workflow.WorkflowTests.test_complete_evidence_and_library_prefix) ...   [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 ok           ledger-2
+ok
+test_failed_rejudge_keeps_grade_only_for_same_selection (test_workflow.WorkflowTests.test_failed_rejudge_keeps_grade_only_for_same_selection) ...   [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 ok           ledger-2
+  [ledger-1] cannot resume agg: adopted output is missing; re-running
+  [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 skipped      ledger-2
+ok
+test_failed_rerun_clears_stale_selections_in_summary (test_workflow.WorkflowTests.test_failed_rerun_clears_stale_selections_in_summary) ...   [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 ok           ledger-2
+  [ledger-1] cannot resume agg: adopted output is missing; re-running
+  [accounting] 1/2 partial      ledger-1  :: agg: RuntimeError: recursion failed on rerun; seq: RuntimeError: recursion failed on rerun
+  [accounting] 2/2 skipped      ledger-2
+  [ledger-1] cached summary covers ['agg', 'seq'], re-running for ['agg', 'seq']
+  [accounting] 1/2 partial      ledger-1  :: agg: RuntimeError: library write failed; seq: RuntimeError: library write failed
+  [accounting] 2/2 skipped      ledger-2
+  [ledger-1] cached summary covers ['agg', 'seq'], re-running for ['agg', 'seq']
+  [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 skipped      ledger-2
+  [ledger-1] cannot resume agg: adopted output is missing; re-running
+  [accounting] 1/2 base-failed  ledger-1  :: no base rollout produced anything
+  [accounting] 2/2 skipped      ledger-2
+ok
+test_failed_selection_is_never_judged (test_workflow.WorkflowTests.test_failed_selection_is_never_judged) ...   [accounting] 1/2 partial      ledger-1  :: agg: selection failed: selection failed; seq: selection failed: selection failed
+  [accounting] 2/2 partial      ledger-2  :: agg: selection failed: selection failed; seq: selection failed: selection failed
+ok
+test_invalid_proposal_retries_with_feedback_and_accumulates_cost (test_workflow.WorkflowTests.test_invalid_proposal_retries_with_feedback_and_accumulates_cost) ... ok
+test_no_entry_stays_out_of_library_on_resume (test_workflow.WorkflowTests.test_no_entry_stays_out_of_library_on_resume) ...   [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 ok           ledger-2
+  [accounting] 1/2 skipped      ledger-1
+  [accounting] 2/2 skipped      ledger-2
+ok
+test_recursion_budget_and_resume (test_workflow.WorkflowTests.test_recursion_budget_and_resume) ...   [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 ok           ledger-2
+  [accounting] 1/2 skipped      ledger-1
+  [accounting] 2/2 skipped      ledger-2
+  [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 ok           ledger-2
+  [accounting] 1/2 skipped      ledger-1
+  [accounting] 2/2 skipped      ledger-2
+  [ledger-1] cannot resume seq: adopted harness has changed; re-running
+  [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 skipped      ledger-2
+  [ledger-1] cannot resume agg: adopted output is missing; re-running
+  [accounting] 1/2 ok           ledger-1
+  [accounting] 2/2 skipped      ledger-2
+ok
+
+----------------------------------------------------------------------
+Ran 70 tests in 18.838s
+
+OK

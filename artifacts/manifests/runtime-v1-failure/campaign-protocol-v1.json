@@ -1,0 +1,33 @@
+{
+  "phase": "qualification",
+  "started_utc": "2026-11-09T19:20:50.604300+00:00",
+  "qualification_runs": {
+    "fir": [
+      "ssevoh-smoke-20261109T191626Z-fir",
+      "ssevoh-smoke-q1-20261109T192050Z-fir-r2",
+      "ssevoh-smoke-q1-20261109T192057Z-fir-r3"
+    ],
+    "narval": [
+      "ssevoh-smoke-20261109T191630Z-narval",
+      "ssevoh-smoke-q1-20261109T192101Z-narval-r2",
+      "ssevoh-smoke-q1-20261109T192110Z-narval-r3"
+    ],
+    "rorqual": [
+      "ssevoh-smoke-20261109T191636Z-rorqual",
+      "ssevoh-smoke-q1-20261109T192116Z-rorqual-r2",
+      "ssevoh-smoke-q1-20261109T192121Z-rorqual-r3"
+    ]
+  },
+  "modelstage_run": "ssevoh-modelstage-20261109T191625Z",
+  "models": [
+    "qwen2.5-coder:7b",
+    "phi4:14b",
+    "gpt-oss:20b",
+    "devstral:24b",
+    "qwen3-coder:30b"
+  ],
+  "full_runs": [],
+  "updated_utc": "2026-11-09T19:34:33.773054+00:00",
+  "monitor_state": "stopped",
+  "retirement_reason": "GPU discovery watchdog caused CPU fallback on Rorqual; repeating all sites under node-local runtime and pre-generation GPU guard"
+}

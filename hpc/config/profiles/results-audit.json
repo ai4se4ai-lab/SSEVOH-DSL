@@ -1,0 +1,40 @@
+{
+  "project": "ssevoh-results-audit",
+  "study": "results-audit-v1",
+  "require_gpu": true,
+  "vars": {},
+  "stages": [
+    {
+      "name": "core_analysis", "depends": [], "cpu_only": true,
+      "resources": {"cpus": 2, "mem": "8G", "time": "00:30:00"},
+      "sbatch_extra": ["--account=def-mbabaei_cpu"],
+      "steps": [{
+        "name": "diagnostics",
+        "cmd": "python experiments/scripts/analyze.py --root \"{REPO}/experiments/aggregate-input\" --output \"{RESULTS}/core-analysis\"",
+        "needs": ["{REPO}/experiments/aggregate-input/records.jsonl", "{REPO}/experiments/aggregate-input/auxiliary.jsonl"],
+        "produces": ["core-analysis/summary.json", "core-analysis/summary.csv", "core-analysis/summary.md", "core-analysis/summary.tex", "core-analysis/scaling.csv"],
+        "critical": true
+      }]
+    },
+    {
+      "name": "harness2_analysis", "depends": [], "cpu_only": true,
+      "resources": {"cpus": 2, "mem": "4G", "time": "00:20:00"},
+      "sbatch_extra": ["--account=def-mbabaei_cpu"],
+      "steps": [{
+        "name": "diagnostics",
+        "cmd": "python experiments/scripts/harness2_analyze.py --root \"{REPO}/experiments/harness2-aggregate-input\" --output \"{RESULTS}/harness2-analysis\"",
+        "needs": ["{REPO}/experiments/harness2-aggregate-input/model-streams.jsonl", "{REPO}/experiments/harness2-aggregate-input/controlled.jsonl"],
+        "produces": ["harness2-analysis/summary.json", "harness2-analysis/summary.csv", "harness2-analysis/summary.md", "harness2-analysis/summary.tex"],
+        "critical": true
+      }]
+    },
+    {
+      "name": "collect", "cpu_only": true,
+      "depends": [{"stage": "core_analysis", "type": "afterany"}, {"stage": "harness2_analysis", "type": "afterany"}],
+      "resources": {"cpus": 1, "mem": "2G", "time": "00:10:00"},
+      "sbatch_extra": ["--account=def-mbabaei_cpu"],
+      "steps": [{"name": "persist", "builtin": "collect", "needs": ["core-analysis/summary.json", "harness2-analysis/summary.json"], "critical": true}]
+    }
+  ],
+  "results": {"tables": [], "summaries": [], "copy": ["core-analysis/**", "harness2-analysis/**"], "archive": []}
+}

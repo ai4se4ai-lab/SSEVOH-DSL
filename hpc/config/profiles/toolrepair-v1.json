@@ -1,0 +1,237 @@
+{
+  "project": "ssevoh-toolrepair-v1",
+  "study": "toolrepair-v1",
+  "require_gpu": true,
+  "vars": {
+    "MODELS": "qwen2.5-coder:7b phi4:14b gpt-oss:20b devstral:24b qwen3-coder:30b",
+    "REPEATS": "3",
+    "QUAL_FLAG": ""
+  },
+  "smoke": {
+    "vars": {
+      "MODELS": "qwen2.5-coder:7b phi4:14b",
+      "REPEATS": "1",
+      "QUAL_FLAG": "--qualification"
+    },
+    "time": "01:00:00",
+    "array_throttle": 2,
+    "matrix": {
+      "llm": {
+        "model": [
+          "qwen2.5-coder:7b",
+          "phi4:14b"
+        ],
+        "arm": [
+          "original",
+          "catalog",
+          "sandboxed_evidence"
+        ],
+        "family": [
+          "signed_sum"
+        ]
+      }
+    }
+  },
+  "stages": [
+    {
+      "name": "setup",
+      "description": "setup",
+      "depends": [],
+      "cpu_only": false,
+      "resources": {
+        "gpus": "h100:1",
+        "cpus": 4,
+        "mem": "32G",
+        "time": "01:00:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "gpu",
+          "builtin": "check_gpu",
+          "critical": true
+        },
+        {
+          "name": "harness2-runtime",
+          "cmd": "python experiments/scripts/harness2_preflight.py --output \"{RESULTS}/setup/harness2.json\"",
+          "produces": [
+            "setup/harness2.json"
+          ],
+          "critical": true
+        },
+        {
+          "name": "pins",
+          "cmd": "python experiments/scripts/runtime.py freeze --models {MODELS} --output \"{RESULTS}/setup/models.lock.json\"",
+          "produces": [
+            "setup/models.lock.json"
+          ],
+          "critical": true
+        },
+        {
+          "name": "sandbox-live",
+          "cmd": "python experiments/scripts/harness2_sandbox_probe.py --output \"{RESULTS}/setup/sandbox.json\"",
+          "produces": [
+            "setup/sandbox.json"
+          ],
+          "critical": true
+        },
+        {
+          "name": "families",
+          "cmd": "python -m unittest discover -s experiments/scripts -p test_toolrepair_families.py",
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "llm",
+      "description": "ToolRepair-12: one family x model x arm per cell, 3 seeds, frozen reference and one red-team injection per stream",
+      "depends": [
+        {
+          "stage": "setup",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": false,
+      "resources": {
+        "gpus": "h100:1",
+        "cpus": 4,
+        "mem": "32G",
+        "time": "01:30:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "generate",
+          "cmd": "python experiments/scripts/toolrepair_models.py --model {model} --arm {arm} --family {family} --output \"{RESULTS}/llm/{CELL}.jsonl\" --lock \"{RESULTS}/setup/models.lock.json\" --repeats {REPEATS} {QUAL_FLAG}",
+          "needs": [
+            "setup/models.lock.json",
+            "setup/harness2.json",
+            "setup/sandbox.json"
+          ],
+          "produces": [
+            "llm/{CELL}.jsonl"
+          ],
+          "progress": {
+            "file": "llm/{CELL}.jsonl",
+            "expected": "{REPEATS}"
+          },
+          "critical": true
+        }
+      ],
+      "matrix": {
+        "model": [
+          "qwen2.5-coder:7b",
+          "phi4:14b",
+          "gpt-oss:20b",
+          "devstral:24b",
+          "qwen3-coder:30b"
+        ],
+        "arm": [
+          "original",
+          "catalog",
+          "sandboxed_evidence"
+        ],
+        "family": [
+          "signed_sum",
+          "half_up_rounding",
+          "column_by_name",
+          "void_status",
+          "fx_rate",
+          "month_window",
+          "dedupe_ids",
+          "blank_amounts",
+          "thousands_separator",
+          "parentheses_negative",
+          "mean_amount",
+          "category_totals"
+        ]
+      },
+      "array_throttle": 8
+    },
+    {
+      "name": "analysis",
+      "description": "Prespecified ToolRepair-12 analysis and resume check",
+      "depends": [
+        {
+          "stage": "llm",
+          "type": "afterany"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "tables",
+          "cmd": "python experiments/scripts/toolrepair_analyze.py --root \"{RESULTS}/llm\" --output \"{RESULTS}/analysis\"",
+          "produces": [
+            "analysis/summary.json",
+            "analysis/summary.md"
+          ],
+          "critical": true
+        },
+        {
+          "name": "resume-check",
+          "cmd": "python experiments/scripts/harness2_pilot_resume.py --results \"{RESULTS}\" --repeats {REPEATS} --schema toolrepair-stream-v1",
+          "produces": [
+            "analysis/resume-check.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "collect",
+      "description": "collect",
+      "depends": [
+        {
+          "stage": "analysis",
+          "type": "afterany"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "persist",
+          "builtin": "collect",
+          "needs": [
+            "analysis/summary.json"
+          ],
+          "critical": true
+        }
+      ],
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ]
+    }
+  ],
+  "results": {
+    "tables": [
+      {
+        "name": "model_streams",
+        "glob": "llm/*.jsonl"
+      }
+    ],
+    "summaries": [],
+    "copy": [
+      "analysis/**",
+      "setup/*.json"
+    ],
+    "archive": [
+      "llm"
+    ]
+  }
+}

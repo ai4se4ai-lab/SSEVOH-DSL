@@ -1,0 +1,487 @@
+{
+  "schema": "ssevoh-study-closeout-v1",
+  "utc": "2026-11-10T02:02:51.683572+00:00",
+  "runs": [
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-core-full-20261109T234758Z-fir",
+      "audit_utc": "2026-11-10 02:01:07",
+      "states": {
+        "OK": 10
+      },
+      "jobs": [
+        "3212606",
+        "3212607",
+        "3212608",
+        "3212609",
+        "3212610",
+        "3212611_0",
+        "3212611_1",
+        "3212611_2",
+        "3212612",
+        "3212613"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-core-smoke-20261109T230325Z-fir-r1",
+      "audit_utc": "2026-11-10 02:01:08",
+      "states": {
+        "OK": 9
+      },
+      "jobs": [
+        "3209073",
+        "3209074",
+        "3209075",
+        "3209076",
+        "3209077",
+        "3209078_0",
+        "3209078_1",
+        "3209079",
+        "3209080"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-core-smoke-20261109T230424Z-fir-r2",
+      "audit_utc": "2026-11-10 02:01:09",
+      "states": {
+        "OK": 9
+      },
+      "jobs": [
+        "3209083",
+        "3209084",
+        "3209085",
+        "3209086",
+        "3209087",
+        "3209088_0",
+        "3209088_1",
+        "3209089",
+        "3209090"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-core-smoke-20261109T230433Z-fir-r3",
+      "audit_utc": "2026-11-10 02:01:09",
+      "states": {
+        "OK": 9
+      },
+      "jobs": [
+        "3209092",
+        "3209093",
+        "3209094",
+        "3209095",
+        "3209096",
+        "3209097_0",
+        "3209097_1",
+        "3209098",
+        "3209099"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-h2-full-20261109T223907Z-fir",
+      "audit_utc": "2026-11-10 02:01:10",
+      "states": {
+        "OK": 7
+      },
+      "jobs": [
+        "3206857",
+        "3206858",
+        "3206859_0",
+        "3206859_1",
+        "3206859_2",
+        "3206860",
+        "3206861"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-h2-smoke-20261109T215404Z-fir-r1",
+      "audit_utc": "2026-11-10 02:01:11",
+      "states": {
+        "OK": 6
+      },
+      "jobs": [
+        "3202191",
+        "3202192",
+        "3202194_0",
+        "3202194_1",
+        "3202195",
+        "3202196"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-h2-smoke-20261109T215506Z-fir-r2",
+      "audit_utc": "2026-11-10 02:01:11",
+      "states": {
+        "OK": 6
+      },
+      "jobs": [
+        "3202199",
+        "3202200",
+        "3202201_0",
+        "3202201_1",
+        "3202202",
+        "3202203"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-h2-smoke-20261109T215518Z-fir-r3",
+      "audit_utc": "2026-11-10 02:01:12",
+      "states": {
+        "OK": 6
+      },
+      "jobs": [
+        "3202296",
+        "3202298",
+        "3202299_0",
+        "3202299_1",
+        "3202300",
+        "3202301"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "narval",
+      "run_id": "ssevoh-core-smoke-20261109T230443Z-narval-r1",
+      "audit_utc": "2026-11-10 02:01:10",
+      "states": {
+        "CANCELLED": 1,
+        "OK": 8
+      },
+      "jobs": [
+        "8857299",
+        "8857303",
+        "8857304",
+        "8857305",
+        "8857308",
+        "8857309_0",
+        "8857309_1",
+        "8857310",
+        "8857311"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "narval",
+      "run_id": "ssevoh-core-smoke-20261109T230533Z-narval-r2",
+      "audit_utc": "2026-11-10 02:01:11",
+      "states": {
+        "CANCELLED": 2,
+        "OK": 7
+      },
+      "jobs": [
+        "8857316",
+        "8857317",
+        "8857318",
+        "8857319",
+        "8857320",
+        "8857321_0",
+        "8857321_1",
+        "8857322",
+        "8857323"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "narval",
+      "run_id": "ssevoh-core-smoke-20261109T230548Z-narval-r3",
+      "audit_utc": "2026-11-10 02:01:12",
+      "states": {
+        "CANCELLED": 2,
+        "OK": 7
+      },
+      "jobs": [
+        "8857325",
+        "8857326",
+        "8857327",
+        "8857328",
+        "8857329",
+        "8857330_0",
+        "8857330_1",
+        "8857332",
+        "8857333"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "narval",
+      "run_id": "ssevoh-h2-smoke-20261109T215528Z-narval-r1",
+      "audit_utc": "2026-11-10 02:01:13",
+      "states": {
+        "CANCELLED": 1,
+        "OK": 5
+      },
+      "jobs": [
+        "8853664",
+        "8853665",
+        "8853666_0",
+        "8853666_1",
+        "8853667",
+        "8853668"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "narval",
+      "run_id": "ssevoh-h2-smoke-20261109T215559Z-narval-r2",
+      "audit_utc": "2026-11-10 02:01:15",
+      "states": {
+        "CANCELLED": 1,
+        "OK": 5
+      },
+      "jobs": [
+        "8853669",
+        "8853670",
+        "8853671_0",
+        "8853671_1",
+        "8853672",
+        "8853673"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "narval",
+      "run_id": "ssevoh-h2-smoke-20261109T215608Z-narval-r3",
+      "audit_utc": "2026-11-10 02:01:17",
+      "states": {
+        "CANCELLED": 1,
+        "OK": 5
+      },
+      "jobs": [
+        "8853675",
+        "8853676",
+        "8853677_0",
+        "8853677_1",
+        "8853678",
+        "8853679"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-core-aggregate-20261110T002102Z-rorqual",
+      "audit_utc": "2026-11-10 02:01:10",
+      "states": {
+        "OK": 1
+      },
+      "jobs": [
+        "26218465"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-core-full-20261109T234913Z-rorqual",
+      "audit_utc": "2026-11-10 02:01:11",
+      "states": {
+        "OK": 9
+      },
+      "jobs": [
+        "26216666",
+        "26216667",
+        "26216668",
+        "26216669",
+        "26216670",
+        "26216671_0",
+        "26216671_1",
+        "26216672",
+        "26216673"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-core-smoke-20261109T230604Z-rorqual-r1",
+      "audit_utc": "2026-11-10 02:01:12",
+      "states": {
+        "OK": 9
+      },
+      "jobs": [
+        "26214307",
+        "26214309",
+        "26214310",
+        "26214311",
+        "26214312",
+        "26214313_0",
+        "26214313_1",
+        "26214314",
+        "26214315"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-core-smoke-20261109T230703Z-rorqual-r2",
+      "audit_utc": "2026-11-10 02:01:13",
+      "states": {
+        "OK": 9
+      },
+      "jobs": [
+        "26214334",
+        "26214335",
+        "26214336",
+        "26214337",
+        "26214338",
+        "26214339_0",
+        "26214339_1",
+        "26214340",
+        "26214341"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-core-smoke-20261109T230711Z-rorqual-r3",
+      "audit_utc": "2026-11-10 02:01:15",
+      "states": {
+        "OK": 9
+      },
+      "jobs": [
+        "26214346",
+        "26214347",
+        "26214348",
+        "26214349",
+        "26214350",
+        "26214351_0",
+        "26214351_1",
+        "26214352",
+        "26214353"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-h2-aggregate-20261109T225912Z-rorqual",
+      "audit_utc": "2026-11-10 02:01:16",
+      "states": {
+        "OK": 2
+      },
+      "jobs": [
+        "26213907",
+        "26213908"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-h2-full-20261109T224011Z-rorqual",
+      "audit_utc": "2026-11-10 02:01:17",
+      "states": {
+        "OK": 6
+      },
+      "jobs": [
+        "26213191",
+        "26213192",
+        "26213193_0",
+        "26213193_1",
+        "26213194",
+        "26213195"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-h2-smoke-20261109T215615Z-rorqual-r1",
+      "audit_utc": "2026-11-10 02:01:18",
+      "states": {
+        "OK": 6
+      },
+      "jobs": [
+        "26210067",
+        "26210068",
+        "26210069_0",
+        "26210069_1",
+        "26210070",
+        "26210071"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-h2-smoke-20261109T215656Z-rorqual-r2",
+      "audit_utc": "2026-11-10 02:01:19",
+      "states": {
+        "OK": 6
+      },
+      "jobs": [
+        "26210073",
+        "26210074",
+        "26210075_0",
+        "26210075_1",
+        "26210076",
+        "26210077"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-h2-smoke-20261109T215701Z-rorqual-r3",
+      "audit_utc": "2026-11-10 02:01:20",
+      "states": {
+        "OK": 6
+      },
+      "jobs": [
+        "26210081",
+        "26210082",
+        "26210083_0",
+        "26210083_1",
+        "26210084",
+        "26210085"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-results-audit-20261110T010942Z-rorqual",
+      "audit_utc": "2026-11-10 02:01:21",
+      "states": {
+        "OK": 3
+      },
+      "jobs": [
+        "26228485",
+        "26228486",
+        "26228487"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-results-audit-qualification-20261110T014457Z-rorqual",
+      "audit_utc": "2026-11-10 02:01:22",
+      "states": {
+        "OK": 1
+      },
+      "jobs": [
+        "26232197"
+      ],
+      "transfer_verified": true
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-results-audit-request-fidelity-20261110T015528Z-rorqual",
+      "audit_utc": "2026-11-10 02:01:23",
+      "states": {
+        "OK": 2
+      },
+      "jobs": [
+        "26234885",
+        "26234886"
+      ],
+      "transfer_verified": true
+    }
+  ],
+  "active_cells": [],
+  "note": "Narval pending GPU cells were censored and closed after the selection deadline. Completed partial outputs and downstream collection were preserved."
+}

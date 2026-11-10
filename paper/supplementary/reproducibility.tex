@@ -1,0 +1,49 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,longtable}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\newcommand{\status}{\IfFileExists{../generated/results.tex}{\input{../generated/results.tex}}{\IfFileExists{paper/generated/results.tex}{\input{paper/generated/results.tex}}{Results must be regenerated from recorded artifacts.}}}
+\title{SSEVOH-DSL: Reproducibility and Operations Guide}
+\author{SSEVOH-DSL project}
+\date{Evidence-linked development document}
+\begin{document}
+\maketitle
+
+\section{Local installation and checks}
+Python 3.11 or newer suffices for the core implementation. From the repository root:
+\begin{verbatim}
+PYTHONPATH=src python3 -m unittest discover -s tests -v
+PYTHONPATH=src python3 -m ssevoh.cli demo \
+  examples/basic-evolution/example.sse
+bash hpc/scripts/selftest.sh
+python3 hpc/slurm/submit.py --dry-run --smoke
+\end{verbatim}
+The core has no third-party Python dependency. Cluster environments use site modules, node-local virtualenvs and the Alliance wheelhouse. GPU-dependent inference remains outside ordinary CI.
+
+\section{Access and source preparation}
+Authenticate using the SSH session script in a local terminal; interactive MFA remains the user's responsibility. ControlMaster sockets are local, private, ignored by Git and reusable for 12 hours of inactivity. Server keepalives detect broken connections. Automation-node access is not assumed. Connection loss produces a visible failure requiring renewed interactive authentication.
+
+The local fleet configuration supplies exact host, account, persistent source path, scratch work path, GPU request and modules. Probe metadata and quotas first. Narval and Rorqual compute nodes have no internet according to the on-cluster site documentation. Stage needed models and runtime assets before offline inference. Existing cached weights can be hard-linked into an isolated cache without rewriting another project's manifests.
+
+\section{Qualification and selection}
+Deploy with fleet.py and submit the smoke graph on Fir, Narval and Rorqual. Each graph includes all stages, tiny model tasks, deterministic scenarios, bounded verification and small scaling. At least three independently completed runs per site, with both smoke models, are required. Check GPU residency, model digests, resume-contract output and transferred artifact hashes. Record failed runs and actual queue times.
+
+The score is Beta-smoothed completion reliability divided by observed completion cost, including queue, startup, generation and transfer. Ranking is evidence based. Independent model cells receive unique site ownership through weighted earliest-finish scheduling; the same planned model cell cannot accidentally appear on multiple sites. Intentional replication must use separate replication identities.
+
+\section{Audit and result persistence}
+\begin{verbatim}
+python3 hpc/scripts/fleet.py status
+python3 hpc/scripts/fleet.py fetch
+python3 hpc/scripts/fleet.py watch --interval 120 --cycles 30
+python3 experiments/scripts/update_report.py
+\end{verbatim}
+The finite watcher has an exclusive local lock and never polls faster than 60 seconds. The upstream step ledger records commands, return codes, durations, retries and failures. Configurations and subsequent-run source snapshots are frozen. Per-job environment files, model locks, GPU CSVs and raw prompts/responses preserve execution context. Final artifacts are copied from scratch to persistent storage and fetched locally. Scratch is not a backup.
+
+\section{Repair and publication}
+Inspect the remote job ledger before any retry after a lost submission acknowledgement. Resubmit only explicitly selected upstream stages with the same run ID and the --only option; the upstream submitter does not itself deduplicate job submissions. Completed data records can be reused. A stale approval is never reused after a state change. Result analysis writes CSV, JSON, Markdown, LaTeX and editable SVG summaries. update\_report.py writes the plain-language research guide and a factual paper fragment from actual files. Missing results remain pending. The seven technical documents use article class independently; the main manuscript uses the supplied magazine class when available and an explicit review fallback otherwise.
+
+\section{Known limits}
+The current runtime is an in-memory metadata sandbox. Cluster caches can be purged, new MFA can be required, tags can move, and runtime support can differ. The source-snapshot extension is documented in hpc/PATCHES.md; the first exploratory smoke predates it. Expanded label review, production adapters, durable recovery and realistic-artifact mechanism studies are not reproduced by the current initial suite. Synthetic sandbox mechanism removals are implemented as a separate scheduled extension. \status
+
+\end{document}

@@ -1,0 +1,29 @@
+{
+  "task_id": "ledger-2",
+  "mode": "agg",
+  "k": 1,
+  "chosen_id": "A",
+  "chosen_label": "agg1",
+  "chosen_run_id": "demo-oc-agg1-s1701/ledger-2/agg1",
+  "chosen_is_base": false,
+  "why": "trivial pool: single final at k=1; delivered without a selector session",
+  "id_map": {
+    "A": "agg1"
+  },
+  "dropped": [],
+  "n_candidates": 1,
+  "ok": true,
+  "fallback": false,
+  "error": "",
+  "usd": 0.0,
+  "experience": {
+    "cue": "when a task requires processing signed amounts in a ledger and the base implementation filters out negative values",
+    "lesson": "ensure that scripts summing signed amounts do not filter out negative values, and explicitly include instructions to load skills that correctly handle all signed amounts",
+    "evidence": "The script in base1/inv1/dom1 filtered positive amounts only (amount > 0), while agg1's script was updated to sum all amounts. The systemprompt.md in agg1 included an instruction to load the 'reconcile' skill, which was absent in other candidates.",
+    "confidence": "high",
+    "edits": "component: scripts/summarize.py\ncandidates: agg1\nchange: The script was modified to sum all signed amounts, including negative values, instead of only positive amounts.\nobserved: In the base harness and candidates inv1/dom1, the script filtered out negative amounts (amount > 0), producing 'Total: 35.50'. In the adopted candidate agg1, the script was updated to sum all amounts without filtering, which would correctly reflect the total of signed amounts in ledger.csv.\nverdict: confounded\n\ncomponent: skills/reconcile/SKILL.md\ncandidates: agg1\nchange: The skill description was updated to clarify that it reconciles signed amounts by summing all values, including negative ones.\nobserved: The skill file in agg1 was modified to include a process step that explicitly sums all signed amounts (positive and negative), whereas in inv1/dom1 the skill was removed entirely from the harness.\nverdict: confounded\n\ncomponent: systemprompt.md\ncandidates: agg1\nchange: The system prompt was updated to include an instruction to load the 'reconcile' skill when processing signed amounts.\nobserved: In the base and inv1/dom1 harnesses, the system prompt did not reference the reconcile skill. In agg1, it was added as a directive to load the skill for handling signed amounts.\nverdict: confounded"
+  },
+  "trivial": true,
+  "evidence": "deliverable",
+  "chosen_run_dir": "artifacts/benchmark-results/harness2-local-dev/qwen3-coder-30b-seed-0/upstream/executions/demo-oc-agg1-s1701/ledger-2/agg1"
+}

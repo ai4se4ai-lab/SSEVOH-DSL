@@ -1,0 +1,94 @@
+{
+  "schema": "ssevoh-harness2-readiness-v1",
+  "utc": "2026-11-10T01:07:18.986941+00:00",
+  "passed": true,
+  "core_current": true,
+  "upstream_commit": "6868817518876de8fd170c6a8354daca273b6191",
+  "source_stable": true,
+  "source_sha256": {
+    "integrations/harness2/adapter/ssevoh_harness2/__init__.py": "d5139d069f8027ab81f4146c763c223ecb94e58135fc76e757ed3462508d09b3",
+    "integrations/harness2/adapter/ssevoh_harness2/authority.py": "e7a445545367a9b25ca9a911a101b4ad270e52471d7ffd61464ef11eef66ed9d",
+    "integrations/harness2/adapter/ssevoh_harness2/bridge.py": "012c85fb4398108a987547554c070e22f4d143edc9ec3aa2038b658289a028fb",
+    "integrations/harness2/adapter/ssevoh_harness2/models.py": "f813de3df938bff131c8e7b540519fed23def0289c71addcfaebc3eeefcc6eab",
+    "integrations/harness2/tests/test_workers.py": "d10c7b170da65b13bffff365229acdb6bbb1bd581eaaa89f5b5e0ea1bb8574af",
+    "integrations/harness2/tests/test_integration.py": "08ceb8efc20e22c17b4cd13a410b54d064279016c74ddc27abe9a3995142c5dc",
+    "integrations/harness2/formal/check.py": "16e45fc49e5cc7b398ac0cbe79d3221e9c6deae0f169a61729ac5a0b39aaf64e",
+    "integrations/harness2/formal/Publication.cfg": "d3fb0a6c950749f604e4818c7991cd5272f89182d079f366c34f88a63a3266b8",
+    "integrations/harness2/formal/contracts.md": "1b50a1803fd7a1c4dc71c2e5c8a5221a226a96b2e515ba05020227b56a220796",
+    "integrations/harness2/formal/Publication.tla": "eebf4419ddd21a74d077eaa0cbf51904b3c9d0189c8bedb91552b814cd5c8d79",
+    "integrations/harness2/scripts/package_runtime.py": "5a699dbdf68a4feff44a548b47665fda9639e5ae8e2ee32b298402dfff7ed417",
+    "integrations/harness2/scripts/verify.py": "cf83ddd7d738c0d9fd146e6746767ba3e1a185ea60b750d47dd5cc3e4d2d68ff",
+    "integrations/harness2/scripts/checkout.py": "ee63cef0d64b6572c96df1ba0721f53abaa5705ebc78f54be8e6a0880602251d",
+    "integrations/harness2/upstream-pin.json": "326633a4d92870ea556e68f869865d1d232263d2f03ec8c3aa5833731578a813",
+    "integrations/harness2/upstream-runtime.json": "99109d754f5d2b0ebda877eb05675994109942dd568cf29df785fcacb3de7815",
+    "integrations/harness2/upstream-runtime.tar.gz": "60415f65f4b7a7b67abdc6bc4e4945eb99d61b0efe9421232da81d5c8b7bda8b",
+    "experiments/scripts/harness2_analyze.py": "1a9a068ce856460413ba10179c9c50d23c7130e03678e5f1dd9e0fa7991957aa",
+    "experiments/scripts/harness2_support.py": "3623544e879deb73ca4890e4de0153df2ed330b8d8241c574f235d6fe36ebc76",
+    "experiments/scripts/harness2_preflight.py": "16aa082978e22da7ed167860f62fce31b6b6d6096af34d08a29bc6c3f75c5804",
+    "experiments/scripts/harness2_resume.py": "4667298d0ffb4e306b595f9199afa2c3d589d6a62d1479efa9feb296bac8c5df",
+    "experiments/scripts/harness2_models.py": "8bd30411938d0c73859098c19698b46d79eef0a7e42f350c2d540fecf1ed135a",
+    "experiments/scripts/harness2_deterministic.py": "c8b78d3aac05f2571f5111d58722af0d1f7acb63aa0706e9b78d497f93704eee",
+    "experiments/scripts/runtime.py": "3f57696a11f57eacb75b95c081f07fa14e654c7fc55b904c62e7d7417227bebb",
+    "hpc/config/profiles/harness2.json": "553d0f4d5c1c568f2f25fce1eb1d1f5b486d467f99c408a1d2aacd7dfc2e1489",
+    "hpc/config/models.json": "dd7120c2d2b20a437efc7cceda59d8d3e4ff38747a51fbb1a7226e849412130a"
+  },
+  "core_readiness_sha256": "8eff9504dcc2e0a70bade5f690cb3ebf2acce9028ccb18328656e2256802cb49",
+  "runs": [
+    {
+      "name": "upstream-tests",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/majid/Documents/PROJECTS/SSEVOH-DSL/integrations/harness2/original/upstream/tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "tests": 70,
+      "log": "integrations/harness2/evidence/upstream-tests.txt",
+      "sha256": "23a8224faa2456e6bc1237b2935571d31108149bf8ad7dfdf58e16881fc70bbb"
+    },
+    {
+      "name": "integration-tests",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/majid/Documents/PROJECTS/SSEVOH-DSL/integrations/harness2/tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "tests": 32,
+      "log": "integrations/harness2/evidence/integration-tests.txt",
+      "sha256": "3250359710dc3b8e3df8a78cf9d7036701e5a003c2bd9ba3a9ea5171aa491af1"
+    },
+    {
+      "name": "publication-model",
+      "command": [
+        "/usr/bin/python3",
+        "/home/majid/Documents/PROJECTS/SSEVOH-DSL/integrations/harness2/formal/check.py",
+        "--tlc-jar",
+        "/tmp/ssevoh-tla2tools.jar"
+      ],
+      "returncode": 0,
+      "tests": null,
+      "log": "integrations/harness2/evidence/publication-model.txt",
+      "sha256": "f48919fe32bab9dc1cd769d1b6c5607a04b6ba6edf24b28f7c5f2a750eacbc50"
+    }
+  ],
+  "scope": "actual unmodified upstream recursion/probe/selection/library with catalog-restricted local executor and data-only proposers",
+  "unsupported": [
+    "general OpenCode/Codex executor isolation",
+    "arbitrary generated executable behavior",
+    "durable automatic recovery",
+    "arbitrary multi-target metadata transactions",
+    "published professional benchmark replication"
+  ],
+  "submits_experiments": false,
+  "release_authority": "hpc/config/research-readiness.json",
+  "next_gate": "source-pinned study preflight, complete smoke graph and measured qualification; no submission by this verifier"
+}

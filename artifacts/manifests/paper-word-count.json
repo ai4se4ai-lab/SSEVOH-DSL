@@ -1,0 +1,11 @@
+{
+  "method": "conservative source lexical count; includes title, conditional-branch text, code, headings and abstract; generated status counted once; figure/table content replaced by allowance; references excluded",
+  "narrative_words": 2930,
+  "figures": 1,
+  "tables": 2,
+  "allowance": 750,
+  "total_counted_words": 3680,
+  "abstract_words": 127,
+  "maximum": 4200,
+  "abstract_maximum": 150
+}

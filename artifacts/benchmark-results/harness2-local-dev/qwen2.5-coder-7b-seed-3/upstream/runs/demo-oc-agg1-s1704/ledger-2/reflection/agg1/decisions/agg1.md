@@ -1,0 +1,1 @@
+kept -> base1.md produced the correct output 'Total: 35.50' without any changes needed.

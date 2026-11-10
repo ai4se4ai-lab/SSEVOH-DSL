@@ -1,0 +1,1 @@
+kept -> base1.md shows that the script correctly sums the signed amounts and returns the total with two decimal places.

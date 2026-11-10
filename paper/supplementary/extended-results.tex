@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,longtable}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\newcommand{\status}{\IfFileExists{../generated/results.tex}{\input{../generated/results.tex}}{\IfFileExists{paper/generated/results.tex}{\input{paper/generated/results.tex}}{Results must be regenerated from recorded artifacts.}}}
+\title{SSEVOH-DSL: Extended Results and Evidence Status}
+\author{SSEVOH-DSL project}
+\date{Evidence-linked development document}
+\begin{document}
+\maketitle
+
+\section{Recorded evidence}
+\status
+
+Current core evidence is under \texttt{formal/assurance/results}: independent conformance, bounded histories and replay, exact TLC/Python graphs, raw logs and a source-scoped readiness manifest. Earlier \texttt{formal/results} and exploratory cluster outputs are legacy evidence. The two completed full-study datasets and scheduled pooled analyses are under \texttt{artifacts/benchmark-results/full-campaign} and \texttt{harness2-full}.
+
+\section{Primary model and baseline outcomes}
+\IfFileExists{../generated/model-results.tex}{\input{../generated/model-results.tex}}{}
+\IfFileExists{../generated/core-observations.tex}{\input{../generated/core-observations.tex}}{}
+The diagnostic analysis retained all original samples and verified that every pre-existing summary metric was unchanged. Initial and revised analysis directories remain available. Three models produced 100 fenced outputs each under the fixed raw-text protocol. GPT-OSS produced 56 empty responses and 62 outputs marked length-limited; these overlapping categories are not additional unsafe samples. Qwen3-Coder had 100 syntax-valid flags but only 61 outputs reached the independent oracle, because earlier semantic/IR checks can still fail.
+
+The original partial transition-field match remains in the raw data and initial analyses. A post hoc strict request-fidelity diagnostic also checks the full snapshot, evidence requirements, postcondition and applicability of the precondition. GPT-OSS and Qwen3-Coder each matched 21 of 100 requests by that stricter diagnostic; the other models matched none. These scores include deliberately prohibited requests and do not represent useful deployment. Only 91 of 500 outputs reached the independent admission oracle: 73 disallowed and 18 allowed. No disallowed output was deployed, and no false rejection was observed among the 18 evaluable allowed outputs. Zero evaluable samples for a model leave its rejection effectiveness unmeasured.
+
+\IfFileExists{../../artifacts/benchmark-results/full-campaign/analysis/summary.tex}{\begin{center}\small\input{../../artifacts/benchmark-results/full-campaign/analysis/summary.tex}\end{center}}{}
+
+\section{Cluster experiments}
+Fir and Rorqual used H100 allocations and Narval A100 allocations. Both current studies submitted three independent qualification graphs per site. Fir and Rorqual qualified before the 45-minute selection deadline; Narval remained queued then and its late observations are retained separately. The frozen plans selected Rorqual for the lower observed end-to-end completion cost, subject to model-cache constraints. This does not establish a universal hardware ranking. Source snapshots, accounting, logs, GPU traces and transfer hashes support each observation.
+
+At least three independent complete smoke runs per model/site are required before that site is eligible for selection. Repeated generations within one allocation do not constitute independent queue trials. A site with an incomplete or failed run is not assigned an invented throughput or reliability result. Failed trials remain part of reliability accounting.
+
+\section{Collected measurements and interpretation}
+The collected five-model tables include syntax/semantic validity, sample sizes, unsafe generated proposals, unsafe deployed proposals, safe acceptance, false rejection, task compliance, latency and tokens. Per-scenario outcomes and raw outputs remain necessary to explain aggregate differences. Scaling tables must retain shape, size, repetition, latency, completion and peak traced Python allocation values. GPU memory, utilization, queue and job resource consumption come from recorded telemetry, not model parameter counts.
+
+The implemented formal mutants remove five lifecycle guards. Separately, five synthetic sandbox ablations omit dependency closure, provenance checks, withdrawal validation, rollback conflict checks or revalidation, with precise scope documented in experiments/ABLATIONS.md. Local checks and qualification remain distinct from full repeated cluster measurements. These conditions do not establish mechanism effects on realistic artifact contents.
+
+\section{Matched cross-site smoke observations}
+The scheduled report compared 24 source/model/prompt/decoding/runtime-matched pairs, including completed cells from partially censored Narval trials. All raw texts and admission decisions matched, and both outputs in every pair were syntax-invalid. This is reproducibility of a protocol failure, not useful model behavior or full-benchmark replication. The report records three trial slots per site; not every slot completed both model cells. The comparison uses one shared first context and three seeds. Completed partial observations never alter the frozen deadline-based assignment.
+\IfFileExists{../../artifacts/benchmark-results/qualification/analysis/summary.tex}{\begin{center}\small\input{../../artifacts/benchmark-results/qualification/analysis/summary.tex}\end{center}}{}
+
+\section{No pending result substituted}
+A five-model result or qualified-cluster assignment is established only when its completed artifacts are imported above. No production deployment guarantee or durable crash-recovery claim follows from these observations. The main paper imports a generated evidence-status fragment and must be updated only after corresponding collected results exist. A successful future run changes the evidence ledger, not the required interpretation of earlier local or smoke data.
+
+\end{document}

@@ -1,0 +1,29 @@
+{
+  "task_id": "ledger-2",
+  "mode": "agg",
+  "k": 1,
+  "chosen_id": "A",
+  "chosen_label": "agg1",
+  "chosen_run_id": "demo-oc-agg1-s1703/ledger-2/agg1",
+  "chosen_is_base": false,
+  "why": "trivial pool: single final at k=1; delivered without a selector session",
+  "id_map": {
+    "A": "agg1"
+  },
+  "dropped": [],
+  "n_candidates": 1,
+  "ok": true,
+  "fallback": false,
+  "error": "",
+  "usd": 0.0,
+  "experience": {
+    "cue": "when multiple candidates produce identical outputs despite differing edits in other components, the unchanged component may not be responsible for the outcome",
+    "lesson": "if a system prompt remains unchanged across all candidates and all rollouts yield the same result, then the prompt does not influence behavior in that task",
+    "evidence": "[{'component': 'systemprompt.md', 'candidates': 'agg1', 'verdict': 'no observed effect'}]",
+    "confidence": "high",
+    "edits": "component: systemprompt.md\ncandidates: agg1\nchange: No change observed in systemprompt.md between base and candidate.\nobserved: All rollouts (base1, inv1, dom1, agg1) produced identical outputs (35.50) without any behavioral differences. The system prompt was unchanged and did not contribute to different outcomes.\nverdict: no observed effect"
+  },
+  "trivial": true,
+  "evidence": "deliverable",
+  "chosen_run_dir": "artifacts/benchmark-results/harness2-local-dev/qwen3-coder-30b-seed-2/upstream/executions/demo-oc-agg1-s1703/ledger-2/agg1"
+}

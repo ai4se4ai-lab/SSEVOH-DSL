@@ -1,0 +1,1 @@
+The permitted summary tool returned a total of 105.25.

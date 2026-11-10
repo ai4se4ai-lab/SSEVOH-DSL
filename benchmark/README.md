@@ -1,0 +1,9 @@
+# HeartBench v1
+
+`scenarios/heartbench-v1.json` is a hand-authored initial suite: 20 scenarios with 25 actions covering the 15 required families plus positive neighbors. Labels and rejection substrings are stored independently of the engine. The initial suite has not been independently reviewed by another researcher; that validation remains required before publication. Fixtures represent versioned metadata, not executable production harnesses.
+
+`python -m ssevoh.benchmark --output path.jsonl --baseline all` executes B3 sandbox transactions and admission-only B0 (parse/unrestricted), B1 (initial schema/structure), B2 (compiler/policy/candidate without independent evidence or formal checking). B0/B1/B2 do not make production deployments; their records explicitly say admission-only. Multi-step contexts advance only with accepted safe reference setup, so timing comparisons across these baselines are descriptive and not a clean deployment-overhead experiment.
+
+B4 runs five Ollama models under the full enforcement engine. A separate benchmark oracle labels each actual parsed generated proposal. It must not reuse the requested task label for a different generated proposal. The prompt excludes expected decisions, golden specifications and rejection reasons. Syntax failures are not evidence of unsafe rejection. Complete task compliance and accepted-safe generation are separate metrics. Repeated task-level measurements require clustered analysis.
+
+`experiments/scripts/ablations.py` adds five explicit sandbox mechanism-removal conditions plus a full control. See `experiments/ABLATIONS.md` for exact omitted gates, retained overlapping checks, decision errors and final-state violations. These empirical synthetic ablations are separate from the five finite lifecycle mutants. Expanded hard-negative generation, independent label review, realistic artifact adapters and semantic provenance release remain open.

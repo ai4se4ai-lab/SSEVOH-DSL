@@ -1,0 +1,110 @@
+{
+  "schema": "ssevoh-core-readiness-v1",
+  "version": "0.2.0",
+  "utc": "2026-11-09T20:50:01.367445+00:00",
+  "passed": true,
+  "source_stable_during_verification": true,
+  "source_sha256": {
+    "docs/language/grammar.ebnf": "f9357ee0f5a26ae371e34b015107061dedbdf5cc44228db6bffae585bf97a46b",
+    "docs/language/language-reference.md": "8f0a1f2f639537bb6c4fc3147e223efeaa707afb753d7413a07584325335c4e6",
+    "docs/language/type-system.md": "246156d1e3b297d30d341a40851913eb782648dc3f1159a48225be0f91d8d6f0",
+    "formal/assurance/check_conformance.py": "a31afec953795fe065c757e9e08ec777a13af9bd305815579e5719cbdefd0d2e",
+    "formal/assurance/check_sequences.py": "1d9aab4683497ab4d38a463f4bf4c126c346b30b65e1e90af39ef4719f2dd9a7",
+    "formal/assurance/contracts.md": "4f1c5bedcaab175b0434587aab2951704c4d042de23c7d86368bfe8bce66e992",
+    "formal/assurance/reference.py": "8d5743991e35b1605303136722a054bb85a1d45ad74308440e9de4da053ee30c",
+    "formal/bootstrap_tlc.py": "978fd647826674e2632e4a8361ca4c4ff68fbcfa3ddad9b150ae092af23608a6",
+    "formal/check.py": "ee4aa2b8f25cf57d25d69877ffba7ad3a1d90c45ef51b9778bfa96d8dc62fd19",
+    "formal/model/Lifecycle.cfg": "dd70810d36e460fb79109460da2b4789428a48ad318e71804ad4c8802bbcab4a",
+    "formal/model/Lifecycle.tla": "5a1b1637648d77f58ecd6830300270a5dd040a23541f8d00d1f248c4354ed294",
+    "formal/run_assurance.py": "27057185918b901553f1f49bb9b8d61924a613ed893e9213f3545c4f7008b29b",
+    "pyproject.toml": "4a3a3f78359ef3642c96176dd2386e05536ccd37aed4469c28271c6542d44c55",
+    "src/ssevoh/__init__.py": "065bc0a995464a5b3974cc028abdcb97edf663739e694b03eef892d68226e7b0",
+    "src/ssevoh/assurance.py": "bcd9dae15d3ed4f96df3f3030035a37af82d4f97fc3d9ac1445994a80349b8f7",
+    "src/ssevoh/benchmark.py": "ea16dfbef101def000fe5ddcbfee7243dcce0b84922738caf11d29a6d827a303",
+    "src/ssevoh/cli.py": "40666c8d4dd21404c3b8775a8afffc3d2955c4063701c857a03c3840f7b0e977",
+    "src/ssevoh/compiler.py": "2e56829c3568c54a18edd63253aedfbafaf11702797d5965a182e6ce7e24bf68",
+    "src/ssevoh/compiler_print.py": "90e5de05bdece0d2df646ae967a9bd7213fd74d1793f2664f2137c4ac59f9bb4",
+    "src/ssevoh/model.py": "9603bee9a8b346a92f150efcb28218fe8b150db950ce6cd9dd14fa6650cbf8a6",
+    "src/ssevoh/policy.py": "5a918c54431ba712debefb6dfbc503269e8c19a2835baa06e230d564e1d09fc6",
+    "src/ssevoh/verification.py": "afa1e4e3fe4160e8b71612ce54fe79d91c48f0935310c975058c81da9dc84b7b",
+    "tests/test_assurance.py": "4067716714f7fc5cadb3de8bd7617eb4c7629b51a402ac4150f5ca74c3d4fbca",
+    "tests/test_experiments.py": "110115e49f915d2bf321fc1f16c158a34fc66df22e13263e8d8d05de36336af7",
+    "tests/test_framework.py": "78ba8686f279630b005f1957636673f830fa22318c366ed2f84d9678406bda08"
+  },
+  "runs": [
+    {
+      "name": "unit-tests",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "log": "formal/assurance/results/unit-tests.log",
+      "sha256": "324005cdf2ce276f3eda3a17e8bfc1e4b28cc7a81ac23ec7106a3b31ba48aa86"
+    },
+    {
+      "name": "temporal",
+      "command": [
+        "/usr/bin/python3",
+        "formal/check.py",
+        "--tlc-jar",
+        "/tmp/ssevoh-tla2tools.jar"
+      ],
+      "returncode": 0,
+      "log": "formal/assurance/results/temporal.log",
+      "sha256": "c445a3be2bf5ec52c6237b1998625fa8014f6de0019a1e1654c0eddeca925691"
+    },
+    {
+      "name": "conformance",
+      "command": [
+        "/usr/bin/python3",
+        "formal/assurance/check_conformance.py"
+      ],
+      "returncode": 0,
+      "log": "formal/assurance/results/conformance.log",
+      "sha256": "fb3884391b31373ce9ec81c6809589d098903bf884c67ebabc94f26c3a82337d"
+    },
+    {
+      "name": "sequences",
+      "command": [
+        "/usr/bin/python3",
+        "formal/assurance/check_sequences.py"
+      ],
+      "returncode": 0,
+      "log": "formal/assurance/results/sequences.log",
+      "sha256": "de3ef822d11a7bd6becf63ecd90f225ea1df1c709af060c25a0c6e52e13ca098"
+    }
+  ],
+  "evidence": {
+    "conformance": {
+      "path": "formal/assurance/results/conformance.json",
+      "sha256": "1dec4e5d72c816bd09fd41bdeda63517c8699a06cc29ec00d5160f8649e08d45"
+    },
+    "sequences": {
+      "path": "formal/assurance/results/sequences.json",
+      "sha256": "c3f8b804463a524bad8f58fef899333963e84de3345762d7a8e8c74da48b4b30"
+    },
+    "temporal": {
+      "path": "formal/assurance/results/temporal/tlc-manifest.json",
+      "sha256": "c445a3be2bf5ec52c6237b1998625fa8014f6de0019a1e1654c0eddeca925691"
+    }
+  },
+  "scope": "stable metadata sandbox API; bounded relative soundness/completeness, temporal safety and replay evidence; no machine-checked unbounded refinement theorem",
+  "empirical_allowed": false,
+  "integration_reconnaissance_allowed": true,
+  "unsupported": [
+    "arbitrary artifact/code semantic safety",
+    "OS-enforced verifier isolation",
+    "multi-component atomic transactions",
+    "durable crash recovery",
+    "distributed commits",
+    "provenance release",
+    "liveness",
+    "unbounded mechanized refinement proof"
+  ]
+}

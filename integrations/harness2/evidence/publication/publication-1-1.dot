@@ -1,0 +1,140 @@
+strict digraph DiskGraph {
+nodesep=0.35;
+subgraph cluster_graph {
+color="white";
+-1988421838326453482 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = -1\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = FALSE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"IDLE\"\n/\\ modified = FALSE",style = filled]
+-1988421838326453482 -> -996725454547763080 [label="Prepare",color="black",fontcolor="black"];
+-996725454547763080 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"PREPARED\"\n/\\ modified = FALSE"];
+-1988421838326453482 -> 1874393065218268448 [label="Change",color="black",fontcolor="black"];
+1874393065218268448 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = -1\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = FALSE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"IDLE\"\n/\\ modified = FALSE"];
+-1988421838326453482 -> 6294013165995195575 [label="Withdraw",color="black",fontcolor="black"];
+6294013165995195575 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = -1\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = FALSE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"IDLE\"\n/\\ modified = FALSE"];
+-996725454547763080 -> 709065209515270480 [label="Stage",color="black",fontcolor="black"];
+709065209515270480 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"STAGED\"\n/\\ modified = FALSE"];
+-996725454547763080 -> 5066065909193306470 [label="Fail",color="black",fontcolor="black"];
+5066065909193306470 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"FAILED\"\n/\\ modified = FALSE"];
+-996725454547763080 -> -8584705922342204676 [label="Change",color="black",fontcolor="black"];
+-8584705922342204676 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"PREPARED\"\n/\\ modified = FALSE"];
+-996725454547763080 -> 3693952668723897589 [label="Withdraw",color="black",fontcolor="black"];
+3693952668723897589 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"PREPARED\"\n/\\ modified = FALSE"];
+1874393065218268448 -> -6252040884169209215 [label="Withdraw",color="black",fontcolor="black"];
+-6252040884169209215 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = -1\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = FALSE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"IDLE\"\n/\\ modified = FALSE"];
+6294013165995195575 -> -6252040884169209215 [label="Change",color="black",fontcolor="black"];
+709065209515270480 -> 1694602558062879414 [label="Commit",color="black",fontcolor="black"];
+1694602558062879414 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = FALSE"];
+709065209515270480 -> 2175856110397588535 [label="Fail",color="black",fontcolor="black"];
+2175856110397588535 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"FAILED\"\n/\\ modified = FALSE"];
+709065209515270480 -> -5279641062968524673 [label="Change",color="black",fontcolor="black"];
+-5279641062968524673 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"STAGED\"\n/\\ modified = FALSE"];
+709065209515270480 -> 5249347607077897035 [label="Tamper",color="black",fontcolor="black"];
+5249347607077897035 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"STAGED\"\n/\\ modified = TRUE"];
+709065209515270480 -> -8496934941976056693 [label="Withdraw",color="black",fontcolor="black"];
+-8496934941976056693 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"STAGED\"\n/\\ modified = FALSE"];
+5066065909193306470 -> -494373986614767543 [label="Change",color="black",fontcolor="black"];
+-494373986614767543 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"FAILED\"\n/\\ modified = FALSE"];
+5066065909193306470 -> -4211567521482294083 [label="Withdraw",color="black",fontcolor="black"];
+-4211567521482294083 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"FAILED\"\n/\\ modified = FALSE"];
+-8584705922342204676 -> -5279641062968524673 [label="Stage",color="black",fontcolor="black"];
+-8584705922342204676 -> -494373986614767543 [label="Fail",color="black",fontcolor="black"];
+-8584705922342204676 -> 5311321111968509553 [label="Withdraw",color="black",fontcolor="black"];
+5311321111968509553 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"PREPARED\"\n/\\ modified = FALSE"];
+3693952668723897589 -> -8496934941976056693 [label="Stage",color="black",fontcolor="black"];
+3693952668723897589 -> -4211567521482294083 [label="Fail",color="black",fontcolor="black"];
+3693952668723897589 -> 5311321111968509553 [label="Change",color="black",fontcolor="black"];
+1694602558062879414 -> -5697907152545316511 [label="Change",color="black",fontcolor="black"];
+-5697907152545316511 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = FALSE"];
+1694602558062879414 -> 6235804155963523245 [label="Tamper",color="black",fontcolor="black"];
+6235804155963523245 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = TRUE"];
+1694602558062879414 -> 354134618245908716 [label="Withdraw",color="black",fontcolor="black"];
+354134618245908716 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = FALSE"];
+1694602558062879414 -> -5037347477077323477 [label="Activate",color="black",fontcolor="black"];
+-5037347477077323477 [label="/\\ copyGood = TRUE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = TRUE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = FALSE"];
+2175856110397588535 -> -6818492739390249704 [label="Change",color="black",fontcolor="black"];
+-6818492739390249704 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"FAILED\"\n/\\ modified = FALSE"];
+2175856110397588535 -> 6862438279645406764 [label="Tamper",color="black",fontcolor="black"];
+6862438279645406764 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"FAILED\"\n/\\ modified = TRUE"];
+2175856110397588535 -> -7065593489973851668 [label="Withdraw",color="black",fontcolor="black"];
+-7065593489973851668 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"FAILED\"\n/\\ modified = FALSE"];
+-5279641062968524673 -> -6818492739390249704 [label="Fail",color="black",fontcolor="black"];
+-5279641062968524673 -> -597706933081726364 [label="Tamper",color="black",fontcolor="black"];
+-597706933081726364 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"STAGED\"\n/\\ modified = TRUE"];
+-5279641062968524673 -> 3853176722013113764 [label="Withdraw",color="black",fontcolor="black"];
+3853176722013113764 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"STAGED\"\n/\\ modified = FALSE"];
+5249347607077897035 -> 6862438279645406764 [label="Fail",color="black",fontcolor="black"];
+5249347607077897035 -> -597706933081726364 [label="Change",color="black",fontcolor="black"];
+5249347607077897035 -> -3811553353566286192 [label="Withdraw",color="black",fontcolor="black"];
+-3811553353566286192 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"STAGED\"\n/\\ modified = TRUE"];
+-8496934941976056693 -> -7065593489973851668 [label="Fail",color="black",fontcolor="black"];
+-8496934941976056693 -> 3853176722013113764 [label="Change",color="black",fontcolor="black"];
+-8496934941976056693 -> -3811553353566286192 [label="Tamper",color="black",fontcolor="black"];
+-494373986614767543 -> 8854192072357666194 [label="Withdraw",color="black",fontcolor="black"];
+8854192072357666194 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"FAILED\"\n/\\ modified = FALSE"];
+-4211567521482294083 -> 8854192072357666194 [label="Change",color="black",fontcolor="black"];
+5311321111968509553 -> 3853176722013113764 [label="Stage",color="black",fontcolor="black"];
+5311321111968509553 -> 8854192072357666194 [label="Fail",color="black",fontcolor="black"];
+-5697907152545316511 -> -1017108208324238470 [label="Tamper",color="black",fontcolor="black"];
+-1017108208324238470 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = TRUE"];
+-5697907152545316511 -> -6664584034790134981 [label="Withdraw",color="black",fontcolor="black"];
+-6664584034790134981 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = FALSE"];
+6235804155963523245 -> -1017108208324238470 [label="Change",color="black",fontcolor="black"];
+6235804155963523245 -> 5036244103023913719 [label="Withdraw",color="black",fontcolor="black"];
+5036244103023913719 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = TRUE"];
+354134618245908716 -> -6664584034790134981 [label="Change",color="black",fontcolor="black"];
+354134618245908716 -> 5036244103023913719 [label="Tamper",color="black",fontcolor="black"];
+-5037347477077323477 -> -8977033171012524917 [label="Finish",color="black",fontcolor="black"];
+-8977033171012524917 [label="/\\ copyGood = TRUE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = FALSE"];
+-6818492739390249704 -> -2282852076176128253 [label="Tamper",color="black",fontcolor="black"];
+-2282852076176128253 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"FAILED\"\n/\\ modified = TRUE"];
+-6818492739390249704 -> 2493887294546061507 [label="Withdraw",color="black",fontcolor="black"];
+2493887294546061507 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"FAILED\"\n/\\ modified = FALSE"];
+6862438279645406764 -> -2282852076176128253 [label="Change",color="black",fontcolor="black"];
+6862438279645406764 -> -2522140049309832201 [label="Withdraw",color="black",fontcolor="black"];
+-2522140049309832201 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"FAILED\"\n/\\ modified = TRUE"];
+-7065593489973851668 -> 2493887294546061507 [label="Change",color="black",fontcolor="black"];
+-7065593489973851668 -> -2522140049309832201 [label="Tamper",color="black",fontcolor="black"];
+-597706933081726364 -> -2282852076176128253 [label="Fail",color="black",fontcolor="black"];
+-597706933081726364 -> 8392261141572054975 [label="Withdraw",color="black",fontcolor="black"];
+8392261141572054975 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"STAGED\"\n/\\ modified = TRUE"];
+3853176722013113764 -> 2493887294546061507 [label="Fail",color="black",fontcolor="black"];
+3853176722013113764 -> 8392261141572054975 [label="Tamper",color="black",fontcolor="black"];
+-3811553353566286192 -> -2522140049309832201 [label="Fail",color="black",fontcolor="black"];
+-3811553353566286192 -> 8392261141572054975 [label="Change",color="black",fontcolor="black"];
+-1017108208324238470 -> -2122089351079130848 [label="Withdraw",color="black",fontcolor="black"];
+-2122089351079130848 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = TRUE"];
+-6664584034790134981 -> -2122089351079130848 [label="Tamper",color="black",fontcolor="black"];
+5036244103023913719 -> -2122089351079130848 [label="Change",color="black",fontcolor="black"];
+-8977033171012524917 -> 2595107247701428060 [label="Change",color="black",fontcolor="black"];
+2595107247701428060 [label="/\\ copyGood = TRUE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = FALSE"];
+-8977033171012524917 -> -4439039329566439792 [label="Tamper",color="black",fontcolor="black"];
+-4439039329566439792 [label="/\\ copyGood = TRUE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = TRUE"];
+-8977033171012524917 -> -8068910769307169071 [label="Withdraw",color="black",fontcolor="black"];
+-8068910769307169071 [label="/\\ copyGood = TRUE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = FALSE"];
+-8977033171012524917 -> -5037347477077323477 [label="Activate",color="black",fontcolor="black"];
+-2282852076176128253 -> 7174911080304806616 [label="Withdraw",color="black",fontcolor="black"];
+7174911080304806616 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = TRUE\n/\\ phase = \"FAILED\"\n/\\ modified = TRUE"];
+2493887294546061507 -> 7174911080304806616 [label="Tamper",color="black",fontcolor="black"];
+-2522140049309832201 -> 7174911080304806616 [label="Change",color="black",fontcolor="black"];
+8392261141572054975 -> 7174911080304806616 [label="Fail",color="black",fontcolor="black"];
+2595107247701428060 -> 7281716492400010567 [label="Tamper",color="black",fontcolor="black"];
+7281716492400010567 [label="/\\ copyGood = TRUE\n/\\ approvalEpoch = 0\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = TRUE"];
+2595107247701428060 -> 3994129685896244486 [label="Withdraw",color="black",fontcolor="black"];
+3994129685896244486 [label="/\\ copyGood = TRUE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = FALSE"];
+-4439039329566439792 -> 7281716492400010567 [label="Change",color="black",fontcolor="black"];
+-4439039329566439792 -> -3383594490147279670 [label="Withdraw",color="black",fontcolor="black"];
+-3383594490147279670 [label="/\\ copyGood = TRUE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = TRUE"];
+-8068910769307169071 -> 3994129685896244486 [label="Change",color="black",fontcolor="black"];
+-8068910769307169071 -> -3383594490147279670 [label="Tamper",color="black",fontcolor="black"];
+7281716492400010567 -> 8530812832179162909 [label="Withdraw",color="black",fontcolor="black"];
+8530812832179162909 [label="/\\ copyGood = TRUE\n/\\ approvalEpoch = 0\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = TRUE\n/\\ active = FALSE\n/\\ published = TRUE\n/\\ stored = TRUE\n/\\ phase = \"COMMITTED\"\n/\\ modified = TRUE"];
+3994129685896244486 -> 8530812832179162909 [label="Tamper",color="black",fontcolor="black"];
+-3383594490147279670 -> 8530812832179162909 [label="Change",color="black",fontcolor="black"];
+{rank = same; -1988421838326453482;}
+{rank = same; 1874393065218268448;6294013165995195575;-996725454547763080;}
+{rank = same; 3693952668723897589;709065209515270480;-8584705922342204676;5066065909193306470;}
+{rank = same; 1694602558062879414;-494373986614767543;2175856110397588535;-8496934941976056693;5311321111968509553;5249347607077897035;-5279641062968524673;-4211567521482294083;}
+{rank = same; -7065593489973851668;-597706933081726364;3853176722013113764;-3811553353566286192;6235804155963523245;-5037347477077323477;-6818492739390249704;-5697907152545316511;354134618245908716;6862438279645406764;}
+{rank = same; -6664584034790134981;-2282852076176128253;-1017108208324238470;5036244103023913719;-8977033171012524917;8392261141572054975;-2522140049309832201;2493887294546061507;}
+{rank = same; 2595107247701428060;-8068910769307169071;-4439039329566439792;}
+{rank = same; 7281716492400010567;-3383594490147279670;3994129685896244486;}
+}
+}

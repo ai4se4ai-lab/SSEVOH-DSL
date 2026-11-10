@@ -1,0 +1,1 @@
+kept -> systemprompt.md -> base rollout and both candidates all produced identical outputs (Total: 35.50), showing no behavioral difference that would justify changing the system prompt; the prompt is minimal and sufficient for the task as demonstrated by all rollouts

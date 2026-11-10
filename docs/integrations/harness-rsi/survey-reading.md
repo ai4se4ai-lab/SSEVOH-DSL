@@ -1,0 +1,22 @@
+# What the survey changes in the integration design
+
+Read after the core 0.2 formal readiness pass: [the supplied survey](../../dev/harness-self-evolution.md) and [the integration plan](../../dev/SSEVOH-DSL4Harness-RSI.md). The official companion was then pinned and inspected. Its README calls Harness RSI the name of the research area. The local Markdown is a converted manuscript: some displayed equations and figures are missing or OCR-rendered, so it is unsuitable as a complete machine-readable source of formal equations. The local document and upstream's later distributed PDFs also have different revision histories; their bibliographic/figure counts must not be silently conflated.
+
+| Survey point | Consequence for SSEVOH integration |
+|---|---|
+| §2 defines self-evolution as feedback-driven revision whose accepted state persists into later runs | A metadata commit or a successful patch-generation script alone is insufficient. The target must have a real feedback/proposal/admission/load lifecycle. |
+| §3 distinguishes interpreted instructions/memory/workflow specifications from executable updates in §4 | Map each actual editable artifact to its execution role; a textual workflow and the code implementing the host need different validators. |
+| §4.3 distinguishes dynamic plugin composition, stable call snapshots and external-action compensation | Bind actual component versions and dispatch generations; in-process metadata rollback cannot undo external effects. |
+| §5 separates candidate search from generalization/retention and states assumptions for confidence-adjusted admission | Do not call observed candidate fitness a proof of improvement. Keep operator admission evidence separate from reporting evidence and account for adaptive reuse. |
+| §6.1–6.2 distinguishes selection, activation, attribution and improvement | Separate development/admission/reporting tasks; predeclare reporting choices; instrument available/reached/carried in scored runs; use matched counterfactual arms and state task distance, baseline and round. |
+| §6.2.2 requires applicability-based activation denominators | Record applicable, loaded, reached and carried counts. A zero denominator means undefined, not a rate of zero. A saved artifact does not establish that it operated. |
+| §6.2.3 separates search cost from scored inference resources | Record model calls, tokens, retries, turns, reasoning settings and verifier cost separately from proposal-search and assurance overhead. Pin model and evaluator identities. |
+| §6.3 separates retained state, later activation, retained performance and later causal contribution | Preserve frozen initial/parent states, immutable task/evaluator snapshots, subsequent-run traces and held-out retention probes. Task repeats estimate execution noise, not independent task count. |
+| §7 explains domain-specific validation and irreversible actions | Restrict initial integration to a resettable software environment. General claims about robotics, medicine or public-service safety are unsupported. |
+| §8 discusses persistence, derived artifacts and composition failures | Preserve transitive version lineage and conservative quarantine; independently assess compositions. Passing each component alone does not prove the whole safe. |
+| §9.2 calls for contracts and trustworthy abstraction-to-execution correspondence | The current core's finite metadata checks must not be advertised as a mechanized proof about arbitrary code or an unverified adapter. Extend/reverify contracts for transactions or artifact deployment. |
+| §9.4–9.7 identifies concurrent versions, stale clients, authorization, provenance and human oversight | Independently protect the assurance service; bind actual installed artifacts to approval; make withdrawal state and exceptional approvals externally governed and auditable. |
+
+The existing three-cluster orchestration can supply model/runtime pins, task/seed ownership, resource telemetry and fetched logs. It does not supply a missing executable harness, task-level activation instrumentation, a protected deployment service or an independent final behavioral oracle. These remain requirements for the real integration.
+
+The survey's literature-audit counts concern reviewed reports; they are not new SSEVOH empirical results and are not imported as our safety measurements. The plan's C0–C4 and RQ6–RQ10 require a genuine executable upstream baseline. All remain pending until the target is identified and its adapter passes conformance/security/regression tests.

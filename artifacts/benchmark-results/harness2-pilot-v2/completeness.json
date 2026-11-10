@@ -1,0 +1,42 @@
+{
+  "complete": true,
+  "records": 50,
+  "expected": 50,
+  "model_identities_match": true,
+  "runs": [
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-h2v2-full-20261110T203035Z-fir",
+      "models": [
+        "qwen3-coder:30b",
+        "devstral:24b",
+        "gpt-oss:20b"
+      ],
+      "state": "submitted",
+      "replaced_cells": [
+        "model=gpt-oss:20b,policy=catalog",
+        "model=gpt-oss:20b,policy=sandboxed_evidence"
+      ],
+      "replacement_reason": "Worker exited on the first Ollama HTTP 500 (gpt-oss harmony parser under JSON decoding) during the frozen reference, so only seed 0 was attempted. Corrected worker records server errors as protocol failures for every seed and keeps each failed attempt's raw record; decoding unchanged."
+    },
+    {
+      "cluster": "narval",
+      "run_id": "ssevoh-h2v2-full-20261110T203242Z-narval",
+      "models": [
+        "phi4:14b",
+        "qwen2.5-coder:7b"
+      ],
+      "state": "submitted"
+    },
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-h2v2-full-supplement-20261110T210306Z-fir",
+      "models": [
+        "gpt-oss:20b"
+      ],
+      "state": "submitted",
+      "supplements": "ssevoh-h2v2-full-20261110T203035Z-fir",
+      "reason": "Worker exited on the first Ollama HTTP 500 (gpt-oss harmony parser under JSON decoding) during the frozen reference, so only seed 0 was attempted. Corrected worker records server errors as protocol failures for every seed and keeps each failed attempt's raw record; decoding unchanged."
+    }
+  ]
+}

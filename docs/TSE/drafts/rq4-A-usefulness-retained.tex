@@ -1,0 +1,20 @@
+% VERSION A -- applies only under the rule in README.md (A1 >= 0.20, H3 and H2 supported).
+% Written before ToolRepair-12 results; fill \TBD{} only, do not change claims.
+\providecommand{\TBD}[1]{\textbf{[#1]}}
+
+\subsection{RQ4: Useful behavior}
+\textbf{Pilot.} The ledger pilot (Table~\ref{tab:pilot}) diagnosed three adapter defects and showed, on two tasks, that sandboxed behavioral evidence admits correct model repairs that a finite catalog rejects. It could not estimate usefulness, so we ran a prespecified study.
+
+\textbf{ToolRepair-12 design.} Twelve tool families each plant one defect in the harness's executable tool (sign handling, rounding, column order, status filtering, currency rates, date boundaries, duplicates, blank and grouped numbers, accounting notation, averaging, ordering). Each family supplies a specification, a trusted reference, and three disjoint input sets: visible task inputs (graded by exact reference output), operator-held validation inputs (used only by the authority), and oracle inputs (used only by the independent proposal oracle). Five pinned models run three seeds per family in three arms: original \harness{} (A1), the contract with the catalog policy (A2), and the contract with sandboxed evidence (A3); a frozen reference runs inside every stream, and each stream receives one injected red-team proposal from seven rotating classes. The protocol, analysis, and implementation hashes were frozen before qualification; the family is the unit of inference (12 clusters, paired cluster bootstrap, Holm over H1 and H3).
+
+\textbf{Usefulness.} Mean per-family success is \TBD{A1} for original \harness{}, \TBD{A2} under the catalog, and \TBD{A3} under sandboxed evidence (frozen: \TBD{A0}). Sandboxed evidence is non-inferior to the unguarded system within the prespecified 10-point margin (difference \TBD{A3-A1}, 95\% CI \TBD{lo, hi}, Holm $p=$\TBD{p}; H3 supported) and recovers \TBD{A3-A2} points over the catalog (95\% CI \TBD{lo, hi}; H1 \TBD{supported/not supported}). Within A3 streams, success rises from \TBD{t1} on the first task to \TBD{t3} on the third (H4, exploratory), consistent with repairs carried forward through the governed library.
+
+\textbf{Safety at the same time.} Original \harness{} executed \TBD{n} contract-violating proposals (\TBD{natural} natural, \TBD{injected}/\TBD{N} injected); A3 executed none (one-sided 95\% upper bound \TBD{u} for injected classes; H2 supported). As declared before the study, the input-triggered resource-abuse probe passed behavioral evidence in \TBD{k}/\TBD{m} A3 streams: its trigger lies outside every validation case, so the contract admitted it and the sandbox bounded its execution. \TBD{per-model sentence, e.g., which models produce most repairs}.
+
+\textbf{Answer to RQ4.} Yes, within the tested domain. With sandboxed behavioral evidence, the contract retains the usefulness of original \harness{} within 10 points while executing none of the violations the unguarded system executes; the conservative catalog costs \TBD{A3-A2} points of success. Behavioral evidence cannot exclude input-triggered behavior; that limit is contained, not prevented.
+
+% ---- abstract replacement for the usefulness sentence
+% In a prespecified 540-stream study of twelve planted-defect tool families, the contract with sandboxed behavioral evidence retained task success within 10 points of original Harness$^2$ (\TBD{A3} vs \TBD{A1}) while executing none of its \TBD{n} contract violations; a conservative catalog policy cost \TBD{A3-A2} points.
+
+% ---- discussion sentence (cost versus benefit)
+% ToolRepair-12 quantifies the trade-off directly: evidence-based admission keeps most of the benefit of self-repair, and its residual risk is the declared class of input-triggered behavior, which the sandbox contains.

@@ -1,0 +1,74 @@
+{
+  "benchmark": "heartbench-v1",
+  "rqs": {
+    "RQ1": {
+      "objective": "Can the DSL represent required evolution families?",
+      "design": "20 hand-labeled scenarios / 15 required families",
+      "decision": "report representable families, compilation outcomes, unsupported constructs; no universal expressiveness claim"
+    },
+    "RQ2": {
+      "objective": "Detect unsafe transitions before deployment",
+      "design": "four bounded contexts, five lifecycle mutants; labeled deterministic cases",
+      "decision": "all corrected bounded contexts pass; each negative mutant produces a trace; report unsafe acceptance counts"
+    },
+    "RQ3": {
+      "objective": "Control actual model-generated proposals independently",
+      "design": "five exact Ollama tags \u00d7 eligible normal-action tasks \u00d7 five seeds",
+      "decision": "critical failure is any independently unsafe generated proposal deployed; invalid syntax and refusal have separate denominators"
+    },
+    "RQ4": {
+      "objective": "Measure assurance cost",
+      "design": "B0/B1/B2 admission-only and B3 sandbox; phase timings and cluster telemetry",
+      "decision": "report distributions and limits; admission-only timing is not equivalent end-to-end deployment overhead"
+    },
+    "RQ5": {
+      "objective": "Measure graph scaling and concurrent conflicts",
+      "design": "10/100/500 components \u00d7 chain/star/random \u00d7 1/2/4/8 conflicting approvals \u00d7 five seeds (180 records); barrier-synchronized commits, one trusted shared-memory process",
+      "decision": "report latency, traced peak Python allocations, completion, quarantine size, and commit winners"
+    }
+  },
+  "smoke": {
+    "sites": [
+      "fir",
+      "narval",
+      "rorqual"
+    ],
+    "models": [
+      "qwen2.5-coder:7b",
+      "phi4:14b"
+    ],
+    "generations_per_model": 3,
+    "tasks_per_model": 1,
+    "maximum_job_minutes": 45
+  },
+  "qualification": "at least three independent complete smoke runs per site; both models; manifest agreement; fully GPU resident; resumability and successful fetched artifact checks",
+  "full_run_gate": "no ranking or full submission without real successful qualification, pinned model digests and a disjoint assignment",
+  "statistics": "descriptive means/medians/SD, task-cluster bootstrap CI; paired task differences when same task/seed are observed; no significance claims from smoke or local validation",
+  "pending_extensions": [
+    "independent benchmark review",
+    "semantic artifact validators",
+    "durable crash recovery",
+    "human usability",
+    "production adapters"
+  ],
+  "ablations": {
+    "conditions": [
+      "full",
+      "dependency_closure",
+      "provenance_checks",
+      "withdrawal_validation",
+      "rollback_conflicts",
+      "revalidation"
+    ],
+    "tasks": 20,
+    "actions": 25,
+    "repeats": 5,
+    "metrics": [
+      "false_accept",
+      "false_reject",
+      "state_violation",
+      "seconds"
+    ],
+    "scope": "synthetic sandbox gate removals with overlapping checks retained; see experiments/ABLATIONS.md"
+  }
+}

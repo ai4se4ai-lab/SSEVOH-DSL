@@ -1,0 +1,503 @@
+{
+  "schema": "harness2-publication-model-v1",
+  "utc": "2026-11-10T21:16:39.098382+00:00",
+  "passed": true,
+  "bounds": {
+    "new_bundles": 1,
+    "origin_revocation_bits": 1,
+    "policy_epochs": [
+      0,
+      1
+    ],
+    "scope": "publication/activation abstraction; not a mechanized refinement or durable crash-recovery proof"
+  },
+  "runs": [
+    {
+      "authorized": false,
+      "evidence": false,
+      "safe": true,
+      "states": 4,
+      "edges": 4,
+      "counterexample": [],
+      "tlc_returncode": 0,
+      "exact_graph_match": true
+    },
+    {
+      "authorized": false,
+      "evidence": true,
+      "safe": true,
+      "states": 4,
+      "edges": 4,
+      "counterexample": [],
+      "tlc_returncode": 0,
+      "exact_graph_match": true
+    },
+    {
+      "authorized": true,
+      "evidence": false,
+      "safe": true,
+      "states": 4,
+      "edges": 4,
+      "counterexample": [],
+      "tlc_returncode": 0,
+      "exact_graph_match": true
+    },
+    {
+      "authorized": true,
+      "evidence": true,
+      "safe": true,
+      "states": 45,
+      "edges": 81,
+      "counterexample": [],
+      "tlc_returncode": 0,
+      "exact_graph_match": true
+    }
+  ],
+  "mutants": [
+    {
+      "name": "authorization",
+      "safe": false,
+      "states": 31,
+      "edges": 48,
+      "counterexample": [
+        {
+          "action": "Prepare",
+          "state": [
+            "PREPARED",
+            0,
+            0,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Stage",
+          "state": [
+            "STAGED",
+            0,
+            0,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Commit",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Activate",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "name": "evidence",
+      "safe": false,
+      "states": 31,
+      "edges": 48,
+      "counterexample": [
+        {
+          "action": "Prepare",
+          "state": [
+            "PREPARED",
+            0,
+            0,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Stage",
+          "state": [
+            "STAGED",
+            0,
+            0,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Commit",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Activate",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "name": "byte_binding",
+      "safe": false,
+      "states": 38,
+      "edges": 66,
+      "counterexample": [
+        {
+          "action": "Prepare",
+          "state": [
+            "PREPARED",
+            0,
+            0,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Stage",
+          "state": [
+            "STAGED",
+            0,
+            0,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Commit",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Tamper",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Activate",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "stale_context",
+      "safe": false,
+      "states": 38,
+      "edges": 65,
+      "counterexample": [
+        {
+          "action": "Prepare",
+          "state": [
+            "PREPARED",
+            0,
+            0,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Stage",
+          "state": [
+            "STAGED",
+            0,
+            0,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Commit",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Change",
+          "state": [
+            "COMMITTED",
+            1,
+            0,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Activate",
+          "state": [
+            "COMMITTED",
+            1,
+            0,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "name": "withdrawal",
+      "safe": false,
+      "states": 38,
+      "edges": 65,
+      "counterexample": [
+        {
+          "action": "Prepare",
+          "state": [
+            "PREPARED",
+            0,
+            0,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Stage",
+          "state": [
+            "STAGED",
+            0,
+            0,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Commit",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Withdraw",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Activate",
+          "state": [
+            "COMMITTED",
+            0,
+            0,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "name": "publication_receipt",
+      "safe": false,
+      "states": 29,
+      "edges": 40,
+      "counterexample": [
+        {
+          "action": "Prepare",
+          "state": [
+            "PREPARED",
+            0,
+            0,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Stage",
+          "state": [
+            "STAGED",
+            0,
+            0,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        {
+          "action": "Activate",
+          "state": [
+            "STAGED",
+            0,
+            0,
+            true,
+            true,
+            false,
+            false,
+            false,
+            true,
+            true
+          ]
+        }
+      ]
+    }
+  ],
+  "tlc_sha256": "936a262061c914694dfd669a543be24573c45d5aa0ff20a8b96b23d01e050e88",
+  "source_sha256": {
+    "formal/check.py": "16e45fc49e5cc7b398ac0cbe79d3221e9c6deae0f169a61729ac5a0b39aaf64e",
+    "formal/Publication.cfg": "d3fb0a6c950749f604e4818c7991cd5272f89182d079f366c34f88a63a3266b8",
+    "formal/contracts.md": "1b50a1803fd7a1c4dc71c2e5c8a5221a226a96b2e515ba05020227b56a220796",
+    "formal/Publication.tla": "eebf4419ddd21a74d077eaa0cbf51904b3c9d0189c8bedb91552b814cd5c8d79"
+  }
+}

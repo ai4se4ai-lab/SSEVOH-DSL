@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,longtable}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\newcommand{\status}{\IfFileExists{../generated/results.tex}{\input{../generated/results.tex}}{\IfFileExists{paper/generated/results.tex}{\input{paper/generated/results.tex}}{Results must be regenerated from recorded artifacts.}}}
+\title{SSEVOH-DSL: Safety Properties and Proof Arguments}
+\author{SSEVOH-DSL project}
+\date{Evidence-linked development document}
+\begin{document}
+\maketitle
+
+\section{Invariants}
+Assume a valid operator-supplied initial state. The intended obligations are:
+\begin{align*}
+commit(e,p,H)&\Rightarrow(p,e.t,e.op)\in P.grants,\\
+x\in Active(H)&\Rightarrow deps(x)\cup parents(x)\subseteq Active(H),\\
+x\in Active(H)&\Rightarrow(x,version(x))\notin W,\\
+W&\subseteq W',\\
+capabilities(C'[t])&\subseteq ceiling_P(t),\\
+approve(e,H)&\Rightarrow\forall v\in required(P,e):V[v](H',e)=true,\\
+commit(cap,H)&\Rightarrow cap.base=hash(H).
+\end{align*}
+The combined graph is acyclic; protected metadata and protected active status are unchanged. Every committed event has proposal, before-state, after-state, target and validator information. Lifecycle transitions require an authentic, unconsumed approval.
+
+\section{Preservation argument}
+For update, the candidate changes one target, advances its version, and quarantines reverse closure. Independent graph checks establish active ancestor integrity and acyclicity. Immutable targets and protected descendants are rejected. For withdrawal, adding one forbidden identity preserves monotonicity and quarantining the closure prevents an active dependent from retaining an inactive ancestor. For rollback, history lookup and current withdrawal checks prohibit silently restoring withdrawn versions. The withdrawal set is never copied from a historical snapshot.
+
+Preparation keeps the trusted reference unchanged. Independent validators are run by the trusted registry; exceptions and missing validators reject the proposal. An approval is retained in the engine's private capability map, so callers cannot manufacture authority by altering returned fields. At commit, a lock serializes the fingerprint comparison and reference swap. Consequently, two approvals for the same base cannot both commit after one changes that base. An injected precommit failure changes neither the reference nor journal.
+
+These arguments establish preservation under the described semantics and trust assumptions. They are not a machine-checked proof of arbitrary Python executions, storage durability or a production adapter. Hash-chain integrity is relative to a trusted retained head; an operator with complete journal access can rewrite a whole unanchored chain.
+
+\section{Finite temporal abstraction}
+The abstract safety invariant is
+\[\Box(active\Rightarrow authorized\land evidence\land\neg withdrawn\land certifiedEpoch=epoch).\]
+Safety excludes forbidden reachable states. Liveness would require that eligible proposals eventually deploy under stated fairness and resource assumptions. This prototype does not establish that condition. Repeated invalidation or resource starvation can prevent progress indefinitely.
+
+\section{Version-sensitive strengthening}
+Version 0.2 requires every active artifact's own identity and transitive version origins to avoid $W$. Recovery restores historical origins while retaining today's withdrawal constraints. Protected policy/verifier dependents remain isolated even when marked mutable. The approval context includes policy, validator identity, history and origin records and is captured before validation; changes during a callback require revalidation. Candidate/origin fingerprints are checked at commit. Independent operational conformance and anchored replay test these obligations over explicitly bounded domains. Detailed assumptions and induction cases are in formal/assurance/proof-arguments.md.
+
+\section{Executable evidence}
+Authorization, evidence, withdrawal, rollback and stale-approval rules have executable negative mutants in verification.py. The TLA+ model checks the corrected bounded invariant. Runtime tests separately exercise cycles, capability escalation, missing/negative evidence, mixed-parent withdrawal, stale/replayed/forged approvals, protected descendants, interrupted commits, and concurrent conflicts. The property-to-test matrix is in docs/verification/properties.md. \status
+
+\end{document}

@@ -1,0 +1,54 @@
+test_campaign_requires_completed_steps_not_just_scheduler_label (test_experiments.ExperimentTests.test_campaign_requires_completed_steps_not_just_scheduler_label) ... ok
+test_complete_record_without_final_newline_resumes (test_experiments.ExperimentTests.test_complete_record_without_final_newline_resumes) ... ok
+test_cpu_fallback_never_receives_a_task_prompt (test_experiments.ExperimentTests.test_cpu_fallback_never_receives_a_task_prompt) ... ok
+test_disjoint_plan (test_experiments.ExperimentTests.test_disjoint_plan) ... ok
+test_empirical_ablation_failures_are_exposed (test_experiments.ExperimentTests.test_empirical_ablation_failures_are_exposed) ... ok
+test_generation_repeats_are_isolated_and_resumable (test_experiments.ExperimentTests.test_generation_repeats_are_isolated_and_resumable) ... ok
+test_hand_labeled_states_and_decisions (test_experiments.ExperimentTests.test_hand_labeled_states_and_decisions) ... ok
+test_independent_oracle_on_known_proposals (test_experiments.ExperimentTests.test_independent_oracle_on_known_proposals) ... ok
+test_no_fabricated_qualification (test_experiments.ExperimentTests.test_no_fabricated_qualification) ... ok
+test_paired_analysis_clusters_repeated_generations (test_experiments.ExperimentTests.test_paired_analysis_clusters_repeated_generations) ... ok
+test_partial_record_resume (test_experiments.ExperimentTests.test_partial_record_resume) ... ok
+test_qualification_failure_excludes_site (test_experiments.ExperimentTests.test_qualification_failure_excludes_site) ... ok
+test_repeats_are_not_independent_queue_trials (test_experiments.ExperimentTests.test_repeats_are_not_independent_queue_trials) ... ok
+test_stale_approval_record_retains_original_proposal_and_journal (test_experiments.ExperimentTests.test_stale_approval_record_retains_original_proposal_and_journal) ... ok
+test_tlc_python_reachable_count_conformance (test_experiments.ExperimentTests.test_tlc_python_reachable_count_conformance) ... ok
+test_cycle (test_framework.CompilerTests.test_cycle) ... ok
+test_duplicate_component (test_framework.CompilerTests.test_duplicate_component) ... ok
+test_examples (test_framework.CompilerTests.test_examples) ... ok
+test_rename_metamorphism (test_framework.CompilerTests.test_rename_metamorphism) ... ok
+test_static_policy (test_framework.CompilerTests.test_static_policy) ... ok
+test_syntax_location (test_framework.CompilerTests.test_syntax_location) ... ok
+test_types (test_framework.CompilerTests.test_types) ... ok
+test_unknown_field (test_framework.CompilerTests.test_unknown_field) ... ok
+test_unknown_reference (test_framework.CompilerTests.test_unknown_reference) ... ok
+test_unknown_type (test_framework.CompilerTests.test_unknown_type) ... ok
+test_bounded_model_and_mutants (test_framework.EnforcementTests.test_bounded_model_and_mutants) ... ok
+test_concrete_verifier_uses_trusted_base_capabilities (test_framework.EnforcementTests.test_concrete_verifier_uses_trusted_base_capabilities) ... ok
+test_concurrency_one_winner (test_framework.EnforcementTests.test_concurrency_one_winner) ... ok
+test_end_to_end (test_framework.EnforcementTests.test_end_to_end) ... ok
+test_forged_approval (test_framework.EnforcementTests.test_forged_approval) ... ok
+test_invalid_rollback_ancestor (test_framework.EnforcementTests.test_invalid_rollback_ancestor) ... ok
+test_journal_tampering (test_framework.EnforcementTests.test_journal_tampering) ... ok
+test_missing_evidence (test_framework.EnforcementTests.test_missing_evidence) ... ok
+test_negative_evidence (test_framework.EnforcementTests.test_negative_evidence) ... ok
+test_partial_failure_and_retry (test_framework.EnforcementTests.test_partial_failure_and_retry) ... ok
+test_policy_component_even_mutable (test_framework.EnforcementTests.test_policy_component_even_mutable) ... ok
+test_privilege_expansion (test_framework.EnforcementTests.test_privilege_expansion) ... ok
+test_protected (test_framework.EnforcementTests.test_protected) ... ok
+test_protected_dependent (test_framework.EnforcementTests.test_protected_dependent) ... ok
+test_random_sequences_invariants (test_framework.EnforcementTests.test_random_sequences_invariants) ... ok
+test_replay (test_framework.EnforcementTests.test_replay) ... ok
+test_rollback_cannot_restore_reduced_capabilities (test_framework.EnforcementTests.test_rollback_cannot_restore_reduced_capabilities) ... ok
+test_rollback_withdrawn (test_framework.EnforcementTests.test_rollback_withdrawn) ... ok
+test_safe_rollback (test_framework.EnforcementTests.test_safe_rollback) ... ok
+test_snapshot_lie (test_framework.EnforcementTests.test_snapshot_lie) ... ok
+test_stale_approval (test_framework.EnforcementTests.test_stale_approval) ... ok
+test_unauthorized (test_framework.EnforcementTests.test_unauthorized) ... ok
+test_validator_exception (test_framework.EnforcementTests.test_validator_exception) ... ok
+test_withdrawal_descendants_and_mixed_parent (test_framework.EnforcementTests.test_withdrawal_descendants_and_mixed_parent) ... ok
+
+----------------------------------------------------------------------
+Ran 49 tests in 0.169s
+
+OK

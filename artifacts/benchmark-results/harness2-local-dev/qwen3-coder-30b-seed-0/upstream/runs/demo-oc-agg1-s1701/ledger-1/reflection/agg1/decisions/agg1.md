@@ -1,0 +1,1 @@
+kept -> systemprompt.md -> base1 rollout used the script and produced a valid total; both candidates showed identical behavior with the same script invocation, no evidence of improvement or regression from changes

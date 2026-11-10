@@ -1,0 +1,41 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,longtable}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\title{SSEVOH-DSL Integration with Google Research Harness\textsuperscript{2}}
+\author{SSEVOH-DSL project}
+\date{Source-pinned engineering and empirical status report}
+\begin{document}
+\maketitle
+\section{Target and preserved behavior}
+The active executable target is \href{https://github.com/google-research/harness2/tree/6868817518876de8fd170c6a8354daca273b6191}{Google Research Harness\textsuperscript{2}}, pinned to \texttt{6868817518876de8fd170c6a8354daca273b6191}. The original 70 tests pass. Its proposer, retries, contrastive probes, parallel/sequential composition, output selection, reflection and improvement library remain upstream and unmodified. The previously supplied Harness-RSI repository was a survey companion; that earlier reconnaissance is superseded by the user's executable-target selection.
+
+\section{Independent assurance boundary}
+The bridge wraps actual candidate admission after the original checks, verifies stage receipts and bytes again before execution, and protects library adoption and subsequent context snapshots. A complete file tree is a versioned bundle depending on immutable policy/verifier/guardrail metadata. Whole-bundle publication covers several edited files; it is not arbitrary multi-target metadata transaction support.
+
+Approval binds canonical DSL, host identity, policy and trusted implementation, candidate bytes, base and evidence. Known fallback, candidate-pool and library exposures remain in the origin set. Commit requires a current approval and a complete materialized bundle; file existence alone does not authorize execution. Execution leases use verified catalog bytes and serialize with withdrawal. Recovery retains the monotone prohibited-version set. Reopening a nonempty authority store is refused until verified durable recovery exists.
+
+\section{Executed assurance evidence}
+Core 0.2 passed 62 unit/adversarial tests, 248,832 independent one-step conformance cases and 19,620 bounded history transitions with 6,880 anchored replays. Exact Python/TLC lifecycle graphs agree in four contexts; five weakened lifecycle variants yield counterexamples. These findings retain their explicit finite bounds and trusted-host assumptions.
+
+Actual integration tests cover legitimate changes, permission/protected-verifier edits, dependencies, withdrawal/derived artifacts, recovery conflicts, missing evidence, several-file publication, concurrent/stale approvals and interruption. Additional checks cover policy/source/artifact/receipt tampering, symlinks, storage/trace failures, bounded model actions and offline runtime integrity. Raw counts and source hashes are recorded in the integration readiness manifest rather than inferred from this prose.
+
+A separate publication abstraction passes four exact Python/TLC graph comparisons: 4 states/4 labelled edges for each context without both authorization and evidence, and 45/81 when both hold. All six negative variants expose counterexamples: authorization, evidence, byte binding, stale context, withdrawal and publication receipts. This is an abstraction with one new bundle, one origin-revocation bit and two policy epochs, not a mechanized refinement proof of Python/filesystem behavior.
+
+\section{Controlled empirical design}
+C0 preserves original surface/schema/dependency/grader checks. C1 adds an ordinary signed-ledger unit input. C2 adds static DSL/operator permission checks. C3 uses the complete authority. Twelve shared fixtures include three legitimate update families, protected paths, privilege/evidence cases, invalid references/syntax and the finite executable contract. Four additional authority lifecycle scenarios are reported separately because C0--C2 do not offer equivalent operator APIs. Eight isolated mechanism removals retain overlapping checks and may legitimately show zero effect. Five repetitions yield 900 primary deterministic records.
+
+C4 uses five frozen Ollama models, five seeds and two ledger tasks: 25 stream records and 50 task outcomes. Models receive data-only edit/selection/reflection requests and an added bounded executor with only a catalog-summary action or final text. The original task-level pipeline and library are exercised, with frozen reference runs and actual available/reached/carried records. Raw prompts, responses, decisions and outputs distinguish invalid syntax, no-ops/refusals, unsafe attempts, deployments and usefulness.
+
+The Alliance pipeline reuses the pinned use-hpc submitter/audit/collector. Every smoke graph contains all stages; three independent trials per site compare two smoke models before a cache-constrained, measured assignment. Full work requires at least two qualified sites and unique ownership of each model. Inaccessible sites remain explicit. Pure analysis/metadata stages use scheduled CPU allocations, and inference stages enforce full GPU residency before task prompts.
+
+\section{Scope and results status}
+Execution is restricted to a checked finite Python AST catalog, the exact original local executor and the added bounded model executor. No arbitrary shell access is granted to model text. General OpenCode/Codex isolation, arbitrary program safety, automatic durable recovery and replication of the published professional benchmarks are unsupported. Two ledger tasks do not establish broad task generalization or statistical significance; repeated seeds are not independent tasks. Zero unsafe denominators are undefined. Empirical tables and plots are generated only from completed jobs.
+
+\section{Recorded campaign status}
+\IfFileExists{../../paper/generated/harness2-results.tex}{\input{../../paper/generated/harness2-results.tex}}{}
+
+\section{Reproduction}
+See \texttt{integrations/harness2/README.md}, \texttt{formal/contracts.md}, the source-scoped \texttt{evidence/readiness.json}, and \texttt{hpc/docs/hpc-guide.md}. The deterministic runtime archive preserves 133 pinned non-image source/license/test files for offline nodes. The full original checkout and its 140-path inventory remain reproducible. Main-article integration findings are imported only after completed source-scoped empirical analysis.
+\end{document}

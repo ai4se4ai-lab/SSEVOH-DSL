@@ -1,0 +1,112 @@
+{
+  "schema": "ssevoh-qualification-closeout-v1",
+  "utc": "2026-11-10T01:07:45.656034+00:00",
+  "cluster": "narval",
+  "trials": [
+    {
+      "profile": "harness2",
+      "run_id": "ssevoh-h2-smoke-20261109T215528Z-narval-r1",
+      "jobs": [
+        "8853664",
+        "8853665",
+        "8853666",
+        "8853667",
+        "8853668"
+      ],
+      "audit_utc": "2026-11-10 01:00:42",
+      "audit_sha256": "67a7df27bca2623e74f8658bb0e935cb282aed0ca2f4fa4fcd51e86ef03ed71d",
+      "qualification_started_utc": "2026-11-09T21:53:09.971831+00:00",
+      "selection_deadline_minutes": 45
+    },
+    {
+      "profile": "harness2",
+      "run_id": "ssevoh-h2-smoke-20261109T215559Z-narval-r2",
+      "jobs": [
+        "8853669",
+        "8853670",
+        "8853671",
+        "8853672",
+        "8853673"
+      ],
+      "audit_utc": "2026-11-10 01:00:43",
+      "audit_sha256": "eaf8ca4b172e456b6114e7255f8b0a97a10b9a99177bcf5c7fc55046e195778d",
+      "qualification_started_utc": "2026-11-09T21:53:09.971831+00:00",
+      "selection_deadline_minutes": 45
+    },
+    {
+      "profile": "harness2",
+      "run_id": "ssevoh-h2-smoke-20261109T215608Z-narval-r3",
+      "jobs": [
+        "8853675",
+        "8853676",
+        "8853677",
+        "8853678",
+        "8853679"
+      ],
+      "audit_utc": "2026-11-10 01:00:44",
+      "audit_sha256": "90c99b6f35451ac51c3577ca0436251c47dda3d04db528a5d545ed3284bd24da",
+      "qualification_started_utc": "2026-11-09T21:53:09.971831+00:00",
+      "selection_deadline_minutes": 45
+    },
+    {
+      "profile": "core",
+      "run_id": "ssevoh-core-smoke-20261109T230443Z-narval-r1",
+      "jobs": [
+        "8857299",
+        "8857303",
+        "8857304",
+        "8857305",
+        "8857308",
+        "8857309",
+        "8857310",
+        "8857311"
+      ],
+      "audit_utc": "2026-11-10 01:00:39",
+      "audit_sha256": "64ff1ac6f1fb1d4c1d11c2f4cb618e51562281aef4fcd279f322e4bd290df978",
+      "qualification_started_utc": "2026-11-09T23:02:33.886528+00:00",
+      "selection_deadline_minutes": 45
+    },
+    {
+      "profile": "core",
+      "run_id": "ssevoh-core-smoke-20261109T230533Z-narval-r2",
+      "jobs": [
+        "8857316",
+        "8857317",
+        "8857318",
+        "8857319",
+        "8857320",
+        "8857321",
+        "8857322",
+        "8857323"
+      ],
+      "audit_utc": "2026-11-10 01:00:40",
+      "audit_sha256": "0007a1c8eb5496a86c09f94b0c0f6341ac75f05628376a29d0bb6cd029b00eec",
+      "qualification_started_utc": "2026-11-09T23:02:33.886528+00:00",
+      "selection_deadline_minutes": 45
+    },
+    {
+      "profile": "core",
+      "run_id": "ssevoh-core-smoke-20261109T230548Z-narval-r3",
+      "jobs": [
+        "8857325",
+        "8857326",
+        "8857327",
+        "8857328",
+        "8857329",
+        "8857330",
+        "8857332",
+        "8857333"
+      ],
+      "audit_utc": "2026-11-10 01:00:41",
+      "audit_sha256": "7a896ed591408e0b49fb879b93870ef561205e0ae35a12d99ae955568f0c67e7",
+      "qualification_started_utc": "2026-11-09T23:02:33.886528+00:00",
+      "selection_deadline_minutes": 45
+    }
+  ],
+  "state": "refused",
+  "reason": "right-censored at the predefined selection deadline; unused pending trials closed after both full studies completed",
+  "gpu_performance": "unmeasured; cancellation is not a GPU failure",
+  "reference": "https://slurm.schedmd.com/scancel.html",
+  "queue_before": "8853676|RUNNING\n8857305|RUNNING\n8857308|RUNNING\n8857326|RUNNING\n8857329|RUNNING\n8857317|RUNNING\n8857320|RUNNING\n8853665|RUNNING\n8853670|RUNNING\n8853666_[0-1%1]|PENDING\n8853667|PENDING\n8853668|PENDING\n8853671_[0-1%1]|PENDING\n8853672|PENDING\n8853673|PENDING\n8853677_[0-1%1]|PENDING\n8853678|PENDING\n8853679|PENDING\n8857309_[0-1%1]|PENDING\n8857310|PENDING\n8857311|PENDING\n8857321_[0-1%1]|PENDING\n8857322|PENDING\n8857323|PENDING\n8857330_[0-1%1]|PENDING\n8857332|PENDING\n8857333|PENDING\n",
+  "error": ""
+}

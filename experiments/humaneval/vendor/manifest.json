@@ -1,0 +1,9 @@
+{
+  "evalplus_commit": "26d6d00bb1fd0fa37f39c99d5290da67891d1c5e",
+  "interface": "evalplus.eval.untrusted_check and evalplus.gen.util.trusted_exec; no modified evaluator code",
+  "files": {
+    "numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "fd83c01228a688733f1ded5201c678f0c53ecc1006ffbc404db9f7a899ac6249",
+    "evalplus-26d6d00.tar.gz": "4ba870a5589b3dbfb16c6492fcf364dca9c1ad789ea558106dcc326924174fdf",
+    "psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl": "4b1388a4f6875d7e2aff5c4ca1cc16c545ed41dd8bb596cefea80111db353a34"
+  }
+}

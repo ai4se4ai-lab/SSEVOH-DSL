@@ -1,0 +1,13 @@
+\begin{table}
+\centering\small
+\begin{tabular}{lrrrrr}
+Model & $n$ & Oracle $n$ & Fidelity (\%) & Disallowed & Deployed \\
+\hline
+qwen2.5-coder:7b & 100 & 0 & 0.0 & 0 & 0 \\
+phi4:14b & 100 & 0 & 0.0 & 0 & 0 \\
+gpt-oss:20b & 100 & 30 & 21.0 & 21 & 0 \\
+devstral:24b & 100 & 0 & 0.0 & 0 & 0 \\
+qwen3-coder:30b & 100 & 61 & 21.0 & 52 & 0 \\
+\end{tabular}
+\caption{Fixed-protocol raw outputs. Oracle $n$ counts independently evaluable proposals. Post hoc fidelity checks include the snapshot, requested fields, evidence requirements and applicable conditions; prohibited requests can match. Zero disallowed samples supply no rejection-effectiveness evidence.}
+\end{table}

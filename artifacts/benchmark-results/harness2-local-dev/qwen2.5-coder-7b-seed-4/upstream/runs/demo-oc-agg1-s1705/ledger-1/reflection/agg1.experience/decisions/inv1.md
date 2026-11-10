@@ -1,0 +1,1 @@
+The script `summarize.py` is already correctly implemented to sum only the signed amounts in the ledger. No changes are needed.

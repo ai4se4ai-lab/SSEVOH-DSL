@@ -1,0 +1,16 @@
+strict digraph DiskGraph {
+nodesep=0.35;
+subgraph cluster_graph {
+color="white";
+-5021783955340962564 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = -1\n/\\ revoked = FALSE\n/\\ epoch = 0\n/\\ approved = FALSE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"IDLE\"\n/\\ modified = FALSE",style = filled]
+-5021783955340962564 -> -6853037304897417866 [label="Change",color="black",fontcolor="black"];
+-6853037304897417866 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = -1\n/\\ revoked = FALSE\n/\\ epoch = 1\n/\\ approved = FALSE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"IDLE\"\n/\\ modified = FALSE"];
+-5021783955340962564 -> -3608895831171000493 [label="Withdraw",color="black",fontcolor="black"];
+-3608895831171000493 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = -1\n/\\ revoked = TRUE\n/\\ epoch = 0\n/\\ approved = FALSE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"IDLE\"\n/\\ modified = FALSE"];
+-6853037304897417866 -> -2936148338202276135 [label="Withdraw",color="black",fontcolor="black"];
+-2936148338202276135 [label="/\\ copyGood = FALSE\n/\\ approvalEpoch = -1\n/\\ revoked = TRUE\n/\\ epoch = 1\n/\\ approved = FALSE\n/\\ active = FALSE\n/\\ published = FALSE\n/\\ stored = FALSE\n/\\ phase = \"IDLE\"\n/\\ modified = FALSE"];
+-3608895831171000493 -> -2936148338202276135 [label="Change",color="black",fontcolor="black"];
+{rank = same; -5021783955340962564;}
+{rank = same; -6853037304897417866;-3608895831171000493;}
+}
+}

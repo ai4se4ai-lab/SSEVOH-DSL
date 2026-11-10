@@ -1,0 +1,1 @@
+The script `summarize.py` is already correctly implemented to sum all signed amounts in the ledger and print the total with two decimal places. No changes are needed.

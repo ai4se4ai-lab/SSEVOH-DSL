@@ -1,0 +1,229 @@
+{
+  "project": "ssevoh-humaneval-full-evaluation",
+  "study": "humaneval-coding-full-v1",
+  "require_gpu": true,
+  "vars": {
+    "MODELS": "qwen2.5-coder:7b phi4:14b"
+  },
+  "stages": [
+    {
+      "name": "isolation",
+      "depends": [],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 1,
+        "mem": "2G",
+        "time": "00:05:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "trusted-controls",
+          "cmd": "python experiments/scripts/humaneval_sandbox.py --output \"{RESULTS}/isolation/report.json\"",
+          "produces": [
+            "isolation/report.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "controls",
+      "depends": [
+        {
+          "stage": "isolation",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "6G",
+        "time": "00:20:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "positive-negative",
+          "cmd": "python experiments/scripts/humaneval_grade.py --controls --dataset \"{WORK}/benchmarks/private/HumanEvalPlus-v0.1.10.jsonl.gz\" --isolation-report \"{RESULTS}/isolation/report.json\" --output \"{RESULTS}/controls/records.jsonl\"",
+          "needs": [
+            "isolation/report.json"
+          ],
+          "produces": [
+            "controls/records.jsonl"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "6G",
+        "time": "00:30:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "name": "freeze",
+      "depends": [
+        {
+          "stage": "controls",
+          "type": "afterok"
+        }
+      ],
+      "steps": [
+        {
+          "name": "complete-population",
+          "cmd": "python experiments/scripts/humaneval_freeze.py --root \"{REPO}/experiments/humaneval-aggregate-input\" --models {MODELS} --seeds 1701 1702 1703 --protocol \"{REPO}/experiments/humaneval/protocol.json\" --output \"{RESULTS}/frozen/samples.jsonl\" --receipt \"{RESULTS}/frozen/global.json\"",
+          "produces": [
+            "frozen/samples.jsonl",
+            "frozen/global.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "6G",
+        "time": "04:00:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "name": "grade",
+      "depends": [
+        {
+          "stage": "freeze",
+          "type": "afterok"
+        }
+      ],
+      "steps": [
+        {
+          "name": "hidden-evalplus",
+          "cmd": "python experiments/scripts/humaneval_grade.py --dataset \"{WORK}/benchmarks/private/HumanEvalPlus-v0.1.10.jsonl.gz\" --isolation-report \"{RESULTS}/isolation/report.json\" --controls-report \"{RESULTS}/controls/records.jsonl\" --samples \"{RESULTS}/frozen/samples.jsonl\" --freeze \"{RESULTS}/frozen/global.json\" --model {model} --seed {seed} --output \"{RESULTS}/grade/{CELL}.jsonl\"",
+          "needs": [
+            "controls/records.jsonl",
+            "frozen/samples.jsonl",
+            "frozen/global.json"
+          ],
+          "produces": [
+            "grade/{CELL}.jsonl"
+          ],
+          "critical": true
+        }
+      ],
+      "matrix": {
+        "model": [
+          "qwen2.5-coder:7b",
+          "phi4:14b"
+        ],
+        "seed": [
+          1701,
+          1702,
+          1703
+        ]
+      },
+      "array_throttle": 3
+    },
+    {
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "6G",
+        "time": "00:30:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "name": "analysis",
+      "depends": [
+        {
+          "stage": "grade",
+          "type": "afterok"
+        }
+      ],
+      "steps": [
+        {
+          "name": "intention-to-evaluate",
+          "cmd": "python experiments/scripts/humaneval_analyze.py --samples \"{RESULTS}/frozen/samples.jsonl\" --freeze \"{RESULTS}/frozen/global.json\" --grades {RESULTS}/grade/*.jsonl --output \"{RESULTS}/analysis\"",
+          "needs": [
+            "frozen/global.json"
+          ],
+          "produces": [
+            "analysis/summary.json",
+            "analysis/summary.md"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "collect",
+      "cpu_only": true,
+      "depends": [
+        {
+          "stage": "isolation",
+          "type": "afterany"
+        },
+        {
+          "stage": "controls",
+          "type": "afterany"
+        },
+        {
+          "stage": "freeze",
+          "type": "afterany"
+        },
+        {
+          "stage": "grade",
+          "type": "afterany"
+        },
+        {
+          "stage": "analysis",
+          "type": "afterany"
+        }
+      ],
+      "resources": {
+        "cpus": 1,
+        "mem": "2G",
+        "time": "00:05:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "persist",
+          "builtin": "collect",
+          "needs": [
+            "isolation/report.json",
+            "controls/records.jsonl",
+            "frozen/global.json",
+            "analysis/summary.json"
+          ],
+          "critical": true
+        }
+      ]
+    }
+  ],
+  "results": {
+    "tables": [],
+    "summaries": [],
+    "copy": [
+      "isolation/**",
+      "controls/**",
+      "frozen/**",
+      "grade/**",
+      "analysis/**"
+    ],
+    "archive": []
+  }
+}

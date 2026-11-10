@@ -1,0 +1,1 @@
+KEEP_BASE -> The base rollout successfully sums the signed amounts in the ledger.csv file and returns the correct total. There is no evidence to suggest that any changes are needed.

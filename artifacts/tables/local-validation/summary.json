@@ -1,0 +1,100 @@
+{
+  "summaries": [
+    {
+      "condition": "B0",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 12,
+      "false_accept_rate": 1,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.0001020885561592877,
+      "median_seconds": 8.459298987872899e-05,
+      "std_seconds": 7.143289225354869e-05,
+      "latency_task_bootstrap_ci95": [
+        8.278471116985505e-05,
+        0.00011888321823789738
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 0
+    },
+    {
+      "condition": "B1",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 12,
+      "false_accept_rate": 1,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.00010900712222792209,
+      "median_seconds": 0.00011776099563576281,
+      "std_seconds": 2.1517973956279888e-05,
+      "latency_task_bootstrap_ci95": [
+        0.00010171403458419566,
+        0.00011913469934370369
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 0
+    },
+    {
+      "condition": "B2",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 4,
+      "false_accept_rate": 0.3333333333333333,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.00013057704083621502,
+      "median_seconds": 0.00013649702304974198,
+      "std_seconds": 3.066739001472772e-05,
+      "latency_task_bootstrap_ci95": [
+        0.00012253898506363233,
+        0.00014764600346097722
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 0
+    },
+    {
+      "condition": "B3",
+      "n": 25,
+      "tasks": 20,
+      "unsafe_n": 12,
+      "safe_n": 13,
+      "false_accepts": 0,
+      "false_accept_rate": 0,
+      "false_reject_rate": 0,
+      "mean_seconds": 0.00017656852258369327,
+      "median_seconds": 0.00015104198246262968,
+      "std_seconds": 8.127013155204394e-05,
+      "latency_task_bootstrap_ci95": [
+        0.00014605195295492497,
+        0.00021089062914446307
+      ],
+      "qualification": false,
+      "syntax_valid_rate": null,
+      "semantic_valid_rate": null,
+      "task_completion_rate": null,
+      "state_violations": 0
+    }
+  ],
+  "paired_comparisons": [],
+  "sources": [
+    {
+      "path": "artifacts/benchmark-results/local-validation.jsonl",
+      "sha256": "cc62412dbfc63378661d1f52110834eb1c88d5dc64d2f4c01b503a570dfe6594"
+    }
+  ],
+  "statistics": "descriptive; task-cluster bootstrap, 2000 draws, seed 481; no significance claim"
+}

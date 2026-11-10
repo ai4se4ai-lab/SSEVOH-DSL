@@ -1,0 +1,1 @@
+The script `summarize.py` already correctly sums the signed amounts in `ledger.csv` and returns the total with two decimal places. No changes are needed.

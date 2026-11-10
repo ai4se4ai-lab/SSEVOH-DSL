@@ -1,0 +1,38 @@
+name: Reference framework and reproduction
+on: [push, pull_request]
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install ruff
+      - run: ruff check src tests experiments/scripts formal/check.py formal/bootstrap_tlc.py formal/run_assurance.py formal/assurance integrations/harness-rsi/scripts integrations/harness-rsi/tests integrations/harness2/adapter integrations/harness2/tests integrations/harness2/scripts integrations/harness2/formal hpc/tests hpc/scripts/halt_experiments.py hpc/scripts/fleet.py hpc/scripts/measure.py hpc/scripts/transfer_models.py hpc/scripts/verify_transfer.py hpc/scripts/campaign.py hpc/scripts/campaignctl.py hpc/scripts/audit_fleet.py hpc/scripts/smoke_ablations.py hpc/scripts/harness2_campaign.py hpc/scripts/live.py hpc/scripts/close_qualification.py hpc/scripts/submit_results_audit.py hpc/scripts/submit_qualification_report.py experiments/tests
+      - run: PYTHONPATH=src python -m unittest discover -s tests -v
+      - run: PYTHONPATH=src python formal/run_assurance.py
+      - run: python -m unittest discover -s integrations/harness-rsi/tests -v
+      - run: python -m unittest discover -s hpc/tests -v
+      - run: PYTHONPATH=src python -m unittest discover -s experiments/tests -v
+      - run: |
+          python formal/bootstrap_tlc.py
+          python integrations/harness2/formal/check.py --tlc-jar .cache/tla2tools.jar
+      - run: |
+          PYTHONPATH=src:experiments/scripts python - <<'PY'
+          import subprocess, sys
+          from harness2_support import ensure_runtime, INTEGRATION, ROOT
+          runtime=ensure_runtime()
+          import os
+          env=dict(os.environ,PYTHONPATH=os.pathsep.join(map(str,[ROOT/'src',runtime,INTEGRATION/'adapter'])))
+          for folder in [runtime/'tests',INTEGRATION/'tests']:
+              subprocess.run([sys.executable,'-m','unittest','discover','-s',str(folder),'-v'],env=env,check=True)
+          PY
+      - run: bash hpc/scripts/selftest.sh
+      - run: python experiments/scripts/update_report.py && python experiments/scripts/word_count.py
+  publications:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y texlive-latex-recommended
+      - run: python3 experiments/scripts/update_report.py && bash paper/build.sh

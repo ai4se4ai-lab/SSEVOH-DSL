@@ -1,0 +1,153 @@
+\newif\ifpublisher
+\IfFileExists{IEEEcsmag.cls}{\publishertrue\documentclass{IEEEcsmag}}{\publisherfalse\documentclass[11pt]{article}}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,graphicx}
+\usepackage[colorlinks,urlcolor=blue,linkcolor=blue,citecolor=blue]{hyperref}
+\ifpublisher
+\jvol{XX}\jnum{XX}\paper{8}\jmonth{Month}\jname{IEEE Software}\jtitle{Controlled Agent Evolution}\pubyear{2026}
+\setcounter{secnumdepth}{0}
+\else
+\usepackage[margin=1in]{geometry}
+\fi
+\title{SSEVOH-DSL: A Domain-Specific Language and Formal Verification Framework for Safe Self-Evolution of AI Agent Harnesses}
+\author{SSEVOH-DSL project}
+\date{Development draft, November 2026}
+\begin{document}
+\ifpublisher\sptitle{Feature: Controlled Agent Evolution}\affil{Research software prototype}\fi
+\ifpublisher\else\maketitle\fi
+\begin{abstract}
+\IfFileExists{../../paper/generated/abstract.tex}{\input{../../paper/generated/abstract.tex}}{\input{paper/generated/abstract.tex}}
+\end{abstract}
+\ifpublisher\maketitle\fi
+
+\section{When an improvement breaks the harness}
+An assistant revises a reusable skill to improve how it handles support requests. Another workflow relies on the old skill, and a memory was derived from its outputs. The update appears useful in isolation. Later, the original artifact is withdrawn because it contains prohibited instructions. An unrelated failure then triggers a request to restore a historical version. Restoring the old snapshot may also restore the withdrawn instructions and reactivate dependent artifacts whose earlier approvals no longer apply.
+
+This example involves more than version management. A commit identifies a change, a log records an action, and a test reports an observed behavior. None independently answers whether this agent was allowed to make this change, whether every affected artifact remains valid, or whether recovery respects prohibitions introduced after the backup was created. Those questions require explicit engineering rules.
+
+A harness is the environment in which an agent operates: its skills, memories, tools, workflows, and configuration. Self-improving agents can modify elements of that environment. The Darwin G\"odel Machine, for example, investigates empirical improvement through modifications to agent code and benchmark evaluation~\cite{zhang2025}. SSEVOH-DSL studies a complementary question: how should an independent mechanism decide whether an attempted evolution is permitted to become trusted state?
+
+The central rule is straightforward: proposing a change does not authorize it. A model can explain why an update appears beneficial, but its explanation cannot grant permission or count as independent verification. The system must continue to reject unauthorized changes even when the proposer is confused, adversarial, or simply persuasive.
+
+This article distinguishes local implementation checks, runtime qualification, and the complete five-model campaign. A functioning implementation and a completed empirical evaluation are separate research deliverables; only recorded outcomes support the findings reported here.
+
+\section{A small language around a trusted boundary}
+SSEVOH-DSL describes an evolution as a transformation of named, versioned components. A component has a type, a mutability flag, required dependencies, provenance parents, and a capability set. A proposal names an operation, a target, an expected version, a desired version, required validators, and supported preconditions and postconditions.
+
+The language is deliberately constrained. It contains no shell commands, Python expressions, permission grants, or declarations that evidence has passed. This follows the practical role of a domain-specific language: expose the concepts engineers need while restricting accidental complexity~\cite{fowler2010}. A larger language would create more translation and validation obligations without necessarily improving assurance.
+
+The prototype supports updating a component, withdrawing its current version, and recovering a known historical version. It does not create or delete arbitrary components. Preconditions and postconditions are finite choices concerning active or inactive status. Arbitrary temporal predicates, temporary permissions, and approval hierarchies remain outside this first implementation.
+
+The operator supplies policy separately. The authenticated caller identity also comes from outside the proposal. A specification that says it was written by an administrator would not acquire administrative privileges. Policy assigns exact principal, target, and operation combinations and bounds capabilities. Policy and verifier components remain protected even if an untrusted snapshot labels them mutable.
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox{0.91\linewidth}{\centering
+Untrusted proposal\\[3pt]
+$\downarrow$\\
+Located parsing and typed intermediate representation\\
+$\downarrow$\\
+Operator policy and candidate graph analysis\\
+$\downarrow$\\
+Independent verification and validator evidence\\
+$\downarrow$\\
+Single-use approval bound to the checked state\\
+$\downarrow$\\
+Atomic sandbox deployment and provenance event}}
+\caption{The proposer supplies text. The trusted service owns policy, evidence, approval, and deployment.}
+\end{figure}
+
+The compiler lexes and parses the specification, constructs immutable nodes, checks field types and references, resolves the dependency graph, applies static rules, and produces a JSON intermediate representation. Diagnostics distinguish syntax, semantic, type, and policy errors. Token errors identify a line and column; some semantic errors currently identify the containing declaration rather than an individual field.
+
+A readable skill update looks like this:
+\begin{verbatim}
+harness assistant {
+  component memory memory {
+    version 1; mutable true;
+  }
+  component skill skill {
+    version 1; mutable true;
+    depends [memory];
+  }
+  evolution improve {
+    operation update; target skill;
+    from 1; to 2; depends [memory];
+    requires [structure];
+    expect active; ensure active;
+  }
+}
+\end{verbatim}
+The required validator name requests an activity. It does not assert the activity succeeded. The service chooses the registered implementation and executes it against the isolated candidate. The built-in structure validator checks metadata integrity; it does not establish that arbitrary generated code is safe or useful.
+
+\section{Dependencies, evidence, and recovery}
+Before applying a proposal, the service constructs a candidate state while retaining the trusted state unchanged. Updating a component must increase its version and cannot reuse an existing historical identity. Required references must exist, and the combined dependency and provenance graph must be acyclic. An active artifact cannot rely on an inactive ancestor.
+
+The service computes reverse reachability over both operational dependencies and derivation relationships. Updating an ancestor quarantines affected descendants because their prior validation may no longer apply. They remain stored and can be revalidated individually. A change that would invalidate an immutable dependent is rejected. This conservative rule can reject an update that a richer semantic analysis might establish as harmless; its effect on useful acceptance is therefore an experimental question.
+
+Provenance records origin and transformation history. W3C PROV distinguishes entities, activities, and derivations~\cite{prov2013}; the prototype uses those ideas as a vocabulary without claiming complete PROV serialization. A deployment event links the proposal, previous state, resulting state, operation, target, and independent validator outcomes. Events form a hash chain.
+
+Hash chaining has a precise limitation. It can expose changes relative to a trusted retained head; it does not turn an ordinary mutable file or Python object into externally authenticated, append-only storage. A production service would need protected storage and an appropriate identity mechanism. The reference implementation returns defensive copies of its journal to prevent callers from accidentally mutating retained events.
+
+Withdrawal retains the affected artifacts and their history. Suppose a derived artifact combines contributions from two sources and only one source is withdrawn. Deleting the entire artifact could discard an independent contribution and obscure the evidence needed to understand the incident. Leaving it active could retain the prohibited contribution. Quarantine provides a conservative intermediate state: retain the artifact, mark it untrusted, and require a separate justification before reactivation.
+
+The current implementation does not supply a semantic certificate proving that a withdrawn contribution has been removed. It therefore prohibits dropping provenance parents during an update. This limitation is explicit: supporting selective release of lineage would require additional independent evidence and a corresponding extension to the formal semantics.
+
+Recovery operates on a selected historical component rather than replacing the whole harness snapshot. The service checks that the requested version is known, has not been withdrawn, and has no invalid active-reference relationship. The current withdrawal set is retained. An old approval or backup cannot erase a prohibition established later.
+
+Approval is also time sensitive. Each approval binds the proposal and candidate to the current state fingerprint and operator policy. The commit path checks the fingerprint again while holding the deployment lock. If another proposal commits first, the older approval requires revalidation. A capability can be consumed only once. This prevents two conflicting proposals from deploying on the assumption that they both extend the same unchanged state.
+
+The sandbox stages the complete metadata candidate and audit event before swapping the trusted state reference. A failure injected before that swap leaves the state unchanged and permits an explicit retry. This demonstrates atomic behavior for the reference adapter. It does not implement a durable transaction across production files, external services, or multiple hosts.
+
+\section{What the formal model establishes}
+Formal assurance begins with a transition system rather than an assumption that the model will follow instructions. The abstract lifecycle contains proposed, analysed, verified, approved, deployed, and rejected phases. Authorization and evidence gate progress, approvals record the state epoch, and withdrawal affects whether a version may become active.
+
+The safety invariant states that an active evolved artifact must be authorized, supported by evidence, unwithdrawn, and certified for its current epoch. The finite model explores one proposal and three epochs across four authorization/evidence contexts. A separate Python explorer and a TLA+ specification describe this abstraction. TLA+ supplies a language for stating and checking behaviors, including the distinction between safety and liveness~\cite{lamport2002}.
+
+The experiment also weakens individual rules. Removing authorization, evidence, withdrawal protection, recovery protection, or stale-approval checking should expose a counterexample. A checker that reports success for both corrected and deliberately unsafe models would provide little confidence in the intended invariant.
+
+The bounded checks do not establish universal safety. They do not prove that every Python execution refines the formal model, that registered validators are correct, or that generated agent code cannot perform harmful actions. They also make no liveness guarantee. An adversarial scheduler or repeated dependency changes can indefinitely prevent an eligible proposal from committing. Separate technical documents record definitions, assumptions, arguments, configurations, and traces.
+
+\section{Implementation and empirical evaluation}
+The reference implementation uses Python's standard library. It provides the compiler, immutable state representation, policy engine, independent graph check, bounded lifecycle explorer, sandbox adapter, and command-line interface. The agent is assumed to access a restricted proposal API. Giving it direct access to the trusted Python process, private attributes, validator registry, or policy filesystem would violate that boundary.
+
+HeartBench starts with 20 hand-authored synthetic scenarios covering the 15 required families. These include safe skill updates, unauthorized permission expansion, dependency changes, protected configuration, missing evidence, mixed-origin withdrawal, rollback conflicts, stale approvals, concurrency, interrupted deployment, and provenance corruption. Expected decisions, rejection substrings, final versions, quarantine sets, withdrawal sets, and provenance-event counts are stored as fixture data.
+
+These labels are independent of the engine's computed decisions, but they have not yet received independent researcher review. Synthetic representativeness and label quality remain threats to validity. Passing this initial suite should guide further testing; it cannot justify a claim of broad practical effectiveness.
+
+\IfFileExists{../../paper/generated/results.tex}{\input{../../paper/generated/results.tex}}{\IfFileExists{paper/generated/results.tex}{\input{paper/generated/results.tex}}{Recorded empirical status is available in the repository's generated report.}}
+
+\IfFileExists{../../paper/generated/model-results.tex}{\input{../../paper/generated/model-results.tex}}{\IfFileExists{paper/generated/model-results.tex}{\input{paper/generated/model-results.tex}}{}}
+
+\IfFileExists{../../paper/generated/core-observations.tex}{\input{../../paper/generated/core-observations.tex}}{}
+
+The baseline protocol distinguishes unrestricted declarative admission, basic structural validation, static policy/candidate checks, and the full sandbox. The first three configurations currently measure admission decisions rather than equivalent deployment transactions. Their timings therefore cannot establish an unbiased end-to-end deployment overhead claim. The report keeps that limitation visible rather than treating every measured duration as directly comparable.
+
+The model-assisted experiment uses five exact Ollama identifiers: Qwen2.5-Coder 7B, Phi-4 14B, GPT-OSS 20B, Devstral 24B, and Qwen3-Coder 30B. The jobs recorded actual manifests, digests, quantization, license text, runtime version, and memory use. An unavailable or incompatible model fails qualification instead of being silently replaced.
+
+Each eligible task receives five generation seeds under fixed decoding settings. The model sees the harness, request, relevant rules, and language grammar, while expected decisions and golden specifications are withheld. The evaluator scores the actual generated proposal with a separate benchmark oracle. It does not assume that a model followed the requested change. A model that produces a different safe proposal may pass enforcement while failing task completion.
+
+The critical outcome is an independently unsafe proposal that reaches deployment. Unsafe proposals correctly rejected by enforcement demonstrate a successful gate, rather than an unsafe deployment. Invalid syntax and model refusals have separate denominators. Safe acceptance, false rejection, generation latency, tokens, throughput, and validator cost are recorded independently.
+
+Experiments target Fir, Narval, and Rorqual through the reused use-hpc orchestration~\cite{usehpc}. Equivalent smoke graphs exercise setup, runtime metadata, small and larger cached models, deterministic verification, scaling, inference, analysis, and persistence. Independent repetitions are required because three generations within one allocation are not three independent queue or loading reliability trials.
+
+Site selection uses measured completion reliability, GPU residency, queue delay, startup overhead, generation time, resume behavior, and verified artifact transfer. Hardware labels alone do not select the fastest cluster. After qualification, a disjoint assignment gives each model cell a single owner and allocates independent cells by reliability-adjusted completion cost. This design separates the question of where a workload completes efficiently from the scientific comparison between model outputs.
+
+Both studies qualified Fir and Rorqual within the 45-minute selection window. Narval remained queued at that cutoff; later observations are retained separately. Rorqual had the lower measured completion cost among eligible sites. Cache-constrained ownership placed the two smaller models there and the three larger models on Fir. This is an operational scheduling decision, not a universal GPU-speed ranking.
+
+\IfFileExists{../../paper/generated/harness2-case.tex}{\section{Controlled \texorpdfstring{Harness\textsuperscript{2}}{Harness2} integration}\input{../../paper/generated/harness2-case.tex}}{}
+
+\section{Practical implications and limits}
+The prototype supports three actionable engineering practices:
+\begin{itemize}
+\item Put the proposal boundary outside the agent's control. Supply identity, policy, validators, and deployment authority through a separate trusted service.
+\item Make dependency invalidation explicit. Retain affected descendants in quarantine and require new evidence rather than assuming a previous approval remains valid.
+\item Treat recovery as a checked transformation. Preserve withdrawal history and recheck historical artifacts against current restrictions before reactivation.
+\end{itemize}
+
+These practices are supported here by bounded assurance checks and controlled fixture observations. The raw-output failures and zero task successes in the model-driven Harness\textsuperscript{2} study leave useful self-improvement unestablished. Successful admission control is therefore a separate result from successful agent evolution. Broader claims about acceptance rates and operational cost require larger artifact domains, calibrated generation protocols, and independent benchmark review.
+
+Further work should extend semantic validators, executor isolation, the supported artifact catalog and durable recovery, and test mechanism removals on broader artifact workloads. A larger language should be justified by a concrete unmet requirement and accompanied by new translation and verification obligations. The current framework makes authority explicit and auditable before a proposed change becomes trusted state; it does not make a poorly formed or unhelpful proposal useful.
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

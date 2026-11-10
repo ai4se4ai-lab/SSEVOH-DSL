@@ -1,0 +1,1 @@
+kept -> systemprompt.md -> base1 and both candidates all produced 'Total: 35.50' with identical system prompts and scripts, showing no behavioral difference; no change needed

@@ -1,0 +1,120 @@
+{
+  "schema": "ssevoh-humaneval-protocol-v1",
+  "status": "prospectively_frozen_before_v5_qualification_and_full_cohort_prior_diagnostic_exposure_disclosed",
+  "dataset": "HumanEvalPlus-v0.1.10-full-164",
+  "private_dataset_sha256": "272720b90ac375502c8ed23cd791c2a93dfb22a911641a494da74a426c09f101",
+  "public_sha256": "2daaf2edc5a3dc6a68316a89800b61af7d534bca5f6230a5e6b6773411576c0a",
+  "evalplus_commit": "26d6d00bb1fd0fa37f39c99d5290da67891d1c5e",
+  "upstream_commit": "6868817518876de8fd170c6a8354daca273b6191",
+  "models": [
+    "qwen2.5-coder:7b",
+    "phi4:14b"
+  ],
+  "seeds": [
+    1701,
+    1702,
+    1703
+  ],
+  "smoke_tasks": [
+    "HumanEval/0",
+    "HumanEval/1"
+  ],
+  "smoke_repetitions": 3,
+  "full_tasks": 164,
+  "k": 2,
+  "mode": "agg",
+  "conditions": [
+    "frozen",
+    "original",
+    "guarded"
+  ],
+  "frozen_solver_calls_per_task": 8,
+  "frozen_reported_endpoints": [
+    "first_of_eight_one_shot",
+    "public_only_selection_of_eight"
+  ],
+  "recursive_solver_calls_per_task_before_retries": 8,
+  "recursive_proposer_calls_per_task_before_retries": 6,
+  "recursive_selector_calls_per_task": 1,
+  "recursive_reflection_calls_per_task": 1,
+  "frozen_selector_calls_per_task": 1,
+  "decoding": {
+    "temperature": 0.2,
+    "top_p": 0.9,
+    "num_predict": 4096,
+    "num_ctx": 32768
+  },
+  "max_client_response_bytes": 200000,
+  "mutable_surface": [
+    "systemprompt.md",
+    "LongTermMEMORY.md",
+    "skills/*/SKILL.md"
+  ],
+  "executable_harness_changes": false,
+  "generated_solution_execution_in_method": false,
+  "public_probe_feedback": [
+    "Python_AST_parse_status",
+    "entry_point_presence"
+  ],
+  "hidden_grading": "external_after_all_stream_selections_and_libraries_frozen",
+  "grading": {
+    "full_base_and_plus": true,
+    "fast_check": false,
+    "minimum_test_seconds": 0.2,
+    "reference_time_factor": 4.0
+  },
+  "ownership": "whole ordered condition/model/seed streams; independent libraries; no arbitrary online task sharding",
+  "qualification": {
+    "sites": [
+      "fir",
+      "narval",
+      "rorqual"
+    ],
+    "minimum_qualified_sites": 2,
+    "deadline_minutes": 45,
+    "criterion": "complete valid smoke graph plus source/model/GPU/control/transfer checks; queue+execution+collection cost"
+  },
+  "failure_policy": "retain every planned task/seed, missing solution, protocol error, timeout, infrastructure error and grader error; no success-only denominator",
+  "primary_metric": "intention_to_evaluate_selected_final_correctness",
+  "secondary_metrics": [
+    "graded_only_correctness",
+    "one_shot_correctness",
+    "calls",
+    "tokens",
+    "GPU_seconds",
+    "wall_seconds",
+    "protocol_failures",
+    "acceptance_and_origin_audit"
+  ],
+  "statistics": "Descriptive paired whole-stream analysis: per-seed 164-task accuracy/differences and across-three-stream mean/range/SD per fixed model. No task/bootstrap significance, noninferiority or population confidence claims because online experience couples tasks.",
+  "scope": "function-level Python coding with non-executable evolving harness text; not unrestricted OpenCode/Codex or open-world safety",
+  "library_window": 5,
+  "library_policy": "Before each task retain at most five preceding tasks in the same condition/model/seed stream; use original run_task with original library APIs; no cross-condition state",
+  "condition_orders": {
+    "1701": [
+      "frozen",
+      "original",
+      "guarded"
+    ],
+    "1702": [
+      "original",
+      "guarded",
+      "frozen"
+    ],
+    "1703": [
+      "guarded",
+      "frozen",
+      "original"
+    ]
+  },
+  "exposure_note": "HumanEval/0 and HumanEval/1 had model-driven smoke grading; HumanEval/2 had trusted evaluator controls. Report all164 plus161-task sensitivity excluding all three previously graded tasks, and162-task summary excluding model-driven smoke tasks.",
+  "previously_graded_tasks": [
+    "HumanEval/0",
+    "HumanEval/1",
+    "HumanEval/2"
+  ],
+  "baseline_scope": "frozen-selected matches8solver calls, not total compute:9nominal calls versus16recursive calls before retries. Publish actual calls/tokens; no equal-total-budget superiority claim.",
+  "amendment": "Before full generation, after initial two-task smoke: corrected stream-level statistics and budget labels; counterbalanced condition order; recorded prior task exposure; corrected cost metadata; clarified editable paths after no-op/wrong-path proposals and added disjoint development edit-transport calibration. No hidden tests/solutions inform task-solving prompts. Initial smoke remains a separate pilot. Disjoint v2calibration showed both models used the displayed harness/ prefix despite instructions; v3adds a logged exact-prefix transport mapping, retaining original raw responses and rejecting alias collisions. No benchmark solutions used. Infrastructure diagnostics then found live output directories entering source hashing and a cold CUDA discovery timeout before any task prompt. v4hashes frozen source only and warms pinned CUDA device enumeration before the unchanged full-GPU residency guards. Earlier cases remain diagnostic cohorts. v4 Phi calibration also rewrote the unrelated ledger fixture system prompt (including newline loss), correctly failing the exact-change gate. v5 uses the coding adapter base in the disjoint calibration, explicitly requests a one-key edit object, and preserves exact byte-level rejection of all extra changes. Task-solving prompts and benchmark conditions are unchanged.",
+  "qualification_cohort": "v5",
+  "edit_transport": "Canonical relative paths, plus exactly one explicit harness/ display prefix normalized and logged; duplicate aliases/path traversal rejected; all authorization applies to canonical paths."
+}

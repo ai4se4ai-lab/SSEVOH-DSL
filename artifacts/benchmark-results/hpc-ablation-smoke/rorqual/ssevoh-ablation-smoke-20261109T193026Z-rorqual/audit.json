@@ -1,0 +1,58 @@
+{
+  "run_id": "ssevoh-ablation-smoke-20261109T193026Z-rorqual",
+  "time": "2026-11-09 19:46:34",
+  "smoke": true,
+  "project": "ssevoh-ablation",
+  "commit": "",
+  "results": "/scratch/mbabaei/ssevoh/runs/ssevoh-ablation-smoke-20261109T193026Z-rorqual/results",
+  "rows": [
+    {
+      "stage": "ablations",
+      "cell_id": 0,
+      "cell": "-",
+      "job": "26200397",
+      "state": "OK",
+      "slurm_state": "COMPLETED",
+      "reason": "",
+      "node": "rc32509",
+      "elapsed": 16,
+      "limit": 600,
+      "steps_ok": 3,
+      "steps_total": 3,
+      "current": null,
+      "failed": [],
+      "progress": null,
+      "steps": [
+        {
+          "step": "mechanisms",
+          "status": "OK",
+          "seconds": 3.0,
+          "rc": "0",
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-ablation-smoke-20261109T193026Z-rorqual/steps/ablations/all/mechanisms.log"
+        },
+        {
+          "step": "statistics",
+          "status": "OK",
+          "seconds": 1.0,
+          "rc": "0",
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-ablation-smoke-20261109T193026Z-rorqual/steps/ablations/all/statistics.log"
+        },
+        {
+          "step": "persist",
+          "status": "OK",
+          "seconds": 2.0,
+          "rc": "0",
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-ablation-smoke-20261109T193026Z-rorqual/steps/ablations/all/persist.log"
+        }
+      ],
+      "gpu": "cpu"
+    }
+  ],
+  "requeues": 0
+}
