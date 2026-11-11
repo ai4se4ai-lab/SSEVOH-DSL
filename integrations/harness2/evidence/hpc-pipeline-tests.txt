@@ -6,6 +6,11 @@ test_cpu_only_discovery_and_missing_allocation_fail_closed (test_gpu_bootstrap.B
 test_device_probe_is_offline_and_has_no_model_or_prompt (test_gpu_bootstrap.BootstrapTests.test_device_probe_is_offline_and_has_no_model_or_prompt) ... ok
 test_three_trials_and_two_qualified_sites_are_required (test_humaneval_campaign.CodingOwnershipTests.test_three_trials_and_two_qualified_sites_are_required) ... ok
 test_whole_streams_have_unique_owners_on_fastest_qualified_sites (test_humaneval_campaign.CodingOwnershipTests.test_whole_streams_have_unique_owners_on_fastest_qualified_sites) ... ok
+test_recovery_records_completed_and_failed_cells (test_humaneval_campaign.RecoveryAndSupplementTests.test_recovery_records_completed_and_failed_cells) ... ok
+test_recovery_rejects_streams_that_differ_from_their_receipt (test_humaneval_campaign.RecoveryAndSupplementTests.test_recovery_rejects_streams_that_differ_from_their_receipt) ... ok
+test_recovery_rejects_unowned_and_failed_client_streams (test_humaneval_campaign.RecoveryAndSupplementTests.test_recovery_rejects_unowned_and_failed_client_streams) ... ok
+test_sources_partition_planned_cells_and_wait_for_pending_runs (test_humaneval_campaign.RecoveryAndSupplementTests.test_sources_partition_planned_cells_and_wait_for_pending_runs) ... ok
+test_supplement_only_for_recorded_failed_cell_at_same_site (test_humaneval_campaign.RecoveryAndSupplementTests.test_supplement_only_for_recorded_failed_cell_at_same_site) ... ok
 test_a_recent_fetch_does_not_make_an_old_audit_fresh (test_live.SnapshotFreshness.test_a_recent_fetch_does_not_make_an_old_audit_fresh) ... ok
 test_missing_snapshot_and_path_escape_fail_closed (test_manifest.ManifestTests.test_missing_snapshot_and_path_escape_fail_closed) ... ok
 test_only_frozen_source_affects_content_identity (test_manifest.ManifestTests.test_only_frozen_source_affects_content_identity) ... ok
@@ -17,6 +22,6 @@ test_success_records_fresh_snapshot (test_monitoring.MonitoringTests.test_succes
 test_timeout_preserves_prior_success_and_exposes_partial_refresh (test_monitoring.MonitoringTests.test_timeout_preserves_prior_success_and_exposes_partial_refresh) ... ok
 
 ----------------------------------------------------------------------
-Ran 14 tests in 0.022s
+Ran 19 tests in 0.017s
 
 OK

@@ -196,6 +196,77 @@ def submit_intent(state, cfg, intent, graph):
         save(state)
 
 
+def generation_sources(state):
+    """Stream sources for global freezing, or None while any is pending (release amendment 3).
+
+    Each planned (model, seed) cell is owned by exactly one source: a complete, verified generation owner;
+    a recovered owner (cells restored from its verified archive, failed cells excluded); or a supplement run
+    that re-generates a failed cell of a recovered owner from scratch."""
+    planned = {(r['model'], r['seed']) for r in state['plan']['ownership']}
+    recovered = state.get('recovered', {})
+    sources = []
+    for intent in state['full_runs']:
+        if intent['kind'] not in ('full-generation', 'full-generation-supplement'):
+            continue
+        cells = {(c['model'], c['seed']) for c in intent['cells']}
+        if intent['run_id'] in recovered:
+            entry = recovered[intent['run_id']]
+            cells = {(c['model'], c['seed']) for c in entry['cells']}
+            folder = ROOT / entry['folder']
+        else:
+            transfer = run_root(intent) / 'transfer.json'
+            if not (complete(intent) and transfer.exists() and json.loads(transfer.read_text())['verified']):
+                return None
+            folder = run_root(intent) / 'results/raw/llm'
+        sources.append({'run_id': intent['run_id'], 'intent': intent, 'cells': cells, 'folder': folder})
+    owned = [cell for s in sources for cell in s['cells']]
+    if len(owned) != len(set(owned)) or set(owned) != planned:
+        raise ValueError('Stream ownership is not a partition of the planned cells: ' + str(sorted(owned)))
+    return sources
+
+
+def recover(state, run_id, folder, archive, archive_sha256, reason):
+    """Record the completed cells of a failed generation owner restored from its verified archive."""
+    intent = next(r for r in state['full_runs'] if r['run_id'] == run_id and r['kind'] == 'full-generation')
+    folder = Path(folder).resolve()
+    cells = []
+    for path in sorted(folder.glob('selected-*.jsonl')):
+        receipt = path.with_suffix('.freeze.json')
+        if not receipt.exists():
+            raise ValueError('Recovered stream without its local freeze receipt: ' + path.name)
+        local = json.loads(receipt.read_text())
+        if local.get('all_local_streams_frozen') is not True or local.get('samples_sha256') != sha(path):
+            raise ValueError('Recovered stream does not match its freeze receipt: ' + path.name)
+        if local['protocol_sha256'] != sha(PROTOCOL) or not local['fully_gpu'] or local['failed_calls']:
+            raise ValueError('Recovered stream fails protocol/GPU/client identity: ' + path.name)
+        if {'model': local['model'], 'seed': local['seed']} not in intent['cells']:
+            raise ValueError('Recovered stream is not owned by this run: ' + path.name)
+        cells.append({'model': local['model'], 'seed': local['seed']})
+    failed = [c for c in intent['cells'] if c not in cells]
+    state.setdefault('recovered', {})[run_id] = {
+        'site': intent['site'], 'cells': cells, 'failed_cells': failed, 'folder': str(folder.relative_to(ROOT)),
+        'archive': archive, 'archive_sha256': archive_sha256, 'reason': reason,
+        'files': {p.name: sha(p) for p in sorted(folder.iterdir()) if p.is_file()},
+        'utc': datetime.now(UTC).isoformat()}
+    return failed
+
+
+def add_supplement(state, cfg, site, model, seed, supersedes):
+    """Re-generate one failed cell of a recovered owner as a new whole stream (never a resume)."""
+    entry = state.get('recovered', {}).get(supersedes)
+    cell = {'model': model, 'seed': seed}
+    if not entry or cell not in entry['failed_cells'] or entry['site'] != site:
+        raise ValueError('A supplement must re-generate a recorded failed cell of a recovered owner at its site')
+    if any(r['kind'] == 'full-generation-supplement' and cell in r['cells'] for r in state['full_runs']):
+        raise ValueError('This cell already has a supplement; inspect it instead of resubmitting')
+    intent = {**make_intent(site, 'full-generation-supplement', [cell]), 'supersedes': supersedes}
+    state['full_runs'].append(intent)
+    save(state)
+    graph = json.loads((ROOT / 'hpc/config/profiles/humaneval-full.json').read_text())
+    submit_intent(state, cfg, intent, graph)
+    return intent
+
+
 def fingerprint():
     report_path = ROOT / 'integrations/harness2/evidence/readiness.json'
     report = json.loads(report_path.read_text())
@@ -260,7 +331,9 @@ def tick(state, cfg, auto_full):
         if item.get('site') in SITES and item.get('run_id'):
             intents.append(item)
     intents.extend(state.get('full_runs', []))
-    intents = list({(r['site'],r['run_id']):r for r in intents}.values())
+    recovered = state.get('recovered', {})
+    # A recovered owner's failure is recorded and its remote run directory was archived: never refetch it.
+    intents = [r for r in {(r['site'],r['run_id']):r for r in intents}.values() if r['run_id'] not in recovered]
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
         futures = {pool.submit(refresh_site, site, cfg, intents): site for site in SITES}
         for future in concurrent.futures.as_completed(futures):
@@ -320,20 +393,19 @@ def tick(state, cfg, auto_full):
         runs = [r for r in state['full_runs'] if r['kind'] == 'full-generation']
         if len(runs) != 2:
             raise ValueError('Generation owner cardinality does not match reserved plan')
-        if all(complete(r) and (run_root(r) / 'transfer.json').exists()
-                                  and json.loads((run_root(r) / 'transfer.json').read_text())['verified'] for r in runs):
+        sources = generation_sources(state)
+        if sources is not None:
             target = ROOT / 'experiments/humaneval-aggregate-input'
             if target.exists():
                 raise ValueError('Existing aggregate input requires identity inspection')
             target.mkdir()
-            for intent in runs:
-                folder = run_root(intent) / 'results/raw/llm'
-                for path in folder.glob('selected-*.jsonl'):
+            for source in sources:
+                for path in sorted(source['folder'].glob('selected-*.jsonl')):
+                    local = json.loads(path.with_suffix('.freeze.json').read_text())
+                    if (local['model'], local['seed']) not in source['cells']:
+                        continue  # failed or superseded cell of this owner; its supplement owns the stream
                     if (target / path.name).exists():
                         raise ValueError('Duplicate whole-stream owner')
-                    local = json.loads(path.with_suffix('.freeze.json').read_text())
-                    if (local['model'], local['seed']) not in {(c['model'], c['seed']) for c in intent['cells']}:
-                        raise ValueError('Generation stream receipt does not match its unique owner')
                     shutil.copy2(path, target / path.name)
                     shutil.copy2(path.with_suffix('.freeze.json'), target / path.with_suffix('.freeze.json').name)
             from importlib import import_module
@@ -343,7 +415,12 @@ def tick(state, cfg, auto_full):
             freeze(target, protocol['models'], protocol['seeds'], [f'HumanEval/{i}' for i in range(164)],
                    target / 'global-samples.jsonl', target / 'global-receipt.json', sha(PROTOCOL))
             provenance = {'generation_owners': runs, 'qualification_plan': state['plan'], 'release': state['release'],
-                          'transfers': {r['run_id']: json.loads((run_root(r)/'transfer.json').read_text()) for r in runs}}
+                          'recovered': state.get('recovered', {}),
+                          'supplements': [r for r in state['full_runs'] if r['kind'] == 'full-generation-supplement'],
+                          'stream_sources': [{'run_id': s['run_id'], 'folder': str(s['folder'].relative_to(ROOT)),
+                                              'cells': sorted(s['cells'])} for s in sources],
+                          'transfers': {s['run_id']: json.loads((run_root(s['intent'])/'transfer.json').read_text())
+                                        for s in sources if s['run_id'] not in state.get('recovered', {})}}
             atomic_json(target / 'generation-provenance.json', provenance)
             graph = json.loads((ROOT / 'hpc/config/profiles/humaneval-evaluate.json').read_text())
             intent = make_intent(state['plan']['primary'], 'full-evaluation')
@@ -368,9 +445,9 @@ def tick(state, cfg, auto_full):
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copytree(root / 'results/raw', destination)
                 shutil.copy2(transfer, destination / 'transfer.json')
-                for owner in [r for r in state['full_runs'] if r['kind'] == 'full-generation']:
-                    source = run_root(owner) / 'results/raw'
-                    shutil.copytree(source, destination / 'generation' / owner['site'])
+                for source in generation_sources(state):
+                    shutil.copytree(source['folder'], destination / 'generation' / source['run_id'],
+                                    ignore=shutil.ignore_patterns('*.stream.tar.gz'))
                 provenance = ROOT / 'experiments/humaneval-aggregate-input/generation-provenance.json'
                 shutil.copy2(provenance, destination / 'generation-provenance.json')
                 atomic_json(destination / 'artifact-manifest.json', {
@@ -386,6 +463,8 @@ def main():
     parser.add_argument('--auto-full', action='store_true')
     parser.add_argument('--cycles', type=int, default=1)
     parser.add_argument('--interval', type=int, default=120)
+    parser.add_argument('--supplement', nargs=4, metavar=('SITE', 'MODEL', 'SEED', 'SUPERSEDES_RUN'),
+                        help='submit one recorded failed cell of a recovered owner as a new stream, then exit')
     args = parser.parse_args()
     if args.interval < 120 or not 1 <= args.cycles <= 1440:
         parser.error('Use at least120seconds and1..1440 finite cycles')
@@ -404,6 +483,12 @@ def run_locked(args):
     if state['phase'] in ('complete', 'needs_attention'):
         raise SystemExit('Terminal state requires inspection before continuation')
     cfg = config()
+    if args.supplement:
+        if state['phase'] != 'full_generation' or state.get('release') != fingerprint():
+            raise SystemExit('Supplements require the full_generation phase and the current recorded release')
+        site, model, seed, supersedes = args.supplement
+        print(json.dumps(add_supplement(state, cfg, site, model, int(seed), supersedes)), flush=True)
+        return
     for cycle in range(args.cycles):
         try:
             tick(state, cfg, args.auto_full)

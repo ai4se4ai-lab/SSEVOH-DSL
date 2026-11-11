@@ -273,5 +273,27 @@ class AnalysisTests(unittest.TestCase):
             summarize(samples, grades[:-1], ['HumanEval/0','HumanEval/1','HumanEval/2'])
 
 
+class StreamArchiveTests(unittest.TestCase):
+    """Release amendment 3: one verified archive per stream replaces the per-call file tree."""
+
+    def test_pack_stores_every_entry_and_removes_the_tree(self):
+        import tarfile
+        from humaneval_generate import pack
+        with tempfile.TemporaryDirectory() as tmp:
+            stream = Path(tmp) / 'local' / 'selected-m-1'
+            (stream / 'raw').mkdir(parents=True)
+            for i in range(5):
+                (stream / 'raw' / f'{i:06d}.json').write_text(json.dumps({'index': i}))
+            (stream / 'guarded' / 'library').mkdir(parents=True)
+            archive = Path(tmp) / 'selected-m-1.stream.tar.gz'
+            stored = pack(stream, archive)
+            self.assertFalse(stream.exists())
+            self.assertEqual(stored['entries'], 9)
+            self.assertEqual(stored['sha256'], hashlib.sha256(archive.read_bytes()).hexdigest())
+            with tarfile.open(archive) as tar:
+                self.assertIn('selected-m-1/raw/000004.json', tar.getnames())
+            self.assertEqual(list(Path(tmp).glob('*.part')), [])
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -10,6 +10,6 @@ test_tools_stay_inside_the_allowlisted_program_domain (test_toolrepair_families.
 test_twelve_uniquely_named_families (test_toolrepair_families.FamilyContracts.test_twelve_uniquely_named_families) ... ok
 
 ----------------------------------------------------------------------
-Ran 10 tests in 7.314s
+Ran 10 tests in 5.308s
 
 OK

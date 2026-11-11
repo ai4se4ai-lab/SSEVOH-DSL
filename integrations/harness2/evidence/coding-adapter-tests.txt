@@ -9,8 +9,9 @@ test_global_barrier_rejects_incomplete_and_duplicate_populations (test_humaneval
 test_full_projection_excludes_hidden_fields (test_humaneval_support.ProjectionTests.test_full_projection_excludes_hidden_fields) ... ok
 test_identity_and_task_completeness_fail_closed (test_humaneval_support.ProjectionTests.test_identity_and_task_completeness_fail_closed) ... ok
 test_isolation_command_has_no_host_root_or_home_bind (test_humaneval_support.ProjectionTests.test_isolation_command_has_no_host_root_or_home_bind) ... ok
+test_pack_stores_every_entry_and_removes_the_tree (test_humaneval_support.StreamArchiveTests.test_pack_stores_every_entry_and_removes_the_tree) ... ok
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.877s
+Ran 10 tests in 0.854s
 
 OK

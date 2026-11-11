@@ -11,6 +11,8 @@ import argparse
 import hashlib
 import json
 import os
+import shutil
+import tarfile
 import threading
 import time
 from contextlib import nullcontext
@@ -25,6 +27,22 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def pack(directory, archive):
+    """Store a stream directory as one verified tar.gz (shared-filesystem file quotas), then remove it."""
+    directory, archive = Path(directory), Path(archive)
+    part = archive.with_name(archive.name + '.part')
+    with tarfile.open(part, 'w:gz') as tar:
+        tar.add(directory, arcname=directory.name)
+    expected = sum(1 for _ in directory.rglob('*')) + 1
+    with tarfile.open(part, 'r:gz') as tar:
+        found = len(tar.getmembers())
+    if found != expected:
+        raise RuntimeError(f'Stream archive entry mismatch: {found} != {expected}')
+    os.replace(part, archive)
+    shutil.rmtree(directory)
+    return {'file': archive.name, 'sha256': sha(archive), 'entries': found}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--model', required=True)
@@ -35,11 +53,6 @@ def main():
     args = parser.parse_args()
     require_allocation()
     ensure_runtime()
-    from experiments.scripts.humaneval_adapter import adapter_class
-    from harness2.core import library, schedule, selection
-    from harness2.core.spec import RunView
-    from ssevoh_harness2.bridge import integrated
-    from experiments.scripts.humaneval_proposer import proposer_class
 
     protocol_path = ROOT / 'experiments/humaneval/protocol.json'
     protocol = json.loads(protocol_path.read_text())
@@ -57,10 +70,27 @@ def main():
     options = {**protocol['decoding'], 'num_thread': int(os.environ.get('SLURM_CPUS_PER_TASK', '4'))}
     load_on_gpu(args.model, identity, num_ctx=options['num_ctx'])
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    stream_root = args.output.with_suffix('')
-    if stream_root.exists() or args.output.exists():
+    # Release amendment 3: the per-call stream tree is built on node-local disk and stored as one archive.
+    stream_root = Path(os.environ.get('SLURM_TMPDIR') or args.output.parent) / args.output.with_suffix('').name
+    archive = args.output.with_suffix('.stream.tar.gz')
+    if stream_root.exists() or args.output.exists() or archive.exists() or args.output.with_suffix('').exists():
         raise SystemExit('Existing stream must be inspected; in-memory authority is not automatically recoverable')
     stream_root.mkdir()
+    try:
+        stored = run_stream(args, protocol, protocol_path, identity, options, stream_root)
+    except BaseException:
+        pack(stream_root, args.output.with_suffix(f'.failed-{time.time_ns()}.stream.tar.gz'))
+        raise
+    receipt = {**stored['receipt'], 'stream_archive': pack(stream_root, archive)}
+    args.output.with_suffix('.freeze.json').write_text(json.dumps(receipt, indent=2) + '\n')
+
+
+def run_stream(args, protocol, protocol_path, identity, options, stream_root):
+    from experiments.scripts.humaneval_adapter import adapter_class
+    from harness2.core import library, schedule, selection
+    from harness2.core.spec import RunView
+    from ssevoh_harness2.bridge import integrated
+    from experiments.scripts.humaneval_proposer import proposer_class
     raw = stream_root / 'raw'
     raw.mkdir()
     calls = []
@@ -198,7 +228,7 @@ def main():
                'failed_calls': sum(r.get('state') == 'failed' for r in calls),
                'output_rows': len(selected), 'utc': datetime.now(UTC).isoformat(),
                'cluster': os.environ.get('CLUSTER'), 'job_id': os.environ['SLURM_JOB_ID']}
-    args.output.with_suffix('.freeze.json').write_text(json.dumps(receipt, indent=2) + '\n')
+    return {'receipt': receipt}
 
 
 if __name__ == '__main__':

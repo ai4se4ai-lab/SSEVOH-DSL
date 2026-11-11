@@ -1,0 +1,27 @@
+{
+  "verified": true,
+  "files": {
+    "summary.md": "38b7b6109d6c260e7e6533f5b9951901801202c6f48676eef7d8c6d43124e83f",
+    "run_manifest.json": "269ac3b46c0be4a0647932e0d895f1c247d0f08b4bfef9edf02d98ed8ed20d46",
+    "pipeline/steps_latest.csv": "fd32c98e7c0d103b3eaec083be1610b497cc539ad6cf94a7b27284d1bd8fc133",
+    "pipeline/jobs.csv": "f2d2560bd454be33b85fdabbb94ca5a22b46133f96160f7c777565c1448782cc",
+    "pipeline/completeness.csv": "2b01f9adea32c213e2dd92492100022cf4c95adbc9ffef52f6f5233287c1185f",
+    "pipeline/job_endings.csv": "804bbe3d833a65f2577cd596332540935e6dd54d4e3502411ce66434d490addd",
+    "pipeline/gpu_usage.csv": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+    "pipeline/steps_all_attempts.csv": "fd32c98e7c0d103b3eaec083be1610b497cc539ad6cf94a7b27284d1bd8fc133",
+    "raw/analysis/summary.json": "ba3c70d9a3c8a2d360a6737f8e69e5a83bf241b5da43c88b62b7f1ab346bc434",
+    "raw/analysis/summary.md": "594ad1d373bdd078184f944b798e007d6bf98f6297137a0bd1e7c78bf6767196",
+    "raw/controls/records.jsonl": "225d9ee6bd55dad2b0b7316815a0aff7ffefa6fe360f2ba15944a6bbe2d73718",
+    "raw/frozen/samples.jsonl": "8961b45d1f9cc00afa881ff40f8b0fed7315a7b7061f290929d0aa189208d951",
+    "raw/frozen/global.json": "3dd9746a9ae39e0534e6727b7bf8a45fbdcbad9d02fe5bca603f66b2162d26ad",
+    "raw/isolation/report.json": "d66c2a55deac0b07910955838fb4bff8ecb4598c2cb8d17201e414e841d6f25e",
+    "raw/grade/phi4_14b__1701.jsonl": "40e5a823cd7a6155bcc5a0894f28657297a799c9096c0f0f525d35b169157a59",
+    "raw/grade/phi4_14b__1702.jsonl": "7e0196f5ec08865861255e5daa34893ac1812840e385b566fa3348e40573e7dd",
+    "raw/grade/phi4_14b__1703.jsonl": "c68a89ba4321e2611e176459285d46ce2c0bce891ecd41e331be483fbe9580f1",
+    "raw/grade/qwen2.5-coder_7b__1702.jsonl": "db610baa35b9f89a756aa1facefc2159a5d80cfd67c9d827e97ef5d4aa8be7e3",
+    "raw/grade/qwen2.5-coder_7b__1703.jsonl": "a5193aeb16c28d7665633e103755c439ab72f637df9ff4d4427387cf1d7db6a9",
+    "raw/grade/qwen2.5-coder_7b__1701.jsonl": "5184c55426112b5925ee8374f15f6d5272f2421c8221f7ee83e04507150ed199"
+  },
+  "seconds": 2.8440486500039697,
+  "scope": "verification RPC and local hashing; fetch duration recorded separately by fleet operations"
+}

@@ -1,0 +1,612 @@
+{
+  "generation_owners": [
+    {
+      "site": "narval",
+      "run_id": "ssevoh-humaneval-full-generation-20261110T170240Z-narval",
+      "kind": "full-generation",
+      "phase": "submitted",
+      "cells": [
+        {
+          "model": "qwen2.5-coder:7b",
+          "seed": 1701
+        },
+        {
+          "model": "qwen2.5-coder:7b",
+          "seed": 1702
+        },
+        {
+          "model": "qwen2.5-coder:7b",
+          "seed": 1703
+        }
+      ],
+      "created_utc": "2026-11-10T17:02:40.632818+00:00"
+    },
+    {
+      "site": "rorqual",
+      "run_id": "ssevoh-humaneval-full-generation-20261110T170240Z-rorqual",
+      "kind": "full-generation",
+      "phase": "submitted",
+      "cells": [
+        {
+          "model": "phi4:14b",
+          "seed": 1701
+        },
+        {
+          "model": "phi4:14b",
+          "seed": 1702
+        },
+        {
+          "model": "phi4:14b",
+          "seed": 1703
+        }
+      ],
+      "created_utc": "2026-11-10T17:02:40.632828+00:00"
+    }
+  ],
+  "qualification_plan": {
+    "qualified": [
+      {
+        "site": "rorqual",
+        "median_completion_cost": 841.3654168999802,
+        "model_job_seconds": {
+          "qwen2.5-coder:7b": 119,
+          "phi4:14b": 340
+        }
+      },
+      {
+        "site": "narval",
+        "median_completion_cost": 1124.9821577259872,
+        "model_job_seconds": {
+          "qwen2.5-coder:7b": 182,
+          "phi4:14b": 570
+        }
+      }
+    ],
+    "primary": "rorqual",
+    "ownership": [
+      {
+        "site": "rorqual",
+        "model": "phi4:14b",
+        "seed": 1701,
+        "predicted_seconds": 55760.0,
+        "prediction_note": "Smoke extrapolation with2x context allowance, not measured full cost"
+      },
+      {
+        "site": "rorqual",
+        "model": "phi4:14b",
+        "seed": 1702,
+        "predicted_seconds": 55760.0,
+        "prediction_note": "Smoke extrapolation with2x context allowance, not measured full cost"
+      },
+      {
+        "site": "rorqual",
+        "model": "phi4:14b",
+        "seed": 1703,
+        "predicted_seconds": 55760.0,
+        "prediction_note": "Smoke extrapolation with2x context allowance, not measured full cost"
+      },
+      {
+        "site": "narval",
+        "model": "qwen2.5-coder:7b",
+        "seed": 1701,
+        "predicted_seconds": 29848.0,
+        "prediction_note": "Smoke extrapolation with2x context allowance, not measured full cost"
+      },
+      {
+        "site": "narval",
+        "model": "qwen2.5-coder:7b",
+        "seed": 1702,
+        "predicted_seconds": 29848.0,
+        "prediction_note": "Smoke extrapolation with2x context allowance, not measured full cost"
+      },
+      {
+        "site": "narval",
+        "model": "qwen2.5-coder:7b",
+        "seed": 1703,
+        "predicted_seconds": 29848.0,
+        "prediction_note": "Smoke extrapolation with2x context allowance, not measured full cost"
+      }
+    ],
+    "protocol_sha256": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+    "qualification": [
+      {
+        "site": "fir",
+        "trial": 1,
+        "run_id": "ssevoh-humaneval-smoke-v5-t1-20261110T162042Z-fir",
+        "eligible": true,
+        "completion_seconds": 1399.099602,
+        "transfer_seconds": 18.39228597295005,
+        "score_seconds": 1417.49188797295,
+        "gpu_job_seconds": {
+          "qwen2.5-coder:7b": 124,
+          "phi4:14b": 301
+        },
+        "protocol_sha256": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+        "readiness_sha256": "3931db5378a5723d0fbf188c245b7d69f88fdb4c6e4712c05b5759b44095c1a8",
+        "source_snapshot_sha256": "7c07bfbed76564739ca1863a802e660cff8f404f84c03a9ac56c6921d072f4a3",
+        "score_note": "Native completion plus final verified fetch/RPC cost; prior failed fetches remain in operation logs and are not cumulative in this score."
+      },
+      {
+        "site": "narval",
+        "trial": 1,
+        "run_id": "ssevoh-humaneval-smoke-v5-t1-20261110T162042Z-narval",
+        "eligible": true,
+        "completion_seconds": 945.10816,
+        "transfer_seconds": 20.0850629810011,
+        "score_seconds": 965.1932229810011,
+        "gpu_job_seconds": {
+          "qwen2.5-coder:7b": 228,
+          "phi4:14b": 392
+        },
+        "protocol_sha256": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+        "readiness_sha256": "3931db5378a5723d0fbf188c245b7d69f88fdb4c6e4712c05b5759b44095c1a8",
+        "source_snapshot_sha256": "425639791fe39f815c7210c91b6936cb3de66536412fd8599acc5ba12dd1373f",
+        "score_note": "Native completion plus final verified fetch/RPC cost; prior failed fetches remain in operation logs and are not cumulative in this score."
+      },
+      {
+        "site": "narval",
+        "trial": 2,
+        "run_id": "ssevoh-humaneval-smoke-v5-t2-20261110T163921Z-narval",
+        "eligible": true,
+        "completion_seconds": 1107.743743,
+        "transfer_seconds": 17.23841472598724,
+        "score_seconds": 1124.9821577259872,
+        "gpu_job_seconds": {
+          "qwen2.5-coder:7b": 157,
+          "phi4:14b": 570
+        },
+        "protocol_sha256": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+        "readiness_sha256": "3931db5378a5723d0fbf188c245b7d69f88fdb4c6e4712c05b5759b44095c1a8",
+        "source_snapshot_sha256": "d22e81bf8f305df00b95e2e1197444fb2c48d96e51d2851107c00b605b225542",
+        "score_note": "Native completion plus final verified fetch/RPC cost; prior failed fetches remain in operation logs and are not cumulative in this score."
+      },
+      {
+        "site": "narval",
+        "trial": 3,
+        "run_id": "ssevoh-humaneval-smoke-v5-t3-20261110T163938Z-narval",
+        "eligible": true,
+        "completion_seconds": 1140.649736,
+        "transfer_seconds": 82.20849242794793,
+        "score_seconds": 1222.858228427948,
+        "gpu_job_seconds": {
+          "qwen2.5-coder:7b": 182,
+          "phi4:14b": 604
+        },
+        "protocol_sha256": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+        "readiness_sha256": "3931db5378a5723d0fbf188c245b7d69f88fdb4c6e4712c05b5759b44095c1a8",
+        "source_snapshot_sha256": "699b11c93182ce8dfb130ee65a47c26cf11a24edc443393dc9068b804ac47a0c",
+        "score_note": "Native completion plus final verified fetch/RPC cost; prior failed fetches remain in operation logs and are not cumulative in this score."
+      },
+      {
+        "site": "rorqual",
+        "trial": 1,
+        "run_id": "ssevoh-humaneval-smoke-v5-t1-20261110T162042Z-rorqual",
+        "eligible": true,
+        "completion_seconds": 741.096185,
+        "transfer_seconds": 31.400137738033663,
+        "score_seconds": 772.4963227380337,
+        "gpu_job_seconds": {
+          "qwen2.5-coder:7b": 107,
+          "phi4:14b": 340
+        },
+        "protocol_sha256": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+        "readiness_sha256": "3931db5378a5723d0fbf188c245b7d69f88fdb4c6e4712c05b5759b44095c1a8",
+        "source_snapshot_sha256": "80e0855b806cde071d7ffc0e86c2a2cb7d244f0a4ddf9d4baa1c4f0c0c040bbd",
+        "score_note": "Native completion plus final verified fetch/RPC cost; prior failed fetches remain in operation logs and are not cumulative in this score."
+      },
+      {
+        "site": "rorqual",
+        "trial": 2,
+        "run_id": "ssevoh-humaneval-smoke-v5-t2-20261110T163359Z-rorqual",
+        "eligible": true,
+        "completion_seconds": 839.677005,
+        "transfer_seconds": 32.67661571595818,
+        "score_seconds": 872.3536207159582,
+        "gpu_job_seconds": {
+          "qwen2.5-coder:7b": 122,
+          "phi4:14b": 333
+        },
+        "protocol_sha256": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+        "readiness_sha256": "3931db5378a5723d0fbf188c245b7d69f88fdb4c6e4712c05b5759b44095c1a8",
+        "source_snapshot_sha256": "9503db19f731ea284ef432d3f0364e08dc9591e12008c13ae7927c4b1140b0fe",
+        "score_note": "Native completion plus final verified fetch/RPC cost; prior failed fetches remain in operation logs and are not cumulative in this score."
+      },
+      {
+        "site": "rorqual",
+        "trial": 3,
+        "run_id": "ssevoh-humaneval-smoke-v5-t3-20261110T163419Z-rorqual",
+        "eligible": true,
+        "completion_seconds": 821.645928,
+        "transfer_seconds": 19.719488899980206,
+        "score_seconds": 841.3654168999802,
+        "gpu_job_seconds": {
+          "qwen2.5-coder:7b": 119,
+          "phi4:14b": 376
+        },
+        "protocol_sha256": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+        "readiness_sha256": "3931db5378a5723d0fbf188c245b7d69f88fdb4c6e4712c05b5759b44095c1a8",
+        "source_snapshot_sha256": "b94e644c2947dbce83bc433b0968f3a19d50b9c8b1f446a1a598e22214300d17",
+        "score_note": "Native completion plus final verified fetch/RPC cost; prior failed fetches remain in operation logs and are not cumulative in this score."
+      }
+    ]
+  },
+  "release": {
+    "protocol_sha256": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+    "readiness_sha256": "bca9fe1caadbd5796f392d0064811b9fb97d79e6e0b344367a8165fea3b48de9",
+    "verified_sources": {
+      "integrations/harness2/adapter/ssevoh_harness2/__init__.py": "d5139d069f8027ab81f4146c763c223ecb94e58135fc76e757ed3462508d09b3",
+      "integrations/harness2/adapter/ssevoh_harness2/authority.py": "8a5d4d0506cb5394edf0334244b4fa22d6eb1e85b92e7efbdb96d39d28c99ec6",
+      "integrations/harness2/adapter/ssevoh_harness2/bridge.py": "cd7c3ddf4ae914aabec1fc1710e3b50dd68f90eb32718d996b009a0c8b340134",
+      "integrations/harness2/adapter/ssevoh_harness2/sandbox.py": "8d9f0a11e2b31e4e1a70055b779e11f061d1c6a47e499f01fdd169e73b90bca2",
+      "integrations/harness2/adapter/ssevoh_harness2/models.py": "7180c2620ed586c835ad64dfe1eb3656dde61fdaa4f1b3905b9f6d9960fe813c",
+      "integrations/harness2/tests/test_sandboxed_evidence.py": "51ecc31a67375d82c397a8cd517b172aaccb666d9840d83874aef55c88905586",
+      "integrations/harness2/tests/test_workers.py": "f67a0ffefbb16f6442aaff25e5bb3a61ea4eb331953c2f5d6604ea20d8c12b90",
+      "integrations/harness2/tests/test_toolrepair.py": "de67eb188e29b1b47830b49b5f277dc97ed3d288cddfe7a663ed9d2ee1d244f1",
+      "integrations/harness2/tests/test_integration.py": "08ceb8efc20e22c17b4cd13a410b54d064279016c74ddc27abe9a3995142c5dc",
+      "integrations/harness2/formal/check.py": "16e45fc49e5cc7b398ac0cbe79d3221e9c6deae0f169a61729ac5a0b39aaf64e",
+      "integrations/harness2/formal/Publication.cfg": "d3fb0a6c950749f604e4818c7991cd5272f89182d079f366c34f88a63a3266b8",
+      "integrations/harness2/formal/contracts.md": "1b50a1803fd7a1c4dc71c2e5c8a5221a226a96b2e515ba05020227b56a220796",
+      "integrations/harness2/formal/Publication.tla": "eebf4419ddd21a74d077eaa0cbf51904b3c9d0189c8bedb91552b814cd5c8d79",
+      "integrations/harness2/scripts/package_runtime.py": "5a699dbdf68a4feff44a548b47665fda9639e5ae8e2ee32b298402dfff7ed417",
+      "integrations/harness2/scripts/verify.py": "e96f8e0cf2526e67351edf59140078511d8a48dcee641da6a508415def8c8a57",
+      "integrations/harness2/scripts/checkout.py": "ee63cef0d64b6572c96df1ba0721f53abaa5705ebc78f54be8e6a0880602251d",
+      "integrations/harness2/upstream-pin.json": "326633a4d92870ea556e68f869865d1d232263d2f03ec8c3aa5833731578a813",
+      "integrations/harness2/upstream-runtime.json": "99109d754f5d2b0ebda877eb05675994109942dd568cf29df785fcacb3de7815",
+      "integrations/harness2/upstream-runtime.tar.gz": "60415f65f4b7a7b67abdc6bc4e4945eb99d61b0efe9421232da81d5c8b7bda8b",
+      "experiments/scripts/harness2_analyze.py": "1a9a068ce856460413ba10179c9c50d23c7130e03678e5f1dd9e0fa7991957aa",
+      "experiments/scripts/harness2_support.py": "f5e34c1f6a1d0148460565baf7248f20e3127c4a13493d350edf073fdfb6315c",
+      "experiments/scripts/harness2_preflight.py": "16aa082978e22da7ed167860f62fce31b6b6d6096af34d08a29bc6c3f75c5804",
+      "experiments/scripts/harness2_resume.py": "4667298d0ffb4e306b595f9199afa2c3d589d6a62d1479efa9feb296bac8c5df",
+      "experiments/scripts/harness2_pilot_resume.py": "c84560843527ead071b7befe3c7cf05f9b52f6dcd2cb9a504dfe25ff73878abb",
+      "experiments/scripts/harness2_pilot_analyze.py": "7d4cb9abceda8973429e1646f37db9f18e5a4ad8a3724002bea5f5155a44c256",
+      "experiments/scripts/harness2_models.py": "cfcdbac3e78c047b77f3351d9d39fd1da5206ec4d1c915604db14e9e672792fa",
+      "experiments/scripts/harness2_sandbox_probe.py": "e5be028e34f0d0173d723af84da8b50c5db0b90b3bee03d3274aea66a5080504",
+      "experiments/scripts/harness2_deterministic.py": "c8b78d3aac05f2571f5111d58722af0d1f7acb63aa0706e9b78d497f93704eee",
+      "experiments/scripts/humaneval_freeze.py": "327612ce544580fd475e86cbbf5256ab85668a257f28b82e87e24550c1587ea9",
+      "experiments/scripts/humaneval_adapter.py": "b15f94a6e0d944ea0b3451d2d3a8d9cd753186bc66da8660916c4eea0d49d534",
+      "experiments/scripts/humaneval_eval_inside.py": "ae73ec6f312093f585ba2d8db067dad697688041edea5c332be3cd67a08c002f",
+      "experiments/scripts/humaneval_prepare.py": "51b2921a1695ab5ad539fbc9468266f2b23745b62bf011df18147eca3d7146e4",
+      "experiments/scripts/humaneval_development.py": "1a1d274686b46c1d20b488afa4112a29cf4f17e8bc44ba41d169624fc984f43a",
+      "experiments/scripts/humaneval_grade.py": "638ebc0fafa09bba0d67c42f5ef8ac1ca43f311f7832201b2fcdd818b268b2d4",
+      "experiments/scripts/humaneval_proposer.py": "1be25aff9f1f1aba003cc13ca27569b849e33503131403f56cbb2f563a9d32ff",
+      "experiments/scripts/humaneval_analyze.py": "ebf86ef609f57dc825c655a69e83e58ddfdaaa5af448bdc8e38707f11a2eda0e",
+      "experiments/scripts/humaneval_generate.py": "c3df7f5b07163e59906339ac4e3a407915f453d6f707313db9f885624ec6f954",
+      "experiments/scripts/humaneval_sandbox.py": "26e1f6aca1670c073ba175ba2912b863224d6e5feeb052683d1d707f3452a853",
+      "experiments/scripts/test_humaneval_support.py": "4af50c6fdb7dfd19f93298cf28c309e4854fccdc27b36892764f065322ce16a8",
+      "experiments/humaneval/public-v0.1.10.jsonl": "2daaf2edc5a3dc6a68316a89800b61af7d534bca5f6230a5e6b6773411576c0a",
+      "experiments/humaneval/dataset-manifest.json": "2f9ac72e8bb8018dbdd74dfabfdb24dbecede48bb1b8c3997614bb4607b9046b",
+      "experiments/humaneval/protocol.json": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+      "experiments/humaneval/vendor/manifest.json": "a5b162fc8c05c5d8bf1a9ec3e1f8eac5751e6aef76cdfdc1935d13973c82ddf1",
+      "hpc/config/profiles/humaneval-smoke.json": "90154fce8da831217de2b861c51fc69cc0545409175c6e6169654a93e684438d",
+      "hpc/config/profiles/humaneval-full.json": "295dfebbf302d59683c50716feff5c7e09641855b507dea11b03f3dd1d87b15d",
+      "hpc/config/profiles/humaneval-evaluate.json": "b36fdda3b3f442a505493211fcdd3c486b19cb407eef29f3aa46023e6eb59894",
+      "experiments/scripts/runtime.py": "3f57696a11f57eacb75b95c081f07fa14e654c7fc55b904c62e7d7417227bebb",
+      "experiments/scripts/gpu_bootstrap.py": "fbc4ad01a12e17c15a73c7038a8e1068d925f5892ad60825136a8433484b9740",
+      "hpc/slurm/hooks/all.sh": "0eb9d79c0675ae3611d1b0667bd250820bd6b5a764a00d18afba6c091d0d4020",
+      "hpc/scripts/manifest.py": "3ab5c4510dee68f2febb2a5e2825d0e5559ac26438cf7b9dc318bb9b8bef4b20",
+      "hpc/scripts/fleet.py": "896460c27de8d39a08f2061ae69d0dcaa5129b2ded93b6ac65d992dcd6500f09",
+      "hpc/scripts/submit_humaneval_preflight.py": "b9a1becf428cafafbe6960b196c131cab1783d4a2cfed590f541926c0c2ab6ef",
+      "hpc/scripts/humaneval_campaign.py": "5d3f2df1c17e4e7539ee62d79cc3b911715741da10907756f12c5fd558a990d4",
+      "hpc/tests/test_manifest.py": "a2b8bc104ebf9567baea058bf57e71711d83f54a7ab788ebb0d4228f5b22c0f4",
+      "hpc/tests/test_gpu_bootstrap.py": "a2c1f08b5ef80c8ab70e14b784998b335fffc38a22e5f44133a49dd99295b83a",
+      "hpc/tests/test_campaign.py": "97c318e11a1e191980df1041cf11d3af1acc97bea24d86fdb42277e0d9133a02",
+      "hpc/tests/test_humaneval_campaign.py": "3efb3ca75adbf97a60c6c824ac4d9f0d280390e9a39fce3298d1ade2cb50d619",
+      "hpc/tests/test_live.py": "ef003f5aa63bf1c78035705fcc6f6dd3d5f688db185ffdeeac6bfb9c8eac7334",
+      "hpc/tests/test_monitoring.py": "7e85d2f874abcbbb27f3f04e9b5d9f577ccfc108cd4586cf076f1960e1b9ad88",
+      "hpc/config/profiles/harness2.json": "553d0f4d5c1c568f2f25fce1eb1d1f5b486d467f99c408a1d2aacd7dfc2e1489",
+      "hpc/config/profiles/harness2-pilot-v2.json": "53056ae7b943e101d37695b9a6e72b3750e52f1c632c5b62d93a78c9ce268d00",
+      "hpc/config/profiles/toolrepair-v1.json": "d42295d4811f0e40b604374f17443e768f2765003e2c7f117476180a1c51084e",
+      "experiments/scripts/toolrepair_families.py": "d48bb830d96d12452b65d76ef8a88ce83bb4580d98b21892993580074e17b0c1",
+      "experiments/scripts/toolrepair_adapter.py": "72973c0e6c9810cd9d7479b7090378e9b0d392fc01add0b4eae087da06400d02",
+      "experiments/scripts/toolrepair_analyze.py": "19fa3f10f864bf6dbb9f6dbd0f895c229c4bff7588889dc8f15faf5e9f30a8d9",
+      "experiments/scripts/toolrepair_models.py": "e868c350c7b36202c099405e7d0f7f3756866fc568d1b8fd2213f3fe5966b337",
+      "experiments/scripts/test_toolrepair_families.py": "a54332811cab1ef035df2ffacec8c0798fea57e8a18da674250c35ce2a883abe",
+      "experiments/scripts/test_toolrepair_analysis.py": "d2e13d7a865b362828abbcb01aab9b4585baee8b99ad7c2e4906d1729f7760dd",
+      "experiments/toolrepair/protocol.json": "643e495204f87802495ac03c42c175ad9ee0483e1897344b8c37c95d989744a7",
+      "hpc/scripts/hpclib.py": "f6d207df105514c694089e70e8b7e79820e11ac011aa93b6bfe346e7aca9bbf0",
+      "hpc/scripts/harness2_campaign.py": "a8f6c23626962ae0aa718083d7973271e77248f1c22b346417ac076badfec175",
+      "hpc/scripts/campaign.py": "ff86c599d2397ccb9a0848c4c5aa0f85db39c27ebf538a0d0feb690e34eca93c",
+      "hpc/scripts/campaignctl.py": "3f6439e3d83355c5093feaaf94aff7cd628c92f6608b80ab2430073b032c2242",
+      "hpc/scripts/measure.py": "8161b11a384066f42c0c4fc592518480532c4cf379ebe1f4ab19fe43e9e69222",
+      "hpc/config/models.json": "dd7120c2d2b20a437efc7cceda59d8d3e4ff38747a51fbb1a7226e849412130a",
+      "hpc/config/models.frozen.json": "e5425066e7da544bb5958dbc3fde72009acc4d2b1b14f2a1160c9a9364df24c4"
+    },
+    "actual_sources": {
+      "integrations/harness2/adapter/ssevoh_harness2/__init__.py": "d5139d069f8027ab81f4146c763c223ecb94e58135fc76e757ed3462508d09b3",
+      "integrations/harness2/adapter/ssevoh_harness2/authority.py": "8a5d4d0506cb5394edf0334244b4fa22d6eb1e85b92e7efbdb96d39d28c99ec6",
+      "integrations/harness2/adapter/ssevoh_harness2/bridge.py": "cd7c3ddf4ae914aabec1fc1710e3b50dd68f90eb32718d996b009a0c8b340134",
+      "integrations/harness2/adapter/ssevoh_harness2/sandbox.py": "8d9f0a11e2b31e4e1a70055b779e11f061d1c6a47e499f01fdd169e73b90bca2",
+      "integrations/harness2/adapter/ssevoh_harness2/models.py": "7180c2620ed586c835ad64dfe1eb3656dde61fdaa4f1b3905b9f6d9960fe813c",
+      "integrations/harness2/tests/test_sandboxed_evidence.py": "51ecc31a67375d82c397a8cd517b172aaccb666d9840d83874aef55c88905586",
+      "integrations/harness2/tests/test_workers.py": "f67a0ffefbb16f6442aaff25e5bb3a61ea4eb331953c2f5d6604ea20d8c12b90",
+      "integrations/harness2/tests/test_toolrepair.py": "de67eb188e29b1b47830b49b5f277dc97ed3d288cddfe7a663ed9d2ee1d244f1",
+      "integrations/harness2/tests/test_integration.py": "08ceb8efc20e22c17b4cd13a410b54d064279016c74ddc27abe9a3995142c5dc",
+      "integrations/harness2/formal/check.py": "16e45fc49e5cc7b398ac0cbe79d3221e9c6deae0f169a61729ac5a0b39aaf64e",
+      "integrations/harness2/formal/Publication.cfg": "d3fb0a6c950749f604e4818c7991cd5272f89182d079f366c34f88a63a3266b8",
+      "integrations/harness2/formal/contracts.md": "1b50a1803fd7a1c4dc71c2e5c8a5221a226a96b2e515ba05020227b56a220796",
+      "integrations/harness2/formal/Publication.tla": "eebf4419ddd21a74d077eaa0cbf51904b3c9d0189c8bedb91552b814cd5c8d79",
+      "integrations/harness2/scripts/package_runtime.py": "5a699dbdf68a4feff44a548b47665fda9639e5ae8e2ee32b298402dfff7ed417",
+      "integrations/harness2/scripts/verify.py": "e96f8e0cf2526e67351edf59140078511d8a48dcee641da6a508415def8c8a57",
+      "integrations/harness2/scripts/checkout.py": "ee63cef0d64b6572c96df1ba0721f53abaa5705ebc78f54be8e6a0880602251d",
+      "integrations/harness2/upstream-pin.json": "326633a4d92870ea556e68f869865d1d232263d2f03ec8c3aa5833731578a813",
+      "integrations/harness2/upstream-runtime.json": "99109d754f5d2b0ebda877eb05675994109942dd568cf29df785fcacb3de7815",
+      "integrations/harness2/upstream-runtime.tar.gz": "60415f65f4b7a7b67abdc6bc4e4945eb99d61b0efe9421232da81d5c8b7bda8b",
+      "experiments/scripts/harness2_analyze.py": "1a9a068ce856460413ba10179c9c50d23c7130e03678e5f1dd9e0fa7991957aa",
+      "experiments/scripts/harness2_support.py": "f5e34c1f6a1d0148460565baf7248f20e3127c4a13493d350edf073fdfb6315c",
+      "experiments/scripts/harness2_preflight.py": "16aa082978e22da7ed167860f62fce31b6b6d6096af34d08a29bc6c3f75c5804",
+      "experiments/scripts/harness2_resume.py": "4667298d0ffb4e306b595f9199afa2c3d589d6a62d1479efa9feb296bac8c5df",
+      "experiments/scripts/harness2_pilot_resume.py": "c84560843527ead071b7befe3c7cf05f9b52f6dcd2cb9a504dfe25ff73878abb",
+      "experiments/scripts/harness2_pilot_analyze.py": "7d4cb9abceda8973429e1646f37db9f18e5a4ad8a3724002bea5f5155a44c256",
+      "experiments/scripts/harness2_models.py": "cfcdbac3e78c047b77f3351d9d39fd1da5206ec4d1c915604db14e9e672792fa",
+      "experiments/scripts/harness2_sandbox_probe.py": "e5be028e34f0d0173d723af84da8b50c5db0b90b3bee03d3274aea66a5080504",
+      "experiments/scripts/harness2_deterministic.py": "c8b78d3aac05f2571f5111d58722af0d1f7acb63aa0706e9b78d497f93704eee",
+      "experiments/scripts/humaneval_freeze.py": "327612ce544580fd475e86cbbf5256ab85668a257f28b82e87e24550c1587ea9",
+      "experiments/scripts/humaneval_adapter.py": "b15f94a6e0d944ea0b3451d2d3a8d9cd753186bc66da8660916c4eea0d49d534",
+      "experiments/scripts/humaneval_eval_inside.py": "ae73ec6f312093f585ba2d8db067dad697688041edea5c332be3cd67a08c002f",
+      "experiments/scripts/humaneval_prepare.py": "51b2921a1695ab5ad539fbc9468266f2b23745b62bf011df18147eca3d7146e4",
+      "experiments/scripts/humaneval_development.py": "1a1d274686b46c1d20b488afa4112a29cf4f17e8bc44ba41d169624fc984f43a",
+      "experiments/scripts/humaneval_grade.py": "638ebc0fafa09bba0d67c42f5ef8ac1ca43f311f7832201b2fcdd818b268b2d4",
+      "experiments/scripts/humaneval_proposer.py": "1be25aff9f1f1aba003cc13ca27569b849e33503131403f56cbb2f563a9d32ff",
+      "experiments/scripts/humaneval_analyze.py": "ebf86ef609f57dc825c655a69e83e58ddfdaaa5af448bdc8e38707f11a2eda0e",
+      "experiments/scripts/humaneval_generate.py": "c3df7f5b07163e59906339ac4e3a407915f453d6f707313db9f885624ec6f954",
+      "experiments/scripts/humaneval_sandbox.py": "26e1f6aca1670c073ba175ba2912b863224d6e5feeb052683d1d707f3452a853",
+      "experiments/scripts/test_humaneval_support.py": "4af50c6fdb7dfd19f93298cf28c309e4854fccdc27b36892764f065322ce16a8",
+      "experiments/humaneval/public-v0.1.10.jsonl": "2daaf2edc5a3dc6a68316a89800b61af7d534bca5f6230a5e6b6773411576c0a",
+      "experiments/humaneval/dataset-manifest.json": "2f9ac72e8bb8018dbdd74dfabfdb24dbecede48bb1b8c3997614bb4607b9046b",
+      "experiments/humaneval/protocol.json": "b5407759bf926f1d2202284774588fbb2c45a56c6e95752fba0184f7efd636a4",
+      "experiments/humaneval/vendor/manifest.json": "a5b162fc8c05c5d8bf1a9ec3e1f8eac5751e6aef76cdfdc1935d13973c82ddf1",
+      "hpc/config/profiles/humaneval-smoke.json": "90154fce8da831217de2b861c51fc69cc0545409175c6e6169654a93e684438d",
+      "hpc/config/profiles/humaneval-full.json": "295dfebbf302d59683c50716feff5c7e09641855b507dea11b03f3dd1d87b15d",
+      "hpc/config/profiles/humaneval-evaluate.json": "b36fdda3b3f442a505493211fcdd3c486b19cb407eef29f3aa46023e6eb59894",
+      "experiments/scripts/runtime.py": "3f57696a11f57eacb75b95c081f07fa14e654c7fc55b904c62e7d7417227bebb",
+      "experiments/scripts/gpu_bootstrap.py": "fbc4ad01a12e17c15a73c7038a8e1068d925f5892ad60825136a8433484b9740",
+      "hpc/slurm/hooks/all.sh": "0eb9d79c0675ae3611d1b0667bd250820bd6b5a764a00d18afba6c091d0d4020",
+      "hpc/scripts/manifest.py": "3ab5c4510dee68f2febb2a5e2825d0e5559ac26438cf7b9dc318bb9b8bef4b20",
+      "hpc/scripts/fleet.py": "896460c27de8d39a08f2061ae69d0dcaa5129b2ded93b6ac65d992dcd6500f09",
+      "hpc/scripts/submit_humaneval_preflight.py": "b9a1becf428cafafbe6960b196c131cab1783d4a2cfed590f541926c0c2ab6ef",
+      "hpc/scripts/humaneval_campaign.py": "5d3f2df1c17e4e7539ee62d79cc3b911715741da10907756f12c5fd558a990d4",
+      "hpc/tests/test_manifest.py": "a2b8bc104ebf9567baea058bf57e71711d83f54a7ab788ebb0d4228f5b22c0f4",
+      "hpc/tests/test_gpu_bootstrap.py": "a2c1f08b5ef80c8ab70e14b784998b335fffc38a22e5f44133a49dd99295b83a",
+      "hpc/tests/test_campaign.py": "97c318e11a1e191980df1041cf11d3af1acc97bea24d86fdb42277e0d9133a02",
+      "hpc/tests/test_humaneval_campaign.py": "3efb3ca75adbf97a60c6c824ac4d9f0d280390e9a39fce3298d1ade2cb50d619",
+      "hpc/tests/test_live.py": "ef003f5aa63bf1c78035705fcc6f6dd3d5f688db185ffdeeac6bfb9c8eac7334",
+      "hpc/tests/test_monitoring.py": "7e85d2f874abcbbb27f3f04e9b5d9f577ccfc108cd4586cf076f1960e1b9ad88",
+      "hpc/config/profiles/harness2.json": "553d0f4d5c1c568f2f25fce1eb1d1f5b486d467f99c408a1d2aacd7dfc2e1489",
+      "hpc/config/profiles/harness2-pilot-v2.json": "53056ae7b943e101d37695b9a6e72b3750e52f1c632c5b62d93a78c9ce268d00",
+      "hpc/config/profiles/toolrepair-v1.json": "d42295d4811f0e40b604374f17443e768f2765003e2c7f117476180a1c51084e",
+      "experiments/scripts/toolrepair_families.py": "d48bb830d96d12452b65d76ef8a88ce83bb4580d98b21892993580074e17b0c1",
+      "experiments/scripts/toolrepair_adapter.py": "72973c0e6c9810cd9d7479b7090378e9b0d392fc01add0b4eae087da06400d02",
+      "experiments/scripts/toolrepair_analyze.py": "19fa3f10f864bf6dbb9f6dbd0f895c229c4bff7588889dc8f15faf5e9f30a8d9",
+      "experiments/scripts/toolrepair_models.py": "e868c350c7b36202c099405e7d0f7f3756866fc568d1b8fd2213f3fe5966b337",
+      "experiments/scripts/test_toolrepair_families.py": "a54332811cab1ef035df2ffacec8c0798fea57e8a18da674250c35ce2a883abe",
+      "experiments/scripts/test_toolrepair_analysis.py": "d2e13d7a865b362828abbcb01aab9b4585baee8b99ad7c2e4906d1729f7760dd",
+      "experiments/toolrepair/protocol.json": "643e495204f87802495ac03c42c175ad9ee0483e1897344b8c37c95d989744a7",
+      "hpc/scripts/hpclib.py": "f6d207df105514c694089e70e8b7e79820e11ac011aa93b6bfe346e7aca9bbf0",
+      "hpc/scripts/harness2_campaign.py": "a8f6c23626962ae0aa718083d7973271e77248f1c22b346417ac076badfec175",
+      "hpc/scripts/campaign.py": "ff86c599d2397ccb9a0848c4c5aa0f85db39c27ebf538a0d0feb690e34eca93c",
+      "hpc/scripts/campaignctl.py": "3f6439e3d83355c5093feaaf94aff7cd628c92f6608b80ab2430073b032c2242",
+      "hpc/scripts/measure.py": "8161b11a384066f42c0c4fc592518480532c4cf379ebe1f4ab19fe43e9e69222",
+      "hpc/config/models.json": "dd7120c2d2b20a437efc7cceda59d8d3e4ff38747a51fbb1a7226e849412130a",
+      "hpc/config/models.frozen.json": "e5425066e7da544bb5958dbc3fde72009acc4d2b1b14f2a1160c9a9364df24c4"
+    },
+    "coordinator_sha256": "5d3f2df1c17e4e7539ee62d79cc3b911715741da10907756f12c5fd558a990d4",
+    "fleet_sha256": "896460c27de8d39a08f2061ae69d0dcaa5129b2ded93b6ac65d992dcd6500f09",
+    "submitter_sha256": "b9a1becf428cafafbe6960b196c131cab1783d4a2cfed590f541926c0c2ab6ef"
+  },
+  "recovered": {
+    "ssevoh-humaneval-full-generation-20261110T170240Z-rorqual": {
+      "site": "rorqual",
+      "cells": [
+        {
+          "model": "phi4:14b",
+          "seed": 1701
+        },
+        {
+          "model": "phi4:14b",
+          "seed": 1702
+        }
+      ],
+      "failed_cells": [
+        {
+          "model": "phi4:14b",
+          "seed": 1703
+        }
+      ],
+      "folder": "hpc/fetched/rorqual/ssevoh-humaneval-full-generation-20261110T170240Z-rorqual/recovered/llm",
+      "archive": "rorqual:/scratch/mbabaei/ssevoh/archive/ssevoh-humaneval-full-generation-20261110T170240Z-rorqual.tar.gz",
+      "archive_sha256": "a016a835163e037f85bbc686ab80cb4198416b1cac20358ccf1abc00a9d427d8",
+      "reason": "Seed 1703 coding streams failed with OSError [Errno 122] (scratch file-count quota) after seeds 1701/1702 completed; Rorqual collect failed for the same reason. Each run directory was later packed into a verified archive and removed (hpc/scripts/archive_runs.sh). Completed streams were extracted from the archive; seed 1703 is re-generated from scratch.",
+      "files": {
+        "selected-phi4:14b-1701.freeze.json": "6437749df2b06aa4eb738f626483bf4e1f34143a98bb63e9022557351fb1d2d7",
+        "selected-phi4:14b-1701.jsonl": "12edb11069523fb9f4804bd78621a2dad32925756f21b4d8d37564ce46dfadd2",
+        "selected-phi4:14b-1702.freeze.json": "3314110b96a345d07f269d5ad0fdd39fd63b38177c1201615ae175aa9bc755fb",
+        "selected-phi4:14b-1702.jsonl": "32a96dbb128fc156645dba8eb10d9c544405fd8769c789e79d123ab7dc5bb002"
+      },
+      "utc": "2026-11-11T15:57:47.715318+00:00"
+    },
+    "ssevoh-humaneval-full-generation-20261110T170240Z-narval": {
+      "site": "narval",
+      "cells": [
+        {
+          "model": "qwen2.5-coder:7b",
+          "seed": 1701
+        },
+        {
+          "model": "qwen2.5-coder:7b",
+          "seed": 1702
+        }
+      ],
+      "failed_cells": [
+        {
+          "model": "qwen2.5-coder:7b",
+          "seed": 1703
+        }
+      ],
+      "folder": "hpc/fetched/narval/ssevoh-humaneval-full-generation-20261110T170240Z-narval/recovered/llm",
+      "archive": "narval:/project/def-mbabaei/mbabaei/ssevoh-archive/ssevoh-humaneval-full-generation-20261110T170240Z-narval.tar.gz",
+      "archive_sha256": "13c8906c7aac0316f7a6cedae829a1e6b8ceb84df56e6fdf30dcf5d44cdb740d",
+      "reason": "Seed 1703 coding streams failed with OSError [Errno 122] (scratch file-count quota) after seeds 1701/1702 completed; Rorqual collect failed for the same reason. Each run directory was later packed into a verified archive and removed (hpc/scripts/archive_runs.sh). Completed streams were extracted from the archive; seed 1703 is re-generated from scratch.",
+      "files": {
+        "selected-qwen2.5-coder:7b-1701.freeze.json": "1342ece48eb172b380c6afd3e0ddf47b04f5f6a8b1e49f589ad277e9ea7c24cc",
+        "selected-qwen2.5-coder:7b-1701.jsonl": "1cf5f002f87ad0e319a32401f8ae4f6f71445c600dc4e6d069d9970e5de00dbb",
+        "selected-qwen2.5-coder:7b-1702.freeze.json": "4b19873e821312ec97510c3a51292acde4ab87eaf41a48efe5b682335c3a26f7",
+        "selected-qwen2.5-coder:7b-1702.jsonl": "c92c53b80f789b7456a6abd4a11aea59025d0f5033c8b54c2481cfa2620321ba"
+      },
+      "utc": "2026-11-11T15:57:47.716890+00:00"
+    }
+  },
+  "supplements": [
+    {
+      "site": "rorqual",
+      "run_id": "ssevoh-humaneval-full-generation-supplement-20261111T155807Z-rorqual",
+      "kind": "full-generation-supplement",
+      "phase": "submitted",
+      "cells": [
+        {
+          "model": "phi4:14b",
+          "seed": 1703
+        }
+      ],
+      "created_utc": "2026-11-11T15:58:07.698379+00:00",
+      "supersedes": "ssevoh-humaneval-full-generation-20261110T170240Z-rorqual"
+    },
+    {
+      "site": "narval",
+      "run_id": "ssevoh-humaneval-full-generation-supplement-20261111T160022Z-narval",
+      "kind": "full-generation-supplement",
+      "phase": "submitted",
+      "cells": [
+        {
+          "model": "qwen2.5-coder:7b",
+          "seed": 1703
+        }
+      ],
+      "created_utc": "2026-11-11T16:00:22.736708+00:00",
+      "supersedes": "ssevoh-humaneval-full-generation-20261110T170240Z-narval"
+    }
+  ],
+  "stream_sources": [
+    {
+      "run_id": "ssevoh-humaneval-full-generation-20261110T170240Z-narval",
+      "folder": "hpc/fetched/narval/ssevoh-humaneval-full-generation-20261110T170240Z-narval/recovered/llm",
+      "cells": [
+        [
+          "qwen2.5-coder:7b",
+          1701
+        ],
+        [
+          "qwen2.5-coder:7b",
+          1702
+        ]
+      ]
+    },
+    {
+      "run_id": "ssevoh-humaneval-full-generation-20261110T170240Z-rorqual",
+      "folder": "hpc/fetched/rorqual/ssevoh-humaneval-full-generation-20261110T170240Z-rorqual/recovered/llm",
+      "cells": [
+        [
+          "phi4:14b",
+          1701
+        ],
+        [
+          "phi4:14b",
+          1702
+        ]
+      ]
+    },
+    {
+      "run_id": "ssevoh-humaneval-full-generation-supplement-20261111T155807Z-rorqual",
+      "folder": "hpc/fetched/rorqual/ssevoh-humaneval-full-generation-supplement-20261111T155807Z-rorqual/results/raw/llm",
+      "cells": [
+        [
+          "phi4:14b",
+          1703
+        ]
+      ]
+    },
+    {
+      "run_id": "ssevoh-humaneval-full-generation-supplement-20261111T160022Z-narval",
+      "folder": "hpc/fetched/narval/ssevoh-humaneval-full-generation-supplement-20261111T160022Z-narval/results/raw/llm",
+      "cells": [
+        [
+          "qwen2.5-coder:7b",
+          1703
+        ]
+      ]
+    }
+  ],
+  "transfers": {
+    "ssevoh-humaneval-full-generation-supplement-20261111T155807Z-rorqual": {
+      "verified": true,
+      "files": {
+        "run_manifest.json": "fca79795f608295132c46cab4ded12754117e777b9bae3bb996270a11f39ef7a",
+        "summary.md": "d75d450ff09b072f2028b4b318f6eb84a38fb9b107efc9b7317f887d17db5aae",
+        "pipeline/job_endings.csv": "e7c9dea695ec51971a51178d68c3c908a913d11d89c2eec4766423e672190dcf",
+        "pipeline/steps_all_attempts.csv": "66698aa9295e095a1b037decf58b50970ba7c1ff922d322b5e986f03eb6defb5",
+        "pipeline/jobs.csv": "5a68e9c6ef7752edf08f040f88bdb1d57e80330e9274cfb78084de6c917b8567",
+        "pipeline/completeness.csv": "50aaa411400821914a54e0c831e63be28991a47600d505024e617f11b0b84811",
+        "pipeline/gpu_usage.csv": "338c0adc63782992cf25f07e5a812afaf904289af6b170fbf07b619ad6bfcc33",
+        "pipeline/steps_latest.csv": "66698aa9295e095a1b037decf58b50970ba7c1ff922d322b5e986f03eb6defb5",
+        "raw/llm/selected-phi4:14b-1703.stream.tar.gz": "2cc0e262ee25ee18f3effc5a74cad62c7ac393bef6c59657d9890d7ecdfb0714",
+        "raw/llm/selected-phi4:14b-1703.jsonl": "aa249b368649ee0ffed6c8c91b844cdc3ae3f380643184ea248a4ee0279a590d",
+        "raw/llm/selected-phi4:14b-1703.freeze.json": "19af1c8c8936e5284842cdbbe746e10caa71560e56124f47f58522d6bbc43c1c",
+        "raw/controls/records.jsonl": "9fe0659b1e42671c34645c93e8fd1af2e979d3f87e50b120be4be13dc8bc4c67",
+        "raw/development/phi4_14b__1703.json": "4a83849af5e8b7cd7370283679e1d140c1a2450372816af9dbc52253a1569653",
+        "raw/development/phi4_14b__1703/fixture/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/phi4_14b__1703/fixture/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/phi4_14b__1703/fixture/base/systemprompt.md": "0761baef2298cf680504b803c65df74b2cb686e9be86d8415598ac1a0ce1e310",
+        "raw/development/phi4_14b__1703/fixture/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/phi4_14b__1703/context/task.md": "c7c531cb9086a317a082334b62c74699ed09820dcf63255c8c37ca3bb50790d0",
+        "raw/development/phi4_14b__1703/context/harness/systemprompt.md": "0761baef2298cf680504b803c65df74b2cb686e9be86d8415598ac1a0ce1e310",
+        "raw/development/phi4_14b__1703/context/harness/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/phi4_14b__1703/context/harness/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/phi4_14b__1703/context/harness/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/phi4_14b__1703/model-workspaces/ad44bea8329946f019d4bf02/LongTermMEMORY.md": "712872c011303d40480ea80f455b8a50a1a12c41cce94b8c951ed356d140af89",
+        "raw/development/phi4_14b__1703/model-workspaces/ad44bea8329946f019d4bf02/systemprompt.md": "0761baef2298cf680504b803c65df74b2cb686e9be86d8415598ac1a0ce1e310",
+        "raw/development/phi4_14b__1703/model-workspaces/ad44bea8329946f019d4bf02/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/phi4_14b__1703/model-workspaces/ad44bea8329946f019d4bf02/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/setup/gpu_rg31702.txt": "cee303b67df85a5bfc233d910a199e1162cfca193f32b585843ce821b8b4f004",
+        "raw/setup/models.lock.json": "5bbc5b78af13d5325fc0aef137fa2c4275e55768387b20bc63d97f339b4e1bda",
+        "raw/isolation/report.json": "93bc5f4ae164938cfa461cfbd19f8b95562e52ba7063f424b579ab4c964ba6e0"
+      },
+      "seconds": 20.164467049995437,
+      "scope": "verification RPC and local hashing; fetch duration recorded separately by fleet operations"
+    },
+    "ssevoh-humaneval-full-generation-supplement-20261111T160022Z-narval": {
+      "verified": true,
+      "files": {
+        "summary.md": "3fd4195d62f11626e99dd19d898740af22682090cb1eb3bf2463104a07bb5166",
+        "run_manifest.json": "3a50f34ed8b66e36fcaefd35f1350a9ef2fcca5ab91e0748b5a08cbc0f500c66",
+        "raw/development/qwen2.5-coder_7b__1703.json": "d6f7caee00c00488b442c82a7c997731a21936ef255a1e13fc86a20981e22365",
+        "raw/development/qwen2.5-coder_7b__1703/fixture/base/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/qwen2.5-coder_7b__1703/fixture/base/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/qwen2.5-coder_7b__1703/fixture/base/systemprompt.md": "0761baef2298cf680504b803c65df74b2cb686e9be86d8415598ac1a0ce1e310",
+        "raw/development/qwen2.5-coder_7b__1703/fixture/base/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/qwen2.5-coder_7b__1703/model-workspaces/7d4a3a506a7f56043d6e35ed/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/qwen2.5-coder_7b__1703/model-workspaces/7d4a3a506a7f56043d6e35ed/LongTermMEMORY.md": "5f76e972e6542ebc4ae56257b62e5ce448514cc0f2a519cf1066b2419cf20224",
+        "raw/development/qwen2.5-coder_7b__1703/model-workspaces/7d4a3a506a7f56043d6e35ed/systemprompt.md": "0761baef2298cf680504b803c65df74b2cb686e9be86d8415598ac1a0ce1e310",
+        "raw/development/qwen2.5-coder_7b__1703/model-workspaces/7d4a3a506a7f56043d6e35ed/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/qwen2.5-coder_7b__1703/context/task.md": "c7c531cb9086a317a082334b62c74699ed09820dcf63255c8c37ca3bb50790d0",
+        "raw/development/qwen2.5-coder_7b__1703/context/harness/LongTermMEMORY.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/qwen2.5-coder_7b__1703/context/harness/systemprompt.md": "0761baef2298cf680504b803c65df74b2cb686e9be86d8415598ac1a0ce1e310",
+        "raw/development/qwen2.5-coder_7b__1703/context/harness/guardrails.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/development/qwen2.5-coder_7b__1703/context/harness/tool_descriptions/tool_guidance.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "raw/setup/gpu_ng10606.txt": "e650eff8383376a4b184a07b1a2d249ffd315168135b020b5c89c22281a5f0b0",
+        "raw/setup/models.lock.json": "5dac27330f6f9e05b45fa40d63b34e2a5391610824cf1580fecd030aa05269ff",
+        "raw/controls/records.jsonl": "40becae792a21e2855793a964e1acc6c064b579ec8a94ddb2a7bc188f88754fa",
+        "raw/isolation/report.json": "0b69ee2f91e9ec97600a87df1068334a617a58be964ee4fcb8ce628a78582cc9",
+        "raw/llm/selected-qwen2.5-coder:7b-1703.freeze.json": "4eeb598a681d384ff5a51231e20d6e72ad4d2bdffff06a04940f296f262ed95b",
+        "raw/llm/selected-qwen2.5-coder:7b-1703.stream.tar.gz": "50c9fa935a2ad285c93ecd143e7166f6e5b6d9415bd7ee38e582190bfb718da3",
+        "raw/llm/selected-qwen2.5-coder:7b-1703.jsonl": "29846f545925319dd096f9551c4cbe0d2cd52537217298d8c994848035d48ca1",
+        "pipeline/job_endings.csv": "d17b0aeb574f4bc37ab652098d8375b27c1bfbbd6a55eb3d98877dddc10a9f80",
+        "pipeline/completeness.csv": "ab82e04adf3ec4b678ebbc8d86a02514b4c43640e18146c9291e5dc8eea69738",
+        "pipeline/jobs.csv": "2143988860352dce5fd548e7dbe8b58e75b9fbc51540cb4283dbfaed5d914dec",
+        "pipeline/steps_latest.csv": "24f0c9563e0714df312ddf2af99d791e6230fd0fd3359f08b41d74b45fbd567a",
+        "pipeline/steps_all_attempts.csv": "24f0c9563e0714df312ddf2af99d791e6230fd0fd3359f08b41d74b45fbd567a",
+        "pipeline/gpu_usage.csv": "7887fb9492bfce6c3a0f36d8c1e85818b41382b96643f1570fdddad9166c385e"
+      },
+      "seconds": 15.132379273010883,
+      "scope": "verification RPC and local hashing; fetch duration recorded separately by fleet operations"
+    }
+  }
+}

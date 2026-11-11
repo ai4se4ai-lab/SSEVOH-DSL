@@ -184,7 +184,7 @@ def _style(ax, title):
 def cost_figure():
     rows = list(csv.DictReader(open(RES / "full-campaign" / "analysis" / "scaling.csv")))
     shapes = [("star", SERIES[0], "o"), ("random", SERIES[1], "s"), ("chain", SERIES[2], "^")]
-    fig, (a, b, c) = plt.subplots(1, 3, figsize=(7.16, 2.05), gridspec_kw={"wspace": 0.38})
+    fig, (a, b, c) = plt.subplots(1, 3, figsize=(7.16, 1.85), gridspec_kw={"wspace": 0.38})
     for shape, color, marker in shapes:
         pts = sorted((int(r["components"]), float(r["median_seconds"])) for r in rows
                      if r["shape"] == shape and r["contenders"] == "1")
@@ -228,7 +228,71 @@ def cost_figure():
     plt.close(fig)
 
 
+# ---------------------------------------------------------------- Figure: ToolRepair-12
+# Natural unsafe proposals executed under the corrected label (experiments/toolrepair/DEVIATIONS.md, D1;
+# computed by experiments/toolrepair/relabel_corrected.py over the per-stream archives).
+CORRECTED_NATURAL = {"original": 298, "catalog": 0, "sandboxed_evidence": 0}
+ARMS = [("original", "A1 original"), ("catalog", "A2 catalog"), ("sandboxed_evidence", "A3 sandboxed evidence")]
+
+
+def toolrepair_figure():
+    s = json.load(open(RES / "toolrepair-v1" / "analysis" / "summary.json"))
+    fig, (a, b, c) = plt.subplots(1, 3, figsize=(7.16, 1.75), gridspec_kw={"wspace": 0.55, "width_ratios": [1.45, 1, 0.9]})
+
+    models = [("phi4:14b", "Phi-4\n14B"), ("qwen2.5-coder:7b", "Qwen2.5\n7B"), ("qwen3-coder:30b", "Qwen3\n30B"),
+              ("devstral:24b", "Devstral\n24B"), ("gpt-oss:20b", "GPT-OSS\n20B")]
+    w = 0.26
+    for j, (arm, label) in enumerate(ARMS):
+        vals = []
+        for m, _ in models:
+            k, n = s["per_model_success"][f"{m}|{arm}"].split("/")
+            vals.append(int(k) / int(n))
+        a.bar([i + (j - 1) * w for i in range(len(models))], vals, width=w - 0.03, color=SERIES[j], label=label)
+    a.annotate("no\noutput", (4, 0), xytext=(0, 3), textcoords="offset points", ha="center",
+               va="bottom", fontsize=6.0, color=MUTED)
+    a.set_xticks(range(len(models))); a.set_xticklabels([l for _, l in models], fontsize=5.8, linespacing=0.95)
+    a.set_ylim(0, 0.5); a.set_ylabel("Strict task success")
+    _style(a, "(a) Success by model and arm")
+    a.grid(axis="x", visible=False)
+
+    fams = sorted(s["H3_noninferiority_A3_vs_A1"]["per_family"].items(), key=lambda kv: kv[1])
+    ys = range(len(fams))
+    b.axvline(0, color=MUTED, lw=0.6)
+    b.axvline(-0.10, color=BAD, lw=1, ls=(0, (3, 2)))
+    b.scatter([v for _, v in fams], ys, s=14, color=SERIES[2], edgecolor="white", linewidth=0.6, zorder=3)
+    est, (lo, hi) = s["H3_noninferiority_A3_vs_A1"]["estimate"], s["H3_noninferiority_A3_vs_A1"]["ci95"]
+    yp = len(fams) + 0.8
+    b.plot([lo, hi], [yp, yp], color=INK, lw=2, solid_capstyle="round")
+    b.scatter([est], [yp], s=22, color=INK, edgecolor="white", linewidth=0.6, zorder=3)
+    b.set_yticks(list(ys) + [yp])
+    b.set_yticklabels([f.replace("_", " ") for f, _ in fams] + ["pooled (95% CI)"], fontsize=5.6)
+    b.text(-0.105, len(fams) - 0.1, "margin", color=BAD, fontsize=6, ha="right", va="center")
+    b.set_xlim(-0.3, 0.12); b.set_ylim(-0.8, yp + 0.8)
+    b.set_xlabel("Success difference A3 $-$ A1")
+    _style(b, "(b) Non-inferiority by family")
+    b.grid(axis="y", visible=False)
+
+    h2 = s["H2_safety"]
+    for j, (arm, label) in enumerate(ARMS):
+        nat, inj, n = CORRECTED_NATURAL[arm], h2[arm]["injected_executed"], h2[arm]["injected_n"]
+        y = 2 - j
+        c.barh(y + 0.18, nat, height=0.32, color=SERIES[j])
+        c.barh(y - 0.18, inj, height=0.32, color=SERIES[j], hatch="////", edgecolor="white", linewidth=0)
+        c.text(nat + 6, y + 0.18, f"{nat} natural", va="center", fontsize=6.2, color=INK)
+        c.text(inj + 6, y - 0.18, f"{inj}/{n} injected", va="center", fontsize=6.2, color=INK)
+    c.set_yticks([2, 1, 0]); c.set_yticklabels(["A1", "A2", "A3"])
+    c.set_xlim(0, 470); c.set_xlabel("Violating proposals executed")
+    _style(c, "(c) Executed contract violations")
+    c.grid(axis="y", visible=False)
+
+    fig.legend(*a.get_legend_handles_labels(), loc="upper center", bbox_to_anchor=(0.5, 1.1), ncol=3,
+               frameon=False, handlelength=1.2, columnspacing=1.6)
+    fig.savefig(OUT / "toolrepair.pdf", bbox_inches="tight", pad_inches=0.02)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     enforcement_figure()
     cost_figure()
-    print("wrote", OUT / "enforcement.pdf", OUT / "cost.pdf")
+    toolrepair_figure()
+    print("wrote", OUT / "enforcement.pdf", OUT / "cost.pdf", OUT / "toolrepair.pdf")
