@@ -17,6 +17,6 @@ test_success_records_fresh_snapshot (test_monitoring.MonitoringTests.test_succes
 test_timeout_preserves_prior_success_and_exposes_partial_refresh (test_monitoring.MonitoringTests.test_timeout_preserves_prior_success_and_exposes_partial_refresh) ... ok
 
 ----------------------------------------------------------------------
-Ran 14 tests in 0.015s
+Ran 14 tests in 0.022s
 
 OK

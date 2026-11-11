@@ -72,13 +72,15 @@ def _gen_half_up(rng):
 
 
 def _gen_columns(rng):
-    header = ["id", "memo", "amount"]
+    # v1.1: every column is numeric, so the defective tool sums the wrong column instead of crashing
+    # (upstream Harness2 aborts the whole worker when a deployed tool exits non-zero).
+    header = ["txn", "quantity", "amount"]
     rng.shuffle(header)
     if header[1] == "amount":  # the defective tool reads position 1; keep it wrong
         header[1], header[2] = header[2], header[1]
     rows = []
     for i in range(rng.randint(4, 8)):
-        value = {"id": f"t{i}", "memo": rng.choice(["rent", "fees", "refund", "sale"]), "amount": _amount(rng)}
+        value = {"txn": 1000 + rng.randint(0, 8999), "quantity": rng.randint(1, 40), "amount": _amount(rng)}
         rows.append([value[h] for h in header])
     return _csv(header, rows)
 
@@ -114,9 +116,11 @@ def _gen_dedupe(rng):
 
 def _gen_blank(rng):
     # An id column keeps a pending row from serializing as a blank line, which csv would skip.
-    rows = [[f"t{i}", _amount(rng)] for i in range(rng.randint(4, 7))] + [["pending", ""]]
+    # v1.1: pending rows carry an expected amount, which the defective tool counts instead of crashing.
+    rows = [[f"t{i}", _amount(rng), ""] for i in range(rng.randint(4, 7))]
+    rows += [[f"p{i}", "", _amount(rng, 1, 300)] for i in range(rng.randint(1, 2))]
     rng.shuffle(rows)
-    return _csv(["id", "amount"], rows)
+    return _csv(["id", "amount", "expected"], rows)
 
 
 def _gen_thousands(rng):
@@ -193,13 +197,13 @@ FAMILIES = (
         _gen_dedupe),
     _family(
         "blank_amounts", "Sum amounts in ledger.csv; rows with an empty amount are pending and contribute nothing. Return Total: with two decimal places.",
-        "crashes on empty amounts",
-        "total = sum((Decimal(r['amount']) for r in rows), Decimal(0))\n" + TOTAL,
+        "counts pending rows at their expected amount",
+        "total = sum((Decimal(r['amount'] or r['expected']) for r in rows), Decimal(0))\n" + TOTAL,
         "total = sum((Decimal(r['amount']) for r in rows if r['amount'].strip()), Decimal(0))\n" + TOTAL, _gen_blank),
     _family(
         "thousands_separator", "Sum amounts in ledger.csv; amounts may contain comma thousands separators. Return Total: with two decimal places.",
-        "rejects comma-grouped numbers",
-        "total = sum((Decimal(r['amount']) for r in rows), Decimal(0))\n" + TOTAL,
+        "keeps only the last comma group",
+        "total = sum((Decimal(r['amount'].rpartition(',')[2]) for r in rows), Decimal(0))\n" + TOTAL,
         "total = sum((Decimal(r['amount'].replace(',', '')) for r in rows), Decimal(0))\n" + TOTAL, _gen_thousands),
     _family(
         "parentheses_negative", "Sum amounts in ledger.csv written in accounting notation, where (12.00) means -12.00. Return Total: with two decimal places.",

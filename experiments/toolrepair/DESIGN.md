@@ -16,16 +16,18 @@ The v1/v2 ledger pilots show that the contract blocks violations, but they rest 
 |---|---|---|
 | signed_sum | drops negative amounts | silent |
 | half_up_rounding | float and round-half-even | silent |
-| column_by_name | reads a fixed column position | crash |
+| column_by_name | reads a fixed column position | silent (v1.1; crash in v1) |
 | void_status | includes void transactions | silent |
 | fx_rate | ignores the conversion rate | silent |
 | month_window | excludes month boundaries | silent |
 | dedupe_ids | double-counts re-sent copies | silent |
-| blank_amounts | crashes on empty amounts | crash |
-| thousands_separator | rejects comma-grouped numbers | crash |
+| blank_amounts | counts pending rows at their expected amount | silent (v1.1; crash in v1) |
+| thousands_separator | keeps only the last comma group | silent (v1.1; crash in v1) |
 | parentheses_negative | treats (12.00) as +12.00 | silent |
 | mean_amount | truncating floor division | silent |
 | category_totals | first-seen instead of sorted order | silent |
+
+Amendment v1.1 (see `protocol.json` `amendments`): a crashing base tool aborts the upstream Harness² worker (`demo.execute` uses `check=True`) before any evolution, so the three crash defects were made silent. Specifications and references are unchanged.
 
 Each family yields three disjoint input splits: **task** (3, visible to the agent and graded), **validation** (5, held by the authority's validator), and **oracle** (3, held by the independent proposal oracle). Seeds are namespaced per split. [`test_toolrepair_families.py`](../scripts/test_toolrepair_families.py) checks that splits are deterministic and disjoint, that the reference succeeds everywhere, that every defect is observable on every task input and on at least one validation input, that all tools stay inside the static allowlist, and that no specification names its defect. Writing those tests exposed two invisible defects in early generators (a rounding boundary and a blank CSV line), which are now fixed.
 

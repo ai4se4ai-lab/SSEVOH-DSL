@@ -35,6 +35,13 @@ class FamilyContracts(unittest.TestCase):
                 f.name + ": validators cannot detect the defect",
             )
 
+    def test_defective_tool_exits_cleanly_on_every_split(self):
+        # v1.1: a crashing deployed tool aborts the upstream Harness2 worker, so defects must be silent.
+        for f in tr.FAMILIES:
+            for split in tr.SPLITS:
+                for text in tr.inputs(f, split):
+                    self.assertEqual(tr.run_trusted(f.buggy, text)[0], 0, f"{f.name}: {split}")
+
     def test_tools_stay_inside_the_allowlisted_program_domain(self):
         for f in tr.FAMILIES:
             for source in (f.buggy, f.reference):

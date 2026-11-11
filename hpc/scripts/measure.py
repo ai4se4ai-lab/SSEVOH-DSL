@@ -98,7 +98,10 @@ def measure(root):
                         "startup_seconds": max(0, float(job[5]) - record["seconds"]),
                         "job_elapsed_seconds": float(job[5]),
                         "generation_seconds": record["seconds"],
-                        "tokens_per_second": record["tokens_per_second"],
+                        # ToolRepair stream records carry total tokens and seconds instead of a rate.
+                        "tokens_per_second": record["tokens_per_second"]
+                        if "tokens_per_second" in record
+                        else record.get("tokens", 0) / max(record["seconds"], 1e-9),
                         "transfer_seconds": transfer.get("seconds", 0),
                         "source": "fetched Slurm accounting + raw generation + completed audit + resume check + transfer hashes",
                     }

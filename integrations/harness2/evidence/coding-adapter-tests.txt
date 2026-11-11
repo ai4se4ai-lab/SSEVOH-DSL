@@ -11,6 +11,6 @@ test_identity_and_task_completeness_fail_closed (test_humaneval_support.Projecti
 test_isolation_command_has_no_host_root_or_home_bind (test_humaneval_support.ProjectionTests.test_isolation_command_has_no_host_root_or_home_bind) ... ok
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.799s
+Ran 9 tests in 0.877s
 
 OK

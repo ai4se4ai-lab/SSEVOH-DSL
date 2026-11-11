@@ -1,6 +1,6 @@
 {
   "schema": "ssevoh-harness2-readiness-v1",
-  "utc": "2026-11-10T21:16:39.109784+00:00",
+  "utc": "2026-11-11T03:27:22.137457+00:00",
   "passed": true,
   "core_current": true,
   "upstream_commit": "6868817518876de8fd170c6a8354daca273b6191",
@@ -68,18 +68,18 @@
     "hpc/config/profiles/harness2.json": "553d0f4d5c1c568f2f25fce1eb1d1f5b486d467f99c408a1d2aacd7dfc2e1489",
     "hpc/config/profiles/harness2-pilot-v2.json": "53056ae7b943e101d37695b9a6e72b3750e52f1c632c5b62d93a78c9ce268d00",
     "hpc/config/profiles/toolrepair-v1.json": "d42295d4811f0e40b604374f17443e768f2765003e2c7f117476180a1c51084e",
-    "experiments/scripts/toolrepair_families.py": "86ff629dc5cf888242d03cdf27dc366146fd667544ed67074029b36fe40be838",
+    "experiments/scripts/toolrepair_families.py": "d48bb830d96d12452b65d76ef8a88ce83bb4580d98b21892993580074e17b0c1",
     "experiments/scripts/toolrepair_adapter.py": "72973c0e6c9810cd9d7479b7090378e9b0d392fc01add0b4eae087da06400d02",
     "experiments/scripts/toolrepair_analyze.py": "19fa3f10f864bf6dbb9f6dbd0f895c229c4bff7588889dc8f15faf5e9f30a8d9",
-    "experiments/scripts/toolrepair_models.py": "fade9fd1e59e779e5c0d0e7d72ffe7556c9d193e9727eac25df9071a3e26f0dc",
-    "experiments/scripts/test_toolrepair_families.py": "b936b53eab39e0fc68731acc4f720e61446d97006bd85f67b2b1ca81e239cb3c",
+    "experiments/scripts/toolrepair_models.py": "e868c350c7b36202c099405e7d0f7f3756866fc568d1b8fd2213f3fe5966b337",
+    "experiments/scripts/test_toolrepair_families.py": "a54332811cab1ef035df2ffacec8c0798fea57e8a18da674250c35ce2a883abe",
     "experiments/scripts/test_toolrepair_analysis.py": "d2e13d7a865b362828abbcb01aab9b4585baee8b99ad7c2e4906d1729f7760dd",
-    "experiments/toolrepair/protocol.json": "497144dc8a646df97d5b2e3729a5547169f5e2ee088b544c3cf73f26c90b43ae",
+    "experiments/toolrepair/protocol.json": "643e495204f87802495ac03c42c175ad9ee0483e1897344b8c37c95d989744a7",
     "hpc/scripts/hpclib.py": "f6d207df105514c694089e70e8b7e79820e11ac011aa93b6bfe346e7aca9bbf0",
     "hpc/scripts/harness2_campaign.py": "a8f6c23626962ae0aa718083d7973271e77248f1c22b346417ac076badfec175",
     "hpc/scripts/campaign.py": "ff86c599d2397ccb9a0848c4c5aa0f85db39c27ebf538a0d0feb690e34eca93c",
     "hpc/scripts/campaignctl.py": "3f6439e3d83355c5093feaaf94aff7cd628c92f6608b80ab2430073b032c2242",
-    "hpc/scripts/measure.py": "f855b62c0070dc68cbbd70095533847948d29fb074f1f9d9f0b03339f962abd4",
+    "hpc/scripts/measure.py": "8161b11a384066f42c0c4fc592518480532c4cf379ebe1f4ab19fe43e9e69222",
     "hpc/config/models.json": "dd7120c2d2b20a437efc7cceda59d8d3e4ff38747a51fbb1a7226e849412130a",
     "hpc/config/models.frozen.json": "e5425066e7da544bb5958dbc3fde72009acc4d2b1b14f2a1160c9a9364df24c4"
   },
@@ -99,7 +99,7 @@
       "returncode": 0,
       "tests": 70,
       "log": "integrations/harness2/evidence/upstream-tests.txt",
-      "sha256": "d91133167b1673aa07e3f7ebcddd283e6e7df06bc6274064bb94cb4cf200b0e1"
+      "sha256": "3ec3561320b941c6136b3b8e85f0550340a20b44bd4f0b7fb6a3d0230c68acb7"
     },
     {
       "name": "integration-tests",
@@ -115,7 +115,7 @@
       "returncode": 0,
       "tests": 51,
       "log": "integrations/harness2/evidence/integration-tests.txt",
-      "sha256": "cd4179c587b21359bf8fecc191e9ebc681622ff30757480d39e8a1b374aaaa2d"
+      "sha256": "1c838f007c6c55bcb5b2b862cd20e9c973f0dd629a66e3c86fcc65cc2bccedfc"
     },
     {
       "name": "coding-adapter-tests",
@@ -133,7 +133,7 @@
       "returncode": 0,
       "tests": 9,
       "log": "integrations/harness2/evidence/coding-adapter-tests.txt",
-      "sha256": "f3a8051b3829ad66f60e13d0c0f85f2e82c5f9a2025cbe55ce0ccdeb02cfa9e8"
+      "sha256": "1f581147c61fae152cab724af327063c5ab03c8de31fba9da58080630ed0c1a8"
     },
     {
       "name": "toolrepair-tests",
@@ -149,9 +149,9 @@
         "-v"
       ],
       "returncode": 0,
-      "tests": 9,
+      "tests": 10,
       "log": "integrations/harness2/evidence/toolrepair-tests.txt",
-      "sha256": "59facdb812bd071f03c269cbae6e9cdba5fb325c41384dedf2d0cd37814b89a7"
+      "sha256": "ffb6e9b9c9c407c1d299ff538aa32aa9fbff4de707223e51e47dd0d9cdfdd0e1"
     },
     {
       "name": "hpc-pipeline-tests",
@@ -167,7 +167,7 @@
       "returncode": 0,
       "tests": 14,
       "log": "integrations/harness2/evidence/hpc-pipeline-tests.txt",
-      "sha256": "1fb542edb91e16e49bb1a20836ac0112ef0b4af6e6ae278bd66b24b936375a0a"
+      "sha256": "8691894d131b79d21767921f735070a86a5bfa864eea56bdcfe1ed36adbf3a92"
     },
     {
       "name": "publication-model",
@@ -180,7 +180,7 @@
       "returncode": 0,
       "tests": null,
       "log": "integrations/harness2/evidence/publication-model.txt",
-      "sha256": "7d5013d59519858098d70c939a1d8f7520197208416fd9a0b5f6ddc17ba41024"
+      "sha256": "ae4c6f408bc84a2c35244ed2fbdbb01a26bef9f42de5d41a75198c3ae72bd0c1"
     }
   ],
   "scope": "actual unmodified upstream recursion/probe/selection/library with catalog-restricted ledger or data-only non-executable coding adapter and data-only proposers; no generated-code grading isolation is verified here",

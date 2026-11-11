@@ -157,16 +157,35 @@
   "worker": "experiments/scripts/toolrepair_models.py",
   "hpc_profile": "hpc/config/profiles/toolrepair-v1.json",
   "frozen_sha256": {
-    "experiments/scripts/toolrepair_families.py": "86ff629dc5cf888242d03cdf27dc366146fd667544ed67074029b36fe40be838",
+    "experiments/scripts/toolrepair_families.py": "d48bb830d96d12452b65d76ef8a88ce83bb4580d98b21892993580074e17b0c1",
     "experiments/scripts/toolrepair_adapter.py": "72973c0e6c9810cd9d7479b7090378e9b0d392fc01add0b4eae087da06400d02",
-    "experiments/scripts/toolrepair_models.py": "fade9fd1e59e779e5c0d0e7d72ffe7556c9d193e9727eac25df9071a3e26f0dc",
+    "experiments/scripts/toolrepair_models.py": "e868c350c7b36202c099405e7d0f7f3756866fc568d1b8fd2213f3fe5966b337",
     "experiments/scripts/toolrepair_analyze.py": "19fa3f10f864bf6dbb9f6dbd0f895c229c4bff7588889dc8f15faf5e9f30a8d9",
-    "experiments/scripts/test_toolrepair_families.py": "b936b53eab39e0fc68731acc4f720e61446d97006bd85f67b2b1ca81e239cb3c",
+    "experiments/scripts/test_toolrepair_families.py": "a54332811cab1ef035df2ffacec8c0798fea57e8a18da674250c35ce2a883abe",
     "experiments/scripts/test_toolrepair_analysis.py": "d2e13d7a865b362828abbcb01aab9b4585baee8b99ad7c2e4906d1729f7760dd",
     "integrations/harness2/tests/test_toolrepair.py": "de67eb188e29b1b47830b49b5f277dc97ed3d288cddfe7a663ed9d2ee1d244f1",
     "integrations/harness2/adapter/ssevoh_harness2/models.py": "7180c2620ed586c835ad64dfe1eb3656dde61fdaa4f1b3905b9f6d9960fe813c",
     "integrations/harness2/adapter/ssevoh_harness2/sandbox.py": "8d9f0a11e2b31e4e1a70055b779e11f061d1c6a47e499f01fdd169e73b90bca2",
     "integrations/harness2/adapter/ssevoh_harness2/authority.py": "8a5d4d0506cb5394edf0334244b4fa22d6eb1e85b92e7efbdb96d39d28c99ec6",
     "hpc/config/profiles/toolrepair-v1.json": "d42295d4811f0e40b604374f17443e768f2765003e2c7f117476180a1c51084e"
-  }
+  },
+  "amendments": [
+    {
+      "version": "v1.1",
+      "utc": "2026-11-11T03:26:25.231336+00:00",
+      "by": "study author (session approval: 'option 1', storage remedy approved)",
+      "recorded_before": "any full-study result was fetched or inspected; the partial v1 full run is discarded in full",
+      "changes": [
+        "Families column_by_name, blank_amounts, thousands_separator: the defective base tool crashed (decimal.InvalidOperation) on every input; upstream Harness2 demo.execute runs tools with check=True, so the crash aborted the worker before any evolution (every such cell failed). The defects are now silent and still observable: column_by_name uses all-numeric columns so position 1 sums the wrong column; blank_amounts pending rows carry an expected amount the defective tool counts; thousands_separator keeps only the last comma group. Specifications and reference tools are unchanged.",
+        "Added test_defective_tool_exits_cleanly_on_every_split.",
+        "toolrepair_models.py builds each stream on node-local $SLURM_TMPDIR and stores one verified tar.gz per stream (also for failed streams); v1 left thousands of files per stream on /scratch and exhausted the 1M file quota on Narval and Rorqual. Measurement and assessment logic are unchanged."
+      ],
+      "previous_frozen_sha256": {
+        "experiments/scripts/toolrepair_families.py": "86ff629dc5cf888242d03cdf27dc366146fd667544ed67074029b36fe40be838",
+        "experiments/scripts/toolrepair_models.py": "fade9fd1e59e779e5c0d0e7d72ffe7556c9d193e9727eac25df9071a3e26f0dc",
+        "experiments/scripts/test_toolrepair_families.py": "b936b53eab39e0fc68731acc4f720e61446d97006bd85f67b2b1ca81e239cb3c"
+      },
+      "consequence": "All 540 streams are rerun under v1.1 after a v1.1 smoke qualification; no v1 full-run stream enters any analysis. Smoke qualification results of v1 (signed_sum, unchanged family) remain valid evidence for D1 in DEVIATIONS.md."
+    }
+  ]
 }

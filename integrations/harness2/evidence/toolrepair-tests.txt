@@ -2,6 +2,7 @@ test_clopper_pearson_upper_bound (test_toolrepair_analysis.AnalysisContracts.tes
 test_designed_effects_are_detected (test_toolrepair_analysis.AnalysisContracts.test_designed_effects_are_detected) ... ok
 test_null_and_harm_are_not_called_supported (test_toolrepair_analysis.AnalysisContracts.test_null_and_harm_are_not_called_supported) ... ok
 test_defect_is_observable_on_every_task_and_some_validation_input (test_toolrepair_families.FamilyContracts.test_defect_is_observable_on_every_task_and_some_validation_input) ... ok
+test_defective_tool_exits_cleanly_on_every_split (test_toolrepair_families.FamilyContracts.test_defective_tool_exits_cleanly_on_every_split) ... ok
 test_reference_succeeds_on_every_split (test_toolrepair_families.FamilyContracts.test_reference_succeeds_on_every_split) ... ok
 test_specification_never_names_the_defect (test_toolrepair_families.FamilyContracts.test_specification_never_names_the_defect) ... ok
 test_splits_are_deterministic_and_disjoint (test_toolrepair_families.FamilyContracts.test_splits_are_deterministic_and_disjoint) ... ok
@@ -9,6 +10,6 @@ test_tools_stay_inside_the_allowlisted_program_domain (test_toolrepair_families.
 test_twelve_uniquely_named_families (test_toolrepair_families.FamilyContracts.test_twelve_uniquely_named_families) ... ok
 
 ----------------------------------------------------------------------
-Ran 9 tests in 4.230s
+Ran 10 tests in 7.314s
 
 OK

@@ -57,89 +57,89 @@ test_sandboxed_evidence_admits_the_repair_and_later_tasks_succeed (test_toolrepa
 ok
 test_analysis_keeps_authority_only_lifecycle_denominators_separate (test_workers.WorkerContracts.test_analysis_keeps_authority_only_lifecycle_denominators_separate) ... ok
 test_complete_worker_reads_seeded_outputs_and_preserves_incomplete_attempts (test_workers.WorkerContracts.test_complete_worker_reads_seeded_outputs_and_preserves_incomplete_attempts) ... {"records": 2, "conditions": 2, "full_unsafe": 0}
-CALL_START seed=0 call=0 role=executor.frozen-ledger-1.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0000.json
+CALL_START seed=0 call=0 role=executor.frozen-ledger-1.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0000.json
 CALL_END seed=0 call=0 role=executor.frozen-ledger-1.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=1 role=executor.frozen-ledger-1.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0001.json
+CALL_START seed=0 call=1 role=executor.frozen-ledger-1.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0001.json
 CALL_END seed=0 call=1 role=executor.frozen-ledger-1.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=2 role=executor.frozen-ledger-2.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0002.json
+CALL_START seed=0 call=2 role=executor.frozen-ledger-2.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0002.json
 CALL_END seed=0 call=2 role=executor.frozen-ledger-2.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=3 role=executor.frozen-ledger-2.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0003.json
+CALL_START seed=0 call=3 role=executor.frozen-ledger-2.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0003.json
 CALL_END seed=0 call=3 role=executor.frozen-ledger-2.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=4 role=executor.demo-oc-agg1-s1701/ledger-1/base1.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0004.json
+CALL_START seed=0 call=4 role=executor.demo-oc-agg1-s1701/ledger-1/base1.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0004.json
 CALL_END seed=0 call=4 role=executor.demo-oc-agg1-s1701/ledger-1/base1.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=5 role=executor.demo-oc-agg1-s1701/ledger-1/base1.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0005.json
+CALL_START seed=0 call=5 role=executor.demo-oc-agg1-s1701/ledger-1/base1.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0005.json
 CALL_END seed=0 call=5 role=executor.demo-oc-agg1-s1701/ledger-1/base1.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=6 role=inv1.a1 raw=/tmp/tmpmszergr8/model-seed-0/raw/0006.json
+CALL_START seed=0 call=6 role=inv1.a1 raw=/tmp/tmp2339wiw4/model-seed-0/raw/0006.json
 CALL_END seed=0 call=6 role=inv1.a1 seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=7 role=dom1.a1 raw=/tmp/tmpmszergr8/model-seed-0/raw/0007.json
+CALL_START seed=0 call=7 role=dom1.a1 raw=/tmp/tmp2339wiw4/model-seed-0/raw/0007.json
 CALL_END seed=0 call=7 role=dom1.a1 seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=8 role=executor.demo-oc-agg1-s1701/ledger-1/inv1.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0008.json
-CALL_END seed=0 call=8 role=executor.demo-oc-agg1-s1701/ledger-1/inv1.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=9 role=executor.demo-oc-agg1-s1701/ledger-1/inv1.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0009.json
-CALL_END seed=0 call=9 role=executor.demo-oc-agg1-s1701/ledger-1/inv1.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=10 role=executor.demo-oc-agg1-s1701/ledger-1/dom1.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0010.json
-CALL_END seed=0 call=10 role=executor.demo-oc-agg1-s1701/ledger-1/dom1.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=11 role=executor.demo-oc-agg1-s1701/ledger-1/dom1.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0011.json
-CALL_END seed=0 call=11 role=executor.demo-oc-agg1-s1701/ledger-1/dom1.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=12 role=agg1.a1 raw=/tmp/tmpmszergr8/model-seed-0/raw/0012.json
+CALL_START seed=0 call=8 role=executor.demo-oc-agg1-s1701/ledger-1/dom1.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0008.json
+CALL_END seed=0 call=8 role=executor.demo-oc-agg1-s1701/ledger-1/dom1.action seconds=0.000 tokens=10 gpu=True
+CALL_START seed=0 call=9 role=executor.demo-oc-agg1-s1701/ledger-1/dom1.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0009.json
+CALL_END seed=0 call=9 role=executor.demo-oc-agg1-s1701/ledger-1/dom1.final seconds=0.000 tokens=10 gpu=True
+CALL_START seed=0 call=10 role=executor.demo-oc-agg1-s1701/ledger-1/inv1.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0010.json
+CALL_END seed=0 call=10 role=executor.demo-oc-agg1-s1701/ledger-1/inv1.action seconds=0.000 tokens=10 gpu=True
+CALL_START seed=0 call=11 role=executor.demo-oc-agg1-s1701/ledger-1/inv1.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0011.json
+CALL_END seed=0 call=11 role=executor.demo-oc-agg1-s1701/ledger-1/inv1.final seconds=0.000 tokens=10 gpu=True
+CALL_START seed=0 call=12 role=agg1.a1 raw=/tmp/tmp2339wiw4/model-seed-0/raw/0012.json
 CALL_END seed=0 call=12 role=agg1.a1 seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=13 role=executor.demo-oc-agg1-s1701/ledger-1/agg1.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0013.json
+CALL_START seed=0 call=13 role=executor.demo-oc-agg1-s1701/ledger-1/agg1.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0013.json
 CALL_END seed=0 call=13 role=executor.demo-oc-agg1-s1701/ledger-1/agg1.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=14 role=executor.demo-oc-agg1-s1701/ledger-1/agg1.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0014.json
+CALL_START seed=0 call=14 role=executor.demo-oc-agg1-s1701/ledger-1/agg1.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0014.json
 CALL_END seed=0 call=14 role=executor.demo-oc-agg1-s1701/ledger-1/agg1.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=15 role=experience.agg1 raw=/tmp/tmpmszergr8/model-seed-0/raw/0015.json
+CALL_START seed=0 call=15 role=experience.agg1 raw=/tmp/tmp2339wiw4/model-seed-0/raw/0015.json
 CALL_END seed=0 call=15 role=experience.agg1 seconds=0.000 tokens=10 gpu=True
   [accounting] 1/2 ok           ledger-1
-CALL_START seed=0 call=16 role=executor.demo-oc-agg1-s1701/ledger-2/base1.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0016.json
+CALL_START seed=0 call=16 role=executor.demo-oc-agg1-s1701/ledger-2/base1.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0016.json
 CALL_END seed=0 call=16 role=executor.demo-oc-agg1-s1701/ledger-2/base1.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=17 role=executor.demo-oc-agg1-s1701/ledger-2/base1.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0017.json
+CALL_START seed=0 call=17 role=executor.demo-oc-agg1-s1701/ledger-2/base1.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0017.json
 CALL_END seed=0 call=17 role=executor.demo-oc-agg1-s1701/ledger-2/base1.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=18 role=inv1.a1 raw=/tmp/tmpmszergr8/model-seed-0/raw/0018.json
+CALL_START seed=0 call=18 role=inv1.a1 raw=/tmp/tmp2339wiw4/model-seed-0/raw/0018.json
 CALL_END seed=0 call=18 role=inv1.a1 seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=19 role=dom1.a1 raw=/tmp/tmpmszergr8/model-seed-0/raw/0019.json
+CALL_START seed=0 call=19 role=dom1.a1 raw=/tmp/tmp2339wiw4/model-seed-0/raw/0019.json
 CALL_END seed=0 call=19 role=dom1.a1 seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=20 role=executor.demo-oc-agg1-s1701/ledger-2/dom1.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0020.json
-CALL_END seed=0 call=20 role=executor.demo-oc-agg1-s1701/ledger-2/dom1.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=21 role=executor.demo-oc-agg1-s1701/ledger-2/dom1.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0021.json
-CALL_END seed=0 call=21 role=executor.demo-oc-agg1-s1701/ledger-2/dom1.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=22 role=executor.demo-oc-agg1-s1701/ledger-2/inv1.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0022.json
-CALL_END seed=0 call=22 role=executor.demo-oc-agg1-s1701/ledger-2/inv1.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=23 role=executor.demo-oc-agg1-s1701/ledger-2/inv1.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0023.json
-CALL_END seed=0 call=23 role=executor.demo-oc-agg1-s1701/ledger-2/inv1.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=24 role=agg1.a1 raw=/tmp/tmpmszergr8/model-seed-0/raw/0024.json
+CALL_START seed=0 call=20 role=executor.demo-oc-agg1-s1701/ledger-2/inv1.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0020.json
+CALL_END seed=0 call=20 role=executor.demo-oc-agg1-s1701/ledger-2/inv1.action seconds=0.000 tokens=10 gpu=True
+CALL_START seed=0 call=21 role=executor.demo-oc-agg1-s1701/ledger-2/inv1.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0021.json
+CALL_END seed=0 call=21 role=executor.demo-oc-agg1-s1701/ledger-2/inv1.final seconds=0.000 tokens=10 gpu=True
+CALL_START seed=0 call=22 role=executor.demo-oc-agg1-s1701/ledger-2/dom1.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0022.json
+CALL_END seed=0 call=22 role=executor.demo-oc-agg1-s1701/ledger-2/dom1.action seconds=0.000 tokens=10 gpu=True
+CALL_START seed=0 call=23 role=executor.demo-oc-agg1-s1701/ledger-2/dom1.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0023.json
+CALL_END seed=0 call=23 role=executor.demo-oc-agg1-s1701/ledger-2/dom1.final seconds=0.000 tokens=10 gpu=True
+CALL_START seed=0 call=24 role=agg1.a1 raw=/tmp/tmp2339wiw4/model-seed-0/raw/0024.json
 CALL_END seed=0 call=24 role=agg1.a1 seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=25 role=executor.demo-oc-agg1-s1701/ledger-2/agg1.action raw=/tmp/tmpmszergr8/model-seed-0/raw/0025.json
+CALL_START seed=0 call=25 role=executor.demo-oc-agg1-s1701/ledger-2/agg1.action raw=/tmp/tmp2339wiw4/model-seed-0/raw/0025.json
 CALL_END seed=0 call=25 role=executor.demo-oc-agg1-s1701/ledger-2/agg1.action seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=26 role=executor.demo-oc-agg1-s1701/ledger-2/agg1.final raw=/tmp/tmpmszergr8/model-seed-0/raw/0026.json
+CALL_START seed=0 call=26 role=executor.demo-oc-agg1-s1701/ledger-2/agg1.final raw=/tmp/tmp2339wiw4/model-seed-0/raw/0026.json
 CALL_END seed=0 call=26 role=executor.demo-oc-agg1-s1701/ledger-2/agg1.final seconds=0.000 tokens=10 gpu=True
-CALL_START seed=0 call=27 role=experience.agg1 raw=/tmp/tmpmszergr8/model-seed-0/raw/0027.json
+CALL_START seed=0 call=27 role=experience.agg1 raw=/tmp/tmp2339wiw4/model-seed-0/raw/0027.json
 CALL_END seed=0 call=27 role=experience.agg1 seconds=0.000 tokens=10 gpu=True
   [accounting] 2/2 ok           ledger-2
 ok
 test_data_only_retry_does_not_inherit_a_rejected_path_marker (test_workers.WorkerContracts.test_data_only_retry_does_not_inherit_a_rejected_path_marker) ... ok
 test_executor_prompts_offer_no_copyable_answer_placeholder (test_workers.WorkerContracts.test_executor_prompts_offer_no_copyable_answer_placeholder) ... ok
 test_larger_context_is_preloaded_before_any_task_prompt (test_workers.WorkerContracts.test_larger_context_is_preloaded_before_any_task_prompt) ... ok
-test_lost_model_server_connection_still_aborts (test_workers.WorkerContracts.test_lost_model_server_connection_still_aborts) ... CALL_START seed=0 call=0 role=executor.frozen-ledger-1.action raw=/tmp/tmpk0mnc5im/model-seed-0/raw/0000.json
+test_lost_model_server_connection_still_aborts (test_workers.WorkerContracts.test_lost_model_server_connection_still_aborts) ... CALL_START seed=0 call=0 role=executor.frozen-ledger-1.action raw=/tmp/tmp5o1pocsl/model-seed-0/raw/0000.json
 CALL_FAILED seed=0 call=0 role=executor.frozen-ledger-1.action: <urlopen error refused>
 ok
-test_model_server_errors_are_recorded_failures_for_every_seed (test_workers.WorkerContracts.test_model_server_errors_are_recorded_failures_for_every_seed) ... CALL_START seed=0 call=0 role=executor.frozen-ledger-1.action raw=/tmp/tmp00yu2rr3/model-seed-0/raw/0000.json
+test_model_server_errors_are_recorded_failures_for_every_seed (test_workers.WorkerContracts.test_model_server_errors_are_recorded_failures_for_every_seed) ... CALL_START seed=0 call=0 role=executor.frozen-ledger-1.action raw=/tmp/tmpvncip7ly/model-seed-0/raw/0000.json
 CALL_FAILED seed=0 call=0 role=executor.frozen-ledger-1.action: HTTP Error 500: Internal Server Error
-CALL_START seed=0 call=1 role=executor.frozen-ledger-2.action raw=/tmp/tmp00yu2rr3/model-seed-0/raw/0001.json
+CALL_START seed=0 call=1 role=executor.frozen-ledger-2.action raw=/tmp/tmpvncip7ly/model-seed-0/raw/0001.json
 CALL_FAILED seed=0 call=1 role=executor.frozen-ledger-2.action: HTTP Error 500: Internal Server Error
-CALL_START seed=0 call=2 role=executor.demo-oc-agg1-s1701/ledger-1/base1.action raw=/tmp/tmp00yu2rr3/model-seed-0/raw/0002.json
+CALL_START seed=0 call=2 role=executor.demo-oc-agg1-s1701/ledger-1/base1.action raw=/tmp/tmpvncip7ly/model-seed-0/raw/0002.json
 CALL_FAILED seed=0 call=2 role=executor.demo-oc-agg1-s1701/ledger-1/base1.action: HTTP Error 500: Internal Server Error
   [accounting] 1/2 base-failed  ledger-1  :: no base rollout produced anything
-CALL_START seed=0 call=3 role=executor.demo-oc-agg1-s1701/ledger-2/base1.action raw=/tmp/tmp00yu2rr3/model-seed-0/raw/0003.json
+CALL_START seed=0 call=3 role=executor.demo-oc-agg1-s1701/ledger-2/base1.action raw=/tmp/tmpvncip7ly/model-seed-0/raw/0003.json
 CALL_FAILED seed=0 call=3 role=executor.demo-oc-agg1-s1701/ledger-2/base1.action: HTTP Error 500: Internal Server Error
   [accounting] 2/2 base-failed  ledger-2  :: no base rollout produced anything
-CALL_START seed=1 call=0 role=executor.frozen-ledger-1.action raw=/tmp/tmp00yu2rr3/model-seed-1/raw/0000.json
+CALL_START seed=1 call=0 role=executor.frozen-ledger-1.action raw=/tmp/tmpvncip7ly/model-seed-1/raw/0000.json
 CALL_FAILED seed=1 call=0 role=executor.frozen-ledger-1.action: HTTP Error 500: Internal Server Error
-CALL_START seed=1 call=1 role=executor.frozen-ledger-2.action raw=/tmp/tmp00yu2rr3/model-seed-1/raw/0001.json
+CALL_START seed=1 call=1 role=executor.frozen-ledger-2.action raw=/tmp/tmpvncip7ly/model-seed-1/raw/0001.json
 CALL_FAILED seed=1 call=1 role=executor.frozen-ledger-2.action: HTTP Error 500: Internal Server Error
-CALL_START seed=1 call=2 role=executor.demo-oc-agg1-s1702/ledger-1/base1.action raw=/tmp/tmp00yu2rr3/model-seed-1/raw/0002.json
+CALL_START seed=1 call=2 role=executor.demo-oc-agg1-s1702/ledger-1/base1.action raw=/tmp/tmpvncip7ly/model-seed-1/raw/0002.json
 CALL_FAILED seed=1 call=2 role=executor.demo-oc-agg1-s1702/ledger-1/base1.action: HTTP Error 500: Internal Server Error
   [accounting] 1/2 base-failed  ledger-1  :: no base rollout produced anything
-CALL_START seed=1 call=3 role=executor.demo-oc-agg1-s1702/ledger-2/base1.action raw=/tmp/tmp00yu2rr3/model-seed-1/raw/0003.json
+CALL_START seed=1 call=3 role=executor.demo-oc-agg1-s1702/ledger-2/base1.action raw=/tmp/tmpvncip7ly/model-seed-1/raw/0003.json
 CALL_FAILED seed=1 call=3 role=executor.demo-oc-agg1-s1702/ledger-2/base1.action: HTTP Error 500: Internal Server Error
   [accounting] 2/2 base-failed  ledger-2  :: no base rollout produced anything
 ok
@@ -148,6 +148,6 @@ test_offline_runtime_archive_matches_every_pinned_file (test_workers.WorkerContr
 test_policy_oracle_does_not_equate_wrong_task_output_with_unsafe_permissions (test_workers.WorkerContracts.test_policy_oracle_does_not_equate_wrong_task_output_with_unsafe_permissions) ... ok
 
 ----------------------------------------------------------------------
-Ran 51 tests in 13.848s
+Ran 51 tests in 14.241s
 
 OK (skipped=1)

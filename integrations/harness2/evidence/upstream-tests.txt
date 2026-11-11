@@ -5,46 +5,46 @@ test_positive_criteria_preserve_zero_partial_and_full_scores (test_baseline_judg
 test_selected_run_uses_the_same_criteria_contract (test_baseline_judge.BaselineJudgeTests.test_selected_run_uses_the_same_criteria_contract) ... ok
 test_documented_copy_loads_an_unconfigured_example (test_env_example.EnvExampleTests.test_documented_copy_loads_an_unconfigured_example) ... ok
 test_existing_file_loading_preserves_shell_precedence (test_env_example.EnvExampleTests.test_existing_file_loading_preserves_shell_precedence) ... ok
-test_clean_rollout_is_left_alone (test_jobbench_killed_rollout.KilledRolloutTests.test_clean_rollout_is_left_alone) ... [14:15:59] run t1 (base1) attempt 1 -> /tmp/tmp83gkw3x7/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141559.jsonl
-[14:15:59] output -> /tmp/tmp83gkw3x7/tasks/t1/model_output/base1
+test_clean_rollout_is_left_alone (test_jobbench_killed_rollout.KilledRolloutTests.test_clean_rollout_is_left_alone) ... [20:26:38] run t1 (base1) attempt 1 -> /tmp/tmp33rxiitt/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_202638.jsonl
+[20:26:38] output -> /tmp/tmp33rxiitt/tasks/t1/model_output/base1
 ok
-test_crashed_rollout_says_so (test_jobbench_killed_rollout.KilledRolloutTests.test_crashed_rollout_says_so) ... [14:15:59] run t1 (base1) attempt 1 -> /tmp/tmpu0xs_xr1/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141559.jsonl
-[14:15:59] EXIT 1: Rollout runner: the executor exited with status 1; files already in the output directory were kept as the deliverable.
-[14:15:59] output -> /tmp/tmpu0xs_xr1/tasks/t1/model_output/base1
+test_crashed_rollout_says_so (test_jobbench_killed_rollout.KilledRolloutTests.test_crashed_rollout_says_so) ... [20:26:38] run t1 (base1) attempt 1 -> /tmp/tmpiho2cz5b/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_202638.jsonl
+[20:26:38] EXIT 1: Rollout runner: the executor exited with status 1; files already in the output directory were kept as the deliverable.
+[20:26:38] output -> /tmp/tmpiho2cz5b/tasks/t1/model_output/base1
 ok
-test_note_survives_an_unterminated_last_event (test_jobbench_killed_rollout.KilledRolloutTests.test_note_survives_an_unterminated_last_event) ... [14:15:59] run t1 (base1) attempt 1 -> /tmp/tmpej_tj5j6/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141559.jsonl
-[14:16:00] EXIT 124: Rollout runner: the executor was stopped at the 1 s time limit (exit 124); files already in the output directory were kept as the deliverable.
-[14:16:00] output -> /tmp/tmpej_tj5j6/tasks/t1/model_output/base1
+test_note_survives_an_unterminated_last_event (test_jobbench_killed_rollout.KilledRolloutTests.test_note_survives_an_unterminated_last_event) ... [20:26:38] run t1 (base1) attempt 1 -> /tmp/tmpaght_6di/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_202638.jsonl
+[20:26:39] EXIT 124: Rollout runner: the executor was stopped at the 1 s time limit (exit 124); files already in the output directory were kept as the deliverable.
+[20:26:39] output -> /tmp/tmpaght_6di/tasks/t1/model_output/base1
 ok
-test_retried_attempt_keeps_its_own_note (test_jobbench_killed_rollout.KilledRolloutTests.test_retried_attempt_keeps_its_own_note) ... [14:16:00] run t1 (base1) attempt 1 -> /tmp/tmpp6nhg662/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141600.jsonl
-[14:16:00] EXIT 1: Rollout runner: the executor exited with status 1; the output directory was empty.
-[14:16:00] run t1 (base1) attempt 2 -> /tmp/tmpp6nhg662/tasks/t1/model_traj/base1/t1_base1_attempt2_20261110_141600.jsonl
-[14:16:00] output -> /tmp/tmpp6nhg662/tasks/t1/model_output/base1
+test_retried_attempt_keeps_its_own_note (test_jobbench_killed_rollout.KilledRolloutTests.test_retried_attempt_keeps_its_own_note) ... [20:26:39] run t1 (base1) attempt 1 -> /tmp/tmpqlmnkua9/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_202639.jsonl
+[20:26:39] EXIT 1: Rollout runner: the executor exited with status 1; the output directory was empty.
+[20:26:39] run t1 (base1) attempt 2 -> /tmp/tmpqlmnkua9/tasks/t1/model_traj/base1/t1_base1_attempt2_20261110_202639.jsonl
+[20:26:39] output -> /tmp/tmpqlmnkua9/tasks/t1/model_output/base1
 ok
-test_rollout_stopped_at_the_time_limit_says_so (test_jobbench_killed_rollout.KilledRolloutTests.test_rollout_stopped_at_the_time_limit_says_so) ... [14:16:00] run t1 (base1) attempt 1 -> /tmp/tmpj60jui_6/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141600.jsonl
-[14:16:01] EXIT 124: Rollout runner: the executor was stopped at the 1 s time limit (exit 124); files already in the output directory were kept as the deliverable.
-[14:16:01] output -> /tmp/tmpj60jui_6/tasks/t1/model_output/base1
+test_rollout_stopped_at_the_time_limit_says_so (test_jobbench_killed_rollout.KilledRolloutTests.test_rollout_stopped_at_the_time_limit_says_so) ... [20:26:39] run t1 (base1) attempt 1 -> /tmp/tmps_sfw5gg/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_202639.jsonl
+[20:26:40] EXIT 124: Rollout runner: the executor was stopped at the 1 s time limit (exit 124); files already in the output directory were kept as the deliverable.
+[20:26:40] output -> /tmp/tmps_sfw5gg/tasks/t1/model_output/base1
 ok
-test_signal_wording (test_jobbench_killed_rollout.KilledRolloutTests.test_signal_wording) ... [14:16:01] EXIT -9: Rollout runner: the executor was killed with SIGKILL (-9), after the 2400 s time limit or by the system; the output directory was empty.
-[14:16:01] EXIT 137: Rollout runner: the executor was killed with SIGKILL (137), after the 2400 s time limit or by the system; the output directory was empty.
-[14:16:01] EXIT -11: Rollout runner: the executor was killed by signal 11; the output directory was empty.
-[14:16:01] EXIT 124: Rollout runner: the executor was stopped at the 40m time limit (exit 124); the output directory was empty.
+test_signal_wording (test_jobbench_killed_rollout.KilledRolloutTests.test_signal_wording) ... [20:26:40] EXIT -9: Rollout runner: the executor was killed with SIGKILL (-9), after the 2400 s time limit or by the system; the output directory was empty.
+[20:26:40] EXIT 137: Rollout runner: the executor was killed with SIGKILL (137), after the 2400 s time limit or by the system; the output directory was empty.
+[20:26:40] EXIT -11: Rollout runner: the executor was killed by signal 11; the output directory was empty.
+[20:26:40] EXIT 124: Rollout runner: the executor was stopped at the 40m time limit (exit 124); the output directory was empty.
 ok
-test_fence_blocks_other_rollouts_but_keeps_own_dirs_and_tmp (test_jobbench_rollout_isolation.RolloutIsolationTests.test_fence_blocks_other_rollouts_but_keeps_own_dirs_and_tmp) ... [14:16:01] run t1 (base1) attempt 1 -> /tmp/tmp4og0fthk/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141601.jsonl
-[14:16:01] output -> /tmp/tmp4og0fthk/tasks/t1/model_output/base1
+test_fence_blocks_other_rollouts_but_keeps_own_dirs_and_tmp (test_jobbench_rollout_isolation.RolloutIsolationTests.test_fence_blocks_other_rollouts_but_keeps_own_dirs_and_tmp) ... [20:26:40] run t1 (base1) attempt 1 -> /tmp/tmpu9s_3q_a/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_202640.jsonl
+[20:26:40] output -> /tmp/tmpu9s_3q_a/tasks/t1/model_output/base1
 ok
-test_installed_commands_stay_on_path (test_jobbench_rollout_isolation.RolloutIsolationTests.test_installed_commands_stay_on_path) ... [14:16:01] run t1 (base1) attempt 1 -> /tmp/tmpxdttwd_w/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141601.jsonl
-[14:16:01] output -> /tmp/tmpxdttwd_w/tasks/t1/model_output/base1
+test_installed_commands_stay_on_path (test_jobbench_rollout_isolation.RolloutIsolationTests.test_installed_commands_stay_on_path) ... [20:26:40] run t1 (base1) attempt 1 -> /tmp/tmpabjgss2c/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_202640.jsonl
+[20:26:40] output -> /tmp/tmpabjgss2c/tasks/t1/model_output/base1
 ok
-test_later_rollout_cannot_see_earlier_installs_or_temp_files (test_jobbench_rollout_isolation.RolloutIsolationTests.test_later_rollout_cannot_see_earlier_installs_or_temp_files) ... [14:16:01] run t1 (base1) attempt 1 -> /tmp/tmpr30fxy46/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141601.jsonl
-[14:16:01] output -> /tmp/tmpr30fxy46/tasks/t1/model_output/base1
-[14:16:01] run t1 (inv1) attempt 1 -> /tmp/tmpr30fxy46/tasks/t1/model_traj/inv1/t1_inv1_attempt1_20261110_141601.jsonl
-[14:16:01] output -> /tmp/tmpr30fxy46/tasks/t1/model_output/inv1
+test_later_rollout_cannot_see_earlier_installs_or_temp_files (test_jobbench_rollout_isolation.RolloutIsolationTests.test_later_rollout_cannot_see_earlier_installs_or_temp_files) ... [20:26:40] run t1 (base1) attempt 1 -> /tmp/tmpiq086577/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_202640.jsonl
+[20:26:40] output -> /tmp/tmpiq086577/tasks/t1/model_output/base1
+[20:26:40] run t1 (inv1) attempt 1 -> /tmp/tmpiq086577/tasks/t1/model_traj/inv1/t1_inv1_attempt1_20261110_202640.jsonl
+[20:26:40] output -> /tmp/tmpiq086577/tasks/t1/model_output/inv1
 ok
-test_retry_starts_from_a_clean_sandbox (test_jobbench_rollout_isolation.RolloutIsolationTests.test_retry_starts_from_a_clean_sandbox) ... [14:16:01] run t1 (base1) attempt 1 -> /tmp/tmp1zvehk8u/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_141601.jsonl
-[14:16:01] EXIT 1: Rollout runner: the executor exited with status 1; the output directory was empty.
-[14:16:01] run t1 (base1) attempt 2 -> /tmp/tmp1zvehk8u/tasks/t1/model_traj/base1/t1_base1_attempt2_20261110_141601.jsonl
-[14:16:01] output -> /tmp/tmp1zvehk8u/tasks/t1/model_output/base1
+test_retry_starts_from_a_clean_sandbox (test_jobbench_rollout_isolation.RolloutIsolationTests.test_retry_starts_from_a_clean_sandbox) ... [20:26:40] run t1 (base1) attempt 1 -> /tmp/tmpq5t2xo_1/tasks/t1/model_traj/base1/t1_base1_attempt1_20261110_202640.jsonl
+[20:26:40] EXIT 1: Rollout runner: the executor exited with status 1; the output directory was empty.
+[20:26:40] run t1 (base1) attempt 2 -> /tmp/tmpq5t2xo_1/tasks/t1/model_traj/base1/t1_base1_attempt2_20261110_202640.jsonl
+[20:26:40] output -> /tmp/tmpq5t2xo_1/tasks/t1/model_output/base1
 ok
 test_temp_dir_leaves_room_for_unix_socket_paths (test_jobbench_rollout_isolation.RolloutIsolationTests.test_temp_dir_leaves_room_for_unix_socket_paths) ... ok
 test_existing_transport_failure_control_stays_ungraded (test_jobbench_worker_failure.JobbenchWorkerFailureTests.test_existing_transport_failure_control_stays_ungraded) ... ok
@@ -110,7 +110,7 @@ test_retry_keeps_the_rejected_attempts_edits (test_stage_retry.StageRetryTests.t
 test_configured_provider_keeps_its_key (test_subprocess_env.SubprocessEnvTests.test_configured_provider_keeps_its_key) ... ok
 test_jobbench_opencode_runner_runs_as_script (test_subprocess_env.SubprocessEnvTests.test_jobbench_opencode_runner_runs_as_script) ... ok
 test_lab_launchers_keep_only_their_own_keys (test_subprocess_env.SubprocessEnvTests.test_lab_launchers_keep_only_their_own_keys) ... ok
-test_scrub_env_across_launchers (test_subprocess_env.SubprocessEnvTests.test_scrub_env_across_launchers) ... [14:16:11] wb | b1: 1 task(s) x k=1 [oc]
+test_scrub_env_across_launchers (test_subprocess_env.SubprocessEnvTests.test_scrub_env_across_launchers) ... [20:26:50] wb | b1: 1 task(s) x k=1 [oc]
 ok
 test_digest_follows_file_contents_and_membership (test_task_input_identity.InputsFingerprintTests.test_digest_follows_file_contents_and_membership) ... ok
 test_digest_follows_the_prompt (test_task_input_identity.InputsFingerprintTests.test_digest_follows_the_prompt) ... ok
@@ -181,6 +181,6 @@ test_recursion_budget_and_resume (test_workflow.WorkflowTests.test_recursion_bud
 ok
 
 ----------------------------------------------------------------------
-Ran 70 tests in 18.838s
+Ran 70 tests in 19.150s
 
 OK
