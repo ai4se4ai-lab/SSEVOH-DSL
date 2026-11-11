@@ -1,6 +1,6 @@
 # Safe self-evolution of AI agent harnesses: a plain-language research guide
 
-Updated from recorded artifacts: 2026-11-10T21:45:35.140236+00:00.
+Updated from recorded artifacts: 2026-11-11T10:58:51.671148+00:00.
 
 **Execution order:** the core and integration were verified before empirical work. Both full studies and their pooled analyses are complete. Late Narval qualification observations are retained separately from the frozen site-selection decision. Earlier exploratory artifacts remain legacy evidence.
 
@@ -118,9 +118,17 @@ Independent one-step cases: 248832; false acceptances: 0; false rejections: 0. R
 | fir | ssevoh-smoke-q1-20261109T192057Z-fir-r3 | {'OK': 8} | True |
 | fir | ssevoh-smoke-q2-20261109T194334Z-fir-r2 | {'OK': 9} | True |
 | fir | ssevoh-smoke-q2-20261109T194342Z-fir-r3 | {'OK': 9} | True |
-| fir | ssevoh-tr-smoke-20261110T212500Z-fir-r1 | {'OK': 5, 'PENDING': 4} | False |
-| fir | ssevoh-tr-smoke-20261110T212537Z-fir-r2 | {'OK': 2, 'PENDING': 7} | False |
-| fir | ssevoh-tr-smoke-20261110T212557Z-fir-r3 | {'OK': 1, 'PENDING': 8} | False |
+| fir | ssevoh-tr-full-20261111T004523Z-fir | {'OK': 88, 'FAILED': 23} | False |
+| fir | ssevoh-tr-full-20261111T100909Z-fir | {'OK': 108, 'RUNNING': 1, 'PENDING': 2} | False |
+| fir | ssevoh-tr-smoke-20261110T212500Z-fir-r1 | {'OK': 9} | True |
+| fir | ssevoh-tr-smoke-20261110T212537Z-fir-r2 | {'OK': 9} | True |
+| fir | ssevoh-tr-smoke-20261110T212557Z-fir-r3 | {'OK': 9} | True |
+| fir | ssevoh-tr-smoke-20261111T060356Z-fir-r1 | {'OK': 7, 'FAILED': 2} | False |
+| fir | ssevoh-tr-smoke-20261111T060412Z-fir-r2 | {'PARTIAL': 1, 'CANCELLED': 6, 'FAILED': 2} | False |
+| fir | ssevoh-tr-smoke-20261111T060422Z-fir-r3 | {'PARTIAL': 1, 'CANCELLED': 6, 'FAILED': 2} | False |
+| fir | ssevoh-tr-smoke-20261111T070021Z-fir-r1 | {'OK': 9} | True |
+| fir | ssevoh-tr-smoke-20261111T070045Z-fir-r2 | {'OK': 9} | True |
+| fir | ssevoh-tr-smoke-20261111T070102Z-fir-r3 | {'OK': 9} | True |
 | narval | ssevoh-ablation-smoke-20261109T193010Z-narval | {'OK': 1} | True |
 | narval | ssevoh-h2v2-full-20261110T203242Z-narval | {'OK': 7} | True |
 | narval | ssevoh-h2v2-smoke-20261110T192814Z-narval-r1 | {'PARTIAL': 1, 'CANCELLED': 4, 'FAILED': 2} | False |
@@ -130,7 +138,7 @@ Independent one-step cases: 248832; false acceptances: 0; false rejections: 0. R
 | narval | ssevoh-h2v2-smoke-20261110T194611Z-narval-r2 | {'OK': 7} | True |
 | narval | ssevoh-h2v2-smoke-20261110T194619Z-narval-r3 | {'OK': 7} | True |
 | narval | ssevoh-humaneval-controls-t2-20261110T041228Z-narval | {'OK': 3} | True |
-| narval | ssevoh-humaneval-full-generation-20261110T170240Z-narval | {'OK': 5, 'RUNNING': 1, 'PENDING': 1} | False |
+| narval | ssevoh-humaneval-full-generation-20261110T170240Z-narval | {'OK': 5, 'PARTIAL': 1, 'RUNNING': 1} | False |
 | narval | ssevoh-humaneval-preflight-t1-20261110T035607Z-narval | {'OK': 2} | True |
 | narval | ssevoh-humaneval-smoke-t1-20261110T042037Z-narval | {'OK': 9} | True |
 | narval | ssevoh-humaneval-smoke-v2-t1-20261110T144728Z-narval | {'OK': 3, 'FAILED': 3, 'CANCELLED': 3} | False |
@@ -147,9 +155,14 @@ Independent one-step cases: 248832; false acceptances: 0; false rejections: 0. R
 | narval | ssevoh-smoke-q1-20261109T192110Z-narval-r3 | {'CANCELLED': 8} | False |
 | narval | ssevoh-smoke-q2-20261109T194348Z-narval-r2 | {'CANCELLED': 9} | False |
 | narval | ssevoh-smoke-q2-20261109T194359Z-narval-r3 | {'CANCELLED': 9} | False |
-| narval | ssevoh-tr-smoke-20261110T212608Z-narval-r1 | {'OK': 4, 'RUNNING': 1, 'PENDING': 4} | False |
-| narval | ssevoh-tr-smoke-20261110T212619Z-narval-r2 | {'OK': 5, 'PENDING': 4} | False |
-| narval | ssevoh-tr-smoke-20261110T212627Z-narval-r3 | {'OK': 5, 'PENDING': 4} | False |
+| narval | ssevoh-tr-full-20261111T004745Z-narval | {'PARTIAL': 1, 'CANCELLED': 36, 'FAILED': 2} | False |
+| narval | ssevoh-tr-full-20261111T101200Z-narval | {'OK': 39} | True |
+| narval | ssevoh-tr-smoke-20261110T212608Z-narval-r1 | {'OK': 9} | True |
+| narval | ssevoh-tr-smoke-20261110T212619Z-narval-r2 | {'OK': 9} | True |
+| narval | ssevoh-tr-smoke-20261110T212627Z-narval-r3 | {'OK': 9} | True |
+| narval | ssevoh-tr-smoke-20261111T060430Z-narval-r1 | {'OK': 9} | True |
+| narval | ssevoh-tr-smoke-20261111T060449Z-narval-r2 | {'OK': 9} | True |
+| narval | ssevoh-tr-smoke-20261111T060459Z-narval-r3 | {'OK': 9} | True |
 | rorqual | ssevoh-ablation-smoke-20261109T193026Z-rorqual | {'OK': 1} | True |
 | rorqual | ssevoh-h2v2-smoke-20261110T192902Z-rorqual-r1 | {'PARTIAL': 1, 'CANCELLED': 4, 'FAILED': 2} | False |
 | rorqual | ssevoh-h2v2-smoke-20261110T192913Z-rorqual-r2 | {'PARTIAL': 1, 'CANCELLED': 4, 'FAILED': 2} | False |
@@ -158,7 +171,7 @@ Independent one-step cases: 248832; false acceptances: 0; false rejections: 0. R
 | rorqual | ssevoh-h2v2-smoke-20261110T194654Z-rorqual-r2 | {'OK': 7} | True |
 | rorqual | ssevoh-h2v2-smoke-20261110T194720Z-rorqual-r3 | {'OK': 7} | True |
 | rorqual | ssevoh-humaneval-controls-t2-20261110T041228Z-rorqual | {'OK': 3} | True |
-| rorqual | ssevoh-humaneval-full-generation-20261110T170240Z-rorqual | {'OK': 3, 'RUNNING': 2, 'PENDING': 2} | False |
+| rorqual | ssevoh-humaneval-full-generation-20261110T170240Z-rorqual | {'OK': 5, 'PARTIAL': 1, 'FAILED': 1} | False |
 | rorqual | ssevoh-humaneval-preflight-t1-20261110T035607Z-rorqual | {'OK': 2} | True |
 | rorqual | ssevoh-humaneval-smoke-t1-20261110T042037Z-rorqual | {'OK': 9} | True |
 | rorqual | ssevoh-humaneval-smoke-v2-t1-20261110T144728Z-rorqual | {'OK': 3, 'FAILED': 3, 'CANCELLED': 3} | False |
@@ -178,6 +191,14 @@ Independent one-step cases: 248832; false acceptances: 0; false rejections: 0. R
 | rorqual | ssevoh-smoke-q1-20261109T192121Z-rorqual-r3 | {'PARTIAL': 2, 'CANCELLED': 5, 'OK': 1} | False |
 | rorqual | ssevoh-smoke-q2-20261109T194404Z-rorqual-r2 | {'OK': 9} | True |
 | rorqual | ssevoh-smoke-q2-20261109T194415Z-rorqual-r3 | {'OK': 9} | True |
+| rorqual | ssevoh-tr-full-20261111T005048Z-rorqual | {'OK': 1, 'FAILED': 38} | False |
+| rorqual | ssevoh-tr-full-20261111T101512Z-rorqual | {'OK': 39} | True |
+| rorqual | ssevoh-tr-smoke-20261110T212634Z-rorqual-r1 | {'OK': 9} | True |
+| rorqual | ssevoh-tr-smoke-20261110T212647Z-rorqual-r2 | {'OK': 9} | True |
+| rorqual | ssevoh-tr-smoke-20261110T212655Z-rorqual-r3 | {'OK': 9} | True |
+| rorqual | ssevoh-tr-smoke-20261111T060523Z-rorqual-r1 | {'OK': 9} | True |
+| rorqual | ssevoh-tr-smoke-20261111T060535Z-rorqual-r2 | {'OK': 9} | True |
+| rorqual | ssevoh-tr-smoke-20261111T060541Z-rorqual-r3 | {'OK': 9} | True |
 
 ## Runtime finding and correction
 
