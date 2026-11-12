@@ -5,7 +5,7 @@ Usage (from the repository root):
     python3 docs/TSE/figures/make_figures.py
 
 Inputs are the committed raw cohorts; nothing is re-run or re-sampled.
-Outputs: docs/TSE/figures/enforcement.pdf and docs/TSE/figures/cost.pdf
+Outputs: enforcement.pdf, cost.pdf, and toolrepair.pdf in docs/TSE/figures/.
 """
 import collections
 import csv
@@ -237,7 +237,12 @@ ARMS = [("original", "A1 original"), ("catalog", "A2 catalog"), ("sandboxed_evid
 
 def toolrepair_figure():
     s = json.load(open(RES / "toolrepair-v1" / "analysis" / "summary.json"))
-    fig, (a, b, c) = plt.subplots(1, 3, figsize=(7.16, 1.75), gridspec_kw={"wspace": 0.55, "width_ratios": [1.45, 1, 0.9]})
+    # Reserve a full label gutter before the family panel: its long y labels
+    # otherwise extend into the model bars. Keep the legend above the titles.
+    fig = plt.figure(figsize=(7.16, 2.75))
+    a = fig.add_axes([0.065, 0.23, 0.32, 0.59])
+    b = fig.add_axes([0.575, 0.23, 0.135, 0.59])
+    c = fig.add_axes([0.81, 0.23, 0.18, 0.59])
 
     models = [("phi4:14b", "Phi-4\n14B"), ("qwen2.5-coder:7b", "Qwen2.5\n7B"), ("qwen3-coder:30b", "Qwen3\n30B"),
               ("devstral:24b", "Devstral\n24B"), ("gpt-oss:20b", "GPT-OSS\n20B")]
@@ -250,7 +255,8 @@ def toolrepair_figure():
         a.bar([i + (j - 1) * w for i in range(len(models))], vals, width=w - 0.03, color=SERIES[j], label=label)
     a.annotate("no\noutput", (4, 0), xytext=(0, 3), textcoords="offset points", ha="center",
                va="bottom", fontsize=6.0, color=MUTED)
-    a.set_xticks(range(len(models))); a.set_xticklabels([l for _, l in models], fontsize=5.8, linespacing=0.95)
+    a.set_xticks(range(len(models))); a.set_xticklabels([l for _, l in models], fontsize=6, linespacing=1.1)
+    a.tick_params(axis="x", pad=5)
     a.set_ylim(0, 0.5); a.set_ylabel("Strict task success")
     _style(a, "(a) Success by model and arm")
     a.grid(axis="x", visible=False)
@@ -265,11 +271,14 @@ def toolrepair_figure():
     b.plot([lo, hi], [yp, yp], color=INK, lw=2, solid_capstyle="round")
     b.scatter([est], [yp], s=22, color=INK, edgecolor="white", linewidth=0.6, zorder=3)
     b.set_yticks(list(ys) + [yp])
-    b.set_yticklabels([f.replace("_", " ") for f, _ in fams] + ["pooled (95% CI)"], fontsize=5.6)
-    b.text(-0.105, len(fams) - 0.1, "margin", color=BAD, fontsize=6, ha="right", va="center")
+    b.set_yticklabels([f.replace("_", " ") for f, _ in fams] + ["pooled (95% CI)"], fontsize=6)
+    b.text(0.97, 0.02, "margin = -0.10", transform=b.transAxes,
+           color=BAD, fontsize=5.8, ha="right", va="bottom",
+           bbox={"facecolor": "white", "edgecolor": "none", "pad": 1})
     b.set_xlim(-0.3, 0.12); b.set_ylim(-0.8, yp + 0.8)
-    b.set_xlabel("Success difference A3 $-$ A1")
-    _style(b, "(b) Non-inferiority by family")
+    b.set_xticks([-0.3, -0.1, 0.1])
+    b.set_xlabel("Success difference\nA3 $-$ A1", linespacing=1.2)
+    _style(b, "(b) Family effects")
     b.grid(axis="y", visible=False)
 
     h2 = s["H2_safety"]
@@ -281,11 +290,11 @@ def toolrepair_figure():
         c.text(nat + 6, y + 0.18, f"{nat} natural", va="center", fontsize=6.2, color=INK)
         c.text(inj + 6, y - 0.18, f"{inj}/{n} injected", va="center", fontsize=6.2, color=INK)
     c.set_yticks([2, 1, 0]); c.set_yticklabels(["A1", "A2", "A3"])
-    c.set_xlim(0, 470); c.set_xlabel("Violating proposals executed")
-    _style(c, "(c) Executed contract violations")
+    c.set_xlim(0, 540); c.set_xlabel("Violating proposals\nexecuted", linespacing=1.2)
+    _style(c, "(c) Violations executed")
     c.grid(axis="y", visible=False)
 
-    fig.legend(*a.get_legend_handles_labels(), loc="upper center", bbox_to_anchor=(0.5, 1.1), ncol=3,
+    fig.legend(*a.get_legend_handles_labels(), loc="upper center", bbox_to_anchor=(0.5, 1.0), ncol=3,
                frameon=False, handlelength=1.2, columnspacing=1.6)
     fig.savefig(OUT / "toolrepair.pdf", bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)

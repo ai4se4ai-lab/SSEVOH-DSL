@@ -1,6 +1,11 @@
-\documentclass[10pt,journal,compsoc]{IEEEtran}
+% Journal layout from New_IEEEtran_how-to.tex.
+\documentclass[lettersize,journal]{IEEEtran}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,array,booktabs,graphicx,url,listings,multirow,xcolor}
+\usepackage{cite}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{balance}
 \usepackage{tikz}
 \usetikzlibrary{positioning,fit,arrows.meta,calc,backgrounds}
 \usepackage{algorithm}
@@ -32,16 +37,16 @@
 \begin{document}
 \title{SSEVOH-DSL: Revocable, Version-Bound Approvals for Self-Evolving Agent Harnesses}
 \author{Anonymous Author(s)}
-\IEEEtitleabstractindextext{%
+\markboth{IEEE Transactions on Software Engineering}%
+{Anonymous Author(s): SSEVOH-DSL: Revocable, Version-Bound Approvals for Self-Evolving Agent Harnesses}
+\maketitle
+
 \begin{abstract}
 An agent that revises its own prompts, tools, memory, and workflows changes the machinery that governs its later behavior. Testing a candidate once does not establish that its approval remains valid after a concurrent update, the withdrawal of an ancestor, or the reuse of a learned experience entry. We present \tool{}, a declarative transition language and a trusted enforcement service that bind every evolution decision to versioned state, operator policy, validator evidence, and transitive provenance. One-use, context-bound receipts are coupled with dependency-aware withdrawal, eligibility-checked recovery, and revalidation at execution and library reuse. We integrate it with a pinned \harness{} runtime by wrapping its admission, execution, and library seams without changing its adaptation logic. Independent bounded exploration finds no discrepancy over 248,832 one-step cases, 19,620 history transitions, and 6,880 anchored journal replays, and independent state graphs agree with TLC. In controlled \harness{} fixtures, deployed contract violations fall from 25/45 under original admission to 0/45 with all permitted executions retained; removing one gate re-opens up to 15. Model-generated requests and \harness{} proposals are blocked when disallowed (73/73; 141/141) and admitted when allowed (18/18; 16/16). Admission costs 0.6\,ms median. In a prespecified 540-stream study of twelve planted-defect tool families, the contract with sandboxed behavioral evidence retained task success within 10 points of original \harness{} (0.196 vs 0.241; non-inferiority supported) while executing none of its 426 contract violations; a conservative catalog policy cost 11 points. On HumanEval+, guarded and unguarded text-only evolution differed by under 2 points, but neither beat a frozen baseline.
 \end{abstract}
 \begin{IEEEkeywords}
 Agent harnesses, self-evolving agents, domain-specific languages, runtime verification, authorization, provenance, model checking.
-\end{IEEEkeywords}}
-\maketitle
-\IEEEdisplaynontitleabstractindextext
-\IEEEpeerreviewmaketitle
+\end{IEEEkeywords}
 
 %=====================================================================
 \section{Introduction}
@@ -78,16 +83,21 @@ We trust the host service, its policy and validator registry, the pinned launche
 %=====================================================================
 \section{Approach}\label{sec:approach}
 \subsection{Overview}
-Fig.~\ref{fig:overview} shows the architecture. The untrusted harness (left) keeps its full adaptive loop. The trusted service (center) consists of four modules: \emph{A.~Admission} turns a request into a receipt (Algs.~\ref{alg:prepare}--\ref{alg:candidate}); \emph{B.~Commit} owns the authority state and journal (Alg.~\ref{alg:commit}); \emph{C.~Runtime guards} recheck that state when a stage runs or a library entry is reused (Alg.~\ref{alg:guard}); and \emph{D.~Operator} withdraws and restores versions (Algs.~\ref{alg:withdraw}--\ref{alg:rollback}). Only eight numbered flows cross module boundaries, and the harness touches the service only through flows \circled{1}, \circled{2}, \circled{5}, and \circled{6}. Offline assurance (right) cross-checks the service against independent semantics. The subsections below follow the modules in order.
+Fig.~\ref{fig:overview} shows the untrusted harness, four trusted service modules, and their evaluation. The harness retains its adaptive loop and touches the service only through request/rejection flows \circled{1}--\circled{2}, dispatch \circled{5}, and library reuse \circled{6}.
+
+\emph{A.~Admission} receives a data-only DSL request and candidate tree (\circled{1}). It parses and canonicalizes the request, matches the trusted snapshot, authorizes the change, builds the candidate with its origins, runs registered validators, and issues a one-use receipt $\rho$ (Algs.~\ref{alg:prepare}--\ref{alg:candidate}). The arrows follow the top row left to right, then down and back left; rejection returns a reason to the harness's retry loop (\circled{2}). \emph{B.~Commit} rechecks $\rho$ under the authority lock (\circled{3}), updates the authority store, records the decision in the journal, and publishes the receipt for execution (\circled{4}; Alg.~\ref{alg:commit}). \emph{C.~Runtime guards} recheck stage dispatch (\circled{5}) and library insertion/exposure (\circled{6}); executed-version origins pass from the dispatch guard to the library guard (Alg.~\ref{alg:guard}). \emph{D.~Operator} commits withdrawal and rollback through B and quarantines affected closures (\circled{7}; Algs.~\ref{alg:withdraw}--\ref{alg:rollback}).
+
+The dashed link \circled{8} connects the service to independent bounded-conformance checks (RQ1): one-step comparison, history exploration and anchored replay, Python/TLC graph agreement, and faulty-variant detection. Their shared rail denotes parallel checks. The bottom strip maps the empirical evaluation to enforcement discrimination (RQ2), integration fidelity (RQ3), useful behavior (RQ4), and cost/reproducibility (RQ5). The following subsections detail the service modules.
 
 \begin{figure*}[t]\centering
+\resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[font=\sffamily\scriptsize, >={Stealth[length=4.5pt]},
   box/.style={draw, rounded corners=2pt, align=center, fill=white, inner sep=2.5pt, minimum height=0.66cm},
   chip/.style={draw=trust!60, rounded corners=1.5pt, align=center, fill=white, inner sep=2pt, minimum height=0.62cm, font=\sffamily\tiny},
   mod/.style={draw=trust, rounded corners=3pt, fill=trust!9, inner sep=4pt},
   modt/.style={font=\sffamily\scriptsize\bfseries, text=trust!80!black},
   grp/.style={draw, rounded corners=4pt, inner sep=6pt},
-  ia/.style={->, trust!55, >={Stealth[length=3pt]}},
+  ia/.style={->, semithick, trust!85!black, >={Stealth[length=4pt]}},
   lbl/.style={font=\sffamily\tiny, align=center, fill=white, inner sep=1pt, text=black},
   flow/.style={->, very thick},
   num/.style={circle, fill=black, text=white, inner sep=0.7pt, font=\sffamily\tiny\bfseries}]
@@ -102,23 +112,28 @@ Fig.~\ref{fig:overview} shows the architecture. The untrusted harness (left) kee
 \begin{scope}[on background layer]
 \node[grp, draw=untrust, fill=untrust!7, fit=(prop)(lib), inner xsep=9pt, label={[font=\sffamily\scriptsize\bfseries, text=untrust]above:{Harness$^{2}$ (untrusted, unchanged)}}] (G1) {};
 \end{scope}
-% ---------------- module A: admission
-\node[chip, minimum width=1.75cm] (a1) at (4.25,4.05) {Parse \&\\canonicalize};
-\node[chip, minimum width=1.75cm] (a2) at (6.05,4.05) {Match trusted\\snapshot};
-\node[chip, minimum width=1.75cm] (a3) at (7.9,4.05) {Authorize\\(policy)};
-\node[chip, minimum width=1.75cm] (a4) at (4.25,2.95) {Build candidate\\+ origins};
-\node[chip, minimum width=1.75cm] (a5) at (6.05,2.95) {Run registered\\validators};
-\node[chip, minimum width=1.75cm] (a6) at (7.9,2.95) {Issue one-use\\receipt $\rho$};
-\draw[ia] (a1) -- (a2); \draw[ia] (a2) -- (a3); \draw[ia] (a3.south) -- (a4.north east);
-\draw[ia] (a4) -- (a5); \draw[ia] (a5) -- (a6);
+% ---------------- module A: admission (serpentine order)
+\node[chip, minimum width=1.6cm] (a1) at (4.05,4.05) {Parse \&\\canonicalize};
+\node[chip, minimum width=1.6cm] (a2) at (6.05,4.05) {Match trusted\\snapshot};
+\node[chip, minimum width=1.6cm] (a3) at (8.05,4.05) {Authorize\\(policy)};
+\node[chip, minimum width=1.6cm] (a4) at (8.05,2.95) {Build candidate\\+ origins};
+\node[chip, minimum width=1.6cm] (a5) at (6.05,2.95) {Run registered\\validators};
+\node[chip, minimum width=1.6cm] (a6) at (4.05,2.95) {Issue one-use\\receipt $\rho$};
+\draw[ia] (a1.east) -- (a2.west);
+\draw[ia] (a2.east) -- (a3.west);
+\draw[ia] (a3.south) -- (a4.north);
+\draw[ia] (a4.west) -- (a5.east);
+\draw[ia] (a5.west) -- (a6.east);
 \begin{scope}[on background layer]
-\node[mod, fit=(a1)(a6), inner ysep=5pt] (A) {};
+\node[mod, fit=(a1)(a3)(a4)(a6), inner ysep=5pt] (A) {};
 \end{scope}
 \node[modt, anchor=south west] at (A.north west) {A. Admission (Alg.~1--2)};
 % ---------------- module B: commit & state
 \node[chip, minimum width=2.25cm] (b1) at (10.85,4.05) {Authority store\\$S$, history $H$, origins $O$};
 \node[chip, minimum width=2.25cm] (b2) at (10.85,2.95) {Locked commit\\recheck $\kappa$, swap};
 \node[chip, minimum width=2.25cm] (b3) at (10.85,1.85) {Hash-chained journal\\+ decision log};
+\draw[ia, <->] (b2.north) -- node[lbl, right]{read / update} (b1.south);
+\draw[ia] (b2.south) -- node[lbl, right]{record} (b3.north);
 \begin{scope}[on background layer]
 \node[mod, fit=(b1)(b3), inner ysep=5pt] (B) {};
 \end{scope}
@@ -126,6 +141,7 @@ Fig.~\ref{fig:overview} shows the architecture. The untrusted harness (left) kee
 % ---------------- module C: runtime guards
 \node[chip, minimum width=3.1cm] (c1) at (5.45,0.85) {Dispatch guard\\receipt $\cdot$ bytes $\cdot$ eligibility};
 \node[chip, minimum width=3.1cm] (c2) at (5.45,-0.25) {Library guard\\executed origins $\cdot$ filter};
+\draw[ia] (c1.south) -- node[lbl, right]{executed origins} (c2.north);
 \begin{scope}[on background layer]
 \node[mod, fit=(c1)(c2), inner ysep=5pt] (C) {};
 \end{scope}
@@ -139,25 +155,40 @@ Fig.~\ref{fig:overview} shows the architecture. The untrusted harness (left) kee
 \begin{scope}[on background layer]
 \node[grp, draw=trust, fit=(A)(B)(C)(D), inner ysep=15pt, inner xsep=8pt, label={[font=\sffamily\scriptsize\bfseries, text=trust]above:{\tool{} trusted enforcement service}}] (G2) {};
 \end{scope}
-% ---------------- assurance
-\node[box, minimum width=2.1cm] (r1) at (14.12,4.05) {Reference\\semantics};
-\node[box, minimum width=2.1cm] (r2) at (14.12,2.95) {History \&\\replay explorers};
-\node[box, minimum width=2.1cm] (r3) at (14.12,1.85) {Python graphs\\$\leftrightarrow$ TLA$^{+}$/TLC};
-\node[box, minimum width=2.1cm] (r4) at (14.12,0.75) {Faulty-variant\\detection};
+% ---------------- RQ1: independent checks, not a processing pipeline
+\node[box, minimum width=2.35cm, font=\sffamily\tiny] (r1) at (14.25,4.05) {One-step comparison\\implementation $\leftrightarrow$ reference};
+\node[box, minimum width=2.35cm, font=\sffamily\tiny] (r2) at (14.25,2.95) {History exploration\\+ anchored replay};
+\node[box, minimum width=2.35cm, font=\sffamily\tiny] (r3) at (14.25,1.85) {Graph agreement\\Python $\leftrightarrow$ TLA$^{+}$/TLC};
+\node[box, minimum width=2.35cm, font=\sffamily\tiny] (r4) at (14.25,0.75) {Faulty variants\\counterexample detection};
+\coordinate (checks) at (12.7,2.95);
+\draw[assure!80!black, semithick] (12.7,4.05) -- (12.7,0.75);
+\foreach \r in {r1,r2,r3,r4}
+  \draw[->, assure!80!black, semithick] (12.7,0 |- \r.west) -- (\r.west);
 \begin{scope}[on background layer]
-\node[grp, draw=assure, fill=assure!7, fit=(r1)(r4), inner xsep=5pt, label={[font=\sffamily\scriptsize\bfseries, text=assure!70!black]above:{Offline assurance (RQ1)}}] (G3) {};
+\node[grp, draw=assure, fill=assure!7, fit=(r1)(r4)(checks), inner xsep=5pt, label={[font=\sffamily\scriptsize\bfseries, text=assure!70!black]above:{RQ1. Bounded conformance}}] (G3) {};
+\end{scope}
+% ---------------- empirical evaluation: measurements, not runtime flows
+\node[box, minimum width=3.75cm, font=\sffamily\scriptsize] (q2) at (0.25,-2.65) {\textbf{RQ2. Discrimination}\\Tests, static checks, gate ablations};
+\node[box, minimum width=3.75cm, font=\sffamily\scriptsize] (q3) at (4.5,-2.65) {\textbf{RQ3. Integration fidelity}\\Upstream seams, model proposals};
+\node[box, minimum width=3.75cm, font=\sffamily\scriptsize] (q4) at (8.75,-2.65) {\textbf{RQ4. Useful behavior}\\ToolRepair-12, HumanEval+};
+\node[box, minimum width=3.75cm, font=\sffamily\scriptsize] (q5) at (13,-2.65) {\textbf{RQ5. Cost / reproducibility}\\Latency, scaling, contention, pins};
+\begin{scope}[on background layer]
+\node[grp, draw=inkm, fill=inkm!4, fit=(q2)(q5), inner ysep=6pt,
+  label={[font=\sffamily\scriptsize\bfseries, text=inkm]above:{Empirical evaluation of the harness and enforcement service (RQ2--RQ5)}}] (G4) {};
 \end{scope}
 % ---------------- numbered flows between modules only
 \draw[flow, untrust] (prop.east) -- node[num, above=1pt]{1} node[lbl, below=1pt]{request + tree} (prop.east -| A.west);
 \draw[flow, inkm] (probe.east -| A.west) -- node[num, above=1pt]{2} node[lbl, below=1pt]{reject + reason} (probe.east);
-\draw[flow, trust] (a6.east) -- node[num, above=1pt]{3} (a6.east -| B.west);
+\draw[flow, trust] (a6.south) -- (4.05,2.25) -- node[num, above=1pt]{3}
+  node[lbl, below=1pt]{approved receipt} (9.45,2.25) |- (b2.west);
 \draw[flow, trust] (B.west |- b3) -| node[pos=0.3, num, above=1pt]{4} node[pos=0.3, lbl, below=1pt]{publish receipts} ([xshift=-14pt]C.north east);
 \draw[flow, trust] (exec.east) -- node[num, above=1pt]{5} node[lbl, below=1pt]{dispatch} (exec.east -| C.west);
 \draw[flow, trust] (lib.east) -- node[num, above=1pt]{6} node[lbl, below=1pt]{insert / expose} (lib.east -| C.west);
 \draw[flow, inkm] (D.north) -- node[num, right=1pt]{7} (B.south -| D.north);
-\draw[<->, very thick, dashed, assure!70!black] (G3.west |- b2) -- node[num, above=1pt]{8} (B.east |- b2);
-\end{tikzpicture}
-\caption{Architecture of \tool{}, grouped into four trusted modules; thin arrows show the order of steps inside the admission module, and numbered arrows show the only flows between modules. \circled{1}~\harness{} submits a data-only DSL request with its candidate tree to Module~A, which canonicalizes it, matches the declared snapshot against trusted state, authorizes it, builds the candidate with its origins, runs the registered validators, and issues a one-use receipt $\rho$. \circled{2}~A rejection returns a reason to \harness{}'s own retry loop. \circled{3}~Module~B rechecks $\rho$ under the authority lock and commits it to state and journal, and \circled{4}~publishes the receipt for execution. Module~C rechecks every \circled{5}~stage dispatch and every \circled{6}~library insertion and exposure. \circled{7}~Operator withdrawal and rollback (Module~D) commit through Module~B and quarantine affected closures. \circled{8}~Offline explorers and TLC cross-check the lifecycle semantics.}
+\draw[->, very thick, dashed, assure!70!black] (B.east |- b2) -- node[num, above=1pt]{8} (checks);
+\end{tikzpicture}%
+}
+\caption{Architecture of \tool{} and its integration with \harness{}, with evaluation coverage across RQ1--RQ5.}
 \label{fig:overview}
 \end{figure*}
 
@@ -500,5 +531,6 @@ Approval in a self-evolving harness should be a versioned relation to a trusted 
 
 \textbf{Artifacts.}\label{sec:availability} An immutable release holds raw records (\pathcode{artifacts/benchmark-results/}) and protocols and deviations (\pathcode{experiments/}); \texttt{make verify} reruns assurance and \pathcode{make_figures.py} the figures.
 \bibliographystyle{IEEEtran}
+\balance
 \bibliography{references}
 \end{document}
