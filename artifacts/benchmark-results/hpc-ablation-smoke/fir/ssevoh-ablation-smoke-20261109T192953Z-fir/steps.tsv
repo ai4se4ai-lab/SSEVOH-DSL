@@ -1,0 +1,4 @@
+time	job	task	restart	stage	cell	step	start	end	seconds	rc	note	command
+2026-11-09 19:30:40	3180941		0	ablations	all	mechanisms	2026-11-09 19:30:39	2026-11-09 19:30:40	1	0		python experiments/scripts/ablations.py --output "/scratch/mbabaei/ssevoh/runs/ssevoh-ablation-smoke-20261109T192953Z-fir/results/ablations/records.jsonl" --repeats 1
+2026-11-09 19:30:40	3180941		0	ablations	all	statistics	2026-11-09 19:30:40	2026-11-09 19:30:40	0	0		python experiments/scripts/analyze.py --root "/scratch/mbabaei/ssevoh/runs/ssevoh-ablation-smoke-20261109T192953Z-fir/results" --output "/scratch/mbabaei/ssevoh/runs/ssevoh-ablation-smoke-20261109T192953Z-fir/results/analysis"
+2026-11-09 19:30:42	3180941		0	ablations	all	persist	2026-11-09 19:30:40	2026-11-09 19:30:42	1	0		[collect]

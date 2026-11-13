@@ -1,0 +1,31 @@
+{
+  "schema": "ssevoh-conformance-v1",
+  "utc": "2026-11-09T20:40:12.690090+00:00",
+  "complete_domain": false,
+  "passed": true,
+  "cases": 5000,
+  "domains": {
+    "graphs-and-lifecycle": 5000
+  },
+  "accepted": 144,
+  "rejected": 4856,
+  "false_accepts": 0,
+  "false_rejects": 0,
+  "counterexamples": [],
+  "seconds": 0.8511118769820314,
+  "verdict_digest": "6b79b0c9628db576c2b3c36aa6db0851b9cd8907fc87e1494a975678f0586dc3",
+  "bounds": "all initial acyclic two-component dependency/provenance graphs; all compatible quarantine/current-withdrawal subsets; one proposal; singleton relation lists from {self,other,missing}; target versions 1..3; expected versions 1..2; all supported pre/postconditions. Separate exhaustive one-component type/mutability/capability/grant/evidence domain.",
+  "source_sha256": {
+    "src/ssevoh/compiler.py": "2e56829c3568c54a18edd63253aedfbafaf11702797d5965a182e6ce7e24bf68",
+    "src/ssevoh/cli.py": "40666c8d4dd21404c3b8775a8afffc3d2955c4063701c857a03c3840f7b0e977",
+    "src/ssevoh/__init__.py": "7c8b82ac346b93d04fc981b6a6962b1c97102ac51a56bad0cf2e794ee0231de3",
+    "src/ssevoh/model.py": "d7dace428822a5d8659fef17d0f62279414480018d896fd096cffddf2ad4c0d0",
+    "src/ssevoh/assurance.py": "6dd9a71d00ee4e5962e271c6197139837dc89d3f05d69d2e1db9e315e3ccb57e",
+    "src/ssevoh/policy.py": "eaa7f5b3a98edbbaf44e0aeceb10be7770ded44aac8c61b82db79fe0c3240616",
+    "src/ssevoh/benchmark.py": "ea16dfbef101def000fe5ddcbfee7243dcce0b84922738caf11d29a6d827a303",
+    "src/ssevoh/verification.py": "293580ab20365a106817710ccbd6e8a6f6c9be686c9bed60c88ce8453f648386",
+    "src/ssevoh/compiler_print.py": "d6ca5c8b6e7726a608f1ec8f85ea4e247556d3cce85795cbd5413330e6ca80d2",
+    "formal/assurance/check_conformance.py": "4b31e281ed1f69ab1cdd5f1ff5ab5c86aad36aed2cd36542f2bac95771cd0227",
+    "formal/assurance/reference.py": "4b5dea154e09612f6860dac77b777f02e95831788cd02bcf320d435f218391e6"
+  }
+}

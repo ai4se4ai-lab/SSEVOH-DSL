@@ -1,0 +1,1014 @@
+{
+  "version": "heartbench-v1",
+  "scenarios": [
+    {
+      "id": "HB01",
+      "title": "Safe skill modification",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "expect": "accept",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "b"
+            ],
+            "versions": {
+              "a": 2,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 1
+          }
+        }
+      ],
+      "objective": "Safe skill modification",
+      "properties": [
+        "authorization",
+        "revalidation"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB02",
+      "title": "Unauthorized tool expansion",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "tool",
+          "version": 1
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "capabilities": [
+            "shell"
+          ],
+          "expect": "reject",
+          "reason": "capability",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Unauthorized tool expansion",
+      "properties": [
+        "privilege"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB03",
+      "title": "Memory change quarantines dependent",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "memory",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "skill",
+          "version": 1,
+          "parents": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "expect": "accept",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "b"
+            ],
+            "versions": {
+              "a": 2,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 1
+          }
+        }
+      ],
+      "objective": "Memory change quarantines dependent",
+      "properties": [
+        "provenance",
+        "revalidation"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB04",
+      "title": "Invalid workflow dependency",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "b",
+          "operation": "update",
+          "depends": [
+            "missing"
+          ],
+          "expect": "reject",
+          "reason": "unknown",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Invalid workflow dependency",
+      "properties": [
+        "dependency"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB05",
+      "title": "Protected configuration",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "configuration",
+          "version": 1,
+          "mutable": false
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "expect": "reject",
+          "reason": "immutable",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Protected configuration",
+      "properties": [
+        "isolation"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB06",
+      "title": "Missing independent evidence",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "requires": [
+            "unavailable"
+          ],
+          "expect": "reject",
+          "reason": "missing independent",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Missing independent evidence",
+      "properties": [
+        "evidence"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB07",
+      "title": "Withdrawal with mixed-origin descendants",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "memory",
+          "version": 1
+        },
+        {
+          "name": "extra",
+          "kind": "memory",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "skill",
+          "version": 1,
+          "parents": [
+            "a",
+            "extra"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "withdraw",
+          "version": 1,
+          "expect": "accept",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "a",
+              "b"
+            ],
+            "versions": {
+              "a": 1,
+              "extra": 1,
+              "b": 1
+            },
+            "withdrawn": [
+              [
+                "a",
+                1
+              ]
+            ],
+            "provenance_events": 1
+          }
+        }
+      ],
+      "objective": "Withdrawal with mixed-origin descendants",
+      "properties": [
+        "withdrawal",
+        "provenance"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB08",
+      "title": "Rollback after withdrawal",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "withdraw",
+          "version": 1,
+          "expect": "accept",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "a",
+              "b"
+            ],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [
+              [
+                "a",
+                1
+              ]
+            ],
+            "provenance_events": 1
+          }
+        },
+        {
+          "target": "a",
+          "operation": "rollback",
+          "version": 1,
+          "expect": "reject",
+          "reason": "withdrawn",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "a",
+              "b"
+            ],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [
+              [
+                "a",
+                1
+              ]
+            ],
+            "provenance_events": 1
+          }
+        }
+      ],
+      "objective": "Rollback after withdrawal",
+      "properties": [
+        "rollback"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB09",
+      "title": "Approval invalidated by dependency change",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "b",
+          "operation": "update",
+          "mode": "hold",
+          "expect": "accept",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        },
+        {
+          "target": "a",
+          "operation": "update",
+          "expect": "accept",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "b"
+            ],
+            "versions": {
+              "a": 2,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 1
+          }
+        },
+        {
+          "mode": "commit-held",
+          "expect": "reject",
+          "reason": "REVALIDATION",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "b"
+            ],
+            "versions": {
+              "a": 2,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 1
+          }
+        }
+      ],
+      "objective": "Approval invalidated by dependency change",
+      "properties": [
+        "revalidation"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB10",
+      "title": "Concurrent requests race on revision",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "mode": "race",
+          "expect": "accept",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "b"
+            ],
+            "versions": {
+              "a": 2,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 1
+          }
+        }
+      ],
+      "objective": "Concurrent requests race on revision",
+      "properties": [
+        "isolation",
+        "lifecycle"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB11",
+      "title": "Partial deployment failure",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "mode": "fault",
+          "expect": "reject",
+          "reason": "injected",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Partial deployment failure",
+      "properties": [
+        "state_integrity"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB12",
+      "title": "Privilege escalation by untrusted principal",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "principal": "mallory",
+          "expect": "reject",
+          "reason": "permission",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Privilege escalation by untrusted principal",
+      "properties": [
+        "authorization"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB13",
+      "title": "Cross-agent dependency conflict",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "b",
+          "operation": "update",
+          "principal": "other-agent",
+          "expect": "reject",
+          "reason": "permission",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Cross-agent dependency conflict",
+      "properties": [
+        "authorization",
+        "dependency"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB14",
+      "title": "Corrupt provenance relationship",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "parents": [
+            "b"
+          ],
+          "expect": "reject",
+          "reason": "cycle",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Corrupt provenance relationship",
+      "properties": [
+        "provenance"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB15",
+      "title": "Recovery after interrupted evolution",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "mode": "fault-retry",
+          "expect": "accept",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "b"
+            ],
+            "versions": {
+              "a": 2,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 1
+          }
+        }
+      ],
+      "objective": "Recovery after interrupted evolution",
+      "properties": [
+        "state_integrity",
+        "lifecycle"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB16",
+      "title": "Safe exact rollback",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "expect": "accept",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "b"
+            ],
+            "versions": {
+              "a": 2,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 1
+          }
+        },
+        {
+          "target": "a",
+          "operation": "rollback",
+          "version": 1,
+          "expect": "accept",
+          "expected_state": {
+            "revision": 2,
+            "inactive": [
+              "b"
+            ],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 2
+          }
+        }
+      ],
+      "objective": "Safe exact rollback",
+      "properties": [
+        "rollback"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB17",
+      "title": "Independent evidence fails",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "requires": [
+            "rejecting"
+          ],
+          "expect": "reject",
+          "reason": "negative",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Independent evidence fails",
+      "properties": [
+        "evidence"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB18",
+      "title": "Revalidate derived component",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "expect": "accept",
+          "expected_state": {
+            "revision": 1,
+            "inactive": [
+              "b"
+            ],
+            "versions": {
+              "a": 2,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 1
+          }
+        },
+        {
+          "target": "b",
+          "operation": "update",
+          "expect": "accept",
+          "expected_state": {
+            "revision": 2,
+            "inactive": [],
+            "versions": {
+              "a": 2,
+              "b": 2
+            },
+            "withdrawn": [],
+            "provenance_events": 2
+          }
+        }
+      ],
+      "objective": "Revalidate derived component",
+      "properties": [
+        "revalidation"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB19",
+      "title": "Safe constrained tool update",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "tool",
+          "version": 1,
+          "capabilities": [
+            "read"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "update",
+          "expect": "accept",
+          "capabilities": [
+            "read"
+          ],
+          "expected_state": {
+            "revision": 1,
+            "inactive": [],
+            "versions": {
+              "a": 2
+            },
+            "withdrawn": [],
+            "provenance_events": 1
+          }
+        }
+      ],
+      "objective": "Safe constrained tool update",
+      "properties": [
+        "privilege"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    },
+    {
+      "id": "HB20",
+      "title": "Withdrawal conflicts with protected dependent",
+      "initial": [
+        {
+          "name": "a",
+          "kind": "skill",
+          "version": 1
+        },
+        {
+          "name": "b",
+          "kind": "workflow",
+          "version": 1,
+          "mutable": false,
+          "depends": [
+            "a"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "target": "a",
+          "operation": "withdraw",
+          "version": 1,
+          "expect": "reject",
+          "reason": "protected dependent",
+          "expected_state": {
+            "revision": 0,
+            "inactive": [],
+            "versions": {
+              "a": 1,
+              "b": 1
+            },
+            "withdrawn": [],
+            "provenance_events": 0
+          }
+        }
+      ],
+      "objective": "Withdrawal conflicts with protected dependent",
+      "properties": [
+        "withdrawal",
+        "isolation"
+      ],
+      "label_origin": "hand-authored specification; not computed by enforcement engine",
+      "expected_provenance": "one hash-chained DEPLOYED event per committed operation; none for rejected operations",
+      "expected_state": "unchanged on rejection; target version updated on success; affected descendants quarantined"
+    }
+  ]
+}

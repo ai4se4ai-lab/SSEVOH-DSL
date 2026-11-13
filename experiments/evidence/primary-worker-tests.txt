@@ -1,0 +1,14 @@
+test_concurrent_scaling_trial_keeps_one_winner_and_all_conflicts (test_primary_analysis.PrimaryAnalysis.test_concurrent_scaling_trial_keeps_one_winner_and_all_conflicts) ... ok
+test_invalid_or_empty_outputs_are_not_evaluable_unsafe_samples (test_primary_analysis.PrimaryAnalysis.test_invalid_or_empty_outputs_are_not_evaluable_unsafe_samples) ... ok
+test_scaling_only_input_retains_shapes_and_repeats (test_primary_analysis.PrimaryAnalysis.test_scaling_only_input_retains_shapes_and_repeats) ... ok
+test_clean_name_does_not_launder_a_withdrawn_version_origin (test_primary_oracle.PrimaryOracle.test_clean_name_does_not_launder_a_withdrawn_version_origin) ... ok
+test_every_fixture_prefix_matches_the_reference_label (test_primary_oracle.PrimaryOracle.test_every_fixture_prefix_matches_the_reference_label) ... ok
+test_mutable_verifier_dependent_is_still_protected (test_primary_oracle.PrimaryOracle.test_mutable_verifier_dependent_is_still_protected) ... ok
+test_three_generations_are_one_job_and_invalid_agreement_is_explicit (test_qualification_analysis.QualificationAnalysis.test_three_generations_are_one_job_and_invalid_agreement_is_explicit) ... ok
+test_evidence_omission_changes_fidelity_even_when_transition_fields_match (test_request_fidelity.RequestFidelity.test_evidence_omission_changes_fidelity_even_when_transition_fields_match) ... ok
+test_snapshot_and_conditions_are_checked_without_enforcing_arbitrary_names (test_request_fidelity.RequestFidelity.test_snapshot_and_conditions_are_checked_without_enforcing_arbitrary_names) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.038s
+
+OK

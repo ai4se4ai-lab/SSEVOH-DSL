@@ -1,0 +1,23 @@
+specification = "harness", identifier, "{", { declaration }, "}" ;
+declaration = component | evolution ;
+component = "component", identifier, kind, "{", { component_field, ";" }, "}" ;
+kind = "skill" | "memory" | "tool" | "workflow" | "configuration" | "policy" | "verifier" ;
+evolution = "evolution", identifier, "{", { evolution_field, ";" }, "}" ;
+component_field = "version", positive_integer
+      | "mutable", ("true" | "false")
+      | ("depends" | "parents" | "capabilities"), list ;
+evolution_field = ("from" | "to"), positive_integer
+      | ("depends" | "parents" | "capabilities" | "requires"), list
+      | "operation", ("update" | "withdraw" | "rollback")
+      | "target", identifier
+      | "expect", ("active" | "inactive" | "any")
+      | "ensure", ("active" | "inactive") ;
+list = "[", [identifier, {",", identifier}], "]" ;
+identifier = letter_or_underscore, {letter_or_digit_or_underscore_or_dot_or_hyphen} ;
+positive_integer = digit, {digit} ; (* ASCII digits, numeric value >= 1. Leading zeros allowed. *)
+(* Lexical whitespace and #-to-end-of-line comments are ignored.
+   Semantic constraints: exactly one evolution; unique names/fields/list members;
+   component version and evolution operation/target/from/to required. Components may
+   appear before or after the evolution. All references resolve across declarations.
+   Only fields belonging to a declaration are accepted. Lists denote sets; IR order
+   is canonical. Defaults and typed preconditions are in language-reference.md. *)

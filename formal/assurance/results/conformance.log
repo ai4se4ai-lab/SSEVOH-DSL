@@ -1,0 +1,42 @@
+10000 exhaustive cases; no divergence; elapsed 1.7s
+20000 exhaustive cases; no divergence; elapsed 3.3s
+30000 exhaustive cases; no divergence; elapsed 5.0s
+40000 exhaustive cases; no divergence; elapsed 6.6s
+50000 exhaustive cases; no divergence; elapsed 8.3s
+60000 exhaustive cases; no divergence; elapsed 10.0s
+70000 exhaustive cases; no divergence; elapsed 11.7s
+80000 exhaustive cases; no divergence; elapsed 13.3s
+90000 exhaustive cases; no divergence; elapsed 15.0s
+100000 exhaustive cases; no divergence; elapsed 16.7s
+110000 exhaustive cases; no divergence; elapsed 18.4s
+120000 exhaustive cases; no divergence; elapsed 20.1s
+130000 exhaustive cases; no divergence; elapsed 21.7s
+140000 exhaustive cases; no divergence; elapsed 23.4s
+150000 exhaustive cases; no divergence; elapsed 25.1s
+160000 exhaustive cases; no divergence; elapsed 26.8s
+170000 exhaustive cases; no divergence; elapsed 28.5s
+180000 exhaustive cases; no divergence; elapsed 30.0s
+190000 exhaustive cases; no divergence; elapsed 31.3s
+200000 exhaustive cases; no divergence; elapsed 32.6s
+210000 exhaustive cases; no divergence; elapsed 33.8s
+220000 exhaustive cases; no divergence; elapsed 35.1s
+230000 exhaustive cases; no divergence; elapsed 36.4s
+240000 exhaustive cases; no divergence; elapsed 37.7s
+{
+  "schema": "ssevoh-conformance-v1",
+  "utc": "2026-11-09T20:49:27.344378+00:00",
+  "complete_domain": true,
+  "passed": true,
+  "cases": 248832,
+  "domains": {
+    "graphs-and-lifecycle": 176256,
+    "types-permissions-evidence": 72576
+  },
+  "accepted": 3388,
+  "rejected": 245444,
+  "false_accepts": 0,
+  "false_rejects": 0,
+  "counterexamples": [],
+  "seconds": 38.832523663004395,
+  "verdict_digest": "e4093beddd10076fba750f0fc8f0f27e319e83d1e005b8659dfccb6cfdba9260"
+}

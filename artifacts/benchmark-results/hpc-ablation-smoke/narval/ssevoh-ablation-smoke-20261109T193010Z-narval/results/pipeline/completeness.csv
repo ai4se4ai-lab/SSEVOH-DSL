@@ -1,0 +1,2 @@
+stage,cell_id,cell,state,steps_ok,steps_total,node,elapsed,failed_steps,records_done,records_expected
+ablations,0,-,RUNNING,2,3,nc10910,103,,,

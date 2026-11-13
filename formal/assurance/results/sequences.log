@@ -1,0 +1,29 @@
+{
+  "schema": "ssevoh-sequences-v1",
+  "utc": "2026-11-09T20:50:01.359209+00:00",
+  "passed": true,
+  "complete_domain": true,
+  "bounds": {
+    "components": 2,
+    "initial_versions": [
+      1
+    ],
+    "versions": [
+      1,
+      2,
+      3
+    ],
+    "depth": 4,
+    "initial_graphs": "all acyclic combinations of four possible cross-component dependency/parent edges",
+    "proposals": "both targets, all three operations, all three destination versions; existing relation/capability lists retained; true structure evidence; all grants"
+  },
+  "initial_graphs": 7,
+  "contexts": 3307,
+  "transitions": 19620,
+  "accepted": 6880,
+  "rejected": 12740,
+  "anchored_replays": 6880,
+  "counterexamples": [],
+  "seconds": 33.970254443993326,
+  "verdict_digest": "66568c3cdadd5f64caa311f24a70f4434b90bd87dc1dff42069e8453109d41ba"
+}

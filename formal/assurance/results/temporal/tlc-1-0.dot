@@ -1,0 +1,96 @@
+strict digraph DiskGraph {
+nodesep=0.35;
+subgraph cluster_graph {
+color="white";
+-4964152525537959439 [label="/\\ certified = -1\n/\\ epoch = 0\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"PROPOSED\"",style = filled]
+-4964152525537959439 -> -6972888899587144288 [label="Analyse",color="black",fontcolor="black"];
+-6972888899587144288 [label="/\\ certified = -1\n/\\ epoch = 0\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"ANALYSED\""];
+-4964152525537959439 -> -8019654762266777986 [label="Change",color="black",fontcolor="black"];
+-8019654762266777986 [label="/\\ certified = -1\n/\\ epoch = 1\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"PROPOSED\""];
+-4964152525537959439 -> 7562458888737071570 [label="Withdraw",color="black",fontcolor="black"];
+7562458888737071570 [label="/\\ certified = -1\n/\\ epoch = 1\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"PROPOSED\""];
+-4964152525537959439 -> 8770476746489559860 [label="Reject",color="black",fontcolor="black"];
+8770476746489559860 [label="/\\ certified = -1\n/\\ epoch = 0\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"REJECTED\""];
+-6972888899587144288 -> -4206528041027346054 [label="Verify",color="black",fontcolor="black"];
+-4206528041027346054 [label="/\\ certified = -1\n/\\ epoch = 0\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"VERIFIED\""];
+-6972888899587144288 -> -5434457634839592401 [label="Change",color="black",fontcolor="black"];
+-5434457634839592401 [label="/\\ certified = -1\n/\\ epoch = 1\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"ANALYSED\""];
+-6972888899587144288 -> 5536009862275696003 [label="Withdraw",color="black",fontcolor="black"];
+5536009862275696003 [label="/\\ certified = -1\n/\\ epoch = 1\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"ANALYSED\""];
+-6972888899587144288 -> 8770476746489559860 [label="Reject",color="black",fontcolor="black"];
+-8019654762266777986 -> -5434457634839592401 [label="Analyse",color="black",fontcolor="black"];
+-8019654762266777986 -> -1421811147036184849 [label="Change",color="black",fontcolor="black"];
+-1421811147036184849 [label="/\\ certified = -1\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"PROPOSED\""];
+-8019654762266777986 -> 1442137567184890179 [label="Withdraw",color="black",fontcolor="black"];
+1442137567184890179 [label="/\\ certified = -1\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"PROPOSED\""];
+-8019654762266777986 -> 5915831936684096699 [label="Reject",color="black",fontcolor="black"];
+5915831936684096699 [label="/\\ certified = -1\n/\\ epoch = 1\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"REJECTED\""];
+7562458888737071570 -> 5536009862275696003 [label="Analyse",color="black",fontcolor="black"];
+7562458888737071570 -> 1442137567184890179 [label="Change",color="black",fontcolor="black"];
+7562458888737071570 -> 1442137567184890179 [label="Withdraw",color="black",fontcolor="black"];
+7562458888737071570 -> 8492006707206535807 [label="Recover",color="black",fontcolor="black"];
+8492006707206535807 [label="/\\ certified = 1\n/\\ epoch = 1\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"REJECTED\""];
+7562458888737071570 -> -6170362511300363497 [label="Reject",color="black",fontcolor="black"];
+-6170362511300363497 [label="/\\ certified = -1\n/\\ epoch = 1\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"REJECTED\""];
+8770476746489559860 -> 5915831936684096699 [label="Change",color="black",fontcolor="black"];
+8770476746489559860 -> -6170362511300363497 [label="Withdraw",color="black",fontcolor="black"];
+-4206528041027346054 -> -1283289605344696587 [label="Change",color="black",fontcolor="black"];
+-1283289605344696587 [label="/\\ certified = -1\n/\\ epoch = 1\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"VERIFIED\""];
+-4206528041027346054 -> 1619009802048954713 [label="Withdraw",color="black",fontcolor="black"];
+1619009802048954713 [label="/\\ certified = -1\n/\\ epoch = 1\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"VERIFIED\""];
+-4206528041027346054 -> 8770476746489559860 [label="Reject",color="black",fontcolor="black"];
+-5434457634839592401 -> -1283289605344696587 [label="Verify",color="black",fontcolor="black"];
+-5434457634839592401 -> -4007027593258988866 [label="Change",color="black",fontcolor="black"];
+-4007027593258988866 [label="/\\ certified = -1\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"ANALYSED\""];
+-5434457634839592401 -> 3468646456865754386 [label="Withdraw",color="black",fontcolor="black"];
+3468646456865754386 [label="/\\ certified = -1\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"ANALYSED\""];
+-5434457634839592401 -> 5915831936684096699 [label="Reject",color="black",fontcolor="black"];
+5536009862275696003 -> 1619009802048954713 [label="Verify",color="black",fontcolor="black"];
+5536009862275696003 -> 3468646456865754386 [label="Change",color="black",fontcolor="black"];
+5536009862275696003 -> 3468646456865754386 [label="Withdraw",color="black",fontcolor="black"];
+5536009862275696003 -> 8492006707206535807 [label="Recover",color="black",fontcolor="black"];
+5536009862275696003 -> -6170362511300363497 [label="Reject",color="black",fontcolor="black"];
+-1421811147036184849 -> -4007027593258988866 [label="Analyse",color="black",fontcolor="black"];
+-1421811147036184849 -> 3380375919919199274 [label="Reject",color="black",fontcolor="black"];
+3380375919919199274 [label="/\\ certified = -1\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"REJECTED\""];
+1442137567184890179 -> 3468646456865754386 [label="Analyse",color="black",fontcolor="black"];
+1442137567184890179 -> -6005715477536476293 [label="Recover",color="black",fontcolor="black"];
+-6005715477536476293 [label="/\\ certified = 2\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"REJECTED\""];
+1442137567184890179 -> -2977240215763291258 [label="Reject",color="black",fontcolor="black"];
+-2977240215763291258 [label="/\\ certified = -1\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"REJECTED\""];
+5915831936684096699 -> 3380375919919199274 [label="Change",color="black",fontcolor="black"];
+5915831936684096699 -> -2977240215763291258 [label="Withdraw",color="black",fontcolor="black"];
+8492006707206535807 -> 660176653479162606 [label="Change",color="black",fontcolor="black"];
+660176653479162606 [label="/\\ certified = 1\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"REJECTED\""];
+8492006707206535807 -> 660176653479162606 [label="Withdraw",color="black",fontcolor="black"];
+8492006707206535807 -> 8492006707206535807 [label="Recover",color="black",fontcolor="black"];
+-6170362511300363497 -> -2977240215763291258 [label="Change",color="black",fontcolor="black"];
+-6170362511300363497 -> -2977240215763291258 [label="Withdraw",color="black",fontcolor="black"];
+-6170362511300363497 -> 8492006707206535807 [label="Recover",color="black",fontcolor="black"];
+-1283289605344696587 -> -7872267033359126940 [label="Change",color="black",fontcolor="black"];
+-7872267033359126940 [label="/\\ certified = -1\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = FALSE\n/\\ phase = \"VERIFIED\""];
+-1283289605344696587 -> 7676140265880873416 [label="Withdraw",color="black",fontcolor="black"];
+7676140265880873416 [label="/\\ certified = -1\n/\\ epoch = 2\n/\\ approved = -1\n/\\ active = FALSE\n/\\ withdrawn = TRUE\n/\\ phase = \"VERIFIED\""];
+-1283289605344696587 -> 5915831936684096699 [label="Reject",color="black",fontcolor="black"];
+1619009802048954713 -> 7676140265880873416 [label="Change",color="black",fontcolor="black"];
+1619009802048954713 -> 7676140265880873416 [label="Withdraw",color="black",fontcolor="black"];
+1619009802048954713 -> 8492006707206535807 [label="Recover",color="black",fontcolor="black"];
+1619009802048954713 -> -6170362511300363497 [label="Reject",color="black",fontcolor="black"];
+-4007027593258988866 -> -7872267033359126940 [label="Verify",color="black",fontcolor="black"];
+-4007027593258988866 -> 3380375919919199274 [label="Reject",color="black",fontcolor="black"];
+3468646456865754386 -> 7676140265880873416 [label="Verify",color="black",fontcolor="black"];
+3468646456865754386 -> -6005715477536476293 [label="Recover",color="black",fontcolor="black"];
+3468646456865754386 -> -2977240215763291258 [label="Reject",color="black",fontcolor="black"];
+-6005715477536476293 -> -6005715477536476293 [label="Recover",color="black",fontcolor="black"];
+-2977240215763291258 -> -6005715477536476293 [label="Recover",color="black",fontcolor="black"];
+660176653479162606 -> -6005715477536476293 [label="Recover",color="black",fontcolor="black"];
+-7872267033359126940 -> 3380375919919199274 [label="Reject",color="black",fontcolor="black"];
+7676140265880873416 -> -6005715477536476293 [label="Recover",color="black",fontcolor="black"];
+7676140265880873416 -> -2977240215763291258 [label="Reject",color="black",fontcolor="black"];
+{rank = same; -4964152525537959439;}
+{rank = same; -8019654762266777986;7562458888737071570;8770476746489559860;-6972888899587144288;}
+{rank = same; -5434457634839592401;5536009862275696003;-4206528041027346054;-1421811147036184849;1442137567184890179;5915831936684096699;-6170362511300363497;8492006707206535807;}
+{rank = same; -4007027593258988866;3468646456865754386;-6005715477536476293;-1283289605344696587;1619009802048954713;660176653479162606;-2977240215763291258;}
+{rank = same; -7872267033359126940;7676140265880873416;}
+}
+}

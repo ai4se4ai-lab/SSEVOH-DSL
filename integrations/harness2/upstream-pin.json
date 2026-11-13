@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/google-research/harness2.git",
+  "commit": "6868817518876de8fd170c6a8354daca273b6191",
+  "user_selected_target": true,
+  "previous_target": "../harness-rsi/upstream-pin.json",
+  "python": "3.12+",
+  "integration_scope": "real upstream scheduling, candidate admission, probes and library; initial controlled local executor"
+}

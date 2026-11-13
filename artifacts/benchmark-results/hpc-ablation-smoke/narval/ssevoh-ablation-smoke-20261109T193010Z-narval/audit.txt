@@ -1,0 +1,13 @@
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+ ssevoh-ablation — run audit ssevoh-ablation-smoke-20261109T193010Z-narval  [SMOKE]   2026-11-09 19:46:35   commit ?
+ results /scratch/mbabaei/ssevoh/runs/ssevoh-ablation-smoke-20261109T193010Z-narval/results
+════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+ cells  ✔ OK 1   (total 1)
+ steps  3/3 ok, 0 failed     requeues 0
+
+   STAGE[cell]   CELL  STATE  GPU  NODE     RUN / LIMIT     WAIT  STEPS  PROGRESS  CURRENT / FAILED  DETAIL  
+─  ────────────  ────  ─────  ───  ───────  ──────────────  ────  ─────  ────────  ────────────────  ────────
+✔  ablations[0]  -     OK     cpu  nc10910  1m46s / 10m00s  -     3/3    -         -                 finished
+      └ mechanisms                 OK          1m25s    
+      └ statistics                 OK          0m02s    
+      └ persist                    OK          0m04s    

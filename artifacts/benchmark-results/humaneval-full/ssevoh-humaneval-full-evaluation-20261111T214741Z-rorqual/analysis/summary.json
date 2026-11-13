@@ -1,0 +1,1257 @@
+{
+  "schema": "ssevoh-humaneval-analysis-v2",
+  "summaries": [
+    {
+      "model": "phi4:14b",
+      "condition": "frozen-one-shot",
+      "planned": 492,
+      "graded": 491,
+      "passed": 239,
+      "intention_to_evaluate_accuracy": 0.48577235772357724,
+      "graded_only_accuracy": 0.48676171079429736,
+      "statuses": {
+        "graded": 491,
+        "missing_solution": 1
+      },
+      "method_errors": 7
+    },
+    {
+      "model": "phi4:14b",
+      "condition": "frozen-selected",
+      "planned": 492,
+      "graded": 485,
+      "passed": 234,
+      "intention_to_evaluate_accuracy": 0.47560975609756095,
+      "graded_only_accuracy": 0.4824742268041237,
+      "statuses": {
+        "graded": 485,
+        "missing_solution": 7
+      },
+      "method_errors": 7
+    },
+    {
+      "model": "phi4:14b",
+      "condition": "guarded",
+      "planned": 492,
+      "graded": 476,
+      "passed": 174,
+      "intention_to_evaluate_accuracy": 0.35365853658536583,
+      "graded_only_accuracy": 0.36554621848739494,
+      "statuses": {
+        "graded": 476,
+        "missing_solution": 16
+      },
+      "method_errors": 16
+    },
+    {
+      "model": "phi4:14b",
+      "condition": "original",
+      "planned": 492,
+      "graded": 477,
+      "passed": 177,
+      "intention_to_evaluate_accuracy": 0.3597560975609756,
+      "graded_only_accuracy": 0.3710691823899371,
+      "statuses": {
+        "graded": 477,
+        "missing_solution": 15
+      },
+      "method_errors": 15
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "condition": "frozen-one-shot",
+      "planned": 492,
+      "graded": 490,
+      "passed": 381,
+      "intention_to_evaluate_accuracy": 0.774390243902439,
+      "graded_only_accuracy": 0.7775510204081633,
+      "statuses": {
+        "graded": 490,
+        "missing_solution": 2
+      },
+      "method_errors": 0
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "condition": "frozen-selected",
+      "planned": 492,
+      "graded": 492,
+      "passed": 384,
+      "intention_to_evaluate_accuracy": 0.7804878048780488,
+      "graded_only_accuracy": 0.7804878048780488,
+      "statuses": {
+        "graded": 492
+      },
+      "method_errors": 0
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "condition": "guarded",
+      "planned": 492,
+      "graded": 489,
+      "passed": 377,
+      "intention_to_evaluate_accuracy": 0.766260162601626,
+      "graded_only_accuracy": 0.7709611451942741,
+      "statuses": {
+        "graded": 489,
+        "missing_solution": 3
+      },
+      "method_errors": 3
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "condition": "original",
+      "planned": 492,
+      "graded": 489,
+      "passed": 368,
+      "intention_to_evaluate_accuracy": 0.7479674796747967,
+      "graded_only_accuracy": 0.7525562372188139,
+      "statuses": {
+        "graded": 489,
+        "missing_solution": 3
+      },
+      "method_errors": 3
+    }
+  ],
+  "ordered_streams": [
+    {
+      "model": "phi4:14b",
+      "seed": 1701,
+      "condition": "frozen-one-shot",
+      "planned": 164,
+      "graded": 164,
+      "passed": 78,
+      "intention_to_evaluate_accuracy": 0.47560975609756095,
+      "graded_only_accuracy": 0.47560975609756095,
+      "statuses": {
+        "graded": 164
+      },
+      "method_errors": 4,
+      "calls": 164,
+      "tokens": 42612,
+      "prompt_tokens": 44723,
+      "seconds": 550.4403180746594,
+      "cost_note": "Nested one-shot endpoint shares the frozen pool; do not add endpoint costs.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 162,
+        "passed": 77,
+        "intention_to_evaluate_accuracy": 0.47530864197530864,
+        "graded_only_accuracy": 0.47530864197530864,
+        "statuses": {
+          "graded": 162
+        },
+        "method_errors": 4
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 161,
+        "passed": 77,
+        "intention_to_evaluate_accuracy": 0.4782608695652174,
+        "graded_only_accuracy": 0.4782608695652174,
+        "statuses": {
+          "graded": 161
+        },
+        "method_errors": 4
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1701,
+      "condition": "frozen-selected",
+      "planned": 164,
+      "graded": 160,
+      "passed": 76,
+      "intention_to_evaluate_accuracy": 0.4634146341463415,
+      "graded_only_accuracy": 0.475,
+      "statuses": {
+        "graded": 160,
+        "missing_solution": 4
+      },
+      "method_errors": 4,
+      "calls": 1476,
+      "tokens": 357257,
+      "prompt_tokens": 963251,
+      "seconds": 3258.841823734576,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 158,
+        "passed": 75,
+        "intention_to_evaluate_accuracy": 0.46296296296296297,
+        "graded_only_accuracy": 0.47468354430379744,
+        "statuses": {
+          "graded": 158,
+          "missing_solution": 4
+        },
+        "method_errors": 4
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 157,
+        "passed": 75,
+        "intention_to_evaluate_accuracy": 0.4658385093167702,
+        "graded_only_accuracy": 0.47770700636942676,
+        "statuses": {
+          "graded": 157,
+          "missing_solution": 4
+        },
+        "method_errors": 4
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1701,
+      "condition": "guarded",
+      "planned": 164,
+      "graded": 157,
+      "passed": 53,
+      "intention_to_evaluate_accuracy": 0.3231707317073171,
+      "graded_only_accuracy": 0.3375796178343949,
+      "statuses": {
+        "graded": 157,
+        "missing_solution": 7
+      },
+      "method_errors": 7,
+      "calls": 2679,
+      "tokens": 698630,
+      "prompt_tokens": 12747755,
+      "seconds": 9454.22464920592,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 155,
+        "passed": 52,
+        "intention_to_evaluate_accuracy": 0.32098765432098764,
+        "graded_only_accuracy": 0.33548387096774196,
+        "statuses": {
+          "graded": 155,
+          "missing_solution": 7
+        },
+        "method_errors": 7
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 154,
+        "passed": 52,
+        "intention_to_evaluate_accuracy": 0.32298136645962733,
+        "graded_only_accuracy": 0.33766233766233766,
+        "statuses": {
+          "graded": 154,
+          "missing_solution": 7
+        },
+        "method_errors": 7
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1701,
+      "condition": "original",
+      "planned": 164,
+      "graded": 162,
+      "passed": 48,
+      "intention_to_evaluate_accuracy": 0.2926829268292683,
+      "graded_only_accuracy": 0.2962962962962963,
+      "statuses": {
+        "graded": 162,
+        "missing_solution": 2
+      },
+      "method_errors": 2,
+      "calls": 2681,
+      "tokens": 664908,
+      "prompt_tokens": 12115606,
+      "seconds": 9607.325784288696,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 160,
+        "passed": 46,
+        "intention_to_evaluate_accuracy": 0.2839506172839506,
+        "graded_only_accuracy": 0.2875,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 2
+        },
+        "method_errors": 2
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 159,
+        "passed": 46,
+        "intention_to_evaluate_accuracy": 0.2857142857142857,
+        "graded_only_accuracy": 0.2893081761006289,
+        "statuses": {
+          "graded": 159,
+          "missing_solution": 2
+        },
+        "method_errors": 2
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1702,
+      "condition": "frozen-one-shot",
+      "planned": 164,
+      "graded": 163,
+      "passed": 79,
+      "intention_to_evaluate_accuracy": 0.4817073170731707,
+      "graded_only_accuracy": 0.48466257668711654,
+      "statuses": {
+        "graded": 163,
+        "missing_solution": 1
+      },
+      "method_errors": 0,
+      "calls": 164,
+      "tokens": 41285,
+      "prompt_tokens": 44458,
+      "seconds": 406.6229680236429,
+      "cost_note": "Nested one-shot endpoint shares the frozen pool; do not add endpoint costs.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 161,
+        "passed": 77,
+        "intention_to_evaluate_accuracy": 0.47530864197530864,
+        "graded_only_accuracy": 0.4782608695652174,
+        "statuses": {
+          "graded": 161,
+          "missing_solution": 1
+        },
+        "method_errors": 0
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 160,
+        "passed": 77,
+        "intention_to_evaluate_accuracy": 0.4782608695652174,
+        "graded_only_accuracy": 0.48125,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 1
+        },
+        "method_errors": 0
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1702,
+      "condition": "frozen-selected",
+      "planned": 164,
+      "graded": 164,
+      "passed": 78,
+      "intention_to_evaluate_accuracy": 0.47560975609756095,
+      "graded_only_accuracy": 0.47560975609756095,
+      "statuses": {
+        "graded": 164
+      },
+      "method_errors": 0,
+      "calls": 1476,
+      "tokens": 355121,
+      "prompt_tokens": 959995,
+      "seconds": 2835.622143154498,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 162,
+        "passed": 77,
+        "intention_to_evaluate_accuracy": 0.47530864197530864,
+        "graded_only_accuracy": 0.47530864197530864,
+        "statuses": {
+          "graded": 162
+        },
+        "method_errors": 0
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 161,
+        "passed": 77,
+        "intention_to_evaluate_accuracy": 0.4782608695652174,
+        "graded_only_accuracy": 0.4782608695652174,
+        "statuses": {
+          "graded": 161
+        },
+        "method_errors": 0
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1702,
+      "condition": "guarded",
+      "planned": 164,
+      "graded": 158,
+      "passed": 56,
+      "intention_to_evaluate_accuracy": 0.34146341463414637,
+      "graded_only_accuracy": 0.35443037974683544,
+      "statuses": {
+        "graded": 158,
+        "missing_solution": 6
+      },
+      "method_errors": 6,
+      "calls": 2686,
+      "tokens": 694697,
+      "prompt_tokens": 12398617,
+      "seconds": 9208.239612621954,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 156,
+        "passed": 55,
+        "intention_to_evaluate_accuracy": 0.3395061728395062,
+        "graded_only_accuracy": 0.3525641025641026,
+        "statuses": {
+          "graded": 156,
+          "missing_solution": 6
+        },
+        "method_errors": 6
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 155,
+        "passed": 54,
+        "intention_to_evaluate_accuracy": 0.33540372670807456,
+        "graded_only_accuracy": 0.34838709677419355,
+        "statuses": {
+          "graded": 155,
+          "missing_solution": 6
+        },
+        "method_errors": 6
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1702,
+      "condition": "original",
+      "planned": 164,
+      "graded": 157,
+      "passed": 70,
+      "intention_to_evaluate_accuracy": 0.4268292682926829,
+      "graded_only_accuracy": 0.445859872611465,
+      "statuses": {
+        "graded": 157,
+        "missing_solution": 7
+      },
+      "method_errors": 7,
+      "calls": 2710,
+      "tokens": 688604,
+      "prompt_tokens": 12241281,
+      "seconds": 8958.372417461942,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 155,
+        "passed": 68,
+        "intention_to_evaluate_accuracy": 0.41975308641975306,
+        "graded_only_accuracy": 0.43870967741935485,
+        "statuses": {
+          "graded": 155,
+          "missing_solution": 7
+        },
+        "method_errors": 7
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 154,
+        "passed": 67,
+        "intention_to_evaluate_accuracy": 0.4161490683229814,
+        "graded_only_accuracy": 0.43506493506493504,
+        "statuses": {
+          "graded": 154,
+          "missing_solution": 7
+        },
+        "method_errors": 7
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1703,
+      "condition": "frozen-one-shot",
+      "planned": 164,
+      "graded": 164,
+      "passed": 82,
+      "intention_to_evaluate_accuracy": 0.5,
+      "graded_only_accuracy": 0.5,
+      "statuses": {
+        "graded": 164
+      },
+      "method_errors": 3,
+      "calls": 164,
+      "tokens": 41646,
+      "prompt_tokens": 44723,
+      "seconds": 356.09426875878125,
+      "cost_note": "Nested one-shot endpoint shares the frozen pool; do not add endpoint costs.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 162,
+        "passed": 81,
+        "intention_to_evaluate_accuracy": 0.5,
+        "graded_only_accuracy": 0.5,
+        "statuses": {
+          "graded": 162
+        },
+        "method_errors": 3
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 161,
+        "passed": 81,
+        "intention_to_evaluate_accuracy": 0.5031055900621118,
+        "graded_only_accuracy": 0.5031055900621118,
+        "statuses": {
+          "graded": 161
+        },
+        "method_errors": 3
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1703,
+      "condition": "frozen-selected",
+      "planned": 164,
+      "graded": 161,
+      "passed": 80,
+      "intention_to_evaluate_accuracy": 0.4878048780487805,
+      "graded_only_accuracy": 0.4968944099378882,
+      "statuses": {
+        "graded": 161,
+        "missing_solution": 3
+      },
+      "method_errors": 3,
+      "calls": 1476,
+      "tokens": 356966,
+      "prompt_tokens": 962060,
+      "seconds": 3014.3051408827305,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 159,
+        "passed": 78,
+        "intention_to_evaluate_accuracy": 0.48148148148148145,
+        "graded_only_accuracy": 0.49056603773584906,
+        "statuses": {
+          "graded": 159,
+          "missing_solution": 3
+        },
+        "method_errors": 3
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 158,
+        "passed": 77,
+        "intention_to_evaluate_accuracy": 0.4782608695652174,
+        "graded_only_accuracy": 0.4873417721518987,
+        "statuses": {
+          "graded": 158,
+          "missing_solution": 3
+        },
+        "method_errors": 3
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1703,
+      "condition": "guarded",
+      "planned": 164,
+      "graded": 161,
+      "passed": 65,
+      "intention_to_evaluate_accuracy": 0.39634146341463417,
+      "graded_only_accuracy": 0.40372670807453415,
+      "statuses": {
+        "graded": 161,
+        "missing_solution": 3
+      },
+      "method_errors": 3,
+      "calls": 2707,
+      "tokens": 680411,
+      "prompt_tokens": 12879402,
+      "seconds": 8281.178258948377,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 159,
+        "passed": 65,
+        "intention_to_evaluate_accuracy": 0.4012345679012346,
+        "graded_only_accuracy": 0.4088050314465409,
+        "statuses": {
+          "graded": 159,
+          "missing_solution": 3
+        },
+        "method_errors": 3
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 158,
+        "passed": 65,
+        "intention_to_evaluate_accuracy": 0.40372670807453415,
+        "graded_only_accuracy": 0.41139240506329117,
+        "statuses": {
+          "graded": 158,
+          "missing_solution": 3
+        },
+        "method_errors": 3
+      }
+    },
+    {
+      "model": "phi4:14b",
+      "seed": 1703,
+      "condition": "original",
+      "planned": 164,
+      "graded": 158,
+      "passed": 59,
+      "intention_to_evaluate_accuracy": 0.3597560975609756,
+      "graded_only_accuracy": 0.37341772151898733,
+      "statuses": {
+        "graded": 158,
+        "missing_solution": 6
+      },
+      "method_errors": 6,
+      "calls": 2707,
+      "tokens": 713431,
+      "prompt_tokens": 12268827,
+      "seconds": 8033.676363293198,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 156,
+        "passed": 57,
+        "intention_to_evaluate_accuracy": 0.35185185185185186,
+        "graded_only_accuracy": 0.36538461538461536,
+        "statuses": {
+          "graded": 156,
+          "missing_solution": 6
+        },
+        "method_errors": 6
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 155,
+        "passed": 56,
+        "intention_to_evaluate_accuracy": 0.34782608695652173,
+        "graded_only_accuracy": 0.36129032258064514,
+        "statuses": {
+          "graded": 155,
+          "missing_solution": 6
+        },
+        "method_errors": 6
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1701,
+      "condition": "frozen-one-shot",
+      "planned": 164,
+      "graded": 163,
+      "passed": 127,
+      "intention_to_evaluate_accuracy": 0.774390243902439,
+      "graded_only_accuracy": 0.7791411042944786,
+      "statuses": {
+        "graded": 163,
+        "missing_solution": 1
+      },
+      "method_errors": 0,
+      "calls": 164,
+      "tokens": 17521,
+      "prompt_tokens": 48280,
+      "seconds": 168.1149697691435,
+      "cost_note": "Nested one-shot endpoint shares the frozen pool; do not add endpoint costs.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 161,
+        "passed": 125,
+        "intention_to_evaluate_accuracy": 0.7716049382716049,
+        "graded_only_accuracy": 0.7763975155279503,
+        "statuses": {
+          "graded": 161,
+          "missing_solution": 1
+        },
+        "method_errors": 0
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 160,
+        "passed": 124,
+        "intention_to_evaluate_accuracy": 0.7701863354037267,
+        "graded_only_accuracy": 0.775,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 1
+        },
+        "method_errors": 0
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1701,
+      "condition": "frozen-selected",
+      "planned": 164,
+      "graded": 164,
+      "passed": 126,
+      "intention_to_evaluate_accuracy": 0.7682926829268293,
+      "graded_only_accuracy": 0.7682926829268293,
+      "statuses": {
+        "graded": 164
+      },
+      "method_errors": 0,
+      "calls": 1476,
+      "tokens": 147228,
+      "prompt_tokens": 803225,
+      "seconds": 1433.574337978731,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 162,
+        "passed": 124,
+        "intention_to_evaluate_accuracy": 0.7654320987654321,
+        "graded_only_accuracy": 0.7654320987654321,
+        "statuses": {
+          "graded": 162
+        },
+        "method_errors": 0
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 161,
+        "passed": 123,
+        "intention_to_evaluate_accuracy": 0.7639751552795031,
+        "graded_only_accuracy": 0.7639751552795031,
+        "statuses": {
+          "graded": 161
+        },
+        "method_errors": 0
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1701,
+      "condition": "guarded",
+      "planned": 164,
+      "graded": 163,
+      "passed": 128,
+      "intention_to_evaluate_accuracy": 0.7804878048780488,
+      "graded_only_accuracy": 0.7852760736196319,
+      "statuses": {
+        "graded": 163,
+        "missing_solution": 1
+      },
+      "method_errors": 1,
+      "calls": 2630,
+      "tokens": 222036,
+      "prompt_tokens": 9788912,
+      "seconds": 8005.078811182408,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 161,
+        "passed": 126,
+        "intention_to_evaluate_accuracy": 0.7777777777777778,
+        "graded_only_accuracy": 0.782608695652174,
+        "statuses": {
+          "graded": 161,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 160,
+        "passed": 125,
+        "intention_to_evaluate_accuracy": 0.7763975155279503,
+        "graded_only_accuracy": 0.78125,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1701,
+      "condition": "original",
+      "planned": 164,
+      "graded": 163,
+      "passed": 124,
+      "intention_to_evaluate_accuracy": 0.7560975609756098,
+      "graded_only_accuracy": 0.7607361963190185,
+      "statuses": {
+        "graded": 163,
+        "missing_solution": 1
+      },
+      "method_errors": 1,
+      "calls": 2637,
+      "tokens": 230998,
+      "prompt_tokens": 9021169,
+      "seconds": 5148.54758228641,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 161,
+        "passed": 122,
+        "intention_to_evaluate_accuracy": 0.7530864197530864,
+        "graded_only_accuracy": 0.7577639751552795,
+        "statuses": {
+          "graded": 161,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 160,
+        "passed": 121,
+        "intention_to_evaluate_accuracy": 0.7515527950310559,
+        "graded_only_accuracy": 0.75625,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1702,
+      "condition": "frozen-one-shot",
+      "planned": 164,
+      "graded": 164,
+      "passed": 127,
+      "intention_to_evaluate_accuracy": 0.774390243902439,
+      "graded_only_accuracy": 0.774390243902439,
+      "statuses": {
+        "graded": 164
+      },
+      "method_errors": 0,
+      "calls": 164,
+      "tokens": 17569,
+      "prompt_tokens": 48593,
+      "seconds": 169.8134881897131,
+      "cost_note": "Nested one-shot endpoint shares the frozen pool; do not add endpoint costs.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 162,
+        "passed": 125,
+        "intention_to_evaluate_accuracy": 0.7716049382716049,
+        "graded_only_accuracy": 0.7716049382716049,
+        "statuses": {
+          "graded": 162
+        },
+        "method_errors": 0
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 161,
+        "passed": 124,
+        "intention_to_evaluate_accuracy": 0.7701863354037267,
+        "graded_only_accuracy": 0.7701863354037267,
+        "statuses": {
+          "graded": 161
+        },
+        "method_errors": 0
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1702,
+      "condition": "frozen-selected",
+      "planned": 164,
+      "graded": 164,
+      "passed": 128,
+      "intention_to_evaluate_accuracy": 0.7804878048780488,
+      "graded_only_accuracy": 0.7804878048780488,
+      "statuses": {
+        "graded": 164
+      },
+      "method_errors": 0,
+      "calls": 1476,
+      "tokens": 149343,
+      "prompt_tokens": 805957,
+      "seconds": 1568.2088955455692,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 162,
+        "passed": 126,
+        "intention_to_evaluate_accuracy": 0.7777777777777778,
+        "graded_only_accuracy": 0.7777777777777778,
+        "statuses": {
+          "graded": 162
+        },
+        "method_errors": 0
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 161,
+        "passed": 125,
+        "intention_to_evaluate_accuracy": 0.7763975155279503,
+        "graded_only_accuracy": 0.7763975155279503,
+        "statuses": {
+          "graded": 161
+        },
+        "method_errors": 0
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1702,
+      "condition": "guarded",
+      "planned": 164,
+      "graded": 163,
+      "passed": 122,
+      "intention_to_evaluate_accuracy": 0.7439024390243902,
+      "graded_only_accuracy": 0.7484662576687117,
+      "statuses": {
+        "graded": 163,
+        "missing_solution": 1
+      },
+      "method_errors": 1,
+      "calls": 2642,
+      "tokens": 228882,
+      "prompt_tokens": 9566084,
+      "seconds": 7474.807344959583,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 161,
+        "passed": 120,
+        "intention_to_evaluate_accuracy": 0.7407407407407407,
+        "graded_only_accuracy": 0.7453416149068323,
+        "statuses": {
+          "graded": 161,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 160,
+        "passed": 119,
+        "intention_to_evaluate_accuracy": 0.7391304347826086,
+        "graded_only_accuracy": 0.74375,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1702,
+      "condition": "original",
+      "planned": 164,
+      "graded": 163,
+      "passed": 122,
+      "intention_to_evaluate_accuracy": 0.7439024390243902,
+      "graded_only_accuracy": 0.7484662576687117,
+      "statuses": {
+        "graded": 163,
+        "missing_solution": 1
+      },
+      "method_errors": 1,
+      "calls": 2646,
+      "tokens": 232882,
+      "prompt_tokens": 9196064,
+      "seconds": 4609.262986948481,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 161,
+        "passed": 120,
+        "intention_to_evaluate_accuracy": 0.7407407407407407,
+        "graded_only_accuracy": 0.7453416149068323,
+        "statuses": {
+          "graded": 161,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 160,
+        "passed": 119,
+        "intention_to_evaluate_accuracy": 0.7391304347826086,
+        "graded_only_accuracy": 0.74375,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1703,
+      "condition": "frozen-one-shot",
+      "planned": 164,
+      "graded": 163,
+      "passed": 127,
+      "intention_to_evaluate_accuracy": 0.774390243902439,
+      "graded_only_accuracy": 0.7791411042944786,
+      "statuses": {
+        "graded": 163,
+        "missing_solution": 1
+      },
+      "method_errors": 0,
+      "calls": 164,
+      "tokens": 17184,
+      "prompt_tokens": 48280,
+      "seconds": 162.90931754768826,
+      "cost_note": "Nested one-shot endpoint shares the frozen pool; do not add endpoint costs.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 161,
+        "passed": 125,
+        "intention_to_evaluate_accuracy": 0.7716049382716049,
+        "graded_only_accuracy": 0.7763975155279503,
+        "statuses": {
+          "graded": 161,
+          "missing_solution": 1
+        },
+        "method_errors": 0
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 160,
+        "passed": 124,
+        "intention_to_evaluate_accuracy": 0.7701863354037267,
+        "graded_only_accuracy": 0.775,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 1
+        },
+        "method_errors": 0
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1703,
+      "condition": "frozen-selected",
+      "planned": 164,
+      "graded": 164,
+      "passed": 130,
+      "intention_to_evaluate_accuracy": 0.7926829268292683,
+      "graded_only_accuracy": 0.7926829268292683,
+      "statuses": {
+        "graded": 164
+      },
+      "method_errors": 0,
+      "calls": 1476,
+      "tokens": 150449,
+      "prompt_tokens": 806254,
+      "seconds": 1397.4123687846586,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 162,
+        "passed": 128,
+        "intention_to_evaluate_accuracy": 0.7901234567901234,
+        "graded_only_accuracy": 0.7901234567901234,
+        "statuses": {
+          "graded": 162
+        },
+        "method_errors": 0
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 161,
+        "passed": 127,
+        "intention_to_evaluate_accuracy": 0.7888198757763976,
+        "graded_only_accuracy": 0.7888198757763976,
+        "statuses": {
+          "graded": 161
+        },
+        "method_errors": 0
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1703,
+      "condition": "guarded",
+      "planned": 164,
+      "graded": 163,
+      "passed": 127,
+      "intention_to_evaluate_accuracy": 0.774390243902439,
+      "graded_only_accuracy": 0.7791411042944786,
+      "statuses": {
+        "graded": 163,
+        "missing_solution": 1
+      },
+      "method_errors": 1,
+      "calls": 2647,
+      "tokens": 236802,
+      "prompt_tokens": 9682848,
+      "seconds": 3482.7309757011244,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 161,
+        "passed": 125,
+        "intention_to_evaluate_accuracy": 0.7716049382716049,
+        "graded_only_accuracy": 0.7763975155279503,
+        "statuses": {
+          "graded": 161,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 160,
+        "passed": 124,
+        "intention_to_evaluate_accuracy": 0.7701863354037267,
+        "graded_only_accuracy": 0.775,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      }
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "seed": 1703,
+      "condition": "original",
+      "planned": 164,
+      "graded": 163,
+      "passed": 122,
+      "intention_to_evaluate_accuracy": 0.7439024390243902,
+      "graded_only_accuracy": 0.7484662576687117,
+      "statuses": {
+        "graded": 163,
+        "missing_solution": 1
+      },
+      "method_errors": 1,
+      "calls": 2638,
+      "tokens": 235448,
+      "prompt_tokens": 8933185,
+      "seconds": 3247.065939394757,
+      "cost_note": "Observed condition cost; retries and failures retained.",
+      "excluding_two_model_smoke_tasks": {
+        "planned": 162,
+        "graded": 161,
+        "passed": 120,
+        "intention_to_evaluate_accuracy": 0.7407407407407407,
+        "graded_only_accuracy": 0.7453416149068323,
+        "statuses": {
+          "graded": 161,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      },
+      "excluding_three_control_exposed_tasks": {
+        "planned": 161,
+        "graded": 160,
+        "passed": 119,
+        "intention_to_evaluate_accuracy": 0.7391304347826086,
+        "graded_only_accuracy": 0.74375,
+        "statuses": {
+          "graded": 160,
+          "missing_solution": 1
+        },
+        "method_errors": 1
+      }
+    }
+  ],
+  "paired_stream_comparisons": [
+    {
+      "model": "phi4:14b",
+      "reference": "original",
+      "paired_streams": [
+        {
+          "seed": 1701,
+          "guarded_minus_reference": 0.030487804878048808
+        },
+        {
+          "seed": 1702,
+          "guarded_minus_reference": -0.08536585365853655
+        },
+        {
+          "seed": 1703,
+          "guarded_minus_reference": 0.03658536585365857
+        }
+      ],
+      "mean_difference": -0.006097560975609724,
+      "minimum_difference": -0.08536585365853655,
+      "maximum_difference": 0.03658536585365857,
+      "sample_sd": 0.06871602237551612
+    },
+    {
+      "model": "phi4:14b",
+      "reference": "frozen-selected",
+      "paired_streams": [
+        {
+          "seed": 1701,
+          "guarded_minus_reference": -0.1402439024390244
+        },
+        {
+          "seed": 1702,
+          "guarded_minus_reference": -0.1341463414634146
+        },
+        {
+          "seed": 1703,
+          "guarded_minus_reference": -0.09146341463414631
+        }
+      ],
+      "mean_difference": -0.1219512195121951,
+      "minimum_difference": -0.1402439024390244,
+      "maximum_difference": -0.09146341463414631,
+      "sample_sd": 0.026578652094760215
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "reference": "original",
+      "paired_streams": [
+        {
+          "seed": 1701,
+          "guarded_minus_reference": 0.024390243902439046
+        },
+        {
+          "seed": 1702,
+          "guarded_minus_reference": 0.0
+        },
+        {
+          "seed": 1703,
+          "guarded_minus_reference": 0.030487804878048808
+        }
+      ],
+      "mean_difference": 0.018292682926829285,
+      "minimum_difference": 0.0,
+      "maximum_difference": 0.030487804878048808,
+      "sample_sd": 0.01613262994551581
+    },
+    {
+      "model": "qwen2.5-coder:7b",
+      "reference": "frozen-selected",
+      "paired_streams": [
+        {
+          "seed": 1701,
+          "guarded_minus_reference": 0.012195121951219523
+        },
+        {
+          "seed": 1702,
+          "guarded_minus_reference": -0.03658536585365857
+        },
+        {
+          "seed": 1703,
+          "guarded_minus_reference": -0.018292682926829285
+        }
+      ],
+      "mean_difference": -0.014227642276422777,
+      "minimum_difference": -0.03658536585365857,
+      "maximum_difference": 0.012195121951219523,
+      "sample_sd": 0.02464299929467917
+    }
+  ],
+  "full_164_task_coverage": true,
+  "sample_rows": 3936,
+  "grade_rows": 3936,
+  "limitation": "Descriptive fixed-benchmark evidence. Ordered online streams are the replication unit; no task-independent inference or general superiority claim.",
+  "input_sha256": {
+    "/scratch/mbabaei/ssevoh/runs/ssevoh-humaneval-full-evaluation-20261111T214741Z-rorqual/results/frozen/samples.jsonl": "8961b45d1f9cc00afa881ff40f8b0fed7315a7b7061f290929d0aa189208d951",
+    "/scratch/mbabaei/ssevoh/runs/ssevoh-humaneval-full-evaluation-20261111T214741Z-rorqual/results/frozen/global.json": "3dd9746a9ae39e0534e6727b7bf8a45fbdcbad9d02fe5bca603f66b2162d26ad",
+    "/scratch/mbabaei/ssevoh/runs/ssevoh-humaneval-full-evaluation-20261111T214741Z-rorqual/results/grade/phi4_14b__1701.jsonl": "40e5a823cd7a6155bcc5a0894f28657297a799c9096c0f0f525d35b169157a59",
+    "/scratch/mbabaei/ssevoh/runs/ssevoh-humaneval-full-evaluation-20261111T214741Z-rorqual/results/grade/phi4_14b__1702.jsonl": "7e0196f5ec08865861255e5daa34893ac1812840e385b566fa3348e40573e7dd",
+    "/scratch/mbabaei/ssevoh/runs/ssevoh-humaneval-full-evaluation-20261111T214741Z-rorqual/results/grade/phi4_14b__1703.jsonl": "c68a89ba4321e2611e176459285d46ce2c0bce891ecd41e331be483fbe9580f1",
+    "/scratch/mbabaei/ssevoh/runs/ssevoh-humaneval-full-evaluation-20261111T214741Z-rorqual/results/grade/qwen2.5-coder_7b__1701.jsonl": "5184c55426112b5925ee8374f15f6d5272f2421c8221f7ee83e04507150ed199",
+    "/scratch/mbabaei/ssevoh/runs/ssevoh-humaneval-full-evaluation-20261111T214741Z-rorqual/results/grade/qwen2.5-coder_7b__1702.jsonl": "db610baa35b9f89a756aa1facefc2159a5d80cfd67c9d827e97ef5d4aa8be7e3",
+    "/scratch/mbabaei/ssevoh/runs/ssevoh-humaneval-full-evaluation-20261111T214741Z-rorqual/results/grade/qwen2.5-coder_7b__1703.jsonl": "a5193aeb16c28d7665633e103755c439ab72f637df9ff4d4427387cf1d7db6a9"
+  }
+}

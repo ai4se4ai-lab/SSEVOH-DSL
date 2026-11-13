@@ -1,0 +1,8 @@
+{
+  "phase": "complete",
+  "cluster": "rorqual",
+  "run_id": "ssevoh-results-audit-qualification-20261110T014457Z-rorqual",
+  "input_sha256": "0fe29254e3a69a4aab843e74cd08f6286cb10eef975bd628fba0ee64666715f7",
+  "created_utc": "2026-11-10T01:44:57.128978+00:00",
+  "completed_utc": "2026-11-10T01:55:28.410612+00:00"
+}

@@ -1,0 +1,36 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,longtable}
+\usepackage[colorlinks,urlcolor=blue]{hyperref}
+\newcommand{\status}{\IfFileExists{../generated/results.tex}{\input{../generated/results.tex}}{\IfFileExists{paper/generated/results.tex}{\input{paper/generated/results.tex}}{Results must be regenerated from recorded artifacts.}}}
+\title{SSEVOH-DSL: HeartBench: Specification and Evaluation Protocol}
+\author{SSEVOH-DSL project}
+\date{Evidence-linked development document}
+\begin{document}
+\maketitle
+
+\section{Scope and label construction}
+HeartBench v1 contains 20 synthetic scenarios and 25 labeled actions. The initial fixtures cover all 15 requested evolution families plus positive boundary cases. Each fixture declares initial components and policy context, a transformation, expected acceptance, an expected rejection substring when relevant, exact versions, quarantine and withdrawal sets, and provenance-event counts. These expectations are hand-authored rather than obtained by asking the engine for its answer. They have not yet received independent researcher review.
+
+The families include safe skill change, tool escalation, dependent memory, invalid workflow references, protected configuration, absent evidence, mixed-origin withdrawal, prohibited rollback, stale approvals, concurrency, partial failure, unauthorized principals, cross-agent conflicts, provenance cycles and interrupted evolution recovery. Positive neighbors include safe rollback, revalidation and capability-preserving tool changes.
+
+\section{Baselines}
+B0 parses declarative proposals and admits them without assurance. B1 additionally checks the declared initial structural schema. B2 compiles, applies static policy and constructs a candidate without independent validator execution or temporal checking. B3 runs full sandbox assurance and deployment. B0--B2 are admission-only measurements; they are not equivalent end-to-end deployment pipelines, and their timing differences must not be interpreted as isolated deployment overhead.
+
+B4 uses the B3 engine to evaluate actual outputs from five Ollama models. A separate benchmark oracle labels the generated proposal itself. The request label is not reused if the generated transformation differs from the request. Prompt material excludes golden specifications, expected outcomes and diagnostic substrings.
+
+\section{Models and repetitions}
+The fixed candidate identifiers are qwen2.5-coder:7b, phi4:14b, gpt-oss:20b, devstral:24b and qwen3-coder:30b. Runtime manifests, digests, license texts and quantization are recorded before evaluation. No unavailable identifier may be silently replaced. The fixed primary decoding uses temperature 0.2, top-p 0.9, context 4096 and a 1024-token prediction cap. Five seeds, 1701 through 1705, are used per eligible task. Model-defined prompt templates and capabilities are recorded rather than assumed identical.
+
+Twenty normal-action task contexts are eligible, giving 500 planned generations across five models and five seeds. Harness state and history are cloned for every repetition. Fault/race actions remain deterministic tests; they are not incorrectly labeled as model proposal safety outcomes.
+
+\section{Metrics and analysis}
+Report parser validity, semantic validity, permission/dependency/evidence correctness, task compliance, accepted-safe proposals, unsafe correctly rejected proposals and unsafe proposals deployed. Invalid syntax or refusal is not automatically an unsafe proposal. False acceptance uses independently unsafe parsed proposals as its denominator. Generation duration, load duration, token counts, throughput and GPU residency are retained with raw prompts/responses.
+
+Descriptive statistics include samples, mean, median and standard deviation. Task-cluster bootstrap intervals resample task clusters rather than treating repeated generations as independent tasks. Matched task/seed comparisons are appropriate for model pairs; significance claims require a prespecified adequate analysis, not smoke results. Hardware and quantization confounding must remain visible.
+
+\section{Validity limits}
+Synthetic representativeness, unreviewed labels, one bounded lifecycle abstraction, structural rather than semantic artifact validation, strict output formatting and sandbox deployment limit generalization. Five synthetic mechanism-removal variants and a full control are implemented in a separate sandbox worker. They score both decision errors and exact final-state violations. Full repeated cluster results and realistic artifact workloads remain required. \status
+
+\end{document}

@@ -1,0 +1,9 @@
+{
+  "username": "mbabaei",
+  "poll_seconds": 120,
+  "clusters": {
+    "fir": {"host": "fir.alliancecan.ca", "account": "", "remote_dir": "", "work": "", "gpus": "", "modules": "StdEnv/2023 python/3.12.4"},
+    "narval": {"host": "narval.alliancecan.ca", "account": "", "remote_dir": "", "work": "", "gpus": "", "modules": "StdEnv/2023 python/3.12.4"},
+    "rorqual": {"host": "rorqual.alliancecan.ca", "account": "", "remote_dir": "", "work": "", "gpus": "", "modules": "StdEnv/2023 python/3.12.4"}
+  }
+}

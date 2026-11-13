@@ -1,0 +1,42 @@
+{
+ "run_id": "ssevoh-ablation-smoke-20261109T193026Z-rorqual",
+ "created": "2026-11-09 19:30:30 UTC",
+ "submissions": [
+  "2026-11-09 19:30:30"
+ ],
+ "submit_host": "rorqual3",
+ "git": {
+  "commit": "",
+  "branch": "",
+  "dirty": [],
+  "diff_sha256": "e3b0c44298fc1c14"
+ },
+ "content_sha256": {
+  "src": "a3af5be2d6879d9c",
+  "benchmark": "07ed3859a914d62f",
+  "formal": "589048f7939d2d40",
+  "experiments": "3ebaa48b232805ee",
+  "hpc": "99123d94fde3aa6a",
+  "hpc/config": "07614d6a0e5817b9"
+ },
+ "cluster_env": {
+  "SRC_DIRS": "src",
+  "ALLOW_MODEL_DOWNLOAD": "0",
+  "OLLAMA_MODELS": "/scratch/mbabaei/ssevoh/models",
+  "MAIL_TYPE": "NONE",
+  "TZ": "UTC",
+  "SEED_MODEL_CACHE": "/scratch/mbabaei/heartness-work/ollama-models",
+  "ACCOUNT": "def-mbabaei_gpu",
+  "GPU_MONITOR_SECS": "60",
+  "EXTRA_WHEELS": "",
+  "WORK": "/scratch/mbabaei/ssevoh",
+  "MODULES": "StdEnv/2023 python/3.11",
+  "RESULTS_DEST": "",
+  "OLLAMA_BIN": "/scratch/mbabaei/heartness-work/ollama/bin/ollama",
+  "CODE_HASH_DIRS": "src benchmark formal experiments hpc",
+  "MAX_REQUEUES": "3",
+  "REQUEUE_SIGNAL_SECS": "120",
+  "CLUSTER": "rorqual"
+ },
+ "experiments_sha256": "874b356fc8e41c5d"
+}

@@ -1,0 +1,1 @@
+kept -> The base rollout and both candidate rollouts produced the correct result, so no changes are necessary.

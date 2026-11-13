@@ -1,0 +1,15 @@
+{
+  "utc": "2026-11-10T16:27:51.657983+00:00",
+  "site": "fir",
+  "run_id": "ssevoh-humaneval-smoke-v4-t1-20261110T154824Z-fir",
+  "ledger_sha256": "37a2cb4366d9cec7962f73a465dbab23fcfb2a3a1cec2d4c97e2212892228e62",
+  "jobs": [
+    "3312496",
+    "3312499"
+  ],
+  "action": "scancel --state=PENDING --user=mbabaei",
+  "reason": "Superseded v4 diagnostic; v5 fresh qualification submitted. Cancel only still-pending GPU reservations; preserve running work and every log.",
+  "scope": "Request receipt only; actual terminal states remain in subsequent native audit.",
+  "command_returncode": 0,
+  "receipt_note": "remote() returned a successful CompletedProcess; subsequent local serialization of that object failed. Request was not repeated. Native audit establishes terminal states."
+}

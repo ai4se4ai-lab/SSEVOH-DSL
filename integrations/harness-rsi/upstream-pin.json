@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/zgcagi/Harness-RSI.git",
+  "commit": "d521b13978806e6132c56cf4adb280e3d969f41b",
+  "reviewed_kind": "survey_companion",
+  "executable_agent_runtime": false,
+  "proposal_boundary": null,
+  "deployment_boundary": null,
+  "review_scope": "All 42 tracked paths; README, CONTRIBUTING, documentation, all three Python scripts, website/data roles, all published branches and tags. No agent evolution runtime at this revision."
+}

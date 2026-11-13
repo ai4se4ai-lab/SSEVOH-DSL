@@ -1,0 +1,105 @@
+[
+  {
+    "index": 0,
+    "previous": "0000000000000000000000000000000000000000000000000000000000000000",
+    "schema": "ssevoh-journal-v2",
+    "principal": "operator",
+    "policy": "5a8b18bc2ef6db1db273410ddcfcc2171dea3bad99ca694aa672ca0cb2ba3339",
+    "registry": "4de5145346294d28474648118b1135382295562344f2eea4027d8d598f6663b1",
+    "source": "harness harness2_bundle {\ncomponent guardrails configuration { version 1; mutable false; depends []; parents []; capabilities []; }\ncomponent harness workflow { version 1; mutable true; depends [guardrails,policy,verifier]; parents []; capabilities [catalog_execution]; }\ncomponent policy policy { version 1; mutable false; depends []; parents []; capabilities []; }\ncomponent verifier verifier { version 1; mutable false; depends []; parents []; capabilities []; }\nevolution artifact_change { operation update; target harness; from 1; to 2; depends [guardrails,policy,verifier]; parents []; capabilities [catalog_execution]; requires []; expect any; ensure active; } }",
+    "proposal": "269638feaa08f8d0f412ce470d946b9e0e66f249cd4934cab858166c321a70cd",
+    "before": "2b30bd86a9c4390d44ad8a9b4822ef247717b0488afaedf14be2610f41c5b369",
+    "after": "05e86e57815beebdc43836ecbf7a29ba7ff2e6751d9c8754f1585a0396157ef1",
+    "operation": "update",
+    "target": "harness",
+    "origins": [
+      [
+        "harness",
+        1
+      ]
+    ],
+    "evidence": [
+      [
+        "artifact_schema",
+        true
+      ],
+      [
+        "code_catalog",
+        true
+      ],
+      [
+        "version_origins",
+        true
+      ]
+    ],
+    "lifecycle": "DEPLOYED",
+    "hash": "00e96a075e5a79bd484bf8a5010987453716cad289f228f7143a3c222f354bec"
+  },
+  {
+    "index": 1,
+    "previous": "00e96a075e5a79bd484bf8a5010987453716cad289f228f7143a3c222f354bec",
+    "schema": "ssevoh-journal-v2",
+    "principal": "operator",
+    "policy": "5a8b18bc2ef6db1db273410ddcfcc2171dea3bad99ca694aa672ca0cb2ba3339",
+    "registry": "4de5145346294d28474648118b1135382295562344f2eea4027d8d598f6663b1",
+    "source": "harness harness2_bundle {\ncomponent guardrails configuration { version 1; mutable false; depends []; parents []; capabilities []; }\ncomponent harness workflow { version 2; mutable true; depends [guardrails,policy,verifier]; parents []; capabilities [catalog_execution]; }\ncomponent policy policy { version 1; mutable false; depends []; parents []; capabilities []; }\ncomponent verifier verifier { version 1; mutable false; depends []; parents []; capabilities []; }\nevolution artifact_change { operation rollback; target harness; from 2; to 1; depends [guardrails,policy,verifier]; parents []; capabilities [catalog_execution]; requires []; expect any; ensure active; } }",
+    "proposal": "99d33b7f0009c45abb8e2232edb036d9d97c8549155124621038538cee8e9954",
+    "before": "05e86e57815beebdc43836ecbf7a29ba7ff2e6751d9c8754f1585a0396157ef1",
+    "after": "fc66ab6d1d5f750d41bd8f23c6e135870f655c38df2aab61cc221a57176c9bd9",
+    "operation": "rollback",
+    "target": "harness",
+    "origins": [],
+    "evidence": [
+      [
+        "artifact_schema",
+        true
+      ],
+      [
+        "code_catalog",
+        true
+      ],
+      [
+        "version_origins",
+        true
+      ]
+    ],
+    "lifecycle": "DEPLOYED",
+    "hash": "74d403331103e33dbfe31c6548322105c2b1ae2899633d61f4a1f92a11af8001"
+  },
+  {
+    "index": 2,
+    "previous": "74d403331103e33dbfe31c6548322105c2b1ae2899633d61f4a1f92a11af8001",
+    "schema": "ssevoh-journal-v2",
+    "principal": "operator",
+    "policy": "5a8b18bc2ef6db1db273410ddcfcc2171dea3bad99ca694aa672ca0cb2ba3339",
+    "registry": "4de5145346294d28474648118b1135382295562344f2eea4027d8d598f6663b1",
+    "source": "harness harness2_bundle {\ncomponent guardrails configuration { version 1; mutable false; depends []; parents []; capabilities []; }\ncomponent harness workflow { version 1; mutable true; depends [guardrails,policy,verifier]; parents []; capabilities [catalog_execution]; }\ncomponent policy policy { version 1; mutable false; depends []; parents []; capabilities []; }\ncomponent verifier verifier { version 1; mutable false; depends []; parents []; capabilities []; }\nevolution artifact_change { operation update; target harness; from 1; to 3; depends [guardrails,policy,verifier]; parents []; capabilities [catalog_execution]; requires []; expect any; ensure active; } }",
+    "proposal": "1681593ce1363620408efdf430c4af1ce15458d3faada2e9cd95a07668a4dc65",
+    "before": "fc66ab6d1d5f750d41bd8f23c6e135870f655c38df2aab61cc221a57176c9bd9",
+    "after": "6f35e0448ec0745b4704283e424e9dab44040ecc7ff6ce319beb6b382a2d92f8",
+    "operation": "update",
+    "target": "harness",
+    "origins": [
+      [
+        "harness",
+        1
+      ]
+    ],
+    "evidence": [
+      [
+        "artifact_schema",
+        true
+      ],
+      [
+        "code_catalog",
+        true
+      ],
+      [
+        "version_origins",
+        true
+      ]
+    ],
+    "lifecycle": "DEPLOYED",
+    "hash": "9f4e2824f25c009558d9a9b309d809724fd7f5756819d173fea9929f584c6035"
+  }
+]

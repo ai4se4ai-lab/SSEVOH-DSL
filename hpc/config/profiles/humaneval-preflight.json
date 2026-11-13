@@ -1,0 +1,67 @@
+{
+  "project": "ssevoh-humaneval-preflight",
+  "study": "humaneval-isolation-preflight-v1",
+  "require_gpu": true,
+  "vars": {},
+  "stages": [
+    {
+      "name": "isolation",
+      "depends": [],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 1,
+        "mem": "2G",
+        "time": "00:05:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "trusted-controls",
+          "cmd": "python experiments/scripts/humaneval_sandbox.py --output \"{RESULTS}/isolation/report.json\"",
+          "produces": [
+            "isolation/report.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "collect",
+      "cpu_only": true,
+      "depends": [
+        {
+          "stage": "isolation",
+          "type": "afterany"
+        }
+      ],
+      "resources": {
+        "cpus": 1,
+        "mem": "2G",
+        "time": "00:05:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "persist",
+          "builtin": "collect",
+          "needs": [
+            "isolation/report.json"
+          ],
+          "critical": true
+        }
+      ]
+    }
+  ],
+  "results": {
+    "tables": [],
+    "summaries": [],
+    "copy": [
+      "isolation/**"
+    ],
+    "archive": []
+  }
+}

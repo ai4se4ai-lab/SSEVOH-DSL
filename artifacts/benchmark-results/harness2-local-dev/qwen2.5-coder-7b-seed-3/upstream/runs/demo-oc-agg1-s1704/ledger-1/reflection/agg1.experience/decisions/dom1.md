@@ -1,0 +1,1 @@
+these files are off the editable surface and were not applied: harness/systemprompt.md. Component names must be lowercase letters, digits, `_` or `-` (e.g. `skills/doc_review/SKILL.md`, `scripts/check_totals.py`).

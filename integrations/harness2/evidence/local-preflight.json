@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "upstream_commit": "6868817518876de8fd170c6a8354daca273b6191",
+  "scope": "source-scoped formal/integration readiness and real catalog execution; no task model prompt"
+}

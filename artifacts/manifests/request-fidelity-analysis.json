@@ -1,0 +1,17 @@
+{
+  "phase": "complete",
+  "run_id": "ssevoh-results-audit-request-fidelity-20261110T015528Z-rorqual",
+  "cluster": "rorqual",
+  "input_sha256": {
+    "experiments/aggregate-input/records.jsonl": "9b5ff073296dab385c4dd279fb9c295b800a538b81f8a411768ea6cdc29f53dc",
+    "experiments/aggregate-input/auxiliary.jsonl": "f0cd232864f22c89e5cb18ecee7b835b986cecc0f4d5381947391a295c23c402",
+    "experiments/harness2-aggregate-input/model-streams.jsonl": "23aa794e6adcba69b58d0001a56f846fa372e82c60fa340afdfea693afa1dd34",
+    "experiments/harness2-aggregate-input/controlled.jsonl": "e68ca2bd3a84c282cc285c38e73142b9ab0175aba1051295d56af8d80db00aaf"
+  },
+  "revision": "request-fidelity",
+  "core_only": true,
+  "created_utc": "2026-11-10T01:55:28.472968+00:00",
+  "reason": "Post hoc full request fidelity including snapshot, evidence and applicable conditions; original partial field match preserved; no model generation",
+  "completed_utc": "2026-11-10T01:59:56.613036+00:00",
+  "original_metrics_unchanged": true
+}

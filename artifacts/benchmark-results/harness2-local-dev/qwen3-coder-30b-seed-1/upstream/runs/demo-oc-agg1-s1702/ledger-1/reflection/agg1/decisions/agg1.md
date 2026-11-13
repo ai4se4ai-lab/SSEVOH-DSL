@@ -1,0 +1,1 @@
+kept -> base harness -> all rollouts produced identical output and no failures observed; no evidence of need for change

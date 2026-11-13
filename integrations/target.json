@@ -1,0 +1,10 @@
+{
+  "target": "google-research/harness2",
+  "commit": "6868817518876de8fd170c6a8354daca273b6191",
+  "workspace": "integrations/harness2",
+  "status": "controlled_empirical_study_complete",
+  "supersedes": "zgcagi/Harness-RSI survey companion",
+  "empirical_allowed": true,
+  "results": "artifacts/benchmark-results/harness2-full/analysis/summary.json",
+  "usefulness_established": false
+}

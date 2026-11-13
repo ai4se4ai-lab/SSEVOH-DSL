@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "Cite the version and artifact hashes used for your experiment. This is a development research artifact."
+title: "SSEVOH-DSL: A Domain-Specific Language and Formal Verification Framework for Safe Self-Evolution of AI Agent Harnesses"
+authors:
+  - name: "SSEVOH-DSL contributors"
+type: software
+version: 0.2.0

@@ -1,0 +1,18 @@
+[
+  {
+    "task": "ledger-1",
+    "expected": "Total: 85.15",
+    "frozen_answer": "Total: 105.25",
+    "answer": "Total: 105.25",
+    "frozen_success": false,
+    "task_success": false
+  },
+  {
+    "task": "ledger-2",
+    "expected": "Total: 20.25",
+    "frozen_answer": "Total: 35.50",
+    "answer": "Total: 35.50",
+    "frozen_success": false,
+    "task_success": false
+  }
+]

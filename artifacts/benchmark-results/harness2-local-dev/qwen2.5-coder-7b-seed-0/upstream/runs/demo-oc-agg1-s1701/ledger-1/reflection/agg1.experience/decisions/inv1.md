@@ -1,0 +1,1 @@
+The script `summarize.py` is already correctly implemented to sum the signed amounts in the ledger.csv file. No changes are needed.

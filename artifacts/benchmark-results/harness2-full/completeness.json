@@ -1,0 +1,29 @@
+{
+  "complete": true,
+  "records": 25,
+  "expected": 25,
+  "task_outcomes": 50,
+  "deterministic_records": 900,
+  "model_identities_match": true,
+  "runs": [
+    {
+      "cluster": "fir",
+      "run_id": "ssevoh-h2-full-20261109T223907Z-fir",
+      "models": [
+        "qwen3-coder:30b",
+        "devstral:24b",
+        "gpt-oss:20b"
+      ],
+      "state": "submitted"
+    },
+    {
+      "cluster": "rorqual",
+      "run_id": "ssevoh-h2-full-20261109T224011Z-rorqual",
+      "models": [
+        "phi4:14b",
+        "qwen2.5-coder:7b"
+      ],
+      "state": "submitted"
+    }
+  ]
+}

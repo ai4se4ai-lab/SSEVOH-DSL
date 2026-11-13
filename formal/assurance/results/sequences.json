@@ -1,0 +1,43 @@
+{
+  "schema": "ssevoh-sequences-v1",
+  "utc": "2026-11-09T20:50:01.359209+00:00",
+  "passed": true,
+  "complete_domain": true,
+  "bounds": {
+    "components": 2,
+    "initial_versions": [
+      1
+    ],
+    "versions": [
+      1,
+      2,
+      3
+    ],
+    "depth": 4,
+    "initial_graphs": "all acyclic combinations of four possible cross-component dependency/parent edges",
+    "proposals": "both targets, all three operations, all three destination versions; existing relation/capability lists retained; true structure evidence; all grants"
+  },
+  "initial_graphs": 7,
+  "contexts": 3307,
+  "transitions": 19620,
+  "accepted": 6880,
+  "rejected": 12740,
+  "anchored_replays": 6880,
+  "counterexamples": [],
+  "seconds": 33.970254443993326,
+  "verdict_digest": "66568c3cdadd5f64caa311f24a70f4434b90bd87dc1dff42069e8453109d41ba",
+  "source_sha256": {
+    "src/ssevoh/compiler.py": "2e56829c3568c54a18edd63253aedfbafaf11702797d5965a182e6ce7e24bf68",
+    "src/ssevoh/cli.py": "40666c8d4dd21404c3b8775a8afffc3d2955c4063701c857a03c3840f7b0e977",
+    "src/ssevoh/__init__.py": "065bc0a995464a5b3974cc028abdcb97edf663739e694b03eef892d68226e7b0",
+    "src/ssevoh/model.py": "9603bee9a8b346a92f150efcb28218fe8b150db950ce6cd9dd14fa6650cbf8a6",
+    "src/ssevoh/assurance.py": "bcd9dae15d3ed4f96df3f3030035a37af82d4f97fc3d9ac1445994a80349b8f7",
+    "src/ssevoh/policy.py": "5a918c54431ba712debefb6dfbc503269e8c19a2835baa06e230d564e1d09fc6",
+    "src/ssevoh/benchmark.py": "ea16dfbef101def000fe5ddcbfee7243dcce0b84922738caf11d29a6d827a303",
+    "src/ssevoh/verification.py": "afa1e4e3fe4160e8b71612ce54fe79d91c48f0935310c975058c81da9dc84b7b",
+    "src/ssevoh/compiler_print.py": "90e5de05bdece0d2df646ae967a9bd7213fd74d1793f2664f2137c4ac59f9bb4",
+    "formal/assurance/check_conformance.py": "a31afec953795fe065c757e9e08ec777a13af9bd305815579e5719cbdefd0d2e",
+    "formal/assurance/reference.py": "8d5743991e35b1605303136722a054bb85a1d45ad74308440e9de4da053ee30c",
+    "formal/assurance/check_sequences.py": "1d9aab4683497ab4d38a463f4bf4c126c346b30b65e1e90af39ef4719f2dd9a7"
+  }
+}

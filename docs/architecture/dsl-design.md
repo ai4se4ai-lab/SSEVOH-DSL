@@ -1,0 +1,5 @@
+# DSL design
+
+A specification declares one harness snapshot and one evolution. Components have a type, an integer version, immutable or mutable status, dependencies, provenance parents, and a capability set. An evolution chooses update, withdraw, or rollback, a target and expected version, the next/recovery version, dependencies, provenance, capabilities, and validators. `expect active` and `ensure active` make supported preconditions and postconditions explicit. Unknown fields fail closed. The language does not change policy or mint evidence.
+
+The trusted operator supplies permissions as principal → target → operations and capability ceilings. Component kind cannot change. Updates must increment the version. A dependency or provenance change quarantines transitive descendants until independently revalidated. Withdrawal retains descendants and their history in quarantine; it does not delete mixed-origin artifacts. Exact recovery is permitted only for a known historical version with no withdrawn version or invalid ancestor. Recovery never replaces the monotone withdrawal set.

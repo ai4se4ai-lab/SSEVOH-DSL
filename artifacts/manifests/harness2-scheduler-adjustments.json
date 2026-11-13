@@ -1,0 +1,30 @@
+[
+  {
+    "utc": "2026-11-09T22:49:36.508592+00:00",
+    "cluster": "fir",
+    "run_id": "ssevoh-h2-full-20261109T223907Z-fir",
+    "array_job_id": "3206859",
+    "previous_throttle": 1,
+    "new_throttle": 3,
+    "reason": "allow already-owned independent model cells to overlap; no added tasks or resource change per cell",
+    "reference": "https://slurm.schedmd.com/scontrol.html",
+    "state": "accepted",
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "utc": "2026-11-09T22:49:37.294834+00:00",
+    "cluster": "rorqual",
+    "run_id": "ssevoh-h2-full-20261109T224011Z-rorqual",
+    "array_job_id": "26213193",
+    "previous_throttle": 1,
+    "new_throttle": 2,
+    "reason": "allow already-owned independent model cells to overlap; no added tasks or resource change per cell",
+    "reference": "https://slurm.schedmd.com/scontrol.html",
+    "state": "rejected",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "26213193_0: Job has already finished\n"
+  }
+]

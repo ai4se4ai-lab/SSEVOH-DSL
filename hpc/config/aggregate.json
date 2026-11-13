@@ -1,0 +1,67 @@
+{
+  "project": "ssevoh-aggregate",
+  "require_gpu": true,
+  "vars": {},
+  "stages": [
+    {
+      "name": "aggregate",
+      "description": "Pool disjoint model cells and perform cluster-independent paired statistical analysis",
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "8G",
+        "time": "00:30:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "inputs",
+          "cmd": "mkdir -p \"{RESULTS}/joined\" && cp \"{REPO}/experiments/aggregate-input/records.jsonl\" \"{REPO}/experiments/aggregate-input/auxiliary.jsonl\" \"{RESULTS}/joined/\"",
+          "produces": [
+            "joined/records.jsonl",
+            "joined/auxiliary.jsonl"
+          ],
+          "critical": true
+        },
+        {
+          "name": "statistics",
+          "cmd": "python experiments/scripts/analyze.py --root \"{RESULTS}/joined\" --output \"{RESULTS}/analysis\"",
+          "needs": [
+            "joined/records.jsonl",
+            "joined/auxiliary.jsonl"
+          ],
+          "produces": [
+            "analysis/summary.json",
+            "analysis/summary.csv",
+            "analysis/summary.tex"
+          ],
+          "critical": true
+        },
+        {
+          "name": "persist",
+          "builtin": "collect",
+          "needs": [
+            "analysis/summary.json"
+          ],
+          "critical": true
+        }
+      ]
+    }
+  ],
+  "results": {
+    "tables": [
+      {
+        "name": "pooled",
+        "glob": "joined/*.jsonl"
+      }
+    ],
+    "copy": [
+      "analysis/**"
+    ],
+    "archive": [
+      "joined"
+    ]
+  }
+}

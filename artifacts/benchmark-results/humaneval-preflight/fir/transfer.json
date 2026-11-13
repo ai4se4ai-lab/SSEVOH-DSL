@@ -1,0 +1,17 @@
+{
+  "verified": true,
+  "files": {
+    "summary.md": "603341368ae374340bed1ee25d80329c4a9935cac6739a91245a71ee8bed25fb",
+    "run_manifest.json": "12c7fbca50776af559d84d5c0a296b5863a50f86e36cffa950de5e17cf41b73e",
+    "pipeline/steps_all_attempts.csv": "9c076add9078940df7ab447dd9a1c14b6a0cbe50f30733dc1875ed8173bf4e95",
+    "pipeline/steps_latest.csv": "9c076add9078940df7ab447dd9a1c14b6a0cbe50f30733dc1875ed8173bf4e95",
+    "pipeline/job_endings.csv": "4ee892d636deb00aac93d8fbfd5794c3ec9803bbc1fc86343247e74751a6a13e",
+    "pipeline/gpu_usage.csv": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+    "pipeline/completeness.csv": "4083e72df8ff2f8af39fd0b6e80f781dac609afe558da0b83cc217484c4146f2",
+    "pipeline/jobs.csv": "b41663a6e41b8f009d5d29c4947aaf9dfe5d916b3fdc98b677ebeebe49987c62",
+    "raw/controls/records.jsonl": "e85d61a81f6603bfb35c97b9cf01d4622fa03c071422b9b36522bc70e1ca01c3",
+    "raw/isolation/report.json": "a4c391c6b13c176a1dc35c2da59fc86eabbef5812db3f193dbbbc9e5fc9b05e2"
+  },
+  "seconds": 34.01556370203616,
+  "scope": "verification RPC and local hashing; fetch duration recorded separately by fleet operations"
+}

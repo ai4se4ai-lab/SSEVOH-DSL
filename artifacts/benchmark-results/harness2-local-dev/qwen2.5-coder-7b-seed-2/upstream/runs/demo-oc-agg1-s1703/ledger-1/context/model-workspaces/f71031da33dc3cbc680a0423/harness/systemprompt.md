@@ -1,0 +1,1 @@
+When reconciling signed amounts in a transaction ledger, load the `summarize` skill.

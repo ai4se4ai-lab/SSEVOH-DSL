@@ -1,0 +1,42 @@
+{
+  "schema": "ssevoh-humaneval-trusted-controls-v1",
+  "scope": "Trusted feasibility/reference controls; no model benchmark outcomes",
+  "sites": {
+    "fir": {
+      "run_id": "ssevoh-humaneval-controls-t2-20261110T041212Z-fir",
+      "controls": 6,
+      "all_controls_ok": true,
+      "isolation_feasible": true,
+      "fetched_source_snapshot": "hpc/fetched/fir/ssevoh-humaneval-controls-t2-20261110T041212Z-fir/config/source-snapshot.json",
+      "files": {
+        "fir/controls.jsonl": "e85d61a81f6603bfb35c97b9cf01d4622fa03c071422b9b36522bc70e1ca01c3",
+        "fir/transfer.json": "52e3211abe39a9f06cc6ab49657163f55f690b68806e4209d1d24c5e848ee762",
+        "fir/isolation.json": "a4c391c6b13c176a1dc35c2da59fc86eabbef5812db3f193dbbbc9e5fc9b05e2"
+      }
+    },
+    "narval": {
+      "run_id": "ssevoh-humaneval-controls-t2-20261110T041228Z-narval",
+      "controls": 6,
+      "all_controls_ok": true,
+      "isolation_feasible": true,
+      "fetched_source_snapshot": "hpc/fetched/narval/ssevoh-humaneval-controls-t2-20261110T041228Z-narval/config/source-snapshot.json",
+      "files": {
+        "narval/controls.jsonl": "42c1b73af723206018e466734e2f8ea48987364d9e62652775a5818d62b08c08",
+        "narval/transfer.json": "6e1aecc2c2a9c4b0b65e0c065ea826384bd2209b1b6977f29d66e2a3a6f42d8b",
+        "narval/isolation.json": "d93574da7ac4017f2f2693bd3ee611c57ffa9eae5a0ecc5f3214a886f6ea6b1b"
+      }
+    },
+    "rorqual": {
+      "run_id": "ssevoh-humaneval-controls-t2-20261110T041228Z-rorqual",
+      "controls": 6,
+      "all_controls_ok": true,
+      "isolation_feasible": true,
+      "fetched_source_snapshot": "hpc/fetched/rorqual/ssevoh-humaneval-controls-t2-20261110T041228Z-rorqual/config/source-snapshot.json",
+      "files": {
+        "rorqual/controls.jsonl": "1ab8b46e33d9c36335de8e91a524eaa7b509bf4e2e7db8df97125ee0e56233a9",
+        "rorqual/transfer.json": "2c38028d5ac7e6ce80d31d2aa8d613f0c174f0f3fa29d2cd242ad94f8c9f6e70",
+        "rorqual/isolation.json": "d949d38dfd703c511e5896a1baa6598b232d33cc8e4356bdd72744c73381d310"
+      }
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "project": "ssevoh-harness2-pilot-v2",
+  "study": "harness2-pilot-v2",
+  "require_gpu": true,
+  "vars": {
+    "MODELS": "qwen2.5-coder:7b phi4:14b gpt-oss:20b devstral:24b qwen3-coder:30b",
+    "REPEATS": "5",
+    "QUAL_FLAG": ""
+  },
+  "smoke": {
+    "vars": {
+      "MODELS": "qwen2.5-coder:7b phi4:14b",
+      "REPEATS": "1",
+      "QUAL_FLAG": "--qualification"
+    },
+    "time": "00:45:00",
+    "matrix_limit": 4,
+    "array_throttle": 1
+  },
+  "stages": [
+    {
+      "name": "setup",
+      "description": "setup",
+      "depends": [],
+      "cpu_only": false,
+      "resources": {
+        "gpus": "h100:1",
+        "cpus": 4,
+        "mem": "32G",
+        "time": "01:00:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "gpu",
+          "builtin": "check_gpu",
+          "critical": true
+        },
+        {
+          "name": "harness2-runtime",
+          "cmd": "python experiments/scripts/harness2_preflight.py --output \"{RESULTS}/setup/harness2.json\"",
+          "produces": [
+            "setup/harness2.json"
+          ],
+          "critical": true
+        },
+        {
+          "name": "pins",
+          "cmd": "python experiments/scripts/runtime.py freeze --models {MODELS} --output \"{RESULTS}/setup/models.lock.json\"",
+          "produces": [
+            "setup/models.lock.json"
+          ],
+          "critical": true
+        },
+        {
+          "name": "sandbox-live",
+          "cmd": "python experiments/scripts/harness2_sandbox_probe.py --output \"{RESULTS}/setup/sandbox.json\"",
+          "produces": [
+            "setup/sandbox.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "llm",
+      "description": "C4 v2: corrected adapter (typed executor schema, model selector), two ledger tasks, frozen controls, executable policy catalog vs sandboxed_evidence",
+      "depends": [
+        {
+          "stage": "setup",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": false,
+      "resources": {
+        "gpus": "h100:1",
+        "cpus": 4,
+        "mem": "32G",
+        "time": "02:00:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "generate",
+          "cmd": "python experiments/scripts/harness2_models.py --model {model} --executable-policy {policy} --output \"{RESULTS}/llm/{CELL}.jsonl\" --lock \"{RESULTS}/setup/models.lock.json\" --repeats {REPEATS} {QUAL_FLAG}",
+          "needs": [
+            "setup/models.lock.json",
+            "setup/harness2.json",
+            "setup/sandbox.json"
+          ],
+          "produces": [
+            "llm/{CELL}.jsonl"
+          ],
+          "progress": {
+            "file": "llm/{CELL}.jsonl",
+            "expected": "{REPEATS}"
+          },
+          "critical": true
+        }
+      ],
+      "matrix": {
+        "model": [
+          "qwen2.5-coder:7b",
+          "phi4:14b",
+          "gpt-oss:20b",
+          "devstral:24b",
+          "qwen3-coder:30b"
+        ],
+        "policy": [
+          "catalog",
+          "sandboxed_evidence"
+        ]
+      },
+      "array_throttle": 1
+    },
+    {
+      "name": "analysis",
+      "description": "Pooled v2 pilot analysis by model and executable policy",
+      "depends": [
+        {
+          "stage": "llm",
+          "type": "afterany"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "tables",
+          "cmd": "python experiments/scripts/harness2_pilot_analyze.py --root \"{RESULTS}/llm\" --output \"{RESULTS}/analysis\"",
+          "produces": [
+            "analysis/summary.json",
+            "analysis/summary.md"
+          ],
+          "critical": true
+        },
+        {
+          "name": "resume-check",
+          "cmd": "python experiments/scripts/harness2_pilot_resume.py --results \"{RESULTS}\" --repeats {REPEATS}",
+          "produces": [
+            "analysis/resume-check.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "collect",
+      "description": "collect",
+      "depends": [
+        {
+          "stage": "analysis",
+          "type": "afterany"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "persist",
+          "builtin": "collect",
+          "needs": [
+            "analysis/summary.json"
+          ],
+          "critical": true
+        }
+      ],
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ]
+    }
+  ],
+  "results": {
+    "tables": [
+      {
+        "name": "model_streams",
+        "glob": "llm/*.jsonl"
+      }
+    ],
+    "summaries": [],
+    "copy": [
+      "analysis/**",
+      "setup/*.json"
+    ],
+    "archive": [
+      "llm"
+    ]
+  }
+}

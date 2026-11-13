@@ -1,0 +1,1 @@
+{"editable": ["systemprompt.md", "LongTermMEMORY.md", "skills/*/SKILL.md", "scripts/summarize.py"], "principal": "operator", "protected": ["guardrails.md", "tool_descriptions/tool_guidance.md"], "validators": ["artifact_schema", "code_catalog", "version_origins"]}

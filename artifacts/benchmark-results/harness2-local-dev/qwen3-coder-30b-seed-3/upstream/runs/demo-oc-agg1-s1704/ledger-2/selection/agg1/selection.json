@@ -1,0 +1,29 @@
+{
+  "task_id": "ledger-2",
+  "mode": "agg",
+  "k": 1,
+  "chosen_id": "A",
+  "chosen_label": "agg1",
+  "chosen_run_id": "demo-oc-agg1-s1704/ledger-2/agg1",
+  "chosen_is_base": false,
+  "why": "trivial pool: single final at k=1; delivered without a selector session",
+  "id_map": {
+    "A": "agg1"
+  },
+  "dropped": [],
+  "n_candidates": 1,
+  "ok": true,
+  "fallback": false,
+  "error": "",
+  "usd": 0.0,
+  "experience": {
+    "cue": "when a task requires summing signed amounts in a ledger and the dataset includes both positive and negative values, but only the positive values contribute to the final total",
+    "lesson": "ensure that scripts handling ledger reconciliation filter out or appropriately process negative values before summing if only positive amounts are intended to be included in the result",
+    "evidence": "[{'component': 'scripts/summarize.py', 'candidates': 'inv1', 'change': 'The script was modified to handle signed amounts correctly by summing only positive amounts.', 'observed': \"In inv1, the script was changed to filter out negative amounts before summing. However, all candidates (base1, dom1, agg1) produced identical outputs ('Total: 35.50') because the ledger.csv contains only one positive amount (35.50) and two negative amounts (-10.25, -5.00). The execution contrast is not observable since all runs behaved identically.\", 'verdict': 'no observed effect'}]",
+    "confidence": "high",
+    "edits": "component: scripts/summarize.py\ncandidates: inv1\nchange: The script was modified to handle signed amounts correctly by summing only positive amounts.\nobserved: In inv1, the script was changed to filter out negative amounts before summing. However, all candidates (base1, dom1, agg1) produced identical outputs ('Total: 35.50') because the ledger.csv contains only one positive amount (35.50) and two negative amounts (-10.25, -5.00). The execution contrast is not observable since all runs behaved identically.\nverdict: no observed effect"
+  },
+  "trivial": true,
+  "evidence": "deliverable",
+  "chosen_run_dir": "artifacts/benchmark-results/harness2-local-dev/qwen3-coder-30b-seed-3/upstream/executions/demo-oc-agg1-s1704/ledger-2/agg1"
+}

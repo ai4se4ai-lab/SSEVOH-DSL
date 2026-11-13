@@ -1,0 +1,277 @@
+{
+  "run_id": "ssevoh-smoke-20261109T191636Z-rorqual",
+  "time": "2026-11-09 19:46:36",
+  "smoke": true,
+  "project": "ssevoh",
+  "commit": "",
+  "results": "/scratch/mbabaei/ssevoh/runs/ssevoh-smoke-20261109T191636Z-rorqual/results",
+  "rows": [
+    {
+      "stage": "setup",
+      "cell_id": 0,
+      "cell": "-",
+      "job": "26198573",
+      "state": "PARTIAL",
+      "slurm_state": "FAILED",
+      "reason": "",
+      "node": "rg31801",
+      "elapsed": 569,
+      "limit": 2700,
+      "steps_ok": 1,
+      "steps_total": 2,
+      "current": null,
+      "failed": [
+        "pins"
+      ],
+      "progress": null,
+      "steps": [
+        {
+          "step": "gpu",
+          "status": "OK",
+          "seconds": 0.0,
+          "rc": "0",
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/setup/all/gpu.log"
+        },
+        {
+          "step": "pins",
+          "status": "FAILED",
+          "seconds": 461.0,
+          "rc": "1",
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/setup/all/pins.log"
+        }
+      ],
+      "gpu": "h100:1"
+    },
+    {
+      "stage": "deterministic",
+      "cell_id": 0,
+      "cell": "-",
+      "job": "26198574",
+      "state": "CANCELLED",
+      "slurm_state": "CANCELLED",
+      "reason": "",
+      "node": "None assigned",
+      "elapsed": 0,
+      "limit": 2700,
+      "steps_ok": 0,
+      "steps_total": 1,
+      "current": null,
+      "failed": [],
+      "progress": null,
+      "steps": [
+        {
+          "step": "heartbench",
+          "status": "PENDING",
+          "seconds": null,
+          "rc": null,
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/deterministic/all/heartbench.log"
+        }
+      ],
+      "gpu": "cpu"
+    },
+    {
+      "stage": "formal",
+      "cell_id": 0,
+      "cell": "-",
+      "job": "26198575",
+      "state": "CANCELLED",
+      "slurm_state": "CANCELLED",
+      "reason": "",
+      "node": "None assigned",
+      "elapsed": 0,
+      "limit": 2700,
+      "steps_ok": 0,
+      "steps_total": 1,
+      "current": null,
+      "failed": [],
+      "progress": null,
+      "steps": [
+        {
+          "step": "exploration",
+          "status": "PENDING",
+          "seconds": null,
+          "rc": null,
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/formal/all/exploration.log"
+        }
+      ],
+      "gpu": "cpu"
+    },
+    {
+      "stage": "scaling",
+      "cell_id": 0,
+      "cell": "-",
+      "job": "26198576",
+      "state": "CANCELLED",
+      "slurm_state": "CANCELLED",
+      "reason": "",
+      "node": "None assigned",
+      "elapsed": 0,
+      "limit": 2700,
+      "steps_ok": 0,
+      "steps_total": 1,
+      "current": null,
+      "failed": [],
+      "progress": null,
+      "steps": [
+        {
+          "step": "graph-sizes",
+          "status": "PENDING",
+          "seconds": null,
+          "rc": null,
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/scaling/all/graph-sizes.log"
+        }
+      ],
+      "gpu": "cpu"
+    },
+    {
+      "stage": "llm",
+      "cell_id": 0,
+      "cell": "model=qwen2.5-coder:7b",
+      "job": "26198577_0",
+      "state": "CANCELLED",
+      "slurm_state": "CANCELLED",
+      "reason": "",
+      "node": "None assigned",
+      "elapsed": 0,
+      "limit": 2700,
+      "steps_ok": 0,
+      "steps_total": 1,
+      "current": null,
+      "failed": [],
+      "progress": [
+        0,
+        3.0
+      ],
+      "steps": [
+        {
+          "step": "generate",
+          "status": "PENDING",
+          "seconds": null,
+          "rc": null,
+          "note": "",
+          "progress": [
+            0,
+            3.0
+          ],
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/llm/qwen2.5-coder_7b/generate.log"
+        }
+      ],
+      "gpu": "h100:1"
+    },
+    {
+      "stage": "llm",
+      "cell_id": 1,
+      "cell": "model=phi4:14b",
+      "job": "26198577_1",
+      "state": "CANCELLED",
+      "slurm_state": "CANCELLED",
+      "reason": "",
+      "node": "None assigned",
+      "elapsed": 0,
+      "limit": 2700,
+      "steps_ok": 0,
+      "steps_total": 1,
+      "current": null,
+      "failed": [],
+      "progress": [
+        0,
+        3.0
+      ],
+      "steps": [
+        {
+          "step": "generate",
+          "status": "PENDING",
+          "seconds": null,
+          "rc": null,
+          "note": "",
+          "progress": [
+            0,
+            3.0
+          ],
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/llm/phi4_14b/generate.log"
+        }
+      ],
+      "gpu": "h100:1"
+    },
+    {
+      "stage": "analysis",
+      "cell_id": 0,
+      "cell": "-",
+      "job": "26198578",
+      "state": "PARTIAL",
+      "slurm_state": "FAILED",
+      "reason": "",
+      "node": "rc32401",
+      "elapsed": 15,
+      "limit": 2700,
+      "steps_ok": 1,
+      "steps_total": 2,
+      "current": null,
+      "failed": [
+        "resume-check"
+      ],
+      "progress": null,
+      "steps": [
+        {
+          "step": "statistics",
+          "status": "OK",
+          "seconds": 1.0,
+          "rc": "0",
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/analysis/all/statistics.log"
+        },
+        {
+          "step": "resume-check",
+          "status": "FAILED",
+          "seconds": 0.0,
+          "rc": "6",
+          "note": "missing input: deterministic/records.jsonl",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/analysis/all/resume-check.log"
+        }
+      ],
+      "gpu": "cpu"
+    },
+    {
+      "stage": "collect",
+      "cell_id": 0,
+      "cell": "-",
+      "job": "26198579",
+      "state": "OK",
+      "slurm_state": "COMPLETED",
+      "reason": "",
+      "node": "rc32401",
+      "elapsed": 16,
+      "limit": 2700,
+      "steps_ok": 1,
+      "steps_total": 1,
+      "current": null,
+      "failed": [],
+      "progress": null,
+      "steps": [
+        {
+          "step": "persist",
+          "status": "OK",
+          "seconds": 3.0,
+          "rc": "0",
+          "note": "",
+          "progress": null,
+          "log": "/lustre09/project/6108124/mbabaei/SSEVOH-DSL/hpc/logs/ssevoh-smoke-20261109T191636Z-rorqual/steps/collect/all/persist.log"
+        }
+      ],
+      "gpu": "cpu"
+    }
+  ],
+  "requeues": 0
+}

@@ -1,0 +1,360 @@
+{
+  "corrected": [
+    {
+      "safe": true,
+      "states": 18,
+      "transitions": 44,
+      "counterexample": [],
+      "bounds": {
+        "proposals": 1,
+        "epochs": 3
+      },
+      "authorized": false,
+      "evidence": false,
+      "mutant": "none",
+      "scope": "finite lifecycle abstraction; no liveness or implementation refinement proof"
+    },
+    {
+      "safe": true,
+      "states": 18,
+      "transitions": 44,
+      "counterexample": [],
+      "bounds": {
+        "proposals": 1,
+        "epochs": 3
+      },
+      "authorized": false,
+      "evidence": true,
+      "mutant": "none",
+      "scope": "finite lifecycle abstraction; no liveness or implementation refinement proof"
+    },
+    {
+      "safe": true,
+      "states": 23,
+      "transitions": 62,
+      "counterexample": [],
+      "bounds": {
+        "proposals": 1,
+        "epochs": 3
+      },
+      "authorized": true,
+      "evidence": false,
+      "mutant": "none",
+      "scope": "finite lifecycle abstraction; no liveness or implementation refinement proof"
+    },
+    {
+      "safe": true,
+      "states": 61,
+      "transitions": 133,
+      "counterexample": [],
+      "bounds": {
+        "proposals": 1,
+        "epochs": 3
+      },
+      "authorized": true,
+      "evidence": true,
+      "mutant": "none",
+      "scope": "finite lifecycle abstraction; no liveness or implementation refinement proof"
+    }
+  ],
+  "mutants": [
+    {
+      "safe": false,
+      "states": 30,
+      "transitions": 66,
+      "counterexample": [
+        {
+          "action": "analyse",
+          "state": [
+            "ANALYSED",
+            0,
+            -1,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "verify",
+          "state": [
+            "VERIFIED",
+            0,
+            -1,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "approve",
+          "state": [
+            "APPROVED",
+            0,
+            0,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "deploy",
+          "state": [
+            "DEPLOYED",
+            0,
+            0,
+            false,
+            true,
+            0
+          ]
+        }
+      ],
+      "bounds": {
+        "proposals": 1,
+        "epochs": 3
+      },
+      "authorized": false,
+      "evidence": true,
+      "mutant": "authorization",
+      "scope": "finite lifecycle abstraction; no liveness or implementation refinement proof"
+    },
+    {
+      "safe": false,
+      "states": 30,
+      "transitions": 66,
+      "counterexample": [
+        {
+          "action": "analyse",
+          "state": [
+            "ANALYSED",
+            0,
+            -1,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "verify",
+          "state": [
+            "VERIFIED",
+            0,
+            -1,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "approve",
+          "state": [
+            "APPROVED",
+            0,
+            0,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "deploy",
+          "state": [
+            "DEPLOYED",
+            0,
+            0,
+            false,
+            true,
+            0
+          ]
+        }
+      ],
+      "bounds": {
+        "proposals": 1,
+        "epochs": 3
+      },
+      "authorized": true,
+      "evidence": false,
+      "mutant": "evidence",
+      "scope": "finite lifecycle abstraction; no liveness or implementation refinement proof"
+    },
+    {
+      "safe": false,
+      "states": 47,
+      "transitions": 92,
+      "counterexample": [
+        {
+          "action": "analyse",
+          "state": [
+            "ANALYSED",
+            0,
+            -1,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "verify",
+          "state": [
+            "VERIFIED",
+            0,
+            -1,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "approve",
+          "state": [
+            "APPROVED",
+            0,
+            0,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "deploy",
+          "state": [
+            "DEPLOYED",
+            0,
+            0,
+            false,
+            true,
+            0
+          ]
+        },
+        {
+          "action": "withdraw",
+          "state": [
+            "DEPLOYED",
+            1,
+            0,
+            true,
+            true,
+            0
+          ]
+        }
+      ],
+      "bounds": {
+        "proposals": 1,
+        "epochs": 3
+      },
+      "authorized": true,
+      "evidence": true,
+      "mutant": "withdrawal",
+      "scope": "finite lifecycle abstraction; no liveness or implementation refinement proof"
+    },
+    {
+      "safe": false,
+      "states": 21,
+      "transitions": 39,
+      "counterexample": [
+        {
+          "action": "withdraw",
+          "state": [
+            "PROPOSED",
+            1,
+            -1,
+            true,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "recover",
+          "state": [
+            "DEPLOYED",
+            1,
+            -1,
+            true,
+            true,
+            1
+          ]
+        }
+      ],
+      "bounds": {
+        "proposals": 1,
+        "epochs": 3
+      },
+      "authorized": true,
+      "evidence": true,
+      "mutant": "rollback",
+      "scope": "finite lifecycle abstraction; no liveness or implementation refinement proof"
+    },
+    {
+      "safe": false,
+      "states": 48,
+      "transitions": 96,
+      "counterexample": [
+        {
+          "action": "analyse",
+          "state": [
+            "ANALYSED",
+            0,
+            -1,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "verify",
+          "state": [
+            "VERIFIED",
+            0,
+            -1,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "approve",
+          "state": [
+            "APPROVED",
+            0,
+            0,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "dependency_change",
+          "state": [
+            "APPROVED",
+            1,
+            0,
+            false,
+            false,
+            -1
+          ]
+        },
+        {
+          "action": "deploy",
+          "state": [
+            "DEPLOYED",
+            1,
+            0,
+            false,
+            true,
+            0
+          ]
+        }
+      ],
+      "bounds": {
+        "proposals": 1,
+        "epochs": 3
+      },
+      "authorized": true,
+      "evidence": true,
+      "mutant": "revalidation",
+      "scope": "finite lifecycle abstraction; no liveness or implementation refinement proof"
+    }
+  ],
+  "passed": true,
+  "seconds": 0.00015042300219647586,
+  "recorded_utc": "2026-11-09T20:48:45.800947+00:00"
+}

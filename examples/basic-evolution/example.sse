@@ -1,0 +1,8 @@
+harness assistant {
+  component base memory { version 1; mutable true; }
+  component target skill { version 1; mutable true; depends [base]; }
+  evolution improve {
+    operation update; target target; from 1; to 2;
+    depends [base]; requires [structure]; expect active; ensure active;
+  }
+}

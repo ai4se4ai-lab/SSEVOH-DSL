@@ -1,0 +1,23 @@
+{
+  "phase": "complete",
+  "run_id": "ssevoh-results-audit-20261110T010942Z-rorqual",
+  "cluster": "rorqual",
+  "input_sha256": {
+    "experiments/aggregate-input/records.jsonl": "9b5ff073296dab385c4dd279fb9c295b800a538b81f8a411768ea6cdc29f53dc",
+    "experiments/aggregate-input/auxiliary.jsonl": "f0cd232864f22c89e5cb18ecee7b835b986cecc0f4d5381947391a295c23c402",
+    "experiments/harness2-aggregate-input/model-streams.jsonl": "23aa794e6adcba69b58d0001a56f846fa372e82c60fa340afdfea693afa1dd34",
+    "experiments/harness2-aggregate-input/controlled.jsonl": "e68ca2bd3a84c282cc285c38e73142b9ab0175aba1051295d56af8d80db00aaf"
+  },
+  "created_utc": "2026-11-10T01:09:42.660413+00:00",
+  "reason": "add protocol diagnostics and legitimate-action timing; preserve all original samples",
+  "initial_submission_error": "Command '['ssh', '-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes', '-o', 'ConnectTimeout=15', '-o', 'ServerAliveInterval=60', '-o', 'ServerAliveCountMax=3', '-o', 'ControlPath=/home/majid/Documents/PROJECTS/SSEVOH-DSL/hpc/.ssh/rorqual', 'mbabaei@rorqual.alliancecan.ca', 'cd /project/def-mbabaei/mbabaei/SSEVOH-DSL && env TZ=UTC python3 hpc/slurm/submit.py --run-id ssevoh-results-audit-20261110T010942Z-rorqual']' timed out after 90 seconds",
+  "jobs": {
+    "core_analysis": "26228485",
+    "harness2_analysis": "26228486",
+    "collect": "26228487"
+  },
+  "reconciled_utc": "2026-11-10T01:15:12.133175+00:00",
+  "reconciliation": "Remote jobs.tsv contains exactly the three expected stages; no resubmission was performed.",
+  "completed_utc": "2026-11-10T01:17:32.265309+00:00",
+  "original_metrics_unchanged": true
+}

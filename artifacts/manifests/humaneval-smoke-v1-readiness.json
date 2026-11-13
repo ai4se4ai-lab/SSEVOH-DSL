@@ -1,0 +1,126 @@
+{
+  "schema": "ssevoh-harness2-readiness-v1",
+  "utc": "2026-11-10T04:20:01.221148+00:00",
+  "passed": true,
+  "core_current": true,
+  "upstream_commit": "6868817518876de8fd170c6a8354daca273b6191",
+  "source_stable": true,
+  "source_sha256": {
+    "integrations/harness2/adapter/ssevoh_harness2/__init__.py": "d5139d069f8027ab81f4146c763c223ecb94e58135fc76e757ed3462508d09b3",
+    "integrations/harness2/adapter/ssevoh_harness2/authority.py": "5971735b3bb3fe05ff7bc0e89d2359ef7bb87f207740482f2c62d6ec4ba35f65",
+    "integrations/harness2/adapter/ssevoh_harness2/bridge.py": "cd7c3ddf4ae914aabec1fc1710e3b50dd68f90eb32718d996b009a0c8b340134",
+    "integrations/harness2/adapter/ssevoh_harness2/models.py": "f813de3df938bff131c8e7b540519fed23def0289c71addcfaebc3eeefcc6eab",
+    "integrations/harness2/tests/test_workers.py": "d10c7b170da65b13bffff365229acdb6bbb1bd581eaaa89f5b5e0ea1bb8574af",
+    "integrations/harness2/tests/test_integration.py": "08ceb8efc20e22c17b4cd13a410b54d064279016c74ddc27abe9a3995142c5dc",
+    "integrations/harness2/formal/check.py": "16e45fc49e5cc7b398ac0cbe79d3221e9c6deae0f169a61729ac5a0b39aaf64e",
+    "integrations/harness2/formal/Publication.cfg": "d3fb0a6c950749f604e4818c7991cd5272f89182d079f366c34f88a63a3266b8",
+    "integrations/harness2/formal/contracts.md": "1b50a1803fd7a1c4dc71c2e5c8a5221a226a96b2e515ba05020227b56a220796",
+    "integrations/harness2/formal/Publication.tla": "eebf4419ddd21a74d077eaa0cbf51904b3c9d0189c8bedb91552b814cd5c8d79",
+    "integrations/harness2/scripts/package_runtime.py": "5a699dbdf68a4feff44a548b47665fda9639e5ae8e2ee32b298402dfff7ed417",
+    "integrations/harness2/scripts/verify.py": "684bc38e92b4a876494aad3b2a42bb1ff6e800872256e79ad06691f675b4f9da",
+    "integrations/harness2/scripts/checkout.py": "ee63cef0d64b6572c96df1ba0721f53abaa5705ebc78f54be8e6a0880602251d",
+    "integrations/harness2/upstream-pin.json": "326633a4d92870ea556e68f869865d1d232263d2f03ec8c3aa5833731578a813",
+    "integrations/harness2/upstream-runtime.json": "99109d754f5d2b0ebda877eb05675994109942dd568cf29df785fcacb3de7815",
+    "integrations/harness2/upstream-runtime.tar.gz": "60415f65f4b7a7b67abdc6bc4e4945eb99d61b0efe9421232da81d5c8b7bda8b",
+    "experiments/scripts/harness2_analyze.py": "1a9a068ce856460413ba10179c9c50d23c7130e03678e5f1dd9e0fa7991957aa",
+    "experiments/scripts/harness2_support.py": "cf4f0aff356cfbef062146e202c588cccca23ee653a09ade004addd3829750b5",
+    "experiments/scripts/harness2_preflight.py": "16aa082978e22da7ed167860f62fce31b6b6d6096af34d08a29bc6c3f75c5804",
+    "experiments/scripts/harness2_resume.py": "4667298d0ffb4e306b595f9199afa2c3d589d6a62d1479efa9feb296bac8c5df",
+    "experiments/scripts/harness2_models.py": "8bd30411938d0c73859098c19698b46d79eef0a7e42f350c2d540fecf1ed135a",
+    "experiments/scripts/harness2_deterministic.py": "c8b78d3aac05f2571f5111d58722af0d1f7acb63aa0706e9b78d497f93704eee",
+    "experiments/scripts/humaneval_freeze.py": "8cdf592b70bbd2931607462dca62bdabb8834fbe0b9b33bf80450141de9f8dc9",
+    "experiments/scripts/humaneval_adapter.py": "2108612427f5752f04c0fb130444b74875c5a5f4254fe7f67ee658ef10f9db53",
+    "experiments/scripts/humaneval_eval_inside.py": "ae73ec6f312093f585ba2d8db067dad697688041edea5c332be3cd67a08c002f",
+    "experiments/scripts/humaneval_prepare.py": "51b2921a1695ab5ad539fbc9468266f2b23745b62bf011df18147eca3d7146e4",
+    "experiments/scripts/humaneval_grade.py": "2d9502afffaea46395f5278a90f989c60013f211691682d0c121f109f5a697f6",
+    "experiments/scripts/humaneval_analyze.py": "1abe2e8c55ffdce93b314c40a89d8bdb4db8fc2eddfb0d18913bb419f10e8326",
+    "experiments/scripts/humaneval_generate.py": "2b57509fd32e45000ea5a70aa803fafc9079ba66a68752a2c17e6efcd3f855c6",
+    "experiments/scripts/humaneval_sandbox.py": "26e1f6aca1670c073ba175ba2912b863224d6e5feeb052683d1d707f3452a853",
+    "experiments/scripts/test_humaneval_support.py": "9f8fe245bfdbcb2321dad179d28f1ff1c04c5aee0129065b0acaf6cf9fa2a4b1",
+    "experiments/humaneval/public-v0.1.10.jsonl": "2daaf2edc5a3dc6a68316a89800b61af7d534bca5f6230a5e6b6773411576c0a",
+    "experiments/humaneval/dataset-manifest.json": "2f9ac72e8bb8018dbdd74dfabfdb24dbecede48bb1b8c3997614bb4607b9046b",
+    "experiments/humaneval/protocol.json": "cef6de0ea68f8ea710295227443496a622a70d2c68286e6993624c52276c6ee1",
+    "experiments/humaneval/vendor/manifest.json": "a5b162fc8c05c5d8bf1a9ec3e1f8eac5751e6aef76cdfdc1935d13973c82ddf1",
+    "hpc/config/profiles/humaneval-smoke.json": "637fff6bd9584aa36de3f260692bfad1672e40d066b9ad16ef9ed8e6b83cc739",
+    "experiments/scripts/runtime.py": "3f57696a11f57eacb75b95c081f07fa14e654c7fc55b904c62e7d7417227bebb",
+    "hpc/config/profiles/harness2.json": "553d0f4d5c1c568f2f25fce1eb1d1f5b486d467f99c408a1d2aacd7dfc2e1489",
+    "hpc/config/models.json": "dd7120c2d2b20a437efc7cceda59d8d3e4ff38747a51fbb1a7226e849412130a"
+  },
+  "core_readiness_sha256": "8eff9504dcc2e0a70bade5f690cb3ebf2acce9028ccb18328656e2256802cb49",
+  "runs": [
+    {
+      "name": "upstream-tests",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/majid/Documents/PROJECTS/SSEVOH-DSL/integrations/harness2/original/upstream/tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "tests": 70,
+      "log": "integrations/harness2/evidence/upstream-tests.txt",
+      "sha256": "9a681e538a2f5f35111212db7ea3c810a16a7b3b02e001be6b2b176b65852593"
+    },
+    {
+      "name": "integration-tests",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/majid/Documents/PROJECTS/SSEVOH-DSL/integrations/harness2/tests",
+        "-v"
+      ],
+      "returncode": 0,
+      "tests": 32,
+      "log": "integrations/harness2/evidence/integration-tests.txt",
+      "sha256": "3f122fc544e02b8d878a6388a2dc236e817f4626d40619424a60c18e85e12db5"
+    },
+    {
+      "name": "coding-adapter-tests",
+      "command": [
+        "/usr/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/home/majid/Documents/PROJECTS/SSEVOH-DSL/experiments/scripts",
+        "-p",
+        "test_humaneval_support.py",
+        "-v"
+      ],
+      "returncode": 0,
+      "tests": 6,
+      "log": "integrations/harness2/evidence/coding-adapter-tests.txt",
+      "sha256": "9cec3008162130ad058004d71e54148f67893a889087d5ada274c4885bb9f10e"
+    },
+    {
+      "name": "publication-model",
+      "command": [
+        "/usr/bin/python3",
+        "/home/majid/Documents/PROJECTS/SSEVOH-DSL/integrations/harness2/formal/check.py",
+        "--tlc-jar",
+        "/tmp/ssevoh-tla2tools.jar"
+      ],
+      "returncode": 0,
+      "tests": null,
+      "log": "integrations/harness2/evidence/publication-model.txt",
+      "sha256": "afa8936f9023064aaf6a0f9947f5627f2890ed16466bf5519e42aa8eac82268f"
+    }
+  ],
+  "scope": "actual unmodified upstream recursion/probe/selection/library with catalog-restricted ledger or data-only non-executable coding adapter and data-only proposers; no generated-code grading isolation is verified here",
+  "unsupported": [
+    "general OpenCode/Codex executor isolation",
+    "arbitrary generated executable behavior",
+    "durable automatic recovery",
+    "arbitrary multi-target metadata transactions",
+    "published professional benchmark replication"
+  ],
+  "submits_experiments": false,
+  "release_authority": "hpc/config/research-readiness.json",
+  "next_gate": "source-pinned study preflight, complete smoke graph and measured qualification; no submission by this verifier"
+}

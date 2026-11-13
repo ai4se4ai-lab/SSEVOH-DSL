@@ -1,0 +1,10 @@
+test_every_pinned_python_source_has_reviewed_publication_role (test_reconnaissance.ReconnaissanceTests.test_every_pinned_python_source_has_reviewed_publication_role) ... ok
+test_original_checks_are_preserved_and_passed (test_reconnaissance.ReconnaissanceTests.test_original_checks_are_preserved_and_passed) ... ok
+test_stale_core_is_reported_as_a_separate_blocker (test_reconnaissance.ReconnaissanceTests.test_stale_core_is_reported_as_a_separate_blocker) ... ok
+test_survey_target_never_authorizes_adapter_or_experiments (test_reconnaissance.ReconnaissanceTests.test_survey_target_never_authorizes_adapter_or_experiments) ... ok
+test_unreviewed_upstream_cannot_inherit_inspection (test_reconnaissance.ReconnaissanceTests.test_unreviewed_upstream_cannot_inherit_inspection) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK

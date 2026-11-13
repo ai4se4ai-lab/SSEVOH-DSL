@@ -1,0 +1,309 @@
+{
+  "schema": "ssevoh-upstream-reconnaissance-v1",
+  "utc": "2026-11-09T20:53:30.671280+00:00",
+  "repository": "https://github.com/zgcagi/Harness-RSI.git",
+  "commit": "d521b13978806e6132c56cf4adb280e3d969f41b",
+  "published_refs": [
+    "d521b13978806e6132c56cf4adb280e3d969f41b\trefs/heads/main"
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 29,
+      "sha256": "60c9bdd905fcf45ac485c680d32e9773962cf061b6f041dcddd033911558a672"
+    },
+    {
+      "path": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "bytes": 3189,
+      "sha256": "ca74f82a02cc72e2112b6cb117a84034e181c737e6e55df3f9dce28bec16084d"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    {
+      "path": "README.md",
+      "bytes": 48806,
+      "sha256": "4f675d3d2340f69b3b0e63603a22a4ba657252318d30baf668e58a7741dca602"
+    },
+    {
+      "path": "README_zh.md",
+      "bytes": 45115,
+      "sha256": "3f47098987c3134837afa992dd4e4bb50143b01dc2fe2820d8dbe2c31971ff17"
+    },
+    {
+      "path": "assets/applications.png",
+      "bytes": 1393875,
+      "sha256": "1fe63036cea61d1aa7edd2548f35af802f3318e517bff16eb912a27b3b909d20"
+    },
+    {
+      "path": "assets/banner.png",
+      "bytes": 2173569,
+      "sha256": "e7348bc8708f85fc674339289ff9005f5618d9703cbc8789e8f2ba6044b979cb"
+    },
+    {
+      "path": "assets/claims.png",
+      "bytes": 285064,
+      "sha256": "60ad75878e03172085f060e2f547a1f9f63809f6b3b2d8f4bb33bf90ccd35a05"
+    },
+    {
+      "path": "assets/evaluation-controls.png",
+      "bytes": 323078,
+      "sha256": "1244432e31d95e259080b16a040f778a6c39b12c459b72ed5bb8367aa4239fd0"
+    },
+    {
+      "path": "assets/evolutionary-paradigms.png",
+      "bytes": 513841,
+      "sha256": "60c816fece066eea01c30109349f9c4c5cbe44b06b1b89fdca77f8d57406970b"
+    },
+    {
+      "path": "assets/harness-components.png",
+      "bytes": 196608,
+      "sha256": "9546a946f7e0208d9b8f375d1941ce82db71e3cdd9f8a6cb14ec2320b3bd0afc"
+    },
+    {
+      "path": "assets/harness-mark.svg",
+      "bytes": 587,
+      "sha256": "0283e57ff398d0f04be23f4648115fda4be78f2f61adb59379a03b01e4a3d78c"
+    },
+    {
+      "path": "assets/landscape.png",
+      "bytes": 409483,
+      "sha256": "6b950f9bf9c7589807db7fa0d9b6e69a0d9aac96ffc2e9ab30831ab6f04ba63f"
+    },
+    {
+      "path": "assets/overview.png",
+      "bytes": 561575,
+      "sha256": "0e93edda90dec97508b2ebdb880a6db8c5524b6b85fe783e043e17adc97721e6"
+    },
+    {
+      "path": "assets/reported-evidence.png",
+      "bytes": 81067,
+      "sha256": "d364b99494aed35e3f0838788ae4c86db03f12d0bd434711f13ec9b4599740ca"
+    },
+    {
+      "path": "assets/seal-ustc.png",
+      "bytes": 28292,
+      "sha256": "6fc2e6eae8404af07ad1340db3584ad7bf51eba67edeff94d50f910dba845895"
+    },
+    {
+      "path": "assets/seal-zgca.png",
+      "bytes": 175395,
+      "sha256": "f915fbdaf97ee12d188a7984b1b121668c3a819eb335f638ddc1854f596de223"
+    },
+    {
+      "path": "assets/seal-zgci.png",
+      "bytes": 203355,
+      "sha256": "1fd621479f31bb2a50b986fe35668ea6274a3453d4dd499950c75c07609f5045"
+    },
+    {
+      "path": "assets/social-impact.png",
+      "bytes": 1502910,
+      "sha256": "a41d7fdc40f95ffd0485fc261130dcec63c35c0d507a668eb15104a4f2aefdcd"
+    },
+    {
+      "path": "assets/taxonomy.png",
+      "bytes": 676609,
+      "sha256": "8c4480493d6bfe72ccde99634d0bafc007c44daaa28a61dbdac8cc7e53cb09b6"
+    },
+    {
+      "path": "data/claim-audit-rubric.md",
+      "bytes": 34790,
+      "sha256": "37f5784cacef0e96045530c65526a41643ddbba9977703befcadd000cc0ba00b"
+    },
+    {
+      "path": "data/claim-audit-secondary.tsv",
+      "bytes": 5102,
+      "sha256": "211176432276cd6778cf08e508971ccbdafba0f008e6b749669380643cb158b8"
+    },
+    {
+      "path": "data/claim-audit.tsv",
+      "bytes": 195849,
+      "sha256": "47f827334503a4cb87d8b8d8f51525d05ec7b6bb8333d2afd377e5f2205d353e"
+    },
+    {
+      "path": "data/fig02-growth-ledger.tsv",
+      "bytes": 13496,
+      "sha256": "274dc994907f6045fe624274c80124cda6de3301cf89e14e17d78f3de0740fa1"
+    },
+    {
+      "path": "data/reported-evidence.json",
+      "bytes": 227776,
+      "sha256": "e0311556bf4b303f13272310641d82cb3cb438cccfcb6b6f941cc4f1800ccbbb"
+    },
+    {
+      "path": "data/source-snapshot.json",
+      "bytes": 5904,
+      "sha256": "6c81ceb6fd816bb165891d0a3f45139df9ca833412592a4cc579ca8e142b54b5"
+    },
+    {
+      "path": "data/taxonomy.json",
+      "bytes": 29267,
+      "sha256": "bbcb637f9309229389d44939459d1b26724da8224e524efdeec1da96de5b4d55"
+    },
+    {
+      "path": "docs/evidence-criteria.md",
+      "bytes": 7996,
+      "sha256": "937989b15c7ab6cfa431825546c288f406434c7cea935974236e0a4b7635e710"
+    },
+    {
+      "path": "docs/manuscript-sync.md",
+      "bytes": 6205,
+      "sha256": "deacfa1e2a381ccac94eae16c3d7ebd857351cbd983616936c2a6c6acc460c59"
+    },
+    {
+      "path": "docs/reported-evidence.md",
+      "bytes": 232525,
+      "sha256": "a9e34a650906ca39d965d9de923bedb7fedb53c4da4f589d54e04cde93382e3d"
+    },
+    {
+      "path": "index.html",
+      "bytes": 27187,
+      "sha256": "6370e9763ffb6777b9d4a1c8ac3c864041f1b22906ad1871e0e83bb999ff6231"
+    },
+    {
+      "path": "paper/harness-self-evolution-references.bib",
+      "bytes": 167456,
+      "sha256": "63904f61243229839974cc4f558bf9239b3bc8b1583d508204e373948a2249ec"
+    },
+    {
+      "path": "paper/harness-self-evolution.pdf",
+      "bytes": 3439388,
+      "sha256": "6c5944265eb4522e4c577446aa7165bda86ef1fcaee81692f1d0e061d5b56fa5"
+    },
+    {
+      "path": "paper/self-evolving-agent-harness-references.bib",
+      "bytes": 163881,
+      "sha256": "e96d3640afa16d444157642fc68b120a30ba0188499ffedfeae68f347920f5a4"
+    },
+    {
+      "path": "paper/self-evolving-agent-harness.pdf",
+      "bytes": 882946,
+      "sha256": "711c63a79fa3784f1e04451c0d8aaa4bf260eb53713ef7d25e3ff8593e94b04a"
+    },
+    {
+      "path": "scripts/build_evidence.py",
+      "bytes": 10838,
+      "sha256": "71e7b84d0fed2438f543d825a3f883cb666b5f46f3d0426469512810169f7254",
+      "module_doc": "Generate evidence tables and site/README summaries from data/reported-evidence.json.",
+      "definitions": [
+        "load_evidence",
+        "table",
+        "summary",
+        "prose",
+        "render_basis",
+        "render_doc",
+        "main"
+      ]
+    },
+    {
+      "path": "scripts/build_site_data.py",
+      "bytes": 6392,
+      "sha256": "35565ad98f428ca797bb03203d555147d8e1ded831c19ab5a2d1d49a3b20f58b",
+      "module_doc": "Generate site/corpus.js, the data behind the project page's paper explorer.\n\n    python3 scripts/build_site_data.py          # rewrite site/corpus.js\n    python3 scripts/build_site_data.py --check  # exit 1 if it is out of date\n\nREADME.md stays the single source of truth for entries; docs/reported-evidence.md\nfor verdicts. The page never carries a hand-edited copy of either, so an entry\nadded to the list reaches the explorer only through this script, and\ncheck_consistency.py fails if the generated file has drifted.",
+      "definitions": [
+        "inline_markdown",
+        "read_verdicts",
+        "read_entries",
+        "render",
+        "main"
+      ]
+    },
+    {
+      "path": "scripts/check_consistency.py",
+      "bytes": 12839,
+      "sha256": "841240eb396173157ee11c27f27799a17a95d99a720b76b840cd5f3a04127269",
+      "module_doc": "Check the invariants this list promises, so a drift fails loudly instead of quietly.\n\n    python3 scripts/check_consistency.py          # structure only, no network\n    python3 scripts/check_consistency.py --links  # also resolve every URL\n\nSix checks, each one a defect found in a comparable list rather than a\nhypothetical: a table of contents whose anchors no longer resolve, an entry\nlisted twice, two language versions that have drifted apart, a heading that\ncarries an emoji and so breaks the anchor a hand-written link points at, a\nfile that nothing links to, and a project-page explorer generated from an\nolder README. Exit status is non-zero if any check fails.",
+      "definitions": [
+        "read",
+        "slug",
+        "entry_lines",
+        "entries",
+        "strip_code",
+        "check_anchors",
+        "check_emoji_headings",
+        "check_duplicates",
+        "check_parity",
+        "check_files",
+        "check_site_data",
+        "check_evidence_and_taxonomy",
+        "check_citation",
+        "check_paper_snapshot",
+        "check_html",
+        "check_links",
+        "main"
+      ]
+    },
+    {
+      "path": "site/app.js",
+      "bytes": 14328,
+      "sha256": "17e0fe07d7780e632c6f21f3daab53cea472c1d2922de94061bb064a9530df88"
+    },
+    {
+      "path": "site/corpus.js",
+      "bytes": 75541,
+      "sha256": "d16b07b79743bd8c4541385e0df026ce43b1c5c5acb6ce52f61057b46642787b"
+    },
+    {
+      "path": "site/style.css",
+      "bytes": 25128,
+      "sha256": "1fce9608d70593e84bb818fca29136af510c0a66b14e82e2662b75cdbc1ffb7b"
+    }
+  ],
+  "tracked_file_count": 42,
+  "python_files": [
+    "scripts/build_evidence.py",
+    "scripts/build_site_data.py",
+    "scripts/check_consistency.py"
+  ],
+  "reviewed_kind": "survey_companion",
+  "runtime_present": false,
+  "interception_boundary": null,
+  "baseline_C0_executable": false,
+  "finding_basis": [
+    "README.md describes companion materials for a survey",
+    "CONTRIBUTING.md specifies paper/evidence/site maintenance",
+    "all three Python modules generate/check publication data; JS is the reading-list browser"
+  ],
+  "checks": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "scripts/build_evidence.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "log": "evidence/build_evidence.py.txt",
+      "sha256": "cee0a8be8f4bfcac73cff69ea1ea57a74ffd5ff59c0747ac9bc3b3dabc04855d",
+      "scope": "publication/data consistency, not agent evolution or safety"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "scripts/build_site_data.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "log": "evidence/build_site_data.py.txt",
+      "sha256": "cac0c1a017516bb3519c5442a25727a7b2add56d0755aeb189260c3fe5a930c6",
+      "scope": "publication/data consistency, not agent evolution or safety"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "scripts/check_consistency.py"
+      ],
+      "returncode": 0,
+      "log": "evidence/check_consistency.py.txt",
+      "sha256": "ad80d676ee42f9fadc4632a0f60a3e9d0ecc8902bf03246de4a18c88e5c82b94",
+      "scope": "publication/data consistency, not agent evolution or safety"
+    }
+  ],
+  "upstream_clean_after_checks": true
+}

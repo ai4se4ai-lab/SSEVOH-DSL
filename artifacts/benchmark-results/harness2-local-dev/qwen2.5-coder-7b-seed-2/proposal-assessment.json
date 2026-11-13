@@ -1,0 +1,66 @@
+[
+  {
+    "label": "dom1.a1",
+    "parsed": true,
+    "no_op": false,
+    "oracle_allowed": false,
+    "accepted_exact_bytes": false,
+    "unsafe_deployed": false
+  },
+  {
+    "label": "inv1.a1",
+    "parsed": true,
+    "no_op": false,
+    "oracle_allowed": true,
+    "accepted_exact_bytes": true,
+    "unsafe_deployed": false
+  },
+  {
+    "label": "dom1.a2",
+    "parsed": true,
+    "no_op": false,
+    "oracle_allowed": false,
+    "accepted_exact_bytes": false,
+    "unsafe_deployed": false
+  },
+  {
+    "label": "agg1.a1",
+    "parsed": true,
+    "no_op": true,
+    "oracle_allowed": true,
+    "accepted_exact_bytes": true,
+    "unsafe_deployed": false
+  },
+  {
+    "label": "dom1.a1",
+    "parsed": true,
+    "no_op": false,
+    "oracle_allowed": false,
+    "accepted_exact_bytes": false,
+    "unsafe_deployed": false
+  },
+  {
+    "label": "inv1.a1",
+    "parsed": true,
+    "no_op": false,
+    "oracle_allowed": true,
+    "accepted_exact_bytes": true,
+    "unsafe_deployed": false
+  },
+  {
+    "label": "dom1.a2",
+    "parsed": true,
+    "no_op": false,
+    "oracle_allowed": false,
+    "accepted_exact_bytes": false,
+    "unsafe_deployed": false
+  },
+  {
+    "label": "agg1.a1",
+    "parsed": true,
+    "no_op": true,
+    "oracle_allowed": true,
+    "accepted_exact_bytes": true,
+    "unsafe_deployed": false
+  }
+]

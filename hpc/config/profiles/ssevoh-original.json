@@ -1,0 +1,382 @@
+{
+  "project": "ssevoh-core",
+  "require_gpu": true,
+  "vars": {
+    "MODELS": "qwen2.5-coder:7b phi4:14b gpt-oss:20b devstral:24b qwen3-coder:30b",
+    "REPEATS": "5",
+    "LIMIT": "0",
+    "SIZES": "10,100,500",
+    "QUAL_FLAG": "",
+    "TASKS": "20",
+    "CONTENDERS": "1,2,4,8"
+  },
+  "smoke": {
+    "vars": {
+      "MODELS": "qwen2.5-coder:7b phi4:14b",
+      "REPEATS": "3",
+      "LIMIT": "1",
+      "SIZES": "10,30",
+      "QUAL_FLAG": "--qualification",
+      "TASKS": "1",
+      "CONTENDERS": "1,2"
+    },
+    "time": "00:45:00",
+    "matrix_limit": 2,
+    "array_throttle": 1
+  },
+  "stages": [
+    {
+      "name": "setup",
+      "description": "setup",
+      "depends": [],
+      "cpu_only": false,
+      "resources": {
+        "gpus": "h100:1",
+        "cpus": 4,
+        "mem": "32G",
+        "time": "01:00:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "gpu",
+          "builtin": "check_gpu",
+          "critical": true
+        },
+        {
+          "name": "core-readiness",
+          "cmd": "python experiments/scripts/core_study_preflight.py",
+          "critical": true
+        },
+        {
+          "name": "pins",
+          "cmd": "python experiments/scripts/runtime.py freeze --models {MODELS} --output \"{RESULTS}/setup/models.lock.json\"",
+          "produces": [
+            "setup/models.lock.json"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "deterministic",
+      "description": "deterministic",
+      "depends": [
+        {
+          "stage": "setup",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "heartbench",
+          "cmd": "python -m ssevoh.benchmark --output \"{RESULTS}/deterministic/records.jsonl\" --baseline all --repeats {REPEATS}",
+          "needs": [
+            "setup/models.lock.json"
+          ],
+          "produces": [
+            "deterministic/records.jsonl"
+          ],
+          "critical": true
+        }
+      ],
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ]
+    },
+    {
+      "name": "formal",
+      "description": "formal",
+      "depends": [
+        {
+          "stage": "setup",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "exploration",
+          "cmd": "python -m ssevoh.cli verify > \"{RESULTS}/formal.json\"",
+          "needs": [
+            "setup/models.lock.json"
+          ],
+          "produces": [
+            "formal.json"
+          ],
+          "critical": true
+        }
+      ],
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ]
+    },
+    {
+      "name": "scaling",
+      "description": "scaling",
+      "depends": [
+        {
+          "stage": "setup",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "graph-sizes",
+          "cmd": "python experiments/scripts/scale.py --output \"{RESULTS}/scaling/records.jsonl\" --sizes {SIZES} --repeats {REPEATS} --contenders {CONTENDERS}",
+          "needs": [
+            "setup/models.lock.json"
+          ],
+          "produces": [
+            "scaling/records.jsonl"
+          ],
+          "critical": true
+        }
+      ],
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ]
+    },
+    {
+      "name": "ablations",
+      "description": "RQ2/RQ3/RQ4: sandbox removal of closure, provenance, withdrawal, rollback and revalidation mechanisms",
+      "depends": [
+        {
+          "stage": "setup",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "mechanisms",
+          "cmd": "python experiments/scripts/ablations.py --output \"{RESULTS}/ablations/records.jsonl\" --repeats {REPEATS}",
+          "produces": [
+            "ablations/records.jsonl"
+          ],
+          "critical": true
+        }
+      ]
+    },
+    {
+      "name": "llm",
+      "description": "llm",
+      "depends": [
+        {
+          "stage": "setup",
+          "type": "afterok"
+        }
+      ],
+      "cpu_only": false,
+      "resources": {
+        "gpus": "h100:1",
+        "cpus": 4,
+        "mem": "32G",
+        "time": "01:00:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "generate",
+          "cmd": "python experiments/scripts/llm.py --model {model} --output \"{RESULTS}/llm/{CELL}.jsonl\" --lock \"{RESULTS}/setup/models.lock.json\" --repeats {REPEATS} --limit {LIMIT} {QUAL_FLAG}",
+          "needs": [
+            "setup/models.lock.json"
+          ],
+          "produces": [
+            "llm/{CELL}.jsonl"
+          ],
+          "progress": {
+            "file": "llm/{CELL}.jsonl",
+            "expected": "{REPEATS} * {TASKS}"
+          },
+          "critical": true
+        }
+      ],
+      "matrix": {
+        "model": [
+          "qwen2.5-coder:7b",
+          "phi4:14b",
+          "gpt-oss:20b",
+          "devstral:24b",
+          "qwen3-coder:30b"
+        ]
+      },
+      "array_throttle": 1
+    },
+    {
+      "name": "analysis",
+      "description": "analysis",
+      "depends": [
+        {
+          "stage": "deterministic",
+          "type": "afterany"
+        },
+        {
+          "stage": "formal",
+          "type": "afterany"
+        },
+        {
+          "stage": "scaling",
+          "type": "afterany"
+        },
+        {
+          "stage": "llm",
+          "type": "afterany"
+        },
+        {
+          "stage": "ablations",
+          "type": "afterany"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "statistics",
+          "cmd": "python experiments/scripts/analyze.py --root \"{RESULTS}\" --output \"{RESULTS}/analysis\"",
+          "produces": [
+            "analysis/summary.json",
+            "analysis/summary.csv",
+            "analysis/summary.md",
+            "analysis/summary.tex"
+          ],
+          "always": true,
+          "critical": true
+        },
+        {
+          "name": "resume-check",
+          "cmd": "python experiments/scripts/resume_check.py --results \"{RESULTS}\" --repeats {REPEATS}",
+          "needs": [
+            "deterministic/records.jsonl"
+          ],
+          "produces": [
+            "analysis/resume-check.json"
+          ],
+          "critical": true,
+          "always": true
+        }
+      ],
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ]
+    },
+    {
+      "name": "collect",
+      "description": "collect",
+      "depends": [
+        {
+          "stage": "analysis",
+          "type": "afterany"
+        }
+      ],
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:20:00",
+        "requeue": true
+      },
+      "steps": [
+        {
+          "name": "persist",
+          "builtin": "collect",
+          "needs": [
+            "analysis/summary.json"
+          ],
+          "always": true,
+          "critical": true
+        }
+      ],
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ]
+    }
+  ],
+  "results": {
+    "tables": [
+      {
+        "name": "deterministic",
+        "glob": "deterministic/*.jsonl"
+      },
+      {
+        "name": "llm",
+        "glob": "llm/*.jsonl"
+      },
+      {
+        "name": "scaling",
+        "glob": "scaling/*.jsonl"
+      },
+      {
+        "name": "ablations",
+        "glob": "ablations/*.jsonl"
+      }
+    ],
+    "summaries": [
+      {
+        "name": "acceptance",
+        "table": "llm",
+        "group_by": [
+          "model"
+        ],
+        "metrics": {
+          "accepted": [
+            "mean"
+          ],
+          "false_accept": [
+            "mean"
+          ],
+          "seconds": [
+            "mean",
+            "median"
+          ]
+        }
+      }
+    ],
+    "copy": [
+      "analysis/**",
+      "setup/*.json",
+      "formal.json"
+    ],
+    "archive": [
+      "llm",
+      "deterministic",
+      "scaling",
+      "ablations"
+    ]
+  },
+  "study": "ssevoh-core-v2"
+}

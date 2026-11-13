@@ -1,0 +1,75 @@
+{
+  "project": "ssevoh-ablation",
+  "require_gpu": true,
+  "vars": {
+    "REPEATS": "1"
+  },
+  "smoke": {
+    "vars": {
+      "REPEATS": "1"
+    },
+    "time": "00:10:00"
+  },
+  "stages": [
+    {
+      "name": "ablations",
+      "description": "Sandbox mechanism-removal extension smoke on a scheduled CPU node",
+      "cpu_only": true,
+      "resources": {
+        "cpus": 2,
+        "mem": "4G",
+        "time": "00:10:00"
+      },
+      "sbatch_extra": [
+        "--account=def-mbabaei_cpu"
+      ],
+      "steps": [
+        {
+          "name": "mechanisms",
+          "cmd": "python experiments/scripts/ablations.py --output \"{RESULTS}/ablations/records.jsonl\" --repeats {REPEATS}",
+          "produces": [
+            "ablations/records.jsonl"
+          ],
+          "critical": true
+        },
+        {
+          "name": "statistics",
+          "cmd": "python experiments/scripts/analyze.py --root \"{RESULTS}\" --output \"{RESULTS}/analysis\"",
+          "needs": [
+            "ablations/records.jsonl"
+          ],
+          "produces": [
+            "analysis/summary.json"
+          ],
+          "critical": true
+        },
+        {
+          "name": "persist",
+          "builtin": "collect",
+          "needs": [
+            "analysis/summary.json"
+          ],
+          "critical": true
+        }
+      ],
+      "cells": [
+        {}
+      ]
+    }
+  ],
+  "results": {
+    "tables": [
+      {
+        "name": "ablations",
+        "glob": "ablations/*.jsonl"
+      }
+    ],
+    "copy": [
+      "analysis/**"
+    ],
+    "archive": [
+      "ablations"
+    ]
+  },
+  "is_smoke": true
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "ssevoh-humaneval-preflight-readiness-v1",
+  "scope": "Trusted CPU isolation diagnostics only; no generated code or inference authorized",
+  "checks": {
+    "projection_regressions": 3,
+    "native_profile_validation": true
+  },
+  "files": {
+    "experiments/scripts/humaneval_sandbox.py": "26e1f6aca1670c073ba175ba2912b863224d6e5feeb052683d1d707f3452a853",
+    "experiments/scripts/humaneval_prepare.py": "09411445c0398af1177db5bcacdfa7aa4027fda67dc21c3ad40e3862ff940a89",
+    "experiments/scripts/test_humaneval_support.py": "517dc7d8523b5f1fb2085ba8b129d004c3a2bbf70d08aa236ce547fd4a503d9e",
+    "hpc/config/profiles/humaneval-preflight.json": "7aaac8567ee4aa256d0aec131546911b379b6d6df581e42587111272c3377eae",
+    "hpc/scripts/submit_humaneval_preflight.py": "3f71ea86c6a47050244e848d0f6af77ef94df45aa988bd7970cf70cfa2470c37"
+  }
+}
