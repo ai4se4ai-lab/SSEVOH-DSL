@@ -51,7 +51,7 @@
 \maketitle
 
 \begin{abstract}
-Self-evolving agents improve themselves by rewriting their own prompts, tools, memory, and workflows. Passing a test does not keep a change authorized as the harness continues to evolve: another change may alter a component that the approved one relies on, or an operator may withdraw a faulty version from which other tools, skills, or memories were derived. We present \tool{}, a domain-specific language (DSL) and trusted enforcement service for \emph{Foundational Contracts}: operator-controlled rules that govern self-modifications and the continued use of their results. An approval is bound to the state, policy, and validator evidence it checked. The service then rechecks freshness at commit, artifact identity and eligibility at execution, and recorded origins at reuse. Withdrawing a version therefore blocks everything derived from it, and rollback restores only versions that remain eligible. The service governs which changes take effect without altering how the agent proposes them. Bounded checks over 248,832 one-step cases and 19,620 explored transitions, and TLA+ model checking, found no disagreement with independent reference semantics. We integrated the service into \harness{}, a self-evolving agent harness recently proposed by Google Research. Across deterministic, model-generated, and in-host tests, it blocked all 178 assessed contract violations, rejected no permitted change, and had a median admission time of 0.6\,ms. %In a prespecified 540-stream tool-repair study, the unguarded agent executed 426 violating proposals and the guarded agent none, while task success stayed within the non-inferiority margin (0.196 versus 0.241). The service preserves, but does not create, usefulness. Portability beyond one host remains untested.
+Self-evolving agents improve themselves by rewriting their own prompts, tools, memory, and workflows. Passing a test does not keep a change authorized as the harness continues to evolve: another change may alter a component that the approved one relies on, or an operator may withdraw a faulty version from which other tools, skills, or memories were derived. We present \tool{}, a domain-specific language (DSL) and trusted enforcement service for \emph{Foundational Contracts}: operator-controlled rules that govern self-modifications and the continued use of their results. An approval is bound to the state, policy, and validator evidence it checked. The service then rechecks freshness at commit, artifact identity and eligibility at execution, and recorded origins at reuse. Withdrawing a version therefore blocks everything derived from it, and rollback restores only versions that remain eligible. The service governs which changes take effect without altering how the agent proposes them. Bounded checks over 248,832 one-step cases and 19,620 explored transitions, and TLA+ model checking, found no disagreement with independent reference semantics. We integrated the service into \harness{}, a self-evolving agent harness recently proposed by Google Research. Across deterministic, model-generated, and in-host tests, it blocked all 178 assessed contract violations, rejected no permitted change, and had a median admission time of 0.6\,ms.
 
 \end{abstract}
 \begin{IEEEkeywords}
@@ -70,7 +70,7 @@ Recent work governs parts of this lifecycle: promotion and rollback of generated
 
 We present \tool{}, a domain-specific language (DSL) and trusted service that enforce Foundational Contracts around an agent's improvement process. The agent proposes changes; the operator defines permissions and evidence requirements. Approval is specific to a version and context: a pending change needs fresh approval if that context changes. For active artifacts, the service prevents use of versions with withdrawn origins and temporarily disables dependents of replaced components until revalidated. The implementation agrees with independent semantics within checked bounds, and it rejects all 178 assessed violations across deterministic, model-generated, and in-host cohorts without rejecting a permitted change. Task studies expose a trade-off between evidence strength and usefulness but do not show an accuracy advantage over frozen selection.
 
-\textbf{Contributions.} (1) Foundational Contracts for version-bound approval, dependency quarantine, transitive withdrawal, and eligible recovery. (2) A DSL, six enforcement algorithms, and explicit host-adapter obligations. (3) Independent bounded conformance, history/replay, and TLA+ model checks. (4) A case study measuring the contribution of contract clauses, integration fidelity, usefulness, and cost. Empirical portability beyond this host remains untested. %Secs.~\ref{sec:background}--\ref{sec:conclusion} present background, approach, evaluation, related work, and conclusions.
+\textbf{Contributions.} (1) Foundational Contracts for version-bound approval, dependency quarantine, transitive withdrawal, and eligible recovery. (2) A DSL, six enforcement algorithms, and explicit host-adapter obligations. (3) Independent bounded conformance, history/replay, and TLA+ model checks. (4) A case study measuring the contribution of contract clauses, integration fidelity, usefulness, and cost. Empirical portability beyond this host remains untested. 
 
 %=====================================================================
 \section{Background and Running Example}\label{sec:background}
@@ -85,7 +85,7 @@ A reference monitor~\cite{schneider} forces every security-relevant action throu
 The trusted parts are the service, operator policy, registered validators, and host adapter; agent proposals cannot modify them. We protect against edits the agent is not permitted to make, approvals made stale by a later change, conflicting updates, artifacts derived from withdrawn versions, and artifacts altered after approval. We assume that validators decide their predicates correctly, although finite tests cannot prove a program safe. We also assume that code the agent can change runs in a separate sandbox (Sec.~\ref{sec:case-study}), that hashes are collision-resistant, and that the journal's latest hash is stored externally so that wholesale replacement is detectable. We do not handle malicious validators, kernel compromise, actions that bypass the guards, or preserving state across restarts.
 
 \subsection{Running example: repairing a ledger tool}\label{sec:running}
-A ledger agent uses tool \textsf{summarize} and a dependent reporting skill, \textsf{report}. The tool's first version ignores refunds: for $9.00,-2.00$, it returns $9.00$ instead of $7.00$. The agent may repair the tool but may neither edit protected \textsf{guardrails} nor add network access. Listing~\ref{lst:trace} follows the repair and its later withdrawal. Red \texttt{BLOCK} lines mark actions the contract must prevent. After the tool changes, the reporting skill is temporarily disabled (\emph{quarantined}) until revalidated. If the repaired version is later withdrawn, artifacts derived from it must also stop being used. %This example abstracts the ledger fixtures (Sec.~\ref{sec:design}).
+A ledger agent uses tool \textsf{summarize} and a dependent reporting skill, \textsf{report}. The tool's first version ignores refunds: for $9.00,-2.00$, it returns $9.00$ instead of $7.00$. The agent may repair the tool but may neither edit protected \textsf{guardrails} nor add network access. Listing~\ref{lst:trace} follows the repair and its later withdrawal. Red \texttt{BLOCK} lines mark actions the contract must prevent. After the tool changes, the reporting skill is temporarily disabled (\emph{quarantined}) until revalidated. If the repaired version is later withdrawn, artifacts derived from it must also stop being used. 
 
 \noindent\begin{minipage}{\columnwidth}
 \begin{lstlisting}[xleftmargin=0pt,xrightmargin=0pt,linewidth=\linewidth,caption={Illustrative lifecycle trace; E1--E5 are used throughout the approach.},label={lst:trace},escapeinside={(*@}{@*)},keywordstyle={},basicstyle=\ttfamily\scriptsize]
@@ -193,7 +193,7 @@ Fig.~\ref{fig:overview} separates \emph{proposing} a change from \emph{deciding}
 \node[lbl, text=inkm] at (16.2,0.29) {ineligible: blocked};
 \end{tikzpicture}%
 }
-\caption{Overview of \tool{}. The untrusted host proposes, executes, and learns; the trusted service enforces Foundational Contracts at admission (A), commit (B), and runtime use (C) over a shared versioned record. Operator requests (D) take the same admission path. Inset: withdrawing \textsf{summarize}~v2 (E5) makes every artifact derived from it ineligible.}
+\caption{Overview of \tool{}.}
 \label{fig:overview}
 \end{figure*}
 
@@ -11314,34 +11314,7 @@ Current restrictions include single-target updates, acyclic metadata, conservati
 
 \textbf{External.} One host, small ledger fixtures, and twelve planted-defect families do not establish cross-framework or general autonomous performance. More models or sites do not add independent tasks. HumanEval+ may be contaminated.
 
-%\textbf{Statistical and operational.} Repeated fixtures and ordered streams are dependent; zero observed violations is not zero risk. ToolRepair's non-inferiority is narrow, bootstrap tails are not calibrated tests, and its safety result depends on corrected labels whose raw archives are not public (Sec.~\ref{sec:availability}). Workflow/model-serving failures reduce assessable proposals and remain task failures. Pins and logs support audit, not deterministic completion.
-
 %=====================================================================
-
-% \section{Related Work}\label{sec:related}
-% \subsection{Harness evolution and persistent learning}
-% ADAS and the Darwin G\"odel Machine search agent programs~\cite{adas,dgm}; \harness{} reuses experience from harness edits~\cite{harness2}, ACE curates context~\cite{ace}, and Voyager composes skills~\cite{voyager}. HarnessBank screens recombined harnesses for valid evaluation, activation, and improvement~\cite{harnessbank}. Foundational Contracts govern whether such retained artifacts remain eligible for use, independently of search quality.
-
-% \subsection{Governed evolution, authorization, and recovery}
-% HarnessMutation already treats generated artifacts as persistent capabilities requiring validation, traceability, promotion, and rollback~\cite{governedevolution}. We formalize context-bound receipts and component-origin eligibility, with finite conformance evidence. EvoUndo checks recovery programs across counterfactual states~\cite{evoundo}; our rollback selects eligible historical records without undoing arbitrary effects. Zhu and Wang conserve authority across replacement, forking, and rollback using single-parent lineage~\cite{succession}. Our multiple-parent origins govern component and library eligibility but do not conserve population budgets or provide durable handoff.
-
-
-% \subsection{Runtime policies and persistent-artifact security}
-% AgentSpec enforces execution rules~\cite{agentspec}, Progent controls tool privileges~\cite{progent}, AutoSpec revises rules from counterexamples~\cite{autospec}, FORGE checks event graphs with provenance and approval chains~\cite{forge}, and SAGA governs agent registration/communication~\cite{saga}. We specialize these governance concerns with fixed evolution operations and version-origin invariants. General policy languages could encode parts of our contract with additional state and hooks; expressiveness or security superiority is not established.
-
-% Harness-tampering audits and SkillRelay expose risks in retained modifications and cross-session skill composition~\cite{tampering,skillrelay}. Our guards block withdrawn recorded origins before dispatch and reuse, assuming complete mediation. CaMeL addresses the complementary prompt-injection channel through trusted control/data separation~\cite{camel,greshake}.
-
-% \subsection{Assurance and lifecycle evaluation}
-% ENTRUST connects design-time and runtime verification to dynamic assurance cases~\cite{entrust}. SpecMAS generates NuSMV models and repairs failed properties~\cite{specmas}. Our evidence concerns metadata transition rules, using established producer/checker separation~\cite{necula}, reference monitoring~\cite{schneider}, and authorization~\cite{cedar,cedarengineering}. Our bounded checks use TLC~\cite{lamport}.
-
-% SEAGym assesses frozen harness snapshots through transfer, retention, replay, and cost views~\cite{seagym}. We similarly separate lifecycle decisions from task usefulness and inference cost. Our designed violation fixtures test enforcement obligations, while HumanEval/EvalPlus test selected-program correctness~\cite{humaneval,evalplus}.
-
-
-
-
-
-% \section*{Declaration on the Use of AI}
-% Generative AI tools were used to assist with organizing the repository code and checking the manuscript for grammatical errors. The author reviewed the generated suggestions and takes full responsibility for the accuracy and integrity of all claims, references, and the final manuscript.
 
 
 \section{Related Work}\label{sec:related}
@@ -11365,21 +11338,20 @@ SEAGym evaluates self-evolving agents through transfer, retention, replay, and c
 
 
 
+
+
+
+
+
 %=====================================================================
 \section{Conclusion}\label{sec:conclusion}
 Self-evolving agents turn their own tools, skills, workflows, and persistent experience into artifacts that shape subsequent behavior. Consequently, approving a modification is not sufficient to establish that its results remain authorized as the harness evolves. Approval can become stale, dependent components can become inconsistent, and artifacts derived from a withdrawn version can remain accessible through execution or persistent memory. This paper addressed these lifecycle problems through \emph{Foundational Contracts}, which make authorization, evidence, provenance, and continued-use eligibility explicit obligations of self-evolution. We presented \tool{}, a domain-specific language and trusted enforcement service that operationalizes these contracts without replacing the agent's proposal, search, or learning mechanisms. Its central contribution is to treat authorization as a lifecycle property rather than a one-time admission decision. The evaluation supports the consistency and practical enforceability of \tool{}. Its implementation matched reference semantics across 248,832 cases, TLA+ detected all assessed faulty variants, and the \harness{} integration blocked assessed contract violations with a median admission latency of 0.6\,ms.
 
-%Behavioral evidence improved repair success over catalog-based enforcement (0.196 vs.\ 0.085) while narrowly meeting the non-inferiority criterion against the unguarded baseline (0.241). However, neither guarded nor unguarded evolution outperformed frozen selection on HumanEval+, suggesting that \tool{} can govern self-modification while preserving useful changes, but does not necessarily improve problem-solving capability.
-
-%Version-bound receipts prevent changes from being committed against stale validation contexts; dependency quarantine prevents affected components from remaining active after an update; transitive provenance makes artifacts derived from withdrawn versions ineligible for execution and reuse; and eligibility-checked rollback prevents recovery from reinstating withdrawn artifacts or their descendants. Together, these mechanisms connect the authorization of a change to the continued legitimacy of everything derived from it.
-
-
-% \tool{} enforces Foundational Contracts that bind approval to a versioned context and govern continued execution, recovery, and reuse. Its metadata rules and adapter obligations apply independently of how a harness searches for improvements, provided execution and persistent reuse remain mediated. Bounded assurance supports consistency of the rules, and one \harness{} integration demonstrates enforcement at real admission, execution, and reuse seams. ToolRepair-12 exposes the usefulness/evidence trade-off, while HumanEval+ shows no advantage over frozen selection. Cross-framework ports, broader tasks, durable recovery, and mechanized refinement remain necessary to establish wider applicability.
-
-% \textbf{Artifacts.}\label{sec:availability} The versioned evidence snapshot~\cite{ssevohartifact} contains the core, pinned host runtime, protocols/deviations, outcome records, and analysis scripts. \texttt{make verify} checks bounded assurance, and \pathcode{experiments/scripts/} reproduces the outcome analyses. ToolRepair success is reproducible from the committed \pathcode{toolrepair-v1/streams.jsonl}. %The corrected execution labels (\pathcode{experiments/toolrepair/DEVIATIONS.md}) need per-stream archives that are not in the public snapshot, so the corrected safety result cannot yet be replicated independently.
 
 
 
+\section*{Declaration on the Use of AI}
+Generative AI tools were used to assist with organizing the repository code and checking the manuscript for grammatical errors. The author reviewed the generated suggestions and takes full responsibility for the accuracy and integrity of all claims, references, and the final manuscript.
 
 \bibliographystyle{IEEEtran}
 \balance
