@@ -1,3 +1,5 @@
+![SSEVOH-DSL — a domain-specific language and formal assurance framework for safe self-evolution of AI agent harnesses. Propose, verify, deploy.](docs/assets/ssevoh-banner.png)
+
 # SSEVOH-DSL
 
 **A domain-specific language and formal assurance framework for safe self-evolution of AI agent harnesses.**
