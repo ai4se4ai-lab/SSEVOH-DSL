@@ -2,9 +2,6 @@
 
 A Domain-Specific Language and Formal Verification Framework for Safe Self-Evolution of AI Agent Harnesses.
 
-The IEEE TSE study has a [development and evaluation prompt](docs/dev/TSE-DEVELOPMENT-PROMPT.md), a [manuscript](docs/TSE/main.tex), and an [HPC coding-study guide](hpc/docs/humaneval-guide.md). The HumanEval+ extension has completed a two-task diagnostic pilot; full 164-task evidence remains pending qualification.
-
-For a consolidated explanation of the research questions, experiments, benchmark status and Harness² integration, read [SSEVOH-DSL explained](docs/ssevoh-dsl-explained.md).
 
 The agent proposes a change. A trusted service checks policy, dependencies, provenance, independent evidence and bounded safety rules before issuing a single-use approval. The sandbox commits it atomically only while the approved base state remains current.
 
